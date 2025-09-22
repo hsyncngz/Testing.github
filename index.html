@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Arama Sayfası</title>
+  <title>Ürün Arama</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      max-width: 600px;
+      max-width: 800px;
       margin: auto;
     }
     input[type="text"] {
@@ -18,15 +18,19 @@
       font-size: 16px;
       box-sizing: border-box;
     }
-    ul {
-      list-style: none;
-      padding: 0;
+    table {
+      width: 100%;
+      border-collapse: collapse;
     }
-    li {
+    th, td {
       padding: 8px;
-      border-bottom: 1px solid #ddd;
+      border: 1px solid #ddd;
+      text-align: left;
     }
-    li:hover {
+    th {
+      background-color: #f4f4f4;
+    }
+    tr:hover {
       background-color: #f0f0f0;
     }
   </style>
@@ -34,10 +38,20 @@
 <body>
   <h2>Ürün Arama</h2>
   <input type="text" id="arama" placeholder="Ürün adı girin...">
-  <ul id="liste"></ul>
+  <table>
+    <thead>
+      <tr>
+        <th>Ürün Kodu</th>
+        <th>Ürün Adı</th>
+        <th>Liste Fiyatı</th>
+        <th>Stok Miktarı</th>
+      </tr>
+    </thead>
+    <tbody id="liste"></tbody>
+  </table>
 
   <script>
-    fetch('https://hsyncngz.github.io/Testing.github/veri.json')
+    fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
       .then(res => res.json())
       .then(data => {
         const arama = document.getElementById('arama');
@@ -47,23 +61,26 @@
           const kelime = arama.value.toLowerCase();
           liste.innerHTML = '';
           data
-            .filter(item => item.isim.toLowerCase().includes(kelime))
+            .filter(item => item["Ürün Adı"].toLowerCase().includes(kelime))
             .forEach(item => {
-              const li = document.createElement('li');
-              li.textContent = item.isim;
-              liste.appendChild(li);
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td>${item["Ürün Kodu"]}</td>
+                <td>${item["Ürün Adı"]}</td>
+                <td>${item["Liste Fiyatı"]}</td>
+                <td>${item["Stok Miktarı"]}</td>
+              `;
+              liste.appendChild(tr);
             });
         }
 
         arama.addEventListener('input', filtrele);
-        filtrele(); // Sayfa ilk yüklendiğinde tüm listeyi göster
+        filtrele(); // Sayfa ilk açıldığında tüm ürünleri göster
       })
       .catch(err => {
-        document.getElementById('liste').innerHTML = '<li>veri.json yüklenemedi.</li>';
+        document.getElementById('liste').innerHTML = '<tr><td colspan="4">veri.json yüklenemedi.</td></tr>';
         console.error('Hata:', err);
       });
   </script>
 </body>
-
 </html>
-
