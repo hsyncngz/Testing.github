@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ürün Arama</title>
+  <title>Detaylı Ürün Arama</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -36,7 +36,7 @@
   </style>
 </head>
 <body>
-  <h2>Ürün Arama</h2>
+  <h2>Detaylı Ürün Arama</h2>
   <input type="text" id="arama" placeholder="Ürün adı veya kodu girin...">
   <table>
     <thead>
@@ -57,14 +57,15 @@
         const arama = document.getElementById('arama');
         const liste = document.getElementById('liste');
 
-        function filtrele() {
-          const kelime = arama.value.toLowerCase();
+        function detayliFiltrele() {
+          const kelimeler = arama.value.toLowerCase().split(/\s+/).filter(k => k);
           liste.innerHTML = '';
+
           data
-            .filter(item =>
-              item["Ürün Adı"].toLowerCase().includes(kelime) ||
-              item["Ürün Kodu"].toLowerCase().includes(kelime)
-            )
+            .filter(item => {
+              const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
+              return kelimeler.every(kelime => metin.includes(kelime));
+            })
             .forEach(item => {
               const tr = document.createElement('tr');
               tr.innerHTML = `
@@ -77,8 +78,8 @@
             });
         }
 
-        arama.addEventListener('input', filtrele);
-        filtrele(); // Sayfa ilk açıldığında tüm ürünleri göster
+        arama.addEventListener('input', detayliFiltrele);
+        detayliFiltrele(); // Sayfa ilk açıldığında tüm ürünleri göster
       })
       .catch(err => {
         document.getElementById('liste').innerHTML = '<tr><td colspan="4">veri.json yüklenemedi.</td></tr>';
