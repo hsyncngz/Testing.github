@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sepet Sistemi</title>
+  <title>JSON'dan Sepet Sistemi</title>
   <style>
     body { font-family: sans-serif; padding: 20px; }
     .product { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
@@ -18,18 +18,14 @@
 <body>
 
 <h2>Ürün Listesi</h2>
-<div id="product-list"></div>
+<div id="product-list">Yükleniyor...</div>
 
 <h3>Sepet</h3>
 <div id="cart-list"></div>
 <button onclick="sendMail()">📧 Sepeti Maille Gönder</button>
 
 <script>
-const products = [
-  { id: 1, name: "Ürün A", price: 100 },
-  { id: 2, name: "Ürün B", price: 150 },
-  { id: 3, name: "Ürün C", price: 200 }
-];
+let products = [];
 
 function loadCart() {
   return JSON.parse(localStorage.getItem("cart") || "[]");
@@ -85,8 +81,18 @@ function sendMail() {
   window.location.href = mailto;
 }
 
-renderProducts();
-renderCart();
+// JSON'dan ürünleri çek
+fetch("veri.json")
+  .then(res => res.json())
+  .then(data => {
+    products = data;
+    renderProducts();
+    renderCart();
+  })
+  .catch(err => {
+    document.getElementById("product-list").innerText = "Ürünler yüklenemedi.";
+    console.error("JSON yükleme hatası:", err);
+  });
 </script>
 
 </body>
