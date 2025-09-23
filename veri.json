@@ -3,7 +3,7 @@
     "Ürün Kodu": "TARİH",
     "Ürün Adı": "23.09.2025",
     "Liste Fiyatı": "SAAT",
-    "Stok Miktarı": "17:28"
+    "Stok Miktarı": "17:31"
   },
   {
     "Ürün Kodu": "191391",
@@ -1728,16 +1728,16 @@
     "Stok Miktarı": "56"
   },
   {
-    "Ürün Kodu": "BDY-2100/E27",
-    "Ürün Adı": "BDY GLOP E27 DUYLU",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "3"
-  },
-  {
     "Ürün Kodu": "BDY.E 136/E10000/PS",
     "Ürün Adı": "1X36W POL.CAM ETANJ ARMATÜR ELEKTRONİK BALASTLI",
     "Liste Fiyatı": "0,00",
     "Stok Miktarı": "27"
+  },
+  {
+    "Ürün Kodu": "BDY-2100/E27",
+    "Ürün Adı": "BDY GLOP E27 DUYLU",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "3"
   },
   {
     "Ürün Kodu": "BEM BC1-4505-2312",
@@ -1776,22 +1776,16 @@
     "Stok Miktarı": "0"
   },
   {
-    "Ürün Kodu": "BK.CAT6",
-    "Ürün Adı": "CAT-6 UTP BİLGİSAYAR KABLOSU",
-    "Liste Fiyatı": "27454,00",
-    "Stok Miktarı": "23.563"
-  },
-  {
     "Ürün Kodu": "BİSTABİL",
     "Ürün Adı": "BİSTABİL ŞALTER",
     "Liste Fiyatı": "0,00",
     "Stok Miktarı": "0"
   },
   {
-    "Ürün Kodu": "Ç.K.KILIDI",
-    "Ürün Adı": "ÇOCUK KORUMA KİLİDİ",
-    "Liste Fiyatı": "45840,00",
-    "Stok Miktarı": "18"
+    "Ürün Kodu": "BK.CAT6",
+    "Ürün Adı": "CAT-6 UTP BİLGİSAYAR KABLOSU",
+    "Liste Fiyatı": "27454,00",
+    "Stok Miktarı": "23.563"
   },
   {
     "Ürün Kodu": "CATA CT-101",
@@ -6126,18 +6120,6 @@
     "Stok Miktarı": "5.705"
   },
   {
-    "Ürün Kodu": "CET.ÇET.5012",
-    "Ürün Adı": "50x12mm BALIK SIRTI KABLO KANALI",
-    "Liste Fiyatı": "63,00",
-    "Stok Miktarı": "68"
-  },
-  {
-    "Ürün Kodu": "CET.ÇET.9019",
-    "Ürün Adı": "90x19mm BALIK SIRTI KABLO KANALI",
-    "Liste Fiyatı": "172,00",
-    "Stok Miktarı": "63"
-  },
-  {
     "Ürün Kodu": "CET.CP.3124",
     "Ürün Adı": "ÇETSAN 25mm SIKMALI EK MUFU",
     "Liste Fiyatı": "45799,00",
@@ -6204,6 +6186,18 @@
     "Stok Miktarı": "14"
   },
   {
+    "Ürün Kodu": "CET.ÇET.5012",
+    "Ürün Adı": "50x12mm BALIK SIRTI KABLO KANALI",
+    "Liste Fiyatı": "63,00",
+    "Stok Miktarı": "68"
+  },
+  {
+    "Ürün Kodu": "CET.ÇET.9019",
+    "Ürün Adı": "90x19mm BALIK SIRTI KABLO KANALI",
+    "Liste Fiyatı": "172,00",
+    "Stok Miktarı": "63"
+  },
+  {
     "Ürün Kodu": "CET.DB.0147",
     "Ürün Adı": "ÇETSAN ALÇIPAN DÜBELİ",
     "Liste Fiyatı": "44197,00",
@@ -6268,6 +6262,18 @@
     "Ürün Adı": "ÇETSAN 3x1F TARAK İZOLATÖR (KISA TİP)",
     "Liste Fiyatı": "63.2",
     "Stok Miktarı": "13"
+  },
+  {
+    "Ürün Kodu": "CET.İ.57246",
+    "Ürün Adı": "ÇETSAN 3x2F TARAK İZOLATÖR ",
+    "Liste Fiyatı": "88,00",
+    "Stok Miktarı": "-6"
+  },
+  {
+    "Ürün Kodu": "CET.İ.57247",
+    "Ürün Adı": "ÇETSAN 4x1F TARAK İZOLATÖRÜ",
+    "Liste Fiyatı": "94,00",
+    "Stok Miktarı": "-5"
   },
   {
     "Ürün Kodu": "CET.KB.0013",
@@ -6502,18 +6508,6 @@
     "Ürün Adı": "ÇETSAN 80 Lİ S/A OTOMATİK SİGORTA KUTUSU",
     "Liste Fiyatı": "2598,00",
     "Stok Miktarı": "0"
-  },
-  {
-    "Ürün Kodu": "CET.İ.57246",
-    "Ürün Adı": "ÇETSAN 3x2F TARAK İZOLATÖR ",
-    "Liste Fiyatı": "88,00",
-    "Stok Miktarı": "-6"
-  },
-  {
-    "Ürün Kodu": "CET.İ.57247",
-    "Ürün Adı": "ÇETSAN 4x1F TARAK İZOLATÖRÜ",
-    "Liste Fiyatı": "94,00",
-    "Stok Miktarı": "-5"
   },
   {
     "Ürün Kodu": "CET.YİS.100",
@@ -6922,6 +6916,12 @@
     "Ürün Adı": "CHINT 12A (5.5kw) MİNİ KONTAKTÖR 1NA (NXC) ( 18,81 € )",
     "Liste Fiyatı": "0,00",
     "Stok Miktarı": "-1"
+  },
+  {
+    "Ürün Kodu": "Ç.K.KILIDI",
+    "Ürün Adı": "ÇOCUK KORUMA KİLİDİ",
+    "Liste Fiyatı": "45840,00",
+    "Stok Miktarı": "18"
   },
   {
     "Ürün Kodu": "DOGAN 204 001",
@@ -7518,6 +7518,66 @@
     "Stok Miktarı": "0"
   },
   {
+    "Ürün Kodu": "ELX.ELX2.5-4",
+    "Ürün Adı": "ELMAX 4 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "22"
+  },
+  {
+    "Ürün Kodu": "ELX.ELX2.5-5",
+    "Ürün Adı": "ELMAX 5 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "950"
+  },
+  {
+    "Ürün Kodu": "ELX.ELX2.5-6",
+    "Ürün Adı": "ELMAX 6 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "-150"
+  },
+  {
+    "Ürün Kodu": "ELX.ELX25-2",
+    "Ürün Adı": "ELMAX 2 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "1.049"
+  },
+  {
+    "Ürün Kodu": "ELX.ELX2M-01L",
+    "Ürün Adı": "ELMAX IŞIKLI YAYLI BUTON KIRMIZI 220v AC/DC ( 4,18 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "71"
+  },
+  {
+    "Ürün Kodu": "ELX.ELX2M-01LK",
+    "Ürün Adı": "ELMAX 0-1 IŞIKLI KALICI MANDAL BUTON KIRMIZI 220v AC/DC ( 4,20 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "0"
+  },
+  {
+    "Ürün Kodu": "ELX.ELX2M-10L",
+    "Ürün Adı": "ELMAX IŞIKLI YAYLI BUTON YEŞİL 220v AC/DC ( 4,18 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "9"
+  },
+  {
+    "Ürün Kodu": "ELX.ELX2M-10LK",
+    "Ürün Adı": "ELMAX 0-1 IŞIKLI KALICI MANDAL BUTON YEŞİL 220v AC/DC ( 4,20 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "4"
+  },
+  {
+    "Ürün Kodu": "ELX.ELX2M-11TBL",
+    "Ürün Adı": "ELMAX IŞIKLI İKİZ BUTON ( 5,70 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "30"
+  },
+  {
+    "Ürün Kodu": "ELX.ELX2M-11TBR",
+    "Ürün Adı": "ELMAX İKİZ BUTON ( 4,30 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "1"
+  },
+  {
     "Ürün Kodu": "ELX.ELX-412",
     "Ürün Adı": "ELMAX 2 İLETKEN BAĞLANTILI WAGO TIRNAKLI KLEMENS ",
     "Liste Fiyatı": "0.192",
@@ -7542,16 +7602,64 @@
     "Stok Miktarı": "2.110"
   },
   {
-    "Ürün Kodu": "ELX.ELX-ÇU-4002",
-    "Ürün Adı": "ELMAX İZOLELİ 1,50-2,50 mm ÇATAL PABUÇ MAVİ M4",
-    "Liste Fiyatı": "45748,00",
-    "Stok Miktarı": "0"
+    "Ürün Kodu": "ELX.ELX9.5-3",
+    "Ürün Adı": "ELMAX 3 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
+    "Liste Fiyatı": "45753,00",
+    "Stok Miktarı": "424"
   },
   {
-    "Ürün Kodu": "ELX.ELX-ÇU-6002",
-    "Ürün Adı": "ELMAX İZOLELİ 1,50-2,50 mm ÇATAL PABUÇ MAVİ M6",
-    "Liste Fiyatı": "1422,00",
-    "Stok Miktarı": "200"
+    "Ürün Kodu": "ELX.ELX9.5-8",
+    "Ürün Adı": "ELMAX 8 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
+    "Liste Fiyatı": "45879,00",
+    "Stok Miktarı": "300"
+  },
+  {
+    "Ürün Kodu": "ELX.ELXBU-SKP-120 (CAL-120C)",
+    "Ürün Adı": "ELMAX 120 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 7,50 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "22"
+  },
+  {
+    "Ürün Kodu": "ELX.ELXBU-SKP-150 (CAL-150C)",
+    "Ürün Adı": "ELMAX 150 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 7,50 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "4"
+  },
+  {
+    "Ürün Kodu": "ELX.ELXBU-SKP-16 (CAL-16C)",
+    "Ürün Adı": "ELMAX 16 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 3,18 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "-1"
+  },
+  {
+    "Ürün Kodu": "ELX.ELXBU-SKP-25 (CAL-25C)",
+    "Ürün Adı": "ELMAX 25 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 3,18 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "70"
+  },
+  {
+    "Ürün Kodu": "ELX.ELXBU-SKP-35 (CAL-35C)",
+    "Ürün Adı": "ELMAX 35 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 3,18 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "42"
+  },
+  {
+    "Ürün Kodu": "ELX.ELXBU-SKP-50 (CAL-50C)",
+    "Ürün Adı": "ELMAX 50 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 4,50 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "48"
+  },
+  {
+    "Ürün Kodu": "ELX.ELXBU-SKP-70 (CAL-70C)",
+    "Ürün Adı": "ELMAX 70 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 4,50 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "2"
+  },
+  {
+    "Ürün Kodu": "ELX.ELXBU-SKP-95 (CAL-95C)",
+    "Ürün Adı": "ELMAX 95 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 4,50 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "0"
   },
   {
     "Ürün Kodu": "ELX.ELX-CY-23005",
@@ -7594,6 +7702,18 @@
     "Ürün Adı": "ELMAX KABLO YÜZÜĞÜ 2*6",
     "Liste Fiyatı": "1208,00",
     "Stok Miktarı": "0"
+  },
+  {
+    "Ürün Kodu": "ELX.ELX-ÇU-4002",
+    "Ürün Adı": "ELMAX İZOLELİ 1,50-2,50 mm ÇATAL PABUÇ MAVİ M4",
+    "Liste Fiyatı": "45748,00",
+    "Stok Miktarı": "0"
+  },
+  {
+    "Ürün Kodu": "ELX.ELX-ÇU-6002",
+    "Ürün Adı": "ELMAX İZOLELİ 1,50-2,50 mm ÇATAL PABUÇ MAVİ M6",
+    "Liste Fiyatı": "1422,00",
+    "Stok Miktarı": "200"
   },
   {
     "Ürün Kodu": "ELX.ELX-FE-2638",
@@ -7758,126 +7878,6 @@
     "Stok Miktarı": "0"
   },
   {
-    "Ürün Kodu": "ELX.ELX2.5-4",
-    "Ürün Adı": "ELMAX 4 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "22"
-  },
-  {
-    "Ürün Kodu": "ELX.ELX2.5-5",
-    "Ürün Adı": "ELMAX 5 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "950"
-  },
-  {
-    "Ürün Kodu": "ELX.ELX2.5-6",
-    "Ürün Adı": "ELMAX 6 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "-150"
-  },
-  {
-    "Ürün Kodu": "ELX.ELX25-2",
-    "Ürün Adı": "ELMAX 2 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "1.049"
-  },
-  {
-    "Ürün Kodu": "ELX.ELX2M-01L",
-    "Ürün Adı": "ELMAX IŞIKLI YAYLI BUTON KIRMIZI 220v AC/DC ( 4,18 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "71"
-  },
-  {
-    "Ürün Kodu": "ELX.ELX2M-01LK",
-    "Ürün Adı": "ELMAX 0-1 IŞIKLI KALICI MANDAL BUTON KIRMIZI 220v AC/DC ( 4,20 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "0"
-  },
-  {
-    "Ürün Kodu": "ELX.ELX2M-10L",
-    "Ürün Adı": "ELMAX IŞIKLI YAYLI BUTON YEŞİL 220v AC/DC ( 4,18 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "9"
-  },
-  {
-    "Ürün Kodu": "ELX.ELX2M-10LK",
-    "Ürün Adı": "ELMAX 0-1 IŞIKLI KALICI MANDAL BUTON YEŞİL 220v AC/DC ( 4,20 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "4"
-  },
-  {
-    "Ürün Kodu": "ELX.ELX2M-11TBL",
-    "Ürün Adı": "ELMAX IŞIKLI İKİZ BUTON ( 5,70 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "30"
-  },
-  {
-    "Ürün Kodu": "ELX.ELX2M-11TBR",
-    "Ürün Adı": "ELMAX İKİZ BUTON ( 4,30 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "1"
-  },
-  {
-    "Ürün Kodu": "ELX.ELX9.5-3",
-    "Ürün Adı": "ELMAX 3 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
-    "Liste Fiyatı": "45753,00",
-    "Stok Miktarı": "424"
-  },
-  {
-    "Ürün Kodu": "ELX.ELX9.5-8",
-    "Ürün Adı": "ELMAX 8 KTP. BUAT İÇİ YAYLI KLEMENS ŞEFFAF (WAGO)",
-    "Liste Fiyatı": "45879,00",
-    "Stok Miktarı": "300"
-  },
-  {
-    "Ürün Kodu": "ELX.ELXBU-SKP-120 (CAL-120C)",
-    "Ürün Adı": "ELMAX 120 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 7,50 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "22"
-  },
-  {
-    "Ürün Kodu": "ELX.ELXBU-SKP-150 (CAL-150C)",
-    "Ürün Adı": "ELMAX 150 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 7,50 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "4"
-  },
-  {
-    "Ürün Kodu": "ELX.ELXBU-SKP-16 (CAL-16C)",
-    "Ürün Adı": "ELMAX 16 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 3,18 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "-1"
-  },
-  {
-    "Ürün Kodu": "ELX.ELXBU-SKP-25 (CAL-25C)",
-    "Ürün Adı": "ELMAX 25 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 3,18 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "70"
-  },
-  {
-    "Ürün Kodu": "ELX.ELXBU-SKP-35 (CAL-35C)",
-    "Ürün Adı": "ELMAX 35 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 3,18 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "42"
-  },
-  {
-    "Ürün Kodu": "ELX.ELXBU-SKP-50 (CAL-50C)",
-    "Ürün Adı": "ELMAX 50 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 4,50 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "48"
-  },
-  {
-    "Ürün Kodu": "ELX.ELXBU-SKP-70 (CAL-70C)",
-    "Ürün Adı": "ELMAX 70 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 4,50 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "2"
-  },
-  {
-    "Ürün Kodu": "ELX.ELXBU-SKP-95 (CAL-95C)",
-    "Ürün Adı": "ELMAX 95 mm UZUN BİMETAL (AL-CU) SKP KABLO PAPUCU ( 4,50 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "0"
-  },
-  {
     "Ürün Kodu": "ELX.LAY5-AA3341",
     "Ürün Adı": "ELMAX BEYAZ OKLU START ( 2,70 $ )",
     "Liste Fiyatı": "0,00",
@@ -7894,6 +7894,18 @@
     "Ürün Adı": "ELMAX YEDEK KONTAK BLOK 1 NC ( 0,55 $ )",
     "Liste Fiyatı": "0,00",
     "Stok Miktarı": "290"
+  },
+  {
+    "Ürün Kodu": "ELX.LAY5DB2BOX1",
+    "Ürün Adı": "ELMAX 1 Lİ BOŞ KUMANDA KUTUSU ( 1,12 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "7"
+  },
+  {
+    "Ürün Kodu": "ELX.LAY5DB2BOX6",
+    "Ürün Adı": "ELMAX 6 LI BOŞ KUMANDA KUTUSU ( 4,50 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "0"
   },
   {
     "Ürün Kodu": "ELX.LAY5-DB2-EA31",
@@ -7942,18 +7954,6 @@
     "Ürün Adı": "ELMAX Q40 mm MANTAR ACİL STOP BUTON ( 1,68 $ )",
     "Liste Fiyatı": "0,00",
     "Stok Miktarı": "-23"
-  },
-  {
-    "Ürün Kodu": "ELX.LAY5DB2BOX1",
-    "Ürün Adı": "ELMAX 1 Lİ BOŞ KUMANDA KUTUSU ( 1,12 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "7"
-  },
-  {
-    "Ürün Kodu": "ELX.LAY5DB2BOX6",
-    "Ürün Adı": "ELMAX 6 LI BOŞ KUMANDA KUTUSU ( 4,50 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "0"
   },
   {
     "Ürün Kodu": "ELX.SKPE-120-12",
@@ -8034,6 +8034,12 @@
     "Stok Miktarı": "0"
   },
   {
+    "Ürün Kodu": "ELX.XCK-SİM-311",
+    "Ürün Adı": "ELMAX PLASTİK GÖVDELİ AÇISAL HAR.14 mm METAL MAK. KOL LİMİT SİVİÇ (CLS111) ( 5,98 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "14"
+  },
+  {
     "Ürün Kodu": "ELX.XCK-SOM-101",
     "Ürün Adı": "ELMAX PLASTİK GÖVDELİ AÇISAL HAR. SPİRAL TELLİ ÇOK YÖNLÜ KOL LİMİT SİVİÇ  (CLS161) ( 6,29 $ )",
     "Liste Fiyatı": "0,00",
@@ -8056,12 +8062,6 @@
     "Ürün Adı": "ELMAX PLASTİK GÖVDELİ DOĞRUSAL HAR. RESETLİ 11 mm METAL MAK. PİM LİMİT SİVİÇ (CLS103R) ( 5,67 $ )",
     "Liste Fiyatı": "0,00",
     "Stok Miktarı": "100"
-  },
-  {
-    "Ürün Kodu": "ELX.XCK-SİM-311",
-    "Ürün Adı": "ELMAX PLASTİK GÖVDELİ AÇISAL HAR.14 mm METAL MAK. KOL LİMİT SİVİÇ (CLS111) ( 5,98 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "14"
   },
   {
     "Ürün Kodu": "ELX.XZ-15GQ-22B",
@@ -8214,6 +8214,12 @@
     "Stok Miktarı": "3"
   },
   {
+    "Ürün Kodu": "ERKA.KBL 4x0.22",
+    "Ürün Adı": "4+1 CCTV (4x0.22) KAMERA KABLOSU",
+    "Liste Fiyatı": "45785,00",
+    "Stok Miktarı": "598"
+  },
+  {
     "Ürün Kodu": "ER-NA VBR-8X",
     "Ürün Adı": "ERNA VBR-8X  V OTOMAT MULTİ ZAMANLI FLAŞÖR",
     "Liste Fiyatı": "255,00",
@@ -8224,12 +8230,6 @@
     "Ürün Adı": "ERNA VSR-05 V OTOMAT SIVI SEVİYE RÖLESİ",
     "Liste Fiyatı": "270,00",
     "Stok Miktarı": "11"
-  },
-  {
-    "Ürün Kodu": "ERKA.KBL 4x0.22",
-    "Ürün Adı": "4+1 CCTV (4x0.22) KAMERA KABLOSU",
-    "Liste Fiyatı": "45785,00",
-    "Stok Miktarı": "598"
   },
   {
     "Ürün Kodu": "ERY.1101/C",
@@ -11736,16 +11736,16 @@
     "Stok Miktarı": "0"
   },
   {
-    "Ürün Kodu": "HRZ.068-008-0100-Y",
-    "Ürün Adı": "HOROZ 100w LED PROJEKTÖR PARS-100 ( 24,10 $ )",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "0"
-  },
-  {
     "Ürün Kodu": "HRZ.068-008-0100G",
     "Ürün Adı": "HOROZ 100w LED PROJEKTÖR PARS-100 ( 22,50 $ )",
     "Liste Fiyatı": "0,00",
     "Stok Miktarı": "-7"
+  },
+  {
+    "Ürün Kodu": "HRZ.068-008-0100-Y",
+    "Ürün Adı": "HOROZ 100w LED PROJEKTÖR PARS-100 ( 24,10 $ )",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "0"
   },
   {
     "Ürün Kodu": "HRZ.068-008-0200",
@@ -20670,96 +20670,6 @@
     "Stok Miktarı": "21"
   },
   {
-    "Ürün Kodu": "ÖZ.AB01",
-    "Ürün Adı": "3 ÇIKIŞLI S/Ü BUAT",
-    "Liste Fiyatı": "37.5",
-    "Stok Miktarı": "24"
-  },
-  {
-    "Ürün Kodu": "ÖZ.AB03",
-    "Ürün Adı": "85X85X35 S/Ü BUAT (HALOJEN FREE) ÖZKARAKUŞ",
-    "Liste Fiyatı": "18,00",
-    "Stok Miktarı": "1.956"
-  },
-  {
-    "Ürün Kodu": "ÖZ.KB008",
-    "Ürün Adı": "110X110X75 S.Ü KARE BUAT",
-    "Liste Fiyatı": "46,00",
-    "Stok Miktarı": "986"
-  },
-  {
-    "Ürün Kodu": "ÖZ.KB07",
-    "Ürün Adı": "10X10 KARE BUAT ÖZKARAKUŞ",
-    "Liste Fiyatı": "45796,00",
-    "Stok Miktarı": "172"
-  },
-  {
-    "Ürün Kodu": "ÖZ.KB08",
-    "Ürün Adı": "12X12 KARE BUAT ÖZKARAKUŞ",
-    "Liste Fiyatı": "21,00",
-    "Stok Miktarı": "54"
-  },
-  {
-    "Ürün Kodu": "ÖZ.KB09",
-    "Ürün Adı": "15X15 KARE BUAT ÖZKARAKUŞ",
-    "Liste Fiyatı": "26,00",
-    "Stok Miktarı": "83"
-  },
-  {
-    "Ürün Kodu": "ÖZ.KB10",
-    "Ürün Adı": "20X20 KARE BUAT ÖZKARAKUŞ",
-    "Liste Fiyatı": "56,00",
-    "Stok Miktarı": "9"
-  },
-  {
-    "Ürün Kodu": "ÖZ.LK08",
-    "Ürün Adı": "10X10 KARE BUAT KAPAĞI ÖZKARAKUŞ",
-    "Liste Fiyatı": "45783,00",
-    "Stok Miktarı": "115"
-  },
-  {
-    "Ürün Kodu": "ÖZ.LK09",
-    "Ürün Adı": "12X12 KARE BUAT KAPAĞI ÖZKARAKUŞ",
-    "Liste Fiyatı": "8,00",
-    "Stok Miktarı": "605"
-  },
-  {
-    "Ürün Kodu": "ÖZ.LK10",
-    "Ürün Adı": "15X15 KARE BUAT KAPAĞI ÖZKARAKUŞ",
-    "Liste Fiyatı": "45785,00",
-    "Stok Miktarı": "171"
-  },
-  {
-    "Ürün Kodu": "ÖZ.LK11",
-    "Ürün Adı": "20x20 KARE BUAT KAPAĞI ÖZKARAKUŞ",
-    "Liste Fiyatı": "24,00",
-    "Stok Miktarı": "99"
-  },
-  {
-    "Ürün Kodu": "ÖZ.LP12",
-    "Ürün Adı": "12W LED PANEL S/Ü KASASI",
-    "Liste Fiyatı": "45,00",
-    "Stok Miktarı": "-4"
-  },
-  {
-    "Ürün Kodu": "ÖZ.LP18",
-    "Ürün Adı": "18W LED PANEL S/Ü KASASI",
-    "Liste Fiyatı": "50,00",
-    "Stok Miktarı": "51"
-  },
-  {
-    "Ürün Kodu": "ÖZ.PB75",
-    "Ürün Adı": "NORM BUAT KAPAKSIZ 16-18 LİK (HALOJEN FREE) ÖZKARAKUŞ",
-    "Liste Fiyatı": "9,00",
-    "Stok Miktarı": "920"
-  },
-  {
-    "Ürün Kodu": "ÖZ.PK01S",
-    "Ürün Adı": "14-18 LİK PLASTİK TAKOZ SİYAH",
-    "Liste Fiyatı": "45874,00",
-    "Stok Miktarı": "0"
-  },
-  {
     "Ürün Kodu": "OZB.1001",
     "Ürün Adı": "TOPRAKLAMA ŞERİDİ 30x2mm",
     "Liste Fiyatı": "72,00",
@@ -21070,6 +20980,96 @@
     "Ürün Adı": "HALAT SIKTIRMA 8mm",
     "Liste Fiyatı": "20,00",
     "Stok Miktarı": "52"
+  },
+  {
+    "Ürün Kodu": "ÖZ.AB01",
+    "Ürün Adı": "3 ÇIKIŞLI S/Ü BUAT",
+    "Liste Fiyatı": "37.5",
+    "Stok Miktarı": "24"
+  },
+  {
+    "Ürün Kodu": "ÖZ.AB03",
+    "Ürün Adı": "85X85X35 S/Ü BUAT (HALOJEN FREE) ÖZKARAKUŞ",
+    "Liste Fiyatı": "18,00",
+    "Stok Miktarı": "1.956"
+  },
+  {
+    "Ürün Kodu": "ÖZ.KB008",
+    "Ürün Adı": "110X110X75 S.Ü KARE BUAT",
+    "Liste Fiyatı": "46,00",
+    "Stok Miktarı": "986"
+  },
+  {
+    "Ürün Kodu": "ÖZ.KB07",
+    "Ürün Adı": "10X10 KARE BUAT ÖZKARAKUŞ",
+    "Liste Fiyatı": "45796,00",
+    "Stok Miktarı": "172"
+  },
+  {
+    "Ürün Kodu": "ÖZ.KB08",
+    "Ürün Adı": "12X12 KARE BUAT ÖZKARAKUŞ",
+    "Liste Fiyatı": "21,00",
+    "Stok Miktarı": "54"
+  },
+  {
+    "Ürün Kodu": "ÖZ.KB09",
+    "Ürün Adı": "15X15 KARE BUAT ÖZKARAKUŞ",
+    "Liste Fiyatı": "26,00",
+    "Stok Miktarı": "83"
+  },
+  {
+    "Ürün Kodu": "ÖZ.KB10",
+    "Ürün Adı": "20X20 KARE BUAT ÖZKARAKUŞ",
+    "Liste Fiyatı": "56,00",
+    "Stok Miktarı": "9"
+  },
+  {
+    "Ürün Kodu": "ÖZ.LK08",
+    "Ürün Adı": "10X10 KARE BUAT KAPAĞI ÖZKARAKUŞ",
+    "Liste Fiyatı": "45783,00",
+    "Stok Miktarı": "115"
+  },
+  {
+    "Ürün Kodu": "ÖZ.LK09",
+    "Ürün Adı": "12X12 KARE BUAT KAPAĞI ÖZKARAKUŞ",
+    "Liste Fiyatı": "8,00",
+    "Stok Miktarı": "605"
+  },
+  {
+    "Ürün Kodu": "ÖZ.LK10",
+    "Ürün Adı": "15X15 KARE BUAT KAPAĞI ÖZKARAKUŞ",
+    "Liste Fiyatı": "45785,00",
+    "Stok Miktarı": "171"
+  },
+  {
+    "Ürün Kodu": "ÖZ.LK11",
+    "Ürün Adı": "20x20 KARE BUAT KAPAĞI ÖZKARAKUŞ",
+    "Liste Fiyatı": "24,00",
+    "Stok Miktarı": "99"
+  },
+  {
+    "Ürün Kodu": "ÖZ.LP12",
+    "Ürün Adı": "12W LED PANEL S/Ü KASASI",
+    "Liste Fiyatı": "45,00",
+    "Stok Miktarı": "-4"
+  },
+  {
+    "Ürün Kodu": "ÖZ.LP18",
+    "Ürün Adı": "18W LED PANEL S/Ü KASASI",
+    "Liste Fiyatı": "50,00",
+    "Stok Miktarı": "51"
+  },
+  {
+    "Ürün Kodu": "ÖZ.PB75",
+    "Ürün Adı": "NORM BUAT KAPAKSIZ 16-18 LİK (HALOJEN FREE) ÖZKARAKUŞ",
+    "Liste Fiyatı": "9,00",
+    "Stok Miktarı": "920"
+  },
+  {
+    "Ürün Kodu": "ÖZ.PK01S",
+    "Ürün Adı": "14-18 LİK PLASTİK TAKOZ SİYAH",
+    "Liste Fiyatı": "45874,00",
+    "Stok Miktarı": "0"
   },
   {
     "Ürün Kodu": "PAKOSAN.YPN 300/10",
@@ -22386,6 +22386,18 @@
     "Stok Miktarı": "0"
   },
   {
+    "Ürün Kodu": "TEKN.1305-65",
+    "Ürün Adı": "TEKNOLOJİ BEYAZ TEZGAH SPOT 3w 6400K",
+    "Liste Fiyatı": "350,00",
+    "Stok Miktarı": "53"
+  },
+  {
+    "Ürün Kodu": "TEKN.1309-165",
+    "Ürün Adı": "TEKNOLOJİ SİYAH TEZGAH SPOT 3w 6400K",
+    "Liste Fiyatı": "430,00",
+    "Stok Miktarı": "-24"
+  },
+  {
     "Ürün Kodu": "TEK-PLS.2036",
     "Ürün Adı": "14-16 mm DİRSEK",
     "Liste Fiyatı": "3,00",
@@ -22408,18 +22420,6 @@
     "Ürün Adı": "MUHAFAZALI TİJ TAKIMI",
     "Liste Fiyatı": "45790,00",
     "Stok Miktarı": "1.070"
-  },
-  {
-    "Ürün Kodu": "TEKN.1305-65",
-    "Ürün Adı": "TEKNOLOJİ BEYAZ TEZGAH SPOT 3w 6400K",
-    "Liste Fiyatı": "350,00",
-    "Stok Miktarı": "53"
-  },
-  {
-    "Ürün Kodu": "TEKN.1309-165",
-    "Ürün Adı": "TEKNOLOJİ SİYAH TEZGAH SPOT 3w 6400K",
-    "Liste Fiyatı": "430,00",
-    "Stok Miktarı": "-24"
   },
   {
     "Ürün Kodu": "TNS.A96-100",
