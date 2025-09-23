@@ -64,7 +64,8 @@
           data
             .filter(item => {
               const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
-              return kelimeler.every(kelime => metin.includes(kelime));
+              const stok = parseFloat(item["Stok Miktarı"].replace(',', '.'));
+              return kelimeler.every(kelime => metin.includes(kelime)) && stok > 0;
             })
             .forEach(item => {
               const tr = document.createElement('tr');
