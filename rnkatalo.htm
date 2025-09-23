@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JSON'dan Sepet Sistemi</title>
+  <title>Sepet Sistemi</title>
   <style>
     body { font-family: sans-serif; padding: 20px; }
     .product { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
@@ -18,11 +18,19 @@
 <body>
 
 <h2>Ürün Listesi</h2>
+<input type="text" id="search" placeholder="Ürün ara..." oninput="filterProducts()">
 <div id="product-list">Yükleniyor...</div>
 
 <h3>Sepet</h3>
 <div id="cart-list"></div>
-<button onclick="sendMail()">📧 Sepeti Maille Gönder</button>
+
+<h3>Mesaj Gönder</h3>
+<form id="mailForm" onsubmit="submitForm(event)">
+  <input type="text" name="isim" placeholder="Adınız" required><br><br>
+  <textarea name="mesaj" placeholder="Mesajınız" required></textarea><br><br>
+  <input type="hidden" name="sepet" id="sepetData">
+  <button type="submit">📧 Gönder</button>
+</form>
 
 <script>
 let products = [];
@@ -35,10 +43,10 @@ function saveCart(cart) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function renderProducts() {
+function renderProducts(list = products) {
   const container = document.getElementById("product-list");
   container.innerHTML = "";
-  products.forEach(p => {
+  list.forEach(p => {
     container.innerHTML += `
       <div class="product">
         <span>${p.name} - ${p.price}₺</span>
@@ -66,22 +74,27 @@ function renderCart() {
   cart.forEach(item => {
     container.innerHTML += `<p>${item.name} - ${item.quantity} adet - ${item.price * item.quantity}₺</p>`;
   });
+  document.getElementById("sepetData").value = JSON.stringify(cart);
 }
 
-function sendMail() {
-  const cart = loadCart();
-  if (cart.length === 0) return alert("Sepet boş");
-
-  let body = "Sepetiniz:\n\n";
-  cart.forEach(item => {
-    body += `${item.name} - ${item.quantity} adet - ${item.price * item.quantity}₺\n`;
-  });
-
-  const mailto = `mailto:Huseyincengiz@ozbekenerji.com.tr?subject=Sepet Bilgisi&body=${encodeURIComponent(body)}`;
-  window.location.href = mailto;
+function filterProducts() {
+  const keyword = document.getElementById("search").value.toLowerCase();
+  const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
+  renderProducts(filtered);
 }
 
-// JSON'dan ürünleri çek
+function submitForm(e) {
+  e.preventDefault();
+  const form = document.getElementById("mailForm");
+  fetch("mail.php", {
+    method: "POST",
+    body: new FormData(form)
+  })
+  .then(res => res.text())
+  .then(msg => alert(msg))
+  .catch(err => alert("Gönderim hatası"));
+}
+
 fetch("veri.json")
   .then(res => res.json())
   .then(data => {
