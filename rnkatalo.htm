@@ -1,75 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-  <title>Ürün Kataloğu</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detaylı Ürün Arama</title>
   <style>
-    input, select { margin: 10px; padding: 5px; }
-    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    tr:hover {
+      background-color: #f0f0f0;
+    }
   </style>
 </head>
 <body>
-  <h2>Ürün Kataloğu</h2>
-
-  <!-- Arama ve Filtre -->
-  <input type="text" id="searchInput" placeholder="Ürün adı ara...">
-  <select id="categoryFilter">
-    <option value="">Tüm Kategoriler</option>
-  </select>
-
-  <table id="dataTable"></table>
+  <h2>Detaylı Ürün Arama</h2>
+  <input type="text" id="arama" placeholder="Ürün adı veya kodu girin...">
+  <table>
+    <thead>
+      <tr>
+        <th>Ürün Kodu</th>
+        <th>Ürün Adı</th>
+        <th>Liste Fiyatı</th>
+        <th>Stok Miktarı</th>
+      </tr>
+    </thead>
+    <tbody id="liste"></tbody>
+  </table>
 
   <script>
-    const rawData = JSON.parse(localStorage.getItem('excelData'));
-    const table = document.getElementById('dataTable');
-    const searchInput = document.getElementById('searchInput');
-    const categoryFilter = document.getElementById('categoryFilter');
+    fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
+      .then(res => res.json())
+      .then(data => {
+        const arama = document.getElementById('arama');
+        const liste = document.getElementById('liste');
 
-    // Kategori filtre seçeneklerini doldur
-    const categories = [...new Set(rawData.map(item => item.Kategori))];
-    categories.forEach(cat => {
-      const option = document.createElement('option');
-      option.value = cat;
-      option.textContent = cat;
-      categoryFilter.appendChild(option);
-    });
+        function detayliFiltrele() {
+          const kelimeler = arama.value.toLowerCase().split(/\s+/).filter(k => k);
+          liste.innerHTML = '';
 
-    // Tabloyu oluştur
-    function renderTable(data) {
-      table.innerHTML = '';
-      const headers = Object.keys(data[0]);
-      const headerRow = table.insertRow();
-      headers.forEach(h => {
-        const cell = headerRow.insertCell();
-        cell.textContent = h;
+          data
+            .filter(item => {
+              const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
+              return kelimeler.every(kelime => metin.includes(kelime));
+            })
+            .forEach(item => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td>${item["Ürün Kodu"]}</td>
+                <td>${item["Ürün Adı"]}</td>
+                <td>${item["Liste Fiyatı"]}</td>
+                <td>${item["Stok Miktarı"]}</td>
+              `;
+              liste.appendChild(tr);
+            });
+        }
+
+        arama.addEventListener('input', detayliFiltrele);
+        detayliFiltrele(); // Sayfa ilk açıldığında tüm ürünleri göster
+      })
+      .catch(err => {
+        document.getElementById('liste').innerHTML = '<tr><td colspan="4">veri.json yüklenemedi.</td></tr>';
+        console.error('Hata:', err);
       });
-
-      data.forEach(item => {
-        const row = table.insertRow();
-        headers.forEach(h => {
-          const cell = row.insertCell();
-          cell.textContent = item[h];
-        });
-      });
-    }
-
-    // Filtreleme ve arama
-    function filterData() {
-      const searchTerm = searchInput.value.toLowerCase();
-      const selectedCategory = categoryFilter.value;
-      const filtered = rawData.filter(item => {
-        const matchesSearch = item.ÜrünAdı.toLowerCase().includes(searchTerm);
-        const matchesCategory = selectedCategory === '' || item.Kategori === selectedCategory;
-        return matchesSearch && matchesCategory;
-      });
-      renderTable(filtered);
-    }
-
-    searchInput.addEventListener('input', filterData);
-    categoryFilter.addEventListener('change', filterData);
-
-    // İlk tablo render
-    renderTable(rawData);
   </script>
 </body>
 </html>
