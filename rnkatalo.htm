@@ -3,89 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Detaylı Ürün Arama</title>
+  <title>Sepet Sistemi</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-    }
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 8px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-    th {
-      background-color: #f4f4f4;
-    }
-    tr:hover {
-      background-color: #f0f0f0;
+    body { font-family: sans-serif; padding: 20px; }
+    .product { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+    .product input { width: 60px; margin-left: 10px; }
+    .product button { font-size: 20px; margin-left: 10px; }
+    #cart-list { margin-top: 20px; }
+    @media (max-width: 600px) {
+      .product { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
-  <h2>Detaylı Ürün Arama</h2>
-  <input type="text" id="arama" placeholder="Ürün adı veya kodu girin...">
-  <table>
-    <thead>
-      <tr>
-        <th>Ürün Kodu</th>
-        <th>Ürün Adı</th>
-        <th>Liste Fiyatı</th>
-        <th>Stok Miktarı</th>
-      </tr>
-    </thead>
-    <tbody id="liste"></tbody>
-  </table>
 
-  <script>
-    fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
-      .then(res => res.json())
-      .then(data => {
-        const arama = document.getElementById('arama');
-        const liste = document.getElementById('liste');
+<h2>Ürün Listesi</h2>
+<div id="product-list"></div>
 
-        function detayliFiltrele() {
-          const kelimeler = arama.value.toLowerCase().split(/\s+/).filter(k => k);
-          liste.innerHTML = '';
+<h3>Sepet</h3>
+<div id="cart-list"></div>
+<button onclick="sendMail()">📧 Sepeti Maille Gönder</button>
 
-          data
-            .filter(item => {
-              const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
-              const stok = parseFloat(item["Stok Miktarı"].replace(',', '.'));
-              return kelimeler.every(kelime => metin.includes(kelime)) && stok > 0;
-            })
-            .forEach(item => {
-              const tr = document.createElement('tr');
-              tr.innerHTML = `
-                <td>${item["Ürün Kodu"]}</td>
-                <td>${item["Ürün Adı"]}</td>
-                <td>${item["Liste Fiyatı"]}</td>
-                <td>${item["Stok Miktarı"]}</td>
-              `;
-              liste.appendChild(tr);
-            });
-        }
+<script>
+const products = [
+  { id: 1, name: "Ürün A", price: 100 },
+  { id: 2, name: "Ürün B", price: 150 },
+  { id: 3, name: "Ürün C", price: 200 }
+];
 
-        arama.addEventListener('input', detayliFiltrele);
-        detayliFiltrele(); // Sayfa ilk açıldığında tüm ürünleri göster
-      })
-      .catch(err => {
-        document.getElementById('liste').innerHTML = '<tr><td colspan="4">veri.json yüklenemedi.</td></tr>';
-        console.error('Hata:', err);
-      });
-  </script>
+function loadCart() {
+  return JSON.parse(localStorage.getItem("cart") || "[]");
+}
+
+function saveCart(cart) {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function renderProducts() {
+  const container = document.getElementById("product-list");
+  container.innerHTML = "";
+  products.forEach(p => {
+    container.innerHTML += `
+      <div class="product">
+        <span>${p.name} - ${p.price}₺</span>
+        <input type="number" min="1" id="qty-${p.id}" placeholder="Adet">
+        <button onclick="addToCart(${p.id})">🛒</button>
+      </div>
+    `;
+  });
+}
+
+function addToCart(id) {
+  const qty = parseInt(document.getElementById(`qty-${id}`).value);
+  if (!qty || qty <= 0) return alert("Geçerli miktar girin");
+  const product = products.find(p => p.id === id);
+  const cart = loadCart();
+  cart.push({ ...product, quantity: qty });
+  saveCart(cart);
+  renderCart();
+}
+
+function renderCart() {
+  const cart = loadCart();
+  const container = document.getElementById("cart-list");
+  container.innerHTML = "";
+  cart.forEach(item => {
+    container.innerHTML += `<p>${item.name} - ${item.quantity} adet - ${item.price * item.quantity}₺</p>`;
+  });
+}
+
+function sendMail() {
+  const cart = loadCart();
+  if (cart.length === 0) return alert("Sepet boş");
+
+  let body = "Sepetiniz:\n\n";
+  cart.forEach(item => {
+    body += `${item.name} - ${item.quantity} adet - ${item.price * item.quantity}₺\n`;
+  });
+
+  const mailto = `mailto:Huseyincengiz@ozbekenerji.com.tr?subject=Sepet Bilgisi&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
+}
+
+renderProducts();
+renderCart();
+</script>
+
 </body>
 </html>
