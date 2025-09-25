@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Detaylı Ürün Arama ve Sepet</title>
+  <title>Ürün Arama ve Sepet</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -102,26 +102,26 @@
                 <td>${item["Liste Fiyatı"]}</td>
                 <td>${item["Stok Miktarı"]}</td>
                 <td><input type="number" id="${inputId}" value="1" min="1" style="width:50px;"></td>
-                <td><button onclick='sepeteEkle(${JSON.stringify(item)}, "${inputId}")'>Sepete Ekle</button></td>
+                <td><button class="sepete-ekle" data-index="${index}">Sepete Ekle</button></td>
               `;
               liste.appendChild(tr);
+
+              // Butona olay dinleyici ekle
+              tr.querySelector('.sepete-ekle').addEventListener('click', function () {
+                const adet = parseInt(document.getElementById(inputId).value);
+                if (isNaN(adet) || adet < 1) return;
+
+                const trSepet = document.createElement('tr');
+                trSepet.innerHTML = `
+                  <td>${item["Ürün Kodu"]}</td>
+                  <td>${item["Ürün Adı"]}</td>
+                  <td>${item["Liste Fiyatı"]}</td>
+                  <td>${adet}</td>
+                  <td><button onclick="this.parentElement.parentElement.remove()">Sil</button></td>
+                `;
+                sepet.appendChild(trSepet);
+              });
             });
-        }
-
-        function sepeteEkle(urun, inputId) {
-          const adetInput = document.getElementById(inputId);
-          const adet = parseInt(adetInput.value);
-          if (isNaN(adet) || adet < 1) return;
-
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${urun["Ürün Kodu"]}</td>
-            <td>${urun["Ürün Adı"]}</td>
-            <td>${urun["Liste Fiyatı"]}</td>
-            <td>${adet}</td>
-            <td><button onclick="this.parentElement.parentElement.remove()">Sil</button></td>
-          `;
-          document.getElementById('sepet').appendChild(tr);
         }
 
         arama.addEventListener('input', detayliFiltrele);
