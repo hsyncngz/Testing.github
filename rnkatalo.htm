@@ -11,12 +11,14 @@
       max-width: 1000px;
       margin: auto;
     }
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
+    input[type="text"], input[type="number"] {
+      padding: 8px;
       font-size: 16px;
       box-sizing: border-box;
+    }
+    input[type="text"] {
+      width: 100%;
+      margin-bottom: 15px;
     }
     table {
       width: 100%;
@@ -50,6 +52,7 @@
         <th>Ürün Adı</th>
         <th>Liste Fiyatı</th>
         <th>Stok Miktarı</th>
+        <th>Adet</th>
         <th>İşlem</th>
       </tr>
     </thead>
@@ -63,6 +66,7 @@
         <th>Ürün Kodu</th>
         <th>Ürün Adı</th>
         <th>Liste Fiyatı</th>
+        <th>Adet</th>
         <th>Sil</th>
       </tr>
     </thead>
@@ -89,23 +93,27 @@
             })
             .forEach(item => {
               const tr = document.createElement('tr');
+              const id = item["Ürün Kodu"];
               tr.innerHTML = `
                 <td>${item["Ürün Kodu"]}</td>
                 <td>${item["Ürün Adı"]}</td>
                 <td>${item["Liste Fiyatı"]}</td>
                 <td>${item["Stok Miktarı"]}</td>
-                <td><button onclick='sepeteEkle(${JSON.stringify(item)})'>Sepete Ekle</button></td>
+                <td><input type="number" id="adet-${id}" value="1" min="1" style="width:60px;"></td>
+                <td><button onclick='sepeteEkle(${JSON.stringify(item)}, "adet-${id}")'>Sepete Ekle</button></td>
               `;
               liste.appendChild(tr);
             });
         }
 
-        function sepeteEkle(urun) {
+        function sepeteEkle(urun, adetInputId) {
+          const adet = document.getElementById(adetInputId).value;
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td>${urun["Ürün Kodu"]}</td>
             <td>${urun["Ürün Adı"]}</td>
             <td>${urun["Liste Fiyatı"]}</td>
+            <td>${adet}</td>
             <td><button onclick="this.parentElement.parentElement.remove()">Sil</button></td>
           `;
           sepet.appendChild(tr);
@@ -115,7 +123,7 @@
         detayliFiltrele(); // Sayfa ilk açıldığında tüm ürünleri göster
       })
       .catch(err => {
-        document.getElementById('liste').innerHTML = '<tr><td colspan="5">veri.json yüklenemedi.</td></tr>';
+        document.getElementById('liste').innerHTML = '<tr><td colspan="6">veri.json yüklenemedi.</td></tr>';
         console.error('Hata:', err);
       });
   </script>
