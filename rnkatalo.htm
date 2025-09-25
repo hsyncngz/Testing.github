@@ -42,6 +42,23 @@
       font-size: 12px;
       cursor: pointer;
     }
+    #yazdir-btn {
+      margin-bottom: 20px;
+    }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #yazdir-alani, #yazdir-alani * {
+        visibility: visible;
+      }
+      #yazdir-alani {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -61,19 +78,27 @@
     <tbody id="liste"></tbody>
   </table>
 
-  <h3>Sepetiniz</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Ürün Kodu</th>
-        <th>Ürün Adı</th>
-        <th>Liste Fiyatı</th>
-        <th>Adet</th>
-        <th>Sil</th>
-      </tr>
-    </thead>
-    <tbody id="sepet"></tbody>
-  </table>
+  <div id="yazdir-alani">
+    <h3>Sipariş Notu</h3>
+    <textarea id="siparisNotu" rows="3" style="width:100%; font-size:14px;" placeholder="Siparişe özel notunuzu yazın..."></textarea>
+
+    <h3>Sepetiniz</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Ürün Kodu</th>
+          <th>Ürün Adı</th>
+          <th>Liste Fiyatı</th>
+          <th>Adet</th>
+          <th>Güncelle</th>
+          <th>Sil</th>
+        </tr>
+      </thead>
+      <tbody id="sepet"></tbody>
+    </table>
+  </div>
+
+  <button id="yazdir-btn" onclick="window.print()">🖨️ Sepeti Yazdır</button>
 
   <script>
     fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
@@ -106,7 +131,6 @@
               `;
               liste.appendChild(tr);
 
-              // Butona olay dinleyici ekle
               tr.querySelector('.sepete-ekle').addEventListener('click', function () {
                 const adet = parseInt(document.getElementById(inputId).value);
                 if (isNaN(adet) || adet < 1) return;
@@ -116,8 +140,9 @@
                   <td>${item["Ürün Kodu"]}</td>
                   <td>${item["Ürün Adı"]}</td>
                   <td>${item["Liste Fiyatı"]}</td>
-                  <td>${adet}</td>
-                  <td><button onclick="this.parentElement.parentElement.remove()">Sil</button></td>
+                  <td><input type="number" value="${adet}" min="1" style="width:50px;"></td>
+                  <td><button onclick="guncelleAdet(this)">✔</button></td>
+                  <td><button onclick="this.parentElement.parentElement.remove()">🗑️</button></td>
                 `;
                 sepet.appendChild(trSepet);
               });
@@ -131,6 +156,14 @@
         document.getElementById('liste').innerHTML = '<tr><td colspan="6">veri.json yüklenemedi.</td></tr>';
         console.error('Hata:', err);
       });
+
+    function guncelleAdet(btn) {
+      const input = btn.parentElement.previousElementSibling.querySelector('input');
+      const yeniAdet = parseInt(input.value);
+      if (!isNaN(yeniAdet) && yeniAdet > 0) {
+        input.value = yeniAdet;
+      }
+    }
   </script>
 </body>
 </html>
