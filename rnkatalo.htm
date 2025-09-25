@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ürün Arama ve Sepet</title>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -38,27 +39,14 @@
       background-color: #f9f9f9;
     }
     button {
-      padding: 4px 8px;
-      font-size: 12px;
+      padding: 6px 10px;
+      font-size: 13px;
       cursor: pointer;
       margin-right: 10px;
     }
-    #yazdir-btn {
-      margin-bottom: 20px;
-    }
-    @media print {
-      body * {
-        visibility: hidden;
-      }
-      #yazdir-alani, #yazdir-alani * {
-        visibility: visible;
-      }
-      #yazdir-alani {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-      }
+    #yazdir-alani {
+      background: #fff;
+      padding: 10px;
     }
   </style>
 </head>
@@ -99,8 +87,7 @@
     </table>
   </div>
 
-  <button id="yazdir-btn" onclick="window.print()">🖨️ Sepeti Yazdır</button>
-  <button onclick="sepetiWhatsAppla()">📲 WhatsApp ile Gönder</button>
+  <button onclick="sepetiJPEGYap()">📸 Sepeti JPEG olarak indir ve WhatsApp'ta paylaş</button>
 
   <script>
     fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
@@ -167,21 +154,19 @@
       }
     }
 
-    function sepetiWhatsAppla() {
-      const not = document.getElementById('siparisNotu').value;
-      const satirlar = document.querySelectorAll('#sepet tr');
-      let mesaj = `Sipariş Notu: ${not}\n\nSepet:\n`;
+    function sepetiJPEGYap() {
+      const alan = document.getElementById('yazdir-alani');
+      html2canvas(alan).then(canvas => {
+        canvas.toBlob(blob => {
+          const dosya = new File([blob], "sepet.jpeg", { type: "image/jpeg" });
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(dosya);
+          link.download = dosya.name;
+          link.click();
 
-      satirlar.forEach(tr => {
-        const hucreler = tr.querySelectorAll('td');
-        if (hucreler.length >= 4) {
-          const adet = hucreler[3].querySelector('input').value;
-          mesaj += `• ${hucreler[1].innerText} (${hucreler[0].innerText}) - ${adet} adet\n`;
-        }
+          alert("📲 Görsel indirildi.\nLütfen WhatsApp'ı açıp +90 533 138 32 92 numarasına bu görseli gönderin.");
+        });
       });
-
-      const url = `https://wa.me/905331383292?text=${encodeURIComponent(mesaj)}`;
-      window.open(url, '_blank');
     }
   </script>
 </body>
