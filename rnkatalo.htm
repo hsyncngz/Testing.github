@@ -48,6 +48,20 @@
       background: #fff;
       padding: 10px;
     }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #yazdir-alani, #yazdir-alani * {
+        visibility: visible;
+      }
+      #yazdir-alani {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -87,6 +101,7 @@
     </table>
   </div>
 
+  <button onclick="window.print()">🖨️ Sepeti Yazdır</button>
   <button onclick="sepetiJPEGYap()">📸 Sepeti JPEG olarak indir ve WhatsApp'ta paylaş</button>
 
   <script>
