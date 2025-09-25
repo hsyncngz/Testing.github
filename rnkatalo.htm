@@ -3,110 +3,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sepet Sistemi</title>
+  <title>Detaylı Ürün Arama ve Sepet</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    .product { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
-    .product input { width: 60px; margin-left: 10px; }
-    .product button { font-size: 20px; margin-left: 10px; }
-    #cart-list { margin-top: 20px; }
-    @media (max-width: 600px) {
-      .product { flex-direction: column; align-items: flex-start; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    tr:hover {
+      background-color: #f0f0f0;
+    }
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <h2>Detaylı Ürün Arama</h2>
+  <input type="text" id="arama" placeholder="Ürün adı veya kodu girin...">
+  <table>
+    <thead>
+      <tr>
+        <th>Ürün Kodu</th>
+        <th>Ürün Adı</th>
+        <th>Liste Fiyatı</th>
+        <th>Stok Miktarı</th>
+        <th>İşlem</th>
+      </tr>
+    </thead>
+    <tbody id="liste"></tbody>
+  </table>
 
-<h2>Ürün Listesi</h2>
-<input type="text" id="search" placeholder="Ürün ara..." oninput="filterProducts()">
-<div id="product-list">Yükleniyor...</div>
+  <h3>Sepetiniz</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Ürün Kodu</th>
+        <th>Ürün Adı</th>
+        <th>Liste Fiyatı</th>
+        <th>Sil</th>
+      </tr>
+    </thead>
+    <tbody id="sepet"></tbody>
+  </table>
 
-<h3>Sepet</h3>
-<div id="cart-list"></div>
+  <script>
+    fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
+      .then(res => res.json())
+      .then(data => {
+        const arama = document.getElementById('arama');
+        const liste = document.getElementById('liste');
+        const sepet = document.getElementById('sepet');
 
-<h3>Mesaj Gönder</h3>
-<form id="mailForm" onsubmit="submitForm(event)">
-  <input type="text" name="isim" placeholder="Adınız" required><br><br>
-  <textarea name="mesaj" placeholder="Mesajınız" required></textarea><br><br>
-  <input type="hidden" name="sepet" id="sepetData">
-  <button type="submit">📧 Gönder</button>
-</form>
+        function detayliFiltrele() {
+          const kelimeler = arama.value.toLowerCase().split(/\s+/).filter(k => k);
+          liste.innerHTML = '';
 
-<script>
-let products = [];
+          data
+            .filter(item => {
+              const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
+              const stok = parseFloat(item["Stok Miktarı"].replace(',', '.'));
+              return kelimeler.every(kelime => metin.includes(kelime)) && stok > 0;
+            })
+            .forEach(item => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td>${item["Ürün Kodu"]}</td>
+                <td>${item["Ürün Adı"]}</td>
+                <td>${item["Liste Fiyatı"]}</td>
+                <td>${item["Stok Miktarı"]}</td>
+                <td><button onclick='sepeteEkle(${JSON.stringify(item)})'>Sepete Ekle</button></td>
+              `;
+              liste.appendChild(tr);
+            });
+        }
 
-function loadCart() {
-  return JSON.parse(localStorage.getItem("cart") || "[]");
-}
+        function sepeteEkle(urun) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${urun["Ürün Kodu"]}</td>
+            <td>${urun["Ürün Adı"]}</td>
+            <td>${urun["Liste Fiyatı"]}</td>
+            <td><button onclick="this.parentElement.parentElement.remove()">Sil</button></td>
+          `;
+          sepet.appendChild(tr);
+        }
 
-function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function renderProducts(list = products) {
-  const container = document.getElementById("product-list");
-  container.innerHTML = "";
-  list.forEach(p => {
-    container.innerHTML += `
-      <div class="product">
-        <span>${p.name} - ${p.price}₺</span>
-        <input type="number" min="1" id="qty-${p.id}" placeholder="Adet">
-        <button onclick="addToCart(${p.id})">🛒</button>
-      </div>
-    `;
-  });
-}
-
-function addToCart(id) {
-  const qty = parseInt(document.getElementById(`qty-${id}`).value);
-  if (!qty || qty <= 0) return alert("Geçerli miktar girin");
-  const product = products.find(p => p.id === id);
-  const cart = loadCart();
-  cart.push({ ...product, quantity: qty });
-  saveCart(cart);
-  renderCart();
-}
-
-function renderCart() {
-  const cart = loadCart();
-  const container = document.getElementById("cart-list");
-  container.innerHTML = "";
-  cart.forEach(item => {
-    container.innerHTML += `<p>${item.name} - ${item.quantity} adet - ${item.price * item.quantity}₺</p>`;
-  });
-  document.getElementById("sepetData").value = JSON.stringify(cart);
-}
-
-function filterProducts() {
-  const keyword = document.getElementById("search").value.toLowerCase();
-  const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
-  renderProducts(filtered);
-}
-
-function submitForm(e) {
-  e.preventDefault();
-  const form = document.getElementById("mailForm");
-  fetch("mail.php", {
-    method: "POST",
-    body: new FormData(form)
-  })
-  .then(res => res.text())
-  .then(msg => alert(msg))
-  .catch(err => alert("Gönderim hatası"));
-}
-
-fetch("veri.json")
-  .then(res => res.json())
-  .then(data => {
-    products = data;
-    renderProducts();
-    renderCart();
-  })
-  .catch(err => {
-    document.getElementById("product-list").innerText = "Ürünler yüklenemedi.";
-    console.error("JSON yükleme hatası:", err);
-  });
-</script>
-
+        arama.addEventListener('input', detayliFiltrele);
+        detayliFiltrele(); // Sayfa ilk açıldığında tüm ürünleri göster
+      })
+      .catch(err => {
+        document.getElementById('liste').innerHTML = '<tr><td colspan="5">veri.json yüklenemedi.</td></tr>';
+        console.error('Hata:', err);
+      });
+  </script>
 </body>
 </html>
