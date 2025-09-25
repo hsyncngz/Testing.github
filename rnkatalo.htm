@@ -12,7 +12,7 @@
       max-width: 1000px;
       margin: auto;
     }
-    input[type="text"], input[type="number"] {
+    input[type="text"], input[type="number"], textarea {
       padding: 6px;
       font-size: 14px;
       box-sizing: border-box;
@@ -41,6 +41,7 @@
       padding: 4px 8px;
       font-size: 12px;
       cursor: pointer;
+      margin-right: 10px;
     }
     #yazdir-btn {
       margin-bottom: 20px;
@@ -80,7 +81,7 @@
 
   <div id="yazdir-alani">
     <h3>Sipariş Notu</h3>
-    <textarea id="siparisNotu" rows="3" style="width:100%; font-size:14px;" placeholder="Siparişe özel notunuzu yazın..."></textarea>
+    <textarea id="siparisNotu" rows="3" style="width:100%;" placeholder="Siparişe özel notunuzu yazın..."></textarea>
 
     <h3>Sepetiniz</h3>
     <table>
@@ -99,6 +100,7 @@
   </div>
 
   <button id="yazdir-btn" onclick="window.print()">🖨️ Sepeti Yazdır</button>
+  <button onclick="sepetiWhatsAppla()">📲 WhatsApp ile Gönder</button>
 
   <script>
     fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
@@ -126,7 +128,7 @@
                 <td>${item["Ürün Adı"]}</td>
                 <td>${item["Liste Fiyatı"]}</td>
                 <td>${item["Stok Miktarı"]}</td>
-                <td><input type="number" id="${inputId}" value="1" min="1" style="width:50px;"></td>
+                <td><input type="number" id="${inputId}" value="1" min="1" style="width:90px;"></td>
                 <td><button class="sepete-ekle" data-index="${index}">Sepete Ekle</button></td>
               `;
               liste.appendChild(tr);
@@ -140,7 +142,7 @@
                   <td>${item["Ürün Kodu"]}</td>
                   <td>${item["Ürün Adı"]}</td>
                   <td>${item["Liste Fiyatı"]}</td>
-                  <td><input type="number" value="${adet}" min="1" style="width:50px;"></td>
+                  <td><input type="number" value="${adet}" min="1" style="width:90px;"></td>
                   <td><button onclick="guncelleAdet(this)">✔</button></td>
                   <td><button onclick="this.parentElement.parentElement.remove()">🗑️</button></td>
                 `;
@@ -163,6 +165,23 @@
       if (!isNaN(yeniAdet) && yeniAdet > 0) {
         input.value = yeniAdet;
       }
+    }
+
+    function sepetiWhatsAppla() {
+      const not = document.getElementById('siparisNotu').value;
+      const satirlar = document.querySelectorAll('#sepet tr');
+      let mesaj = `Sipariş Notu: ${not}\n\nSepet:\n`;
+
+      satirlar.forEach(tr => {
+        const hucreler = tr.querySelectorAll('td');
+        if (hucreler.length >= 4) {
+          const adet = hucreler[3].querySelector('input').value;
+          mesaj += `• ${hucreler[1].innerText} (${hucreler[0].innerText}) - ${adet} adet\n`;
+        }
+      });
+
+      const url = `https://wa.me/905331383292?text=${encodeURIComponent(mesaj)}`;
+      window.open(url, '_blank');
     }
   </script>
 </body>
