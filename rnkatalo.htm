@@ -7,13 +7,14 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      font-size: 14px;
       padding: 20px;
       max-width: 1000px;
       margin: auto;
     }
     input[type="text"], input[type="number"] {
-      padding: 8px;
-      font-size: 16px;
+      padding: 6px;
+      font-size: 14px;
       box-sizing: border-box;
     }
     input[type="text"] {
@@ -26,18 +27,19 @@
       margin-bottom: 30px;
     }
     th, td {
-      padding: 8px;
-      border: 1px solid #ddd;
+      padding: 6px;
+      border: 1px solid #ccc;
       text-align: left;
     }
     th {
-      background-color: #f4f4f4;
+      background-color: #eee;
     }
     tr:hover {
-      background-color: #f0f0f0;
+      background-color: #f9f9f9;
     }
     button {
-      padding: 5px 10px;
+      padding: 4px 8px;
+      font-size: 12px;
       cursor: pointer;
     }
   </style>
@@ -91,23 +93,26 @@
               const stok = parseFloat(item["Stok Miktarı"].replace(',', '.'));
               return kelimeler.every(kelime => metin.includes(kelime)) && stok > 0;
             })
-            .forEach(item => {
+            .forEach((item, index) => {
               const tr = document.createElement('tr');
-              const id = item["Ürün Kodu"];
+              const inputId = `adet-${index}`;
               tr.innerHTML = `
                 <td>${item["Ürün Kodu"]}</td>
                 <td>${item["Ürün Adı"]}</td>
                 <td>${item["Liste Fiyatı"]}</td>
                 <td>${item["Stok Miktarı"]}</td>
-                <td><input type="number" id="adet-${id}" value="1" min="1" style="width:60px;"></td>
-                <td><button onclick='sepeteEkle(${JSON.stringify(item)}, "adet-${id}")'>Sepete Ekle</button></td>
+                <td><input type="number" id="${inputId}" value="1" min="1" style="width:50px;"></td>
+                <td><button onclick='sepeteEkle(${JSON.stringify(item)}, "${inputId}")'>Sepete Ekle</button></td>
               `;
               liste.appendChild(tr);
             });
         }
 
-        function sepeteEkle(urun, adetInputId) {
-          const adet = document.getElementById(adetInputId).value;
+        function sepeteEkle(urun, inputId) {
+          const adetInput = document.getElementById(inputId);
+          const adet = parseInt(adetInput.value);
+          if (isNaN(adet) || adet < 1) return;
+
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td>${urun["Ürün Kodu"]}</td>
@@ -116,11 +121,11 @@
             <td>${adet}</td>
             <td><button onclick="this.parentElement.parentElement.remove()">Sil</button></td>
           `;
-          sepet.appendChild(tr);
+          document.getElementById('sepet').appendChild(tr);
         }
 
         arama.addEventListener('input', detayliFiltrele);
-        detayliFiltrele(); // Sayfa ilk açıldığında tüm ürünleri göster
+        detayliFiltrele();
       })
       .catch(err => {
         document.getElementById('liste').innerHTML = '<tr><td colspan="6">veri.json yüklenemedi.</td></tr>';
