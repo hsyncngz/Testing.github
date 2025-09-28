@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Video Oynatıcı</title>
+  <title>Medya Oynatıcı</title>
   <style>
     html, body {
       margin: 0;
@@ -11,36 +11,52 @@
       height: 100%;
       overflow: hidden;
     }
-    video {
+    video, audio {
       width: 100vw;
       height: 100vh;
-      object-fit: contain;
       background: black;
     }
   </style>
 </head>
 <body>
-  <video id="video" controls autoplay></video>
+  <video id="media" controls autoplay></video>
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const videoUrl = urlParams.get('src');
-    const video = document.getElementById('video');
+    const src = urlParams.get('src');
+    const media = document.getElementById('media');
 
-    if (Hls.isSupported()) {
+    function isAudio(url) {
+      return url.endsWith('.mp3') || url.endsWith('.m3u');
+    }
+
+    function isHLS(url) {
+      return url.endsWith('.m3u8') || url.endsWith('.ts');
+    }
+
+    if (!src) {
+      alert("Medya URL'si belirtilmedi.");
+    } else if (isAudio(src)) {
+      const audio = document.createElement('audio');
+      audio.src = src;
+      audio.controls = true;
+      audio.autoplay = true;
+      audio.style.width = '100vw';
+      audio.style.height = '100vh';
+      document.body.innerHTML = '';
+      document.body.appendChild(audio);
+    } else if (isHLS(src) && Hls.isSupported()) {
       const hls = new Hls();
-      hls.loadSource(videoUrl);
-      hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoUrl;
+      hls.loadSource(src);
+      hls.attachMedia(media);
     } else {
-      video.src = videoUrl; // MP4 gibi diğer formatlar için
+      media.src = src;
     }
 
     // Tam ekran başlat
     window.onload = () => {
-      video.requestFullscreen().catch(() => {});
+      media.requestFullscreen?.().catch(() => {});
     };
   </script>
 </body>
