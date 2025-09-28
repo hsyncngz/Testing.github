@@ -1,1 +1,1 @@
-https://live.powerapp.com.tr/powerturk/mpeg/icecast.audio?/;stream.mp3
+https://www.nerotv24.com/api/crypto.json?id=380578&parentId=0&type=1
