@@ -1,188 +1,96 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ürün Arama ve Sepet</title>
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    input[type="text"], input[type="number"], textarea {
-      padding: 6px;
-      font-size: 14px;
-      box-sizing: border-box;
-    }
-    input[type="text"] {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 30px;
-    }
-    th, td {
-      padding: 6px;
-      border: 1px solid #ccc;
-      text-align: left;
-    }
-    th {
-      background-color: #eee;
-    }
-    tr:hover {
-      background-color: #f9f9f9;
-    }
-    button {
-      padding: 6px 10px;
-      font-size: 13px;
-      cursor: pointer;
-      margin-right: 10px;
-    }
-    #yazdir-alani {
-      background: #fff;
-      padding: 10px;
-    }
-    @media print {
-      body * {
-        visibility: hidden;
-      }
-      #yazdir-alani, #yazdir-alani * {
-        visibility: visible;
-      }
-      #yazdir-alani {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Dinamik Fiyat Listesi</title>
+    <style>
+        /* Sadece görünümü düzenlemek için basit CSS */
+        body { font-family: sans-serif; padding: 20px; background-color: #f4f4f4; }
+        .urun-listesi { display: flex; gap: 20px; justify-content: center; }
+        .urun-kart {
+            background: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .urun-kart img { max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px; }
+        .urun-adi { font-size: 1.4em; color: #333; margin-bottom: 10px; }
+        /* Fiyatın çekileceği alanı belirginleştiriyoruz */
+        .urun-fiyat { font-size: 2em; color: #e94e77; font-weight: bold; }
+        .yukleniyor { color: orange; }
+    </style>
 </head>
 <body>
-  <h2>Detaylı Ürün Arama</h2>
-  <input type="text" id="arama" placeholder="Ürün adı veya kodu girin...">
-  <table>
-    <thead>
-      <tr>
-        <th>Ürün Kodu</th>
-        <th>Ürün Adı</th>
-        <th>Liste Fiyatı</th>
-        <th>Stok Miktarı</th>
-        <th>Adet</th>
-        <th>İşlem</th>
-      </tr>
-    </thead>
-    <tbody id="liste"></tbody>
-  </table>
 
-  <div id="yazdir-alani">
-    <h3>Sipariş Notu</h3>
-    <textarea id="siparisNotu" rows="3" style="width:100%;" placeholder="Siparişe özel notunuzu yazın..."></textarea>
+    <h1>Ürün Fiyat Listesi</h1>
+    
+    <div class="urun-listesi">
 
-    <h3>Sepetiniz</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Ürün Kodu</th>
-          <th>Ürün Adı</th>
-          <th>Liste Fiyatı</th>
-          <th>Adet</th>
-          <th>Güncelle</th>
-          <th>Sil</th>
-        </tr>
-      </thead>
-      <tbody id="sepet"></tbody>
-    </table>
-  </div>
+        <div class="urun-kart">
+            <img src="gorsel1.jpg" alt="Ürün A Görseli">
+            <div class="urun-adi">Ultra HD Monitör</div>
+            <p>Sınırları zorlayan netlik ve canlı renkler. Profesyonel kullanım için ideal.</p>
+            <div class="urun-fiyat" id="urun_a_fiyati"><span class="yukleniyor">Fiyat Yükleniyor...</span></div>
+        </div>
 
-  <button onclick="window.print()">🖨️ Sepeti Yazdır</button>
-  <button onclick="sepetiJPEGYap()">📸 Sepeti JPEG olarak indir ve WhatsApp'ta paylaş</button>
+        <div class="urun-kart">
+            <img src="gorsel2.jpg" alt="Ürün B Görseli">
+            <div class="urun-adi">Mekanik Klavye</div>
+            <p>Yüksek tepkime süresi ve dayanıklı tuşlar ile oyun deneyiminizi artırın.</p>
+            <div class="urun-fiyat" id="urun_b_fiyati"><span class="yukleniyor">Fiyat Yükleniyor...</span></div>
+        </div>
+        
+        <div class="urun-kart">
+            <img src="gorsel3.jpg" alt="Ürün C Görseli">
+            <div class="urun-adi">Kablosuz Mouse</div>
+            <p>Ergonomik tasarım ve uzun pil ömrü.</p>
+            <div class="urun-fiyat" id="urun_c_fiyati"><span class="yukleniyor">Fiyat Yükleniyor...</span></div>
+        </div>
 
-  <script>
-    fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
-      .then(res => res.json())
-      .then(data => {
-        const arama = document.getElementById('arama');
-        const liste = document.getElementById('liste');
-        const sepet = document.getElementById('sepet');
+    </div>
 
-        function detayliFiltrele() {
-          const kelimeler = arama.value.toLowerCase().split(/\s+/).filter(k => k);
-          liste.innerHTML = '';
+    <script>
+        // JSON dosyasını çekip fiyatları HTML'e yerleştiren fonksiyon
+        async function fiyatlariCekVeGoster() {
+            const jsonDosyaYolu = 'fiyatlar.json';
 
-          data
-            .filter(item => {
-              const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
-              const stok = parseFloat(item["Stok Miktarı"].replace(',', '.'));
-              return kelimeler.every(kelime => metin.includes(kelime)) && stok > 0;
-            })
-            .forEach((item, index) => {
-              const tr = document.createElement('tr');
-              const inputId = `adet-${index}`;
-              tr.innerHTML = `
-                <td>${item["Ürün Kodu"]}</td>
-                <td>${item["Ürün Adı"]}</td>
-                <td>${item["Liste Fiyatı"]}</td>
-                <td>${item["Stok Miktarı"]}</td>
-                <td><input type="number" id="${inputId}" value="1" min="1" style="width:90px;"></td>
-                <td><button class="sepete-ekle" data-index="${index}">Sepete Ekle</button></td>
-              `;
-              liste.appendChild(tr);
+            try {
+                // 1. JSON dosyasını oku (Fetch API kullanılır)
+                const response = await fetch(jsonDosyaYolu);
+                if (!response.ok) {
+                    throw new Error(`HTTP hata kodu: ${response.status}`);
+                }
+                const fiyatVerileri = await response.json();
 
-              tr.querySelector('.sepete-ekle').addEventListener('click', function () {
-                const adet = parseInt(document.getElementById(inputId).value);
-                if (isNaN(adet) || adet < 1) return;
+                // 2. Her bir fiyat bilgisini dolaş
+                fiyatVerileri.forEach(urun => {
+                    // JSON'daki 'id' ile HTML'deki elementi bul
+                    const fiyatElementi = document.getElementById(urun.id);
 
-                const trSepet = document.createElement('tr');
-                trSepet.innerHTML = `
-                  <td>${item["Ürün Kodu"]}</td>
-                  <td>${item["Ürün Adı"]}</td>
-                  <td>${item["Liste Fiyatı"]}</td>
-                  <td><input type="number" value="${adet}" min="1" style="width:90px;"></td>
-                  <td><button onclick="guncelleAdet(this)">✔</button></td>
-                  <td><button onclick="this.parentElement.parentElement.remove()">🗑️</button></td>
-                `;
-                sepet.appendChild(trSepet);
-              });
-            });
+                    if (fiyatElementi) {
+                        // Eğer element bulunduysa, içeriğini güncelle
+                        fiyatElementi.innerHTML = `${urun.fiyat} ${urun.para_birimi}`; 
+                    } else {
+                        console.warn(`HTML'de '${urun.id}' ID'li bir element bulunamadı.`);
+                    }
+                });
+
+            } catch (error) {
+                console.error('Fiyatlar yüklenirken bir hata oluştu:', error);
+                // Kullanıcıya bir hata mesajı gösterebiliriz
+                const tumFiyatAlanlari = document.querySelectorAll('.urun-fiyat');
+                tumFiyatAlanlari.forEach(alan => {
+                    alan.innerHTML = 'Fiyatlar Yüklenemedi.';
+                    alan.style.color = 'red';
+                });
+            }
         }
 
-        arama.addEventListener('input', detayliFiltrele);
-        detayliFiltrele();
-      })
-      .catch(err => {
-        document.getElementById('liste').innerHTML = '<tr><td colspan="6">veri.json yüklenemedi.</td></tr>';
-        console.error('Hata:', err);
-      });
-
-    function guncelleAdet(btn) {
-      const input = btn.parentElement.previousElementSibling.querySelector('input');
-      const yeniAdet = parseInt(input.value);
-      if (!isNaN(yeniAdet) && yeniAdet > 0) {
-        input.value = yeniAdet;
-      }
-    }
-
-    function sepetiJPEGYap() {
-      const alan = document.getElementById('yazdir-alani');
-      html2canvas(alan).then(canvas => {
-        canvas.toBlob(blob => {
-          const dosya = new File([blob], "sepet.jpeg", { type: "image/jpeg" });
-          const link = document.createElement('a');
-          link.href = URL.createObjectURL(dosya);
-          link.download = dosya.name;
-          link.click();
-
-          alert("📲 Görsel indirildi.\nLütfen WhatsApp'ı açıp +90 533 138 32 92 numarasına bu görseli gönderin.");
-        });
-      });
-    }
-  </script>
-</body>
+        // Fonksiyonu sayfa yüklendiğinde çalıştır
+        fiyatlariCekVeGoster();
+    </script>
+    </body>
 </html>
