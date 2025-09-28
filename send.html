@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Video Gönder</title>
+  <title>Medya Gönder</title>
   <style>
     body {
       font-family: sans-serif;
@@ -23,17 +23,19 @@
   </style>
 </head>
 <body>
-  <h2>Video URL'si Girin</h2>
-  <input type="text" id="videoUrl" placeholder="https://... .m3u8 veya .mp4">
-  <button onclick="sendVideo()">TV'de Oynat</button>
+  <h2>Medya URL'si Girin</h2>
+  <input type="text" id="mediaUrl" placeholder="https://... .mp4 / .mp3 / .m3u8">
+  <button onclick="sendMedia()">TV'de Oynat</button>
 
   <script>
-    function sendVideo() {
-      const url = document.getElementById('videoUrl').value;
+    function sendMedia() {
+      const url = document.getElementById('mediaUrl').value;
       if (url) {
         window.location.href = `player.html?src=${encodeURIComponent(url)}`;
       }
     }
   </script>
+</body>
+</html>  </script>
 </body>
 </html>
