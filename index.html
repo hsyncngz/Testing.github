@@ -57,30 +57,51 @@
         const arama = document.getElementById('arama');
         const liste = document.getElementById('liste');
 
+        function ilkSatiriGoster() {
+          liste.innerHTML = '';
+          if (data.length > 0) {
+            const ilk = data[0];
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${ilk["Ürün Kodu"]}</td>
+              <td>${ilk["Ürün Adı"]}</td>
+              <td>${ilk["Liste Fiyatı"]}</td>
+              <td>${ilk["Stok Miktarı"]}</td>
+            `;
+            liste.appendChild(tr);
+          }
+        }
+
         function detayliFiltrele() {
           const kelimeler = arama.value.toLowerCase().split(/\s+/).filter(k => k);
           liste.innerHTML = '';
 
-          data
-            .filter(item => {
-              const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
-              const stok = parseFloat(item["Stok Miktarı"].replace(',', '.'));
-              return kelimeler.every(kelime => metin.includes(kelime)) && stok > 0;
-            })
-            .forEach(item => {
-              const tr = document.createElement('tr');
-              tr.innerHTML = `
-                <td>${item["Ürün Kodu"]}</td>
-                <td>${item["Ürün Adı"]}</td>
-                <td>${item["Liste Fiyatı"]}</td>
-                <td>${item["Stok Miktarı"]}</td>
-              `;
-              liste.appendChild(tr);
-            });
+          if (kelimeler.length === 0) {
+            ilkSatiriGoster();
+            return;
+          }
+
+          const filtrelenmis = data.filter((item, index) => {
+            if (index === 0) return false;
+            const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
+            const stok = parseFloat(item["Stok Miktarı"].replace(',', '.'));
+            return kelimeler.every(k => metin.includes(k)) && stok > 0;
+          });
+
+          filtrelenmis.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${item["Ürün Kodu"]}</td>
+              <td>${item["Ürün Adı"]}</td>
+              <td>${item["Liste Fiyatı"]}</td>
+              <td>${item["Stok Miktarı"]}</td>
+            `;
+            liste.appendChild(tr);
+          });
         }
 
         arama.addEventListener('input', detayliFiltrele);
-        detayliFiltrele(); // Sayfa ilk açıldığında tüm ürünleri göster
+        ilkSatiriGoster();
       })
       .catch(err => {
         document.getElementById('liste').innerHTML = '<tr><td colspan="4">veri.json yüklenemedi.</td></tr>';
