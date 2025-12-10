@@ -3,31 +3,36 @@
     "title": "CATA 2025-2",
     "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/CATA_2025-2-01.jpg",
     "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/CATA%202025-2.pdf",
-    "order": 1
+    "order": "1"
   },
-{
-    "title": "CATA 2025-2",
-    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/CATA_2025-2-01.jpg",
-    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/CATA%202025-2.pdf",
-    "order": 2
+  {
+    "title": "NOAS 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/NOAS%202025-KAPAK.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/NOAS%202025.pdf",
+    "order": "2"
   },
-{
-    "title": "CATA 2025-2",
-    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/CATA_2025-2-01.jpg",
-    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/CATA%202025-2.pdf",
-    "order": 3
+  {
+    "title": "ZMR 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/ZMR%202025-KAPAK.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/ZMR%202025.pdf",
+    "order": "3"
   },
-{
-    "title": "CATA 2025-2",
-    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/CATA_2025-2-01.jpg",
-    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/CATA%202025-2.pdf",
-    "order": 4
+  {
+    "title": "HELİOS 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/HELIOS-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Ledmar%202025%20Katalog.pdf",
+    "order": "4"
   },
-{
-    "title": "CATA 2025-2",
-    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/CATA_2025-2-01.jpg",
-    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/CATA%202025-2.pdf",
-    "order": 5
+  {
+    "title": "HOROZ 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/HOROZ%20AYDINLATMA%202025_V5-001.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/HOROZ%20AYDINLATMA%202025_V5.pdf",
+    "order": "5"
   },
-  
+  {
+    "title": "DÜNYA LED 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/D%C3%9CNYA%20KAP-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/D%C3%9CNYA%20LED%202025.pdf",
+    "order": "6"
+  }
 ]
