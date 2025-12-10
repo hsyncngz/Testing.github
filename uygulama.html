@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinamik Kitaplık Görünümü - PDF Görüntüleyici</title>
+    <style>
+        /* (Önceki CSS kodunu koruyun: Mobil uyumluluk ve modal stilleri burada yer almaktadır) */
+        
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --bg-color: #f4f4f4;
+            --container-bg: #e6e6e6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Kitaplık Konteyneri */
+        #library-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background-color: var(--container-bg); 
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (min-width: 768px) {
+            #library-container {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 30px;
+            }
+        }
+
+        /* Tekil Kitap Öğesi (Tıklanabilir Kart) */
+        .book-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .book-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Kitap Kapağı */
+        .book-cover {
+            width: 100%;
+            height: 250px; 
+            object-fit: cover; 
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); 
+        }
+
+        @media (min-width: 768px) {
+            .book-cover {
+                height: 300px;
+            }
+        }
+
+        /* Kitap Başlığı */
+        .book-title {
+            margin-top: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            line-height: 1.3;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Modal (PDF Görüntüleyici) */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Dış scroll'u engeller */
+            background-color: rgba(0,0,0,0.9);
+            padding-top: 0;
+        }
+
+        .modal-content {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #fff;
+        }
+
+        /* Kapatma Butonu */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 1001; /* Iframe'in üstünde kalmalı */
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+        }
+        
+        /* Yükleniyor Mesajı */
+        #message {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📚 Fiyat Listesi Arşivi</h1>
+    <div id="message">Kataloglar yükleniyor...</div>
+    
+    <div id="library-container">
+        </div>
+
+    <div id="pdfModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-content">
+        <iframe id="pdfFrame" src="" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <script>
+        const JSON_URL = 'https://hsyncngz.github.io/Testing.github/uygulama.json';
+        const container = document.getElementById('library-container');
+        const message = document.getElementById('message');
+        const pdfModal = document.getElementById('pdfModal');
+        const pdfFrame = document.getElementById('pdfFrame');
+
+        // ********** YAPILANDIRMA **********
+        // Eğer indirme başlıyorsa, bu değişkeni TRUE yapın.
+        const useGoogleViewer = false; 
+        // **********************************
+
+        // Modal'ı açan ve PDF'i görüntüleyen fonksiyon
+        function openPdfViewer(pdfUrl) {
+            let finalUrl;
+
+            if (useGoogleViewer) {
+                // Google Docs Viewer, PDF'in indirilmesini engelleyen sunucu ayarlarını atlamak için idealdir.
+                // Not: PDF dosyası herkese açık olmalıdır.
+                finalUrl = `https://docs.google.com/gview?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
+                console.log("Google Viewer kullanılıyor:", finalUrl);
+            } else {
+                // Tarayıcının yerleşik görüntüleyicisini zorla (Daha hızlıdır, ancak indirmeyi engelleyemeyebilir)
+                finalUrl = pdfUrl;
+                console.log("Doğrudan Iframe kullanılıyor:", finalUrl);
+            }
+            
+            pdfFrame.src = finalUrl;
+            pdfModal.style.display = "block";
+        }
+
+        // Modal'ı kapatan fonksiyon
+        function closeModal() {
+            pdfModal.style.display = "none";
+            pdfFrame.src = ""; // Kaynağı temizleyerek belleği serbest bırak
+        }
+
+        // Harici JSON dosyasından verileri çeken fonksiyon
+        async function loadBooks() {
+            // Hata işleme ve veri çekme kısmı önceki cevapla aynı kalır.
+            try {
+                const response = await fetch(JSON_URL);
+                if (!response.ok) {
+                    throw new Error(`HTTP Hata kodu: ${response.status}`);
+                }
+                const data = await response.json();
+                
+                message.style.display = 'none';
+                container.innerHTML = ''; 
+
+                if (!data || data.length === 0) {
+                     message.style.display = 'block';
+                     message.textContent = 'Katalog listesi boş veya veri bulunamadı.';
+                     return;
+                }
+
+                // Sıralama
+                data.sort((a, b) => parseInt(a.order) - parseInt(b.order)); 
+
+                data.forEach(book => {
+                    const title = book.title;
+                    const coverUrl = book.imageUrl; 
+                    const pdfUrl = book.pdfUrl;
+
+                    if (!title || !coverUrl || !pdfUrl) return;
+
+                    const bookItem = document.createElement('div');
+                    bookItem.className = 'book-item';
+                    
+                    // Tıklama olayını openPdfViewer fonksiyonuna bağla
+                    bookItem.onclick = () => openPdfViewer(pdfUrl);
+
+                    const coverImage = document.createElement('img');
+                    coverImage.src = coverUrl;
+                    coverImage.alt = `Katalog Kapağı: ${title}`;
+                    coverImage.className = 'book-cover';
+
+                    const bookTitle = document.createElement('span');
+                    bookTitle.textContent = title;
+                    bookTitle.className = 'book-title';
+                    
+                    bookItem.appendChild(coverImage);
+                    bookItem.appendChild(bookTitle);
+                    
+                    container.appendChild(bookItem);
+                });
+
+            } catch (error) {
+                console.error('Veri yüklenirken bir hata oluştu:', error);
+                message.style.display = 'block';
+                message.textContent = `Veri yüklenirken hata: ${error.message}. Lütfen JSON dosya adresini veya yapısını kontrol edin.`;
+            }
+        }
+
+        // Modal'ın dışına tıklanırsa kapatma
+        window.onclick = function(event) {
+          if (event.target == pdfModal) {
+            closeModal();
+          }
+        }
+
+        // Sayfa yüklendiğinde fonksiyonu çalıştır
+        loadBooks();
+    </script>
+
+</body>
+</html>
