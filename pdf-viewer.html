@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>PDF Görüntüleyici</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background-color: #f4f4f4;
+        }
+
+        #viewerContainer {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+        
+        /* Yükleme çubuğu stilleri */
+        #loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">PDF yükleniyor...</div>
+
+    <div id="viewerContainer">
+        <canvas id="pdfCanvas"></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs" type="module"></script>
+    <script type="module">
+        import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs';
+
+        // PDF.js worker'ı ayarla
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs';
+
+        const canvas = document.getElementById('pdfCanvas');
+        const loader = document.getElementById('loader');
+        const ctx = canvas.getContext('2d');
+        const viewerContainer = document.getElementById('viewerContainer');
+        let pdfDoc = null;
+        let pageNum = 1;
+
+        // URL'den 'file' parametresini alır
+        function getPdfUrlFromQuery() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('file');
+        }
+
+        async function renderPage(num) {
+            if (!pdfDoc) return;
+
+            try {
+                // Sayfayı yükle
+                const page = await pdfDoc.getPage(num);
+                const viewport = page.getViewport({ scale: 1.5 }); // Başlangıç ölçeği
+
+                // Ölçeği ekran genişliğine göre ayarla
+                const scale = viewerContainer.clientWidth / viewport.width;
+                const scaledViewport = page.getViewport({ scale: scale });
+
+                canvas.height = scaledViewport.height;
+                canvas.width = scaledViewport.width;
+
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: scaledViewport
+                };
+
+                // Sayfayı Canvas'a çiz
+                await page.render(renderContext).promise;
+
+            } catch (error) {
+                console.error('Sayfa render hatası:', error);
+            }
+        }
+
+        async function loadPdf() {
+            const pdfUrl = getPdfUrlFromQuery();
+            
+            if (!pdfUrl) {
+                loader.textContent = 'Hata: PDF adresi bulunamadı.';
+                return;
+            }
+            
+            loader.textContent = 'PDF yükleniyor...';
+
+            try {
+                // PDF'i yükle
+                const loadingTask = pdfjsLib.getDocument({ url: pdfUrl });
+                pdfDoc = await loadingTask.promise;
+
+                // PDF yüklendi, yükleyiciyi gizle
+                loader.style.display = 'none';
+                
+                // İlk sayfayı render et
+                renderPage(pageNum);
+
+            } catch (error) {
+                loader.textContent = `Hata: PDF yüklenemedi. Dosya boyutu veya erişim sorunu olabilir. (${error.message})`;
+                console.error('PDF yükleme hatası:', error);
+            }
+        }
+
+        // Yeniden boyutlandırma olayında sayfayı yeniden çiz
+        window.addEventListener('resize', () => {
+             // Sadece genişlik değiştiğinde yeniden çizmek daha performanslıdır
+            renderPage(pageNum); 
+        });
+
+
+        // Not: Birden fazla sayfayı göstermek için bir döngü ve sayfa kaydırma mantığı eklenmesi gerekir.
+        // Bu temel yapı, ilk sayfayı tarayıcıda göstermek ve aranabilirliği sağlamak için yeterlidir.
+
+        loadPdf();
+    </script>
+</body>
+</html>
