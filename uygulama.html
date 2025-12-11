@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dinamik Kitaplık Görünümü - PDF.js Çözümü</title>
+    <title>Dinamik Kitaplık Görünümü - Dahili PDF Çözümü</title>
     <style>
-        /* (CSS kodlarının tamamı önceki cevaplardan aynı şekilde kopyalanmalıdır) */
-        
+        /* Bu CSS Bölümü, Mobil Uyumluluk, Kitaplık ve Modal Stilllerini İçerir */
         :root {
             --primary-color: #007bff;
             --secondary-color: #6c757d;
@@ -47,7 +46,7 @@
             }
         }
 
-        /* Tekil Kitap Öğesi (Tıklanabilir Kart) */
+        /* Tekil Kitap Öğesi */
         .book-item {
             display: flex;
             flex-direction: column;
@@ -68,7 +67,6 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
         }
 
-        /* Kitap Kapağı */
         .book-cover {
             width: 100%;
             height: 250px; 
@@ -84,7 +82,6 @@
             }
         }
 
-        /* Kitap Başlığı */
         .book-title {
             margin-top: 10px;
             font-size: 1em;
@@ -95,7 +92,50 @@
             align-items: center;
         }
         
-        /* Modal ve Kapatma Butonu artık kullanılmayacak, kaldırılabilir veya boş bırakılabilir. */
+        /* Modal (PDF Görüntüleyici) */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            background-color: rgba(0,0,0,0.95); /* Biraz daha koyu arka plan */
+            padding-top: 0;
+        }
+
+        .modal-content {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #fff;
+        }
+
+        /* Kapatma Butonu */
+        .close {
+            position: fixed; /* Modal'ın içinde sabit kalmalı */
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 1001; 
+            text-shadow: 0 0 5px rgba(0,0,0,0.5); /* Okunabilirliği artırır */
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+        }
         
         /* Yükleniyor Mesajı */
         #message {
@@ -114,22 +154,50 @@
     <div id="library-container">
         </div>
 
+    <div id="pdfModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-content">
+        <iframe id="pdfFrame" src="" allowfullscreen></iframe>
+      </div>
+    </div>
+
     <script>
         const JSON_URL = 'https://hsyncngz.github.io/Testing.github/uygulama.json';
         const container = document.getElementById('library-container');
         const message = document.getElementById('message');
+        const pdfModal = document.getElementById('pdfModal');
+        const pdfFrame = document.getElementById('pdfFrame');
         
-        // Modal ile ilgili değişkenler kaldırıldı.
+        // **YENİ PROXY ADRESİ:** Proxy sorununu aşmak için denenmiştir.
+        // Lütfen bu adresin geçerliliğini kontrol edin.
+        // Üretim ortamında kesinlikle KENDİ PROXY HİZMETİNİZİ kullanın.
+        const CORS_PROXY = 'https://api.allorigins.win/raw?url='; 
+        // Veya eski çözüm: const CORS_PROXY = 'https://corsproxy.io/?';
 
-        // Modal yerine PDF.js görüntüleyicisine yönlendirme
-        function openPdfViewer(pdfUrl) {
-            // PDF dosyasının URL'sini parametre olarak pdf-viewer.html'e gönderiyoruz.
-            const viewerUrl = `pdf-viewer.html?file=${encodeURIComponent(pdfUrl)}`;
-            // Yeni sekmede açıyoruz ki, kullanıcı geri tuşuyla kolayca kitaplığa dönebilsin.
-            window.open(viewerUrl, '_blank');
+        // Modal'ı kapatan fonksiyon
+        function closeModal() {
+            pdfModal.style.display = "none";
+            pdfFrame.src = ""; // Kaynağı temizle
         }
 
-        // Harici JSON dosyasından verileri çeken fonksiyon
+        // Modal'ı açan ve PDF'i PDF.js Viewer üzerinden yükleyen fonksiyon
+        function openPdfViewer(pdfUrl) {
+            // PDF dosyasının URL'sini parametre olarak pdf-viewer.html'e gönderiyoruz.
+            // **PROXY'yi PDF.js görüntüleyicisine GÖNDERMEK YERİNE, PDF.js görüntüyeyicisine GÖNDERİLECEK URL'yi proxy'liyoruz.**
+            
+            // 1. PDF dosyasını önce CORS proxy'den geçirecek URL'yi oluştur.
+            const proxiedPdfUrl = CORS_PROXY + encodeURIComponent(pdfUrl);
+
+            // 2. Bu proxied URL'yi, PDF.js görüntüleyici sayfamıza (pdf-viewer.html) gönder.
+            const viewerUrl = `pdf-viewer.html?file=${encodeURIComponent(proxiedPdfUrl)}`;
+
+            // 3. Iframe'i modal içinde aç
+            pdfFrame.src = viewerUrl;
+            pdfModal.style.display = "block";
+        }
+
+
+        // Harici JSON dosyasından verileri çeken fonksiyon (Değişiklik yok)
         async function loadBooks() {
             try {
                 const response = await fetch(JSON_URL);
@@ -184,9 +252,15 @@
             }
         }
 
+        // Modal'ın dışına tıklanırsa kapatma
+        window.onclick = function(event) {
+          if (event.target == pdfModal) {
+            closeModal();
+          }
+        }
+
         // Sayfa yüklendiğinde fonksiyonu çalıştır
         loadBooks();
     </script>
-
 </body>
 </html>

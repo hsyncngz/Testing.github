@@ -8,7 +8,7 @@
         body, html {
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow: hidden; /* Dış sayfadaki modal içinde çalıştığı için scroll yok */
             width: 100%;
             height: 100%;
             background-color: #f4f4f4;
@@ -18,11 +18,9 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            /* PDF.js'nin arama, kaydırma ve zoom araçlarının düzgün çalışması için zemin */
             position: relative; 
         }
         
-        /* Yükleme çubuğu stilleri */
         #loader {
             position: fixed;
             top: 50%;
@@ -43,7 +41,7 @@
     <div id="loader">PDF yükleniyor... Lütfen bekleyiniz.</div>
 
     <div id="viewerContainer">
-        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs" type="module"></script>
     <script type="module">
@@ -52,26 +50,21 @@
         // PDF.js worker'ı ayarla (CORS uyumlu)
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs';
 
-        // LÜTFEN DİKKAT: Bu bir genel (public) test proxy'sidir. 
-        // Üretim ortamında KULLANILMAMALIDIR. Kendi güvenli sunucunuzda bir proxy kurmanız önerilir.
-        const CORS_PROXY = 'https://corsproxy.io/?'; 
-
         const loader = document.getElementById('loader');
         const viewerContainer = document.getElementById('viewerContainer');
         let pdfDoc = null;
 
-        // URL'den 'file' parametresini alır
+        // URL'den 'file' parametresini alır (Bu artık proxylenmiş adrestir)
         function getPdfUrlFromQuery() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('file');
         }
 
-        // Sayfa çizimini yapar (Mobil uyumluluk için ölçekleme dahil)
         async function renderPage(pdfDoc, pageNum, container) {
             const page = await pdfDoc.getPage(pageNum);
             const viewport = page.getViewport({ scale: 1.0 });
 
-            // Ölçeği ekran genişliğine göre ayarla
+            // Ölçeği konteyner genişliğine göre ayarla
             const scale = container.clientWidth / viewport.width;
             const scaledViewport = page.getViewport({ scale: scale });
 
@@ -81,9 +74,10 @@
             canvas.height = scaledViewport.height;
             canvas.width = scaledViewport.width;
             
-            // Her sayfaya bir alt öğe div ekle (Gelecekte metin katmanı vb. için yararlıdır)
             const pageDiv = document.createElement('div');
             pageDiv.style.marginBottom = '10px';
+            pageDiv.style.width = '100%';
+            pageDiv.style.textAlign = 'center'; // Sayfayı ortala
             pageDiv.appendChild(canvas);
             container.appendChild(pageDiv);
 
@@ -93,46 +87,37 @@
             };
 
             await page.render(renderContext).promise;
-            
-            // Eğer PDF aranabilir metin içeriyorsa, metin katmanını ekle (Aranabilirlik için)
-            // Bu kısım, PDF.js'nin tam viewer'ının bir parçasıdır. Basit bir entegrasyonda manuel olarak eklenir.
-            // PDF.js'nin tam kütüphanesini kullanmak, bu özelliği otomatikleştirir.
-            // Bu temel kodda, tarayıcı metin aramasını (Ctrl+F) tam olarak desteklemek için
-            // bu kısmı (annotationLayer ve textLayer) devre dışı bırakıyoruz, 
-            // ancak büyük dosya açma sorununu çözüyoruz.
         }
 
         // Tüm PDF'i yükle ve render et
         async function loadPdf() {
-            const pdfUrl = getPdfUrlFromQuery();
+            const proxiedUrl = getPdfUrlFromQuery();
             
-            if (!pdfUrl) {
+            if (!proxiedUrl) {
                 loader.textContent = 'Hata: PDF adresi URL\'de bulunamadı.';
                 return;
             }
             
-            // **CORS ÇÖZÜMÜ:** Proxy'yi URL'nin başına ekle
-            const proxiedUrl = CORS_PROXY + encodeURIComponent(pdfUrl);
-            
             loader.textContent = 'PDF yükleniyor... Lütfen bekleyiniz.';
 
             try {
-                // PDF'i yükle
+                // PDF'i yükle (Zaten proxylenmiş adresi kullanıyoruz)
                 const loadingTask = pdfjsLib.getDocument({ url: proxiedUrl });
                 pdfDoc = await loadingTask.promise;
                 
                 // Yükleyiciyi gizle
                 loader.style.display = 'none';
                 
-                // Tüm sayfaları render et (Büyük dosyalar için döngü)
+                // Tüm sayfaları render et
                 const numPages = pdfDoc.numPages;
                 for (let i = 1; i <= numPages; i++) {
+                    // Sayfa yüklenirken yükleyiciyi göstermek isterseniz burada bir güncelleme yapabilirsiniz.
                     await renderPage(pdfDoc, i, viewerContainer);
                 }
 
             } catch (error) {
                 // Hata mesajını göster
-                loader.textContent = `Hata: PDF yüklenemedi. Proxy, sunucu erişimi veya dosya bozukluğu olabilir. (${error.message})`;
+                loader.textContent = `Hata: PDF yüklenemedi. Sunucu izinleri, dosya bozukluğu veya proxy hatası olabilir. Lütfen deneyin: ${decodeURIComponent(proxiedUrl)}`;
                 console.error('PDF yükleme hatası:', error);
             }
         }
@@ -148,7 +133,7 @@
                          renderPage(pdfDoc, i, viewerContainer);
                      }
                  }
-             }, 250); // 250ms gecikme ile yeniden çiz, performansı koru
+             }, 250); // Performans için gecikmeli yeniden çizim
         });
 
 
