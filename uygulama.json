@@ -34,5 +34,209 @@
     "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/D%C3%9CNYA%20KAP-1.jpg",
     "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/D%C3%9CNYA%20LED%202025.pdf",
     "order": "6"
+  },
+  {
+    "title": "ERAYLAR 2025-2",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/ERAYLAR%202025-2-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Eraylar%20Liste%202025%20-%202.pdf",
+    "order": "7"
+  },
+  {
+    "title": "HES 2024",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/HES%20KABLO%202024%20Fiyat%20Listesi-01.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/HES%20KABLO%202024%20Fiyat%20Listesi.pdf",
+    "order": "8"
+  },
+  {
+    "title": "HASÇELİK 2024 MART",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/Hasc%CC%A7elik%20Kablo-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Hasc%CC%A7elik%20Kablo%20Numune%20Katalog%CC%86u%20Mart%202024%201.pdf",
+    "order": "9"
+  },
+  {
+    "title": "REÇBER 2024 TEMMUZ",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/RE%C3%87BER-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Re%C3%A7ber%20Kablo%20Fiyat%20Listesi%202024%20YEN%C4%B0.pdf",
+    "order": "10"
+  },
+  {
+    "title": "MAKEL 2025-2",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/MAKEL-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/MAKEL-2025-2.pdf",
+    "order": "11"
+  },
+  {
+    "title": "GÜNSAN 2025-2",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/Gunsan_Fiyat_Listesi_2025-2-01.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Gunsan_Fiyat_Listesi_2025-2.pdf",
+    "order": "12"
+  },
+  {
+    "title": "OVİVO 2025-1",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/OV%C4%B0VO%202025-1-01.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/OV%C4%B0VO%202025-1.pdf",
+    "order": "13"
+  },
+  {
+    "title": "MUTLUSAN 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/MUTLUSAN%202025-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/MUTLUSAN%202025.pdf",
+    "order": "14"
+  },
+  {
+    "title": "VİKO 2025-2",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/V%C4%B0KO-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/PANASONIC_VIKO_FIYAT_LISTESI_2025-2.pdf",
+    "order": "15"
+  },
+  {
+    "title": "CHINT 2025 OCAK",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/CHINT%202025%20OCAK.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/CHINT%202025%20OCAK.pdf",
+    "order": "16"
+  },
+  {
+    "title": "SIEMENS 2025 EKİM",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/SIEMENS_2025-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/SIEMENS_2025%20EK%C4%B0M.pdf",
+    "order": "17"
+  },
+  {
+    "title": "SİGMA 2025 OCAK",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/S%C4%B0GMA%202025%20OCAK.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/S%C4%B0GMA%202025%20OCAK.pdf",
+    "order": "18"
+  },
+  {
+    "title": "OAG 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/OAG%202025%20Fiyat%20Listesi-01.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/OAG%202025%20Fiyat%20Listesi.pdf",
+    "order": "19"
+  },
+  {
+    "title": "LEGRAND 2025 EKİM",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/LEGRAND-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/legrand%202025%20ekim.pdf",
+    "order": "20"
+  },
+  {
+    "title": "IŞILDAR 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/ISILDAR%202025%201-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/ISILDAR%202025.pdf",
+    "order": "21"
+  },
+  {
+    "title": "ZERPA 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/Zerpa%202024%20Eylu%CC%88l%201-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Zerpa%202024%20Eylu%CC%88l.pdf",
+    "order": "22"
+  },
+  {
+    "title": "DPA",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/DPA.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/DPA.PDF",
+    "order": "23"
+  },
+  {
+    "title": "NEAD 2025-2",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/NE-AD%202025.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/NE-AD%202025-2.pdf",
+    "order": "24"
+  },
+  {
+    "title": "ÖZKARAKUŞ 2024-1",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/ozkarakus_2024-1%20KAPAK-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/ozkarakus_2024-1.pdf",
+    "order": "25"
+  },
+  {
+    "title": "ELMAX 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/ELMAX%202025-01.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/ELMAX%202025.pdf",
+    "order": "26"
+  },
+  {
+    "title": "EMAS 2025 OCAK",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/EMAS-001.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/EMAS%202025%20F%C4%B0YAT%20L%C4%B0STES%C4%B0.pdf",
+    "order": "27"
+  },
+  {
+    "title": "ENTES 2025 AĞUSTOS",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/ENTES%20205-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/ENTES%20205%20A%C4%9EUSTOS.pdf",
+    "order": "28"
+  },
+  {
+    "title": "GWEST 2025 OCAK",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/GWEST%202025%20OCAK.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/GWEST%202025%20OCAK.pdf",
+    "order": "29"
+  },
+  {
+    "title": "ÇETSAN 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/%C3%87ETSAN%202025.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/%C3%87ET-SAN%20%202025.pdf",
+    "order": "30"
+  },
+  {
+    "title": "TEM 2024",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/TEM%202024-01.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/TEM%202024.pdf",
+    "order": "31"
+  },
+  {
+    "title": "ÇEBİ 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/%C3%87EB%C4%B0%202025.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/%C3%87EB%C4%B0%202025.pdf",
+    "order": "32"
+  },
+  {
+    "title": "METOP 2024 ARALIK",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/METOP.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Metop-Aralik-2024-Fiyat-Listesi-1.pdf",
+    "order": "33"
+  },
+  {
+    "title": "AYKA 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/AYKA%202025.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/AYKA%202025.pdf",
+    "order": "34"
+  },
+  {
+    "title": "OPAŞ 2025 AĞUSTOS",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/Opa%C5%9F%20Fiyat%20Listesi%20-%202025-A%C4%9Fustos-01.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Opa%C5%9F%20Fiyat%20Listesi%20-%202025-A%C4%9Fustos.pdf",
+    "order": "35"
+  },
+  {
+    "title": "POFACO 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/POFACO%202025.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/POFACO%202025.pdf",
+    "order": "36"
+  },
+  {
+    "title": "TAMER 2025",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/TAMER-1.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Tam%20Grup%20Fiyat%20Listesi%202025_.pdf",
+    "order": "37"
+  },
+  {
+    "title": "TENSE 2025 EKİM",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/TENSE%20EKIM%202025%20FIYAT%20LISTESI-01.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/TENSE%20EKIM%202025%20FIYAT%20LISTESI.pdf",
+    "order": "38"
+  },
+  {
+    "title": "NTS 2025-3",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/NTS%202025-03-01.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/NTS%202025-03.pdf",
+    "order": "39"
+  },
+  {
+    "title": "AUDİO 2025-3",
+    "imageUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/AUDIO%202025-3.jpg",
+    "pdfUrl": "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/AUDIO%202025-3.pdf",
+    "order": "40"
   }
 ]
