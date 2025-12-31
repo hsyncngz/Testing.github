@@ -21,11 +21,8 @@
         }
 
         .main-content { flex: 1; display: flex; flex-direction: column; background: #000; min-width: 0; position: relative; }
-        
-        /* Liste alanı player barın üstünde kalacak şekilde padding ayarlandı */
         .scrollable-results { flex: 1; overflow-y: auto; padding: 15px; padding-bottom: calc(var(--player-h) + 20px); -webkit-overflow-scrolling: touch; }
 
-        /* SONG CARD - Butonlar Sağa Yaslandı */
         .song-card { 
             display: flex; align-items: center; background: var(--card); border-radius: 15px; 
             padding: 12px; margin-bottom: 10px; border: 1px solid #222; gap: 15px; cursor: pointer;
@@ -33,25 +30,21 @@
         .song-card.active-song { border-color: var(--accent); background: #1a0505; }
         .song-card img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
         
-        .song-meta { flex: 1; min-width: 0; } /* Yazı alanı genişler */
+        .song-meta { flex: 1; min-width: 0; }
         .song-title { font-weight: bold; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .song-artist { font-size: 12px; color: #aaa; }
 
         .card-actions { display: flex; gap: 15px; margin-left: auto; flex-shrink: 0; padding-left: 10px; }
         .card-actions i { font-size: 18px; color: #888; transition: 0.2s; }
-        .card-actions i:hover { color: var(--accent); }
 
-        /* PLAYER BAR - Sabitlendi */
         .player-bar { 
             position: fixed; bottom: 0; left: 0; width: 100%; height: var(--player-h);
             background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(15px);
             border-top: 1px solid #333; padding: 10px 20px; z-index: 4000;
-            display: flex; flex-direction: column; justify-content: center;
         }
         .progress-bar-bg { width: 100%; height: 4px; background: #333; border-radius: 2px; cursor: pointer; margin-bottom: 10px; }
         .progress-bar-fill { height: 100%; background: var(--accent); width: 0%; border-radius: 2px; }
 
-        /* FULL PLAYER */
         #full-player {
             position: fixed; top: 100%; left: 0; width: 100%; height: 100%; 
             background: #000; z-index: 5000; transition: 0.4s ease;
@@ -63,8 +56,12 @@
         .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1500; }
         .overlay.active { display: block; }
         .time-text { font-size: 11px; color: #777; }
-
         #floating-menu { position: fixed; background: #1a1a1a; z-index: 6000; display: none; width: 85%; max-width: 320px; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px; border-radius: 20px; border: 1px solid #333; }
+        .nav-link-custom { padding: 12px; border-radius: 10px; transition: 0.2s; cursor: pointer; display: flex; align-items: center; gap: 10px; color: #eee; font-size: 14px; }
+        .nav-link-custom:hover { background: #222; color: var(--accent); }
+        
+        /* Resim yoksa yerini tutan stil */
+        .default-img { background: #222; display: flex; align-items: center; justify-content: center; color: var(--accent); }
     </style>
 </head>
 <body onclick="closeAll()">
@@ -78,8 +75,8 @@
 
 <div id="full-player">
     <i class="fas fa-chevron-down fs-3 mb-4" onclick="toggleFullPlayer(false)"></i>
-    <img id="full-img" src="">
-    <h4 id="full-title" class="fw-bold text-center">Şarkı Başlığı</h4>
+    <img id="full-img" src="https://via.placeholder.com/600x600/000000/ff0000?text=DURU">
+    <h4 id="full-title" class="fw-bold text-center">Şarkı Seçin</h4>
     <p id="full-artist" class="text-secondary mb-4">Sanatçı</p>
     <div class="w-100 mb-4">
         <div class="progress-bar-bg" onclick="seek(event)"><div class="progress-bar-fill" id="full-p-bar"></div></div>
@@ -98,15 +95,20 @@
     <div class="main-wrapper">
         <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
         <div class="sidebar" id="sidebar">
-            <h2 class="text-danger fw-bold mb-4">Duru Müzik</h2>
-            <div class="p-2 mb-2" onclick="search('trend'); toggleMenu();" style="cursor:pointer"><i class="fas fa-fire me-2"></i>Keşfet</div>
+            <h2 class="text-danger fw-bold mb-4">DURU</h2>
+            <div class="nav-link-custom" onclick="search('Türkçe Pop'); toggleMenu();"><i class="fas fa-fire"></i> Keşfet</div>
+            <div class="nav-link-custom" onclick="search('Slow Pop'); toggleMenu();"><i class="fas fa-leaf"></i> Slow Pop</div>
+            <div class="nav-link-custom" onclick="search('Arabesk'); toggleMenu();"><i class="fas fa-heart-broken"></i> Arabesk</div>
+            <div class="nav-link-custom" onclick="search('Deep House'); toggleMenu();"><i class="fas fa-compact-disc"></i> Deep House</div>
+            <hr class="border-secondary my-4">
+            <h6 class="text-secondary small fw-bold px-2 mb-3">KÜTÜPHANEM</h6>
             <div id="playlist-sidebar"></div>
         </div>
 
         <div class="main-content">
             <div class="p-3 bg-dark d-flex align-items-center">
                 <i class="fas fa-bars d-lg-none me-3 fs-4" onclick="toggleMenu()"></i>
-                <input type="text" id="searchInput" class="form-control bg-black text-white border-0 rounded-pill" placeholder="Şarkı ara...">
+                <input type="text" id="searchInput" class="form-control bg-black text-white border-0 rounded-pill" placeholder="Ara...">
                 <button class="btn btn-danger rounded-pill ms-2" onclick="search()"><i class="fas fa-search"></i></button>
             </div>
             <div class="scrollable-results" id="results-container">
@@ -120,10 +122,10 @@
         <div class="progress-bar-bg" onclick="event.stopPropagation(); seek(event)"><div class="progress-bar-fill" id="p-bar"></div></div>
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center overflow-hidden" style="flex:1">
-                <img id="p-img" src="https://via.placeholder.com/50" style="width:50px; height:50px; border-radius:6px; margin-right:12px;">
+                <img id="p-img" src="https://via.placeholder.com/150/000000/ff0000?text=DURU" style="width:50px; height:50px; border-radius:6px; margin-right:12px; object-fit: cover;">
                 <div class="overflow-hidden">
-                    <div id="p-title" class="fw-bold text-truncate small">Duru Müzik Kutusu</div>
-                    <div id="p-artist" class="text-secondary text-truncate" style="font-size:11px">Şarkı seçin</div>
+                    <div id="p-title" class="fw-bold text-truncate small">Duru Müzik</div>
+                    <div id="p-artist" class="text-secondary text-truncate" style="font-size:11px">Dinlemek için seçin</div>
                     <div class="time-text mt-1"><span id="p-cur">0:00</span> / <span id="p-total">0:00</span></div>
                 </div>
             </div>
@@ -139,48 +141,39 @@
 
 <script>
     const audio = document.getElementById('audio');
-    let currentHost = "", currentQueue = [], currentIndex = -1, selectedSong = null;
+    let currentQueue = [], currentIndex = -1, selectedSong = null;
     let playlists = JSON.parse(localStorage.getItem('duru_db')) || { "Favorilerim": [] };
 
-    async function init() {
-        try {
-            const res = await fetch('https://api.audius.co');
-            const json = await res.json();
-            currentHost = json.data[Math.floor(Math.random() * json.data.length)];
-            updateSidebar(); search("trend");
-        } catch(e) { setTimeout(init, 2000); }
-    }
-
-    async function search(query) {
+    function search(query) {
         let q = query || document.getElementById('searchInput').value;
         if(!q) return;
         document.getElementById('main-title').innerText = q.toUpperCase();
-        const res = await fetch(`${currentHost}/v1/tracks/search?query=${encodeURIComponent(q)}&limit=50&app_name=DURU`);
-        const data = await res.json();
-        const unique = []; const seen = new Set();
-        data.data.forEach(t => {
-            const key = `${t.title.toLowerCase()}-${t.user.name.toLowerCase()}`;
-            if(!seen.has(key)) { seen.add(key); unique.push(t); }
-        });
-        render(unique);
+        const script = document.createElement('script');
+        script.src = `https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&limit=50&callback=handleSearch`;
+        document.body.appendChild(script);
+        document.body.removeChild(script);
     }
+
+    window.handleSearch = function(data) {
+        const results = data.results.map(t => ({
+            id: t.trackId,
+            title: t.trackName,
+            user: { name: t.artistName },
+            artwork: { 
+                '150x150': t.artworkUrl100.replace('100x100', '200x200'), 
+                '480x480': t.artworkUrl100.replace('100x100', '600x600') 
+            },
+            streamUrl: t.previewUrl
+        }));
+        render(results);
+    };
 
     function render(tracks) {
         const div = document.getElementById('results'); div.innerHTML = "";
         tracks.forEach((t, i) => {
             const card = document.createElement('div');
             card.className = `song-card ${selectedSong?.id === t.id ? 'active-song' : ''}`;
-            card.innerHTML = `
-                <img src="${t.artwork ? t.artwork['150x150'] : 'https://via.placeholder.com/60'}">
-                <div class="song-meta">
-                    <div class="song-title">${t.title}</div>
-                    <div class="song-artist">${t.user.name}</div>
-                </div>
-                <div class="card-actions">
-                    <i class="fas fa-plus-circle" onclick="openMenu(event, ${JSON.stringify(t).replace(/"/g, '&quot;')})"></i>
-                    <i class="fas fa-download" onclick="download(event, '${t.id}', '${t.title}')"></i>
-                </div>
-            `;
+            card.innerHTML = `<img src="${t.artwork['150x150']}"><div class="song-meta"><div class="song-title">${t.title}</div><div class="song-artist">${t.user.name}</div></div><div class="card-actions"><i class="fas fa-plus-circle" onclick="openMenu(event, ${JSON.stringify(t).replace(/"/g, '&quot;')})"></i><i class="fas fa-download" onclick="download(event, '${t.streamUrl}', '${t.title}')"></i></div>`;
             card.onclick = () => { currentQueue = tracks; currentIndex = i; play(t); };
             div.appendChild(card);
         });
@@ -188,13 +181,16 @@
 
     function play(t) {
         selectedSong = t;
-        const img = t.artwork ? t.artwork['480x480'] || t.artwork['150x150'] : 'https://via.placeholder.com/150';
-        document.getElementById('p-img').src = img; document.getElementById('full-img').src = img;
-        document.getElementById('p-title').innerText = t.title; document.getElementById('full-title').innerText = t.title;
-        document.getElementById('p-artist').innerText = t.user.name; document.getElementById('full-artist').innerText = t.user.name;
-        document.getElementById('f-dl').onclick = (e) => download(e, t.id, t.title);
-        audio.src = `${currentHost}/v1/tracks/${t.id}/stream?app_name=DURU`;
-        audio.play(); updateIcons(true);
+        document.getElementById('p-img').src = t.artwork['150x150'];
+        document.getElementById('full-img').src = t.artwork['480x480'];
+        document.getElementById('p-title').innerText = t.title;
+        document.getElementById('full-title').innerText = t.title;
+        document.getElementById('p-artist').innerText = t.user.name;
+        document.getElementById('full-artist').innerText = t.user.name;
+        document.getElementById('f-dl').onclick = (e) => download(e, t.streamUrl, t.title);
+        audio.src = t.streamUrl;
+        audio.play();
+        updateIcons(true);
     }
 
     function togglePlay() { if(!audio.src) return; audio.paused ? audio.play() : audio.pause(); updateIcons(!audio.paused); }
@@ -208,17 +204,16 @@
         const side = document.getElementById('playlist-sidebar'); side.innerHTML = "";
         Object.keys(playlists).forEach(n => {
             const d = document.createElement('div');
-            d.className = "p-2 d-flex justify-content-between align-items-center small";
-            d.innerHTML = `<span><i class="fas fa-music me-2"></i>${n}</span>`;
+            d.className = "nav-link-custom"; d.innerHTML = `<i class="fas fa-list-ul"></i> ${n}`;
             d.onclick = () => { currentQueue = playlists[n]; render(currentQueue); toggleMenu(); };
             side.appendChild(d);
         });
     }
 
-    function openMenu(e, t) { e.stopPropagation(); selectedSong = t; document.getElementById('floating-menu').style.display = 'block'; const list = document.getElementById('menu-playlists'); list.innerHTML = ""; Object.keys(playlists).forEach(n => { const b = document.createElement('div'); b.className = "p-2 border-bottom border-dark small"; b.innerText = n; b.onclick = () => { playlists[n].push(selectedSong); localStorage.setItem('duru_db', JSON.stringify(playlists)); closeAll(); updateSidebar(); }; list.appendChild(b); }); }
+    function openMenu(e, t) { e.stopPropagation(); selectedSong = t; document.getElementById('floating-menu').style.display = 'block'; const list = document.getElementById('menu-playlists'); list.innerHTML = ""; Object.keys(playlists).forEach(n => { const b = document.createElement('div'); b.className = "p-2 border-bottom border-dark small"; b.style.cursor = "pointer"; b.innerText = n; b.onclick = () => { playlists[n].push(selectedSong); localStorage.setItem('duru_db', JSON.stringify(playlists)); closeAll(); updateSidebar(); }; list.appendChild(b); }); }
     function openMenuManual() { if(selectedSong) openMenu({stopPropagation:()=>{}}, selectedSong); }
     function createNewPlaylist() { const n = document.getElementById('new-pl-name').value; if(n) { playlists[n] = []; if(selectedSong) playlists[n].push(selectedSong); localStorage.setItem('duru_db', JSON.stringify(playlists)); updateSidebar(); closeAll(); } }
-    async function download(e, id, title) { e.stopPropagation(); const i = e.target; i.className = "fas fa-sync fa-spin"; try { const res = await fetch(`${currentHost}/v1/tracks/${id}/stream?app_name=DURU`); const blob = await res.blob(); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${title}.mp3`; a.click(); i.className = "fas fa-check text-success"; } catch { i.className = "fas fa-times text-danger"; } setTimeout(() => i.className = "fas fa-download", 2000); }
+    function download(e, url, title) { e.stopPropagation(); const a = document.createElement('a'); a.href = url; a.download = `${title}.mp3`; a.click(); }
     function fmt(s) { if(isNaN(s)) return "0:00"; const m = Math.floor(s/60); const sc = Math.floor(s%60); return `${m}:${sc < 10 ? '0' : ''}${sc}`; }
     audio.ontimeupdate = () => { const p = (audio.currentTime/audio.duration)*100; document.getElementById('p-bar').style.width = p+"%"; document.getElementById('full-p-bar').style.width = p+"%"; document.getElementById('p-cur').innerText = fmt(audio.currentTime); document.getElementById('f-cur').innerText = fmt(audio.currentTime); document.getElementById('p-total').innerText = fmt(audio.duration); document.getElementById('f-total').innerText = fmt(audio.duration); };
     function seek(e) { if(audio.duration) audio.currentTime = (e.offsetX / e.currentTarget.clientWidth) * audio.duration; }
@@ -227,8 +222,9 @@
     function closeAll() { document.getElementById('floating-menu').style.display = 'none'; }
     function nextTrack() { if(currentIndex < currentQueue.length-1) { currentIndex++; play(currentQueue[currentIndex]); } }
     function prevTrack() { if(currentIndex > 0) { currentIndex--; play(currentQueue[currentIndex]); } }
-    audio.onended = () => nextTrack();
-    window.onload = init;
+    
+    window.onload = () => { updateSidebar(); search("Türkçe Pop"); };
+    document.getElementById('searchInput').onkeypress = (e) => { if(e.key === 'Enter') search(); };
 </script>
 </body>
 </html>
