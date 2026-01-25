@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stok Sorgulama</title>
+  <style>
+    /* Arka Plan Tam Siyah */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000000; 
+      color: #e0e0e0; 
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #00d4ff; 
+      text-align: center;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 2px solid #1e2130;
+      padding-bottom: 10px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 25px;
+      font-size: 16px;
+      box-sizing: border-box;
+      background-color: #1a1d29;
+      border: 1px solid #333;
+      border-radius: 10px;
+      color: #fff;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: #00d4ff;
+      background-color: #202436;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #232736;
+      text-align: left;
+    }
+
+    th {
+      background-color: #1a1d29;
+      color: #00d4ff;
+    }
+
+    tr {
+      background-color: #141721;
+    }
+
+    tr:hover {
+      background-color: #1e2231;
+    }
+
+    .stok-pozitif {
+      color: #39ff14; 
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Stok Sorgulama</h2>
+  
+  <input type="text" id="arama" placeholder="Ürün adı veya kodu ile hızlıca arayın...">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Ürün Kodu</th>
+        <th>Ürün Adı</th>
+        <th>Liste Fiyatı</th>
+        <th>Stok Miktarı</th>
+      </tr>
+    </thead>
+    <tbody id="liste"></tbody>
+  </table>
+
+  <script>
+    // Karşılaştırma için metni Büyük Harfe çeviren ve Türkçe karakterleri düzelten fonksiyon
+    function buyukHarfNormalize(metin) {
+      return metin.toLocaleUpperCase('tr-TR')
+        .replace(/I/g, 'I')
+        .replace(/İ/g, 'I')
+        .replace(/Ğ/g, 'G')
+        .replace(/Ü/g, 'U')
+        .replace(/Ş/g, 'S')
+        .replace(/Ö/g, 'O')
+        .replace(/Ç/g, 'C');
+    }
+
+    fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
+      .then(res => res.json())
+      .then(data => {
+        const arama = document.getElementById('arama');
+        const liste = document.getElementById('liste');
+
+        function tabloyaEkle(item) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${item["Ürün Kodu"]}</td>
+            <td>${item["Ürün Adı"]}</td>
+            <td>${item["Liste Fiyatı"]}</td>
+            <td class="stok-pozitif">${item["Stok Miktarı"]}</td>
+          `;
+          liste.appendChild(tr);
+        }
+
+        function ilkSatiriGoster() {
+          liste.innerHTML = '';
+          if (data.length > 0) {
+            tabloyaEkle(data[0]);
+          }
+        }
+
+        function detayliFiltrele() {
+          // Arama terimini Büyük Harfe çeviriyoruz
+          const kelimeler = buyukHarfNormalize(arama.value.trim()).split(/\s+/).filter(k => k);
+          liste.innerHTML = '';
+
+          if (kelimeler.length === 0) {
+            ilkSatiriGoster();
+            return;
+          }
+
+          const filtrelenmis = data.filter((item, index) => {
+            if (index === 0) return false;
+            
+            // Verideki ürün bilgilerini Büyük Harfe çevirip arıyoruz
+            const metin = buyukHarfNormalize(item["Ürün Adı"] + ' ' + item["Ürün Kodu"]);
+            
+            const stokStr = String(item["Stok Miktarı"]).replace(',', '.');
+            const stok = parseFloat(stokStr);
+            
+            return kelimeler.every(k => metin.includes(k)) && stok > 0;
+          });
+
+          if (filtrelenmis.length === 0) {
+            liste.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; color:#888;">Sonuç bulunamadı.</td></tr>';
+            return;
+          }
+
+          filtrelenmis.forEach(item => tabloyaEkle(item));
+        }
+
+        arama.addEventListener('input', detayliFiltrele);
+        ilkSatiriGoster();
+      })
+      .catch(err => {
+        console.error('Hata:', err);
+      });
+  </script>
+</body>
+</html>
