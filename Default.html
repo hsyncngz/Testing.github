@@ -5,72 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Stok Sorgulama</title>
   <style>
+    /* Koyu Tema Ayarları */
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0d1117;
-      color: #c9d1d9;
+      font-family: Arial, sans-serif;
       padding: 20px;
-      max-width: 900px;
+      max-width: 800px;
       margin: auto;
+      background-color: #121212; /* Arka plan siyah */
+      color: #e0e0e0; /* Yazı rengi açık gri */
     }
     h2 {
-      color: #58a6ff;
       text-align: center;
-      margin-bottom: 25px;
-      letter-spacing: 1px;
+      color: #ffffff;
     }
     input[type="text"] {
       width: 100%;
-      padding: 14px;
-      margin-bottom: 25px;
-      background-color: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      color: #fff;
+      padding: 10px;
+      margin-bottom: 15px;
       font-size: 16px;
       box-sizing: border-box;
-      outline: none;
-    }
-    input[type="text"]:focus {
-      border-color: #58a6ff;
-      box-shadow: 0 0 8px rgba(88, 166, 255, 0.2);
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 4px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      background-color: #161b22;
-      border-radius: 10px;
-      overflow: hidden;
+      background-color: #1e1e1e;
     }
     th, td {
-      padding: 14px;
-      border: 1px solid #30363d;
+      padding: 8px;
+      border: 1px solid #333;
       text-align: left;
     }
     th {
-      background-color: #21262d;
-      color: #58a6ff;
-      font-weight: 600;
+      background-color: #2c2c2c;
+      color: #bb86fc; /* Başlıklar için hafif mor vurgu */
     }
     tr:hover {
-      background-color: #1c2128;
-    }
-    .stok-pozitif {
-      color: #3fb950;
-      font-weight: bold;
-    }
-    .no-result {
-      text-align: center;
-      padding: 40px;
-      color: #8b949e;
+      background-color: #252525;
     }
   </style>
 </head>
 <body>
-
   <h2>Stok Sorgulama</h2>
-  <input type="text" id="arama" placeholder="Ürün adı veya kodu yazarak arayın...">
-
+  <input type="text" id="arama" placeholder="Ürün adı veya kodu girin...">
   <table>
     <thead>
       <tr>
@@ -80,84 +60,37 @@
         <th>Stok Miktarı</th>
       </tr>
     </thead>
-    <tbody id="liste">
-      <tr><td colspan="4" class="no-result">Veriler hazırlanıyor...</td></tr>
-    </tbody>
+    <tbody id="liste"></tbody>
   </table>
 
   <script>
-    let orijinalVeri = [];
-
     fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
       .then(res => res.json())
       .then(data => {
-        // GÖRÜNTÜ KİRLİLİĞİNİ ÖNLEYEN FİLTRE:
-        // Sadece içinde CSS kodu olmayan ve gerçek ürün bilgisi içeren satırları alıyoruz.
-        orijinalVeri = data.filter(item => {
-          const urunKodu = String(item["Ürün Kodu"] || "");
-          // Eğer hücrede "border:", "color:", "TARİH" veya "Ürün Kodu" gibi başlıklar varsa geçersiz say.
-          return urunKodu && 
-                 !urunKodu.includes("{") && 
-                 !urunKodu.includes("border:") && 
-                 !urunKodu.includes("TARİH") && 
-                 urunKodu !== "Ürün Kodu";
+        const arama = document.getElementById('arama');
+        const liste = document.getElementById('liste');
+
+        // Veri temizleme: Sadece içinde kod olmayan gerçek verileri filtrele
+        const temizVeri = data.filter(item => {
+          const kod = String(item["Ürün Kodu"] || "");
+          return kod && !kod.includes("{") && !kod.includes("border:") && kod !== "Ürün Kodu";
         });
 
-        document.getElementById('liste').innerHTML = '<tr><td colspan="4" class="no-result">Aramaya başlamak için bir kelime yazın.</td></tr>';
-      })
-      .catch(err => {
-        document.getElementById('liste').innerHTML = '<tr><td colspan="4" style="color:#f85149; text-align:center; padding:20px;">Hata: Veri dosyası okunamadı.</td></tr>';
-      });
+        function ilkSatiriGoster() {
+          liste.innerHTML = '';
+          // İlk açılışta liste boş kalsın veya temiz verinin ilkini göstersin istersen:
+          // if (temizVeri.length > 0) satırEkle(temizVeri[0]); 
+        }
 
-    const aramaInput = document.getElementById('arama');
-    const tabloGövdesi = document.getElementById('liste');
-
-    aramaInput.addEventListener('input', () => {
-      const anahtarKelime = aramaInput.value.toLowerCase().trim();
-
-      if (anahtarKelime === "") {
-        tabloGövdesi.innerHTML = '<tr><td colspan="4" class="no-result">Aramaya başlamak için bir kelime yazın.</td></tr>';
-        return;
-      }
-
-      const sonuclar = orijinalVeri.filter(item => {
-        const ad = String(item["Ürün Adı"] || "").toLowerCase();
-        const kod = String(item["Ürün Kodu"] || "").toLowerCase();
-        
-        // Stok miktarını kontrol et (0'dan büyük ve boş değilse)
-        const stokHam = String(item["Stok Miktarı"] || "0").replace(',', '.');
-        const stokSayi = parseFloat(stokHam);
-
-        return (ad.includes(anahtarKelime) || kod.includes(anahtarKelime)) && stokSayi > 0;
-      });
-
-      tabloyuYazdir(sonuclar);
-    });
-
-    function tabloyuYazdir(liste) {
-      tabloGövdesi.innerHTML = '';
-
-      if (liste.length === 0) {
-        tabloGövdesi.innerHTML = '<tr><td colspan="4" class="no-result">Eşleşen ürün bulunamadı.</td></tr>';
-        return;
-      }
-
-      liste.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${item["Ürün Kodu"]}</td>
-          <td>${item["Ürün Adı"]}</td>
-          <td>${item["Liste Fiyatı"]}</td>
-          <td class="stok-pozitif">${item["Stok Miktarı"]}</td>
-        `;
-        tabloGövdesi.appendChild(tr);
-      });
-    }
-  </script>
-</body>
-</html>
-;
-          }
+        function satırEkle(item) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${item["Ürün Kodu"]}</td>
+            <td>${item["Ürün Adı"]}</td>
+            <td>${item["Liste Fiyatı"]}</td>
+            <td style="color: #03dac6;">${item["Stok Miktarı"]}</td>
+          `;
+          liste.appendChild(tr);
         }
 
         function detayliFiltrele() {
@@ -169,40 +102,20 @@
             return;
           }
 
-          const filtrelenmis = data.filter((item, index) => {
-            if (index === 0) return false;
-            const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
-            
-            // Stok miktarını sayıya çevirip kontrol etme
-            const stokStr = String(item["Stok Miktarı"]).replace(',', '.');
-            const stok = parseFloat(stokStr);
-            
+          const filtrelenmis = temizVeri.filter((item) => {
+            const metin = (String(item["Ürün Adı"]) + ' ' + String(item["Ürün Kodu"])).toLowerCase();
+            const stok = parseFloat(String(item["Stok Miktarı"]).replace(',', '.'));
             return kelimeler.every(k => metin.includes(k)) && stok > 0;
           });
 
-          if (filtrelenmis.length === 0) {
-            liste.innerHTML = '<tr><td colspan="4" style="text-align:center;">Sonuç bulunamadı veya stokta yok.</td></tr>';
-            return;
-          }
-
-          filtrelenmis.forEach(item => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-              <td>${item["Ürün Kodu"]}</td>
-              <td>${item["Ürün Adı"]}</td>
-              <td>${item["Liste Fiyatı"]}</td>
-              <td style="color: #03dac6;">${item["Stok Miktarı"]}</td>
-            `;
-            liste.appendChild(tr);
-          });
+          filtrelenmis.forEach(item => satırEkle(item));
         }
 
         arama.addEventListener('input', detayliFiltrele);
         ilkSatiriGoster();
       })
       .catch(err => {
-        document.getElementById('liste').innerHTML = '<tr><td colspan="4" class="error-msg">Veriler yüklenemedi. Lütfen bağlantınızı kontrol edin.</td></tr>';
-        console.error('Hata:', err);
+        document.getElementById('liste').innerHTML = '<tr><td colspan="4">Veri yüklenemedi.</td></tr>';
       });
   </script>
 </body>
