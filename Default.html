@@ -5,35 +5,147 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Stok Sorgulama</title>
   <style>
-    /* Genel Arka Plan ve Koyu Tema Renkleri */
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0f111a; /* Daha derin bir gece mavisi/siyah */
-      color: #e0e0e0; 
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d1117; /* GitHub koyu modu gibi */
+      color: #c9d1d9;
       padding: 20px;
       max-width: 900px;
       margin: auto;
     }
-
-    /* Başlık Alanı */
     h2 {
-      color: #00d4ff; /* Parlak mavi tonu */
+      color: #58a6ff;
       text-align: center;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      border-bottom: 2px solid #1e2130;
-      padding-bottom: 10px;
+      margin-bottom: 20px;
     }
-
-    /* Arama Kutusu */
     input[type="text"] {
       width: 100%;
-      padding: 15px;
-      margin-bottom: 25px;
+      padding: 12px;
+      margin-bottom: 20px;
+      background-color: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      color: #fff;
       font-size: 16px;
       box-sizing: border-box;
-      background-color: #1a1d29;
+    }
+    input[type="text"]:focus {
+      border-color: #58a6ff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(88, 166, 255, 0.3);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #161b22;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #30363d;
+      text-align: left;
+    }
+    th {
+      background-color: #21262d;
+      color: #58a6ff;
+    }
+    tr:hover {
+      background-color: #1c2128;
+    }
+    .stok-sayi {
+      color: #3fb950; /* Yeşil stok */
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Stok Sorgulama</h2>
+  <input type="text" id="arama" placeholder="Ürün adı veya kodu yazın...">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Ürün Kodu</th>
+        <th>Ürün Adı</th>
+        <th>Liste Fiyatı</th>
+        <th>Stok Miktarı</th>
+      </tr>
+    </thead>
+    <tbody id="liste">
+      <tr><td colspan="4" style="text-align:center;">Veriler yükleniyor...</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    let tumVeri = [];
+
+    // Veriyi çek
+    fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
+      .then(res => res.json())
+      .then(data => {
+        // İlk satır başlık ise (Ürün Kodu, Ürün Adı yazıyorsa) onu diziden çıkar
+        if (data.length > 0 && data[0]["Ürün Kodu"] === "Ürün Kodu") {
+          tumVeri = data.slice(1);
+        } else {
+          tumVeri = data;
+        }
+        
+        // Sayfa açıldığında tablo boş görünmesin diye ilk 5 ürünü gösterelim (isteğe bağlı)
+        tabloyuGuncelle(tumVeri.slice(0, 0)); 
+        document.getElementById('liste').innerHTML = '<tr><td colspan="4" style="text-align:center;">Arama yapmak için bir şeyler yazın.</td></tr>';
+      })
+      .catch(err => {
+        document.getElementById('liste').innerHTML = '<tr><td colspan="4" style="color:red; text-align:center;">Veri yüklenemedi!</td></tr>';
+      });
+
+    const aramaInput = document.getElementById('arama');
+    const listeGövdesi = document.getElementById('liste');
+
+    aramaInput.addEventListener('input', () => {
+      const kriter = aramaInput.value.toLowerCase().trim();
+      
+      if (kriter === "") {
+        listeGövdesi.innerHTML = '<tr><td colspan="4" style="text-align:center;">Arama yapmak için bir şeyler yazın.</td></tr>';
+        return;
+      }
+
+      const sonuclar = tumVeri.filter(item => {
+        const ad = (item["Ürün Adı"] || "").toString().toLowerCase();
+        const kod = (item["Ürün Kodu"] || "").toString().toLowerCase();
+        const stokStr = (item["Stok Miktarı"] || "0").toString().replace(',', '.');
+        const stok = parseFloat(stokStr);
+
+        // Hem arama kelimesi geçsin hem de stok 0'dan büyük olsun
+        return (ad.includes(kriter) || kod.includes(kriter)) && stok > 0;
+      });
+
+      tabloyuGuncelle(sonuclar);
+    });
+
+    function tabloyuGuncelle(liste) {
+      listeGövdesi.innerHTML = '';
+
+      if (liste.length === 0) {
+        listeGövdesi.innerHTML = '<tr><td colspan="4" style="text-align:center;">Uygun ürün bulunamadı.</td></tr>';
+        return;
+      }
+
+      liste.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item["Ürün Kodu"]}</td>
+          <td>${item["Ürün Adı"]}</td>
+          <td>${item["Liste Fiyatı"]}</td>
+          <td class="stok-sayi">${item["Stok Miktarı"]}</td>
+        `;
+        listeGövdesi.appendChild(tr);
+      });
+    }
+  </script>
+</body>
+</html>
       border: 1px solid #333;
       border-radius: 10px;
       color: #fff;
