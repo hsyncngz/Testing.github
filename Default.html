@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #0d1117;
+      background-color: #0d1117; /* GitHub koyu modu gibi */
       color: #c9d1d9;
       padding: 20px;
       max-width: 900px;
@@ -16,60 +16,53 @@
     h2 {
       color: #58a6ff;
       text-align: center;
-      margin-bottom: 25px;
-      letter-spacing: 1px;
+      margin-bottom: 20px;
     }
     input[type="text"] {
       width: 100%;
-      padding: 14px;
-      margin-bottom: 25px;
+      padding: 12px;
+      margin-bottom: 20px;
       background-color: #161b22;
       border: 1px solid #30363d;
-      border-radius: 8px;
+      border-radius: 6px;
       color: #fff;
       font-size: 16px;
       box-sizing: border-box;
-      outline: none;
     }
     input[type="text"]:focus {
       border-color: #58a6ff;
-      box-shadow: 0 0 8px rgba(88, 166, 255, 0.2);
+      outline: none;
+      box-shadow: 0 0 5px rgba(88, 166, 255, 0.3);
     }
     table {
       width: 100%;
       border-collapse: collapse;
       background-color: #161b22;
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
     }
     th, td {
-      padding: 14px;
+      padding: 12px;
       border: 1px solid #30363d;
       text-align: left;
     }
     th {
       background-color: #21262d;
       color: #58a6ff;
-      font-weight: 600;
     }
     tr:hover {
       background-color: #1c2128;
     }
-    .stok-pozitif {
-      color: #3fb950;
+    .stok-sayi {
+      color: #3fb950; /* Yeşil stok */
       font-weight: bold;
-    }
-    .no-result {
-      text-align: center;
-      padding: 40px;
-      color: #8b949e;
     }
   </style>
 </head>
 <body>
 
   <h2>Stok Sorgulama</h2>
-  <input type="text" id="arama" placeholder="Ürün adı veya kodu yazarak arayın...">
+  <input type="text" id="arama" placeholder="Ürün adı veya kodu yazın...">
 
   <table>
     <thead>
@@ -81,64 +74,61 @@
       </tr>
     </thead>
     <tbody id="liste">
-      <tr><td colspan="4" class="no-result">Veriler hazırlanıyor...</td></tr>
+      <tr><td colspan="4" style="text-align:center;">Veriler yükleniyor...</td></tr>
     </tbody>
   </table>
 
   <script>
-    let orijinalVeri = [];
+    let tumVeri = [];
 
+    // Veriyi çek
     fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
       .then(res => res.json())
       .then(data => {
-        // GÖRÜNTÜ KİRLİLİĞİNİ ÖNLEYEN FİLTRE:
-        // Sadece içinde CSS kodu olmayan ve gerçek ürün bilgisi içeren satırları alıyoruz.
-        orijinalVeri = data.filter(item => {
-          const urunKodu = String(item["Ürün Kodu"] || "");
-          // Eğer hücrede "border:", "color:", "TARİH" veya "Ürün Kodu" gibi başlıklar varsa geçersiz say.
-          return urunKodu && 
-                 !urunKodu.includes("{") && 
-                 !urunKodu.includes("border:") && 
-                 !urunKodu.includes("TARİH") && 
-                 urunKodu !== "Ürün Kodu";
-        });
-
-        document.getElementById('liste').innerHTML = '<tr><td colspan="4" class="no-result">Aramaya başlamak için bir kelime yazın.</td></tr>';
+        // İlk satır başlık ise (Ürün Kodu, Ürün Adı yazıyorsa) onu diziden çıkar
+        if (data.length > 0 && data[0]["Ürün Kodu"] === "Ürün Kodu") {
+          tumVeri = data.slice(1);
+        } else {
+          tumVeri = data;
+        }
+        
+        // Sayfa açıldığında tablo boş görünmesin diye ilk 5 ürünü gösterelim (isteğe bağlı)
+        tabloyuGuncelle(tumVeri.slice(0, 0)); 
+        document.getElementById('liste').innerHTML = '<tr><td colspan="4" style="text-align:center;">Arama yapmak için bir şeyler yazın.</td></tr>';
       })
       .catch(err => {
-        document.getElementById('liste').innerHTML = '<tr><td colspan="4" style="color:#f85149; text-align:center; padding:20px;">Hata: Veri dosyası okunamadı.</td></tr>';
+        document.getElementById('liste').innerHTML = '<tr><td colspan="4" style="color:red; text-align:center;">Veri yüklenemedi!</td></tr>';
       });
 
     const aramaInput = document.getElementById('arama');
-    const tabloGövdesi = document.getElementById('liste');
+    const listeGövdesi = document.getElementById('liste');
 
     aramaInput.addEventListener('input', () => {
-      const anahtarKelime = aramaInput.value.toLowerCase().trim();
-
-      if (anahtarKelime === "") {
-        tabloGövdesi.innerHTML = '<tr><td colspan="4" class="no-result">Aramaya başlamak için bir kelime yazın.</td></tr>';
+      const kriter = aramaInput.value.toLowerCase().trim();
+      
+      if (kriter === "") {
+        listeGövdesi.innerHTML = '<tr><td colspan="4" style="text-align:center;">Arama yapmak için bir şeyler yazın.</td></tr>';
         return;
       }
 
-      const sonuclar = orijinalVeri.filter(item => {
-        const ad = String(item["Ürün Adı"] || "").toLowerCase();
-        const kod = String(item["Ürün Kodu"] || "").toLowerCase();
-        
-        // Stok miktarını kontrol et (0'dan büyük ve boş değilse)
-        const stokHam = String(item["Stok Miktarı"] || "0").replace(',', '.');
-        const stokSayi = parseFloat(stokHam);
+      const sonuclar = tumVeri.filter(item => {
+        const ad = (item["Ürün Adı"] || "").toString().toLowerCase();
+        const kod = (item["Ürün Kodu"] || "").toString().toLowerCase();
+        const stokStr = (item["Stok Miktarı"] || "0").toString().replace(',', '.');
+        const stok = parseFloat(stokStr);
 
-        return (ad.includes(anahtarKelime) || kod.includes(anahtarKelime)) && stokSayi > 0;
+        // Hem arama kelimesi geçsin hem de stok 0'dan büyük olsun
+        return (ad.includes(kriter) || kod.includes(kriter)) && stok > 0;
       });
 
-      tabloyuYazdir(sonuclar);
+      tabloyuGuncelle(sonuclar);
     });
 
-    function tabloyuYazdir(liste) {
-      tabloGövdesi.innerHTML = '';
+    function tabloyuGuncelle(liste) {
+      listeGövdesi.innerHTML = '';
 
       if (liste.length === 0) {
-        tabloGövdesi.innerHTML = '<tr><td colspan="4" class="no-result">Eşleşen ürün bulunamadı.</td></tr>';
+        listeGövdesi.innerHTML = '<tr><td colspan="4" style="text-align:center;">Uygun ürün bulunamadı.</td></tr>';
         return;
       }
 
@@ -148,9 +138,9 @@
           <td>${item["Ürün Kodu"]}</td>
           <td>${item["Ürün Adı"]}</td>
           <td>${item["Liste Fiyatı"]}</td>
-          <td class="stok-pozitif">${item["Stok Miktarı"]}</td>
+          <td class="stok-sayi">${item["Stok Miktarı"]}</td>
         `;
-        tabloGövdesi.appendChild(tr);
+        listeGövdesi.appendChild(tr);
       });
     }
   </script>
