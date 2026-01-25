@@ -3,37 +3,179 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stok Sorgulama - Dark Mode</title>
+  <title>Stok Sorgulama</title>
   <style>
-    /* Genel Arka Plan ve Renkler */
+    /* Genel Arka Plan ve Koyu Tema Renkleri */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212; /* Derin siyah/gri */
-      color: #e0e0e0; /* Yumuşak beyaz yazı */
+      background-color: #0f111a; /* Daha derin bir gece mavisi/siyah */
+      color: #e0e0e0; 
       padding: 20px;
       max-width: 900px;
       margin: auto;
     }
 
+    /* Başlık Alanı */
     h2 {
-      color: #bb86fc; /* Modern mor tonu */
+      color: #00d4ff; /* Parlak mavi tonu */
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 2px solid #1e2130;
+      padding-bottom: 10px;
     }
 
     /* Arama Kutusu */
     input[type="text"] {
       width: 100%;
-      padding: 12px 15px;
-      margin-bottom: 20px;
+      padding: 15px;
+      margin-bottom: 25px;
       font-size: 16px;
       box-sizing: border-box;
-      background-color: #1e1e1e;
+      background-color: #1a1d29;
       border: 1px solid #333;
-      border-radius: 8px;
+      border-radius: 10px;
       color: #fff;
       outline: none;
-      transition: border-color 0.3s;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #00d4ff;
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+      background-color: #202436;
+    }
+
+    /* Tablo Tasarımı */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    th, td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #232736;
+      text-align: left;
+    }
+
+    th {
+      background-color: #1a1d29;
+      color: #00d4ff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    tr {
+      background-color: #141721;
+      transition: background-color 0.2s ease;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover {
+      background-color: #1e2231;
+    }
+
+    /* Stok Miktarı Vurgusu */
+    .stok-pozitif {
+      color: #39ff14; /* Neon yeşil */
+      font-weight: bold;
+    }
+
+    .hata-mesaji {
+      color: #ff4d4d;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Stok Sorgulama</h2>
+  
+  <input type="text" id="arama" placeholder="Ürün adı veya kodu ile hızlıca arayın...">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Ürün Kodu</th>
+        <th>Ürün Adı</th>
+        <th>Liste Fiyatı</th>
+        <th>Stok Miktarı</th>
+      </tr>
+    </thead>
+    <tbody id="liste"></tbody>
+  </table>
+
+  <script>
+    fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
+      .then(res => res.json())
+      .then(data => {
+        const arama = document.getElementById('arama');
+        const liste = document.getElementById('liste');
+
+        function tabloyaEkle(item) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${item["Ürün Kodu"]}</td>
+            <td>${item["Ürün Adı"]}</td>
+            <td>${item["Liste Fiyatı"]}</td>
+            <td class="stok-pozitif">${item["Stok Miktarı"]}</td>
+          `;
+          liste.appendChild(tr);
+        }
+
+        function ilkSatiriGoster() {
+          liste.innerHTML = '';
+          if (data.length > 0) {
+            tabloyaEkle(data[0]);
+          }
+        }
+
+        function detayliFiltrele() {
+          const kelimeler = arama.value.toLowerCase().trim().split(/\s+/).filter(k => k);
+          liste.innerHTML = '';
+
+          if (kelimeler.length === 0) {
+            ilkSatiriGoster();
+            return;
+          }
+
+          const filtrelenmis = data.filter((item, index) => {
+            if (index === 0) return false;
+            const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
+            
+            const stokStr = String(item["Stok Miktarı"]).replace(',', '.');
+            const stok = parseFloat(stokStr);
+            
+            return kelimeler.every(k => metin.includes(k)) && stok > 0;
+          });
+
+          if (filtrelenmis.length === 0) {
+            liste.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; color:#888;">Eşleşen ürün bulunamadı veya stok tükenmiş.</td></tr>';
+            return;
+          }
+
+          filtrelenmis.forEach(item => tabloyaEkle(item));
+        }
+
+        arama.addEventListener('input', detayliFiltrele);
+        ilkSatiriGoster();
+      })
+      .catch(err => {
+        document.getElementById('liste').innerHTML = '<tr><td colspan="4" class="hata-mesaji">Veri kaynağına erişilemedi.</td></tr>';
+        console.error('Hata:', err);
+      });
+  </script>
+</body>
+</html>
     }
 
     input[type="text"]:focus {
