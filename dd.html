@@ -24,6 +24,8 @@
         .card { display: flex; background: var(--card-bg); border-radius: 12px; margin: 10px 15px; padding: 10px; text-decoration: none; color: inherit; align-items: center; transition: transform 0.2s; }
         .card:active { transform: scale(0.98); }
         .card-img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; margin-right: 12px; background: #252833; flex-shrink: 0; }
+        
+        /* Ticker Stili */
         .ticker-wrapper { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--ticker-bg); height: 38px; display: flex; align-items: center; z-index: 1000; border-top: 1px solid #222; overflow: hidden; }
         .ticker-content { display: flex; white-space: nowrap; animation: tickerSlide 25s linear infinite; }
         .ticker-item { display: flex; align-items: center; padding: 0 35px; font-size: 13px; font-weight: 600; }
@@ -48,7 +50,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Genel CSV işleyici (Slider ve Kartlar için)
+        // CSV Dönüştürücü (Slider ve Kartlar için)
         function csvToJSON(csv) {
             const lines = csv.split(/\r?\n/);
             if (lines.length < 1) return [];
@@ -62,6 +64,7 @@
             });
         }
 
+        // Market Verilerini Çekme ve Formatlama (Bakır, USD, EURO)
         async function fetchMarketData() {
             const mUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?output=csv";
             
@@ -69,20 +72,29 @@
                 const res = await fetch(mUrl + "&cache_bust=" + Date.now());
                 const csvText = await res.text();
                 
-                // Gelen ham metni satırlara böl
                 const lines = csvText.split(/\r?\n/);
                 if (lines.length > 1) {
-                    // Veri satırını al (2. satır)
-                    const dataRow = lines[1].split(/[,;]/); // Hem virgül hem noktalı virgül desteği
+                    const dataRow = lines[1].split(/[,;]/); 
                     
-                    // Verileri temizle (Tırnakları ve gereksiz boşlukları at)
-                    const clean = (val) => val ? val.replace(/"/g, "").trim() : "---";
+                    // Sayıyı Türkiye formatına (13.212,28) dönüştüren yardımcı fonksiyon
+                    const formatTR = (val) => {
+                        if (!val) return "---";
+                        let raw = val.replace(/"/g, "").trim();
+                        // Sayıyı temizle ve float'a çevir
+                        let num = parseFloat(raw.replace(",", ".")); 
+                        
+                        if (isNaN(num)) return raw;
 
-                    const b = clean(dataRow[0]); // Bakır
-                    const u = clean(dataRow[1]); // USD
-                    const e = clean(dataRow[2]); // EURO
+                        return new Intl.NumberFormat('tr-TR', { 
+                            minimumFractionDigits: 2, 
+                            maximumFractionDigits: 2 
+                        }).format(num);
+                    };
 
-                    // Eğer veri hala hata içeriyorsa veya boşsa gösterme
+                    const b = formatTR(dataRow[0]); // Bakır
+                    const u = formatTR(dataRow[1]); // USD
+                    const e = formatTR(dataRow[2]); // EURO
+
                     if (b.includes('#') || u.includes('#')) throw new Error("Veri hatası");
 
                     const items = `
@@ -93,11 +105,11 @@
                         <div class="ticker-item"><span class="cur-name">EURO</span><span style="color:#fff">${e}</span><span style="color:#555; margin-left:2px">₺</span></div>
                         <div class="ticker-item brand-item"><span style="color:var(--ozbek-red)">Özbek</span> <span style="color:var(--enerji-blue)">Enerji</span></div>
                     `;
+                    // Kayan yazı akışkanlığı için içeriği çoğaltıyoruz
                     document.getElementById('ticker-target').innerHTML = items + items + items;
                 }
             } catch (err) {
                 console.log("Veri çekilemedi, tekrar deneniyor...");
-                // Hata durumunda 5 saniye sonra tekrar dene
                 setTimeout(fetchMarketData, 5000);
             }
         }
@@ -131,10 +143,12 @@
             
             const cachedSlider = localStorage.getItem("sliderData");
             const cachedCards = localStorage.getItem("cardsData");
+            
             if (cachedSlider && cachedCards) {
                 renderSlider(JSON.parse(cachedSlider));
                 renderCards(JSON.parse(cachedCards));
             }
+
             try {
                 const [rS, rC] = await Promise.all([
                     fetch(sUrl).then(r => r.text()),
@@ -142,6 +156,7 @@
                 ]);
                 const sliderData = csvToJSON(rS);
                 const cardsData = csvToJSON(rC);
+                
                 if (JSON.stringify(sliderData) !== cachedSlider) {
                     localStorage.setItem("sliderData", JSON.stringify(sliderData));
                     renderSlider(sliderData);
@@ -152,6 +167,7 @@
                 }
             } catch (e) { console.error("Slider/Kart hatası."); }
         }
+
         window.onload = init;
     </script>
 </body>
