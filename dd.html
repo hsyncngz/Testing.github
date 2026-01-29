@@ -48,12 +48,37 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+        // Sayı formatlama fonksiyonu (Binlik nokta, Ondalık virgül)
+        function formatNumberTR(val) {
+            if (!val) return "0,00";
+            let s = val.toString().replace(/"/g, "").trim();
+            
+            // Eğer veride nokta binlik, virgül ondalık ise (13.768,00 gibi)
+            if (s.includes('.') && s.includes(',')) {
+                s = s.replace(/\./g, "").replace(",", ".");
+            } 
+            // Sadece virgül varsa (43,41 gibi)
+            else if (s.includes(',') && !s.includes('.')) {
+                s = s.replace(",", ".");
+            }
+            
+            let n = parseFloat(s);
+            if (isNaN(n)) return val;
+
+            return new Intl.NumberFormat('tr-TR', { 
+                minimumFractionDigits: 2, 
+                maximumFractionDigits: 2 
+            }).format(n);
+        }
+
+        // CSV'yi JSON'a çeviren ana fonksiyon
         function csvToJSON(csv) {
-            const lines = csv.split(/\r?\n/);
-            if (lines.length < 1) return [];
+            const lines = csv.split(/\r?\n/).filter(l => l.trim());
+            if (lines.length < 2) return [];
             const sep = lines[0].includes(';') ? ';' : ',';
             const headers = lines[0].split(sep).map(h => h.trim().replace(/"/g, "").toLowerCase());
-            return lines.slice(1).filter(l => l.trim()).map(line => {
+            
+            return lines.slice(1).map(line => {
                 const data = line.split(sep);
                 const obj = {};
                 headers.forEach((h, i) => { obj[h] = data[i] ? data[i].trim().replace(/"/g, "") : ""; });
@@ -67,33 +92,14 @@
             try {
                 const res = await fetch(mUrl + "&cache_bust=" + Date.now());
                 const csvText = await res.text();
-                
-                const lines = csvText.split(/\r?\n/);
-                if (lines.length > 1) {
-                    const dataRow = lines[1].split(/[,;]/); 
+                const allData = csvToJSON(csvText);
 
-                    const formatPrice = (val) => {
-                        if (!val) return "0,00";
-                        // Tırnakları temizle
-                        let clean = val.replace(/"/g, "").trim();
-                        
-                        // Eğer hücrede 13.768,00 gibi TR formatında geliyorsa:
-                        // Önce binlik olan noktayı sil, sonra ondalık olan virgülü noktaya çevir ki JS sayı olarak anlasın
-                        let normalized = clean.replace(/\./g, "").replace(",", ".");
-                        
-                        let num = parseFloat(normalized);
-                        if (isNaN(num)) return clean;
-
-                        // Türkiye formatında (13.768,00) geri döndür
-                        return new Intl.NumberFormat('tr-TR', { 
-                            minimumFractionDigits: 2, 
-                            maximumFractionDigits: 2 
-                        }).format(num);
-                    };
-
-                    const b = formatPrice(dataRow[0]); // Bakır
-                    const u = formatPrice(dataRow[1]); // USD
-                    const e = formatPrice(dataRow[2]); // EURO
+                if (allData.length > 0) {
+                    const firstRow = allData[0];
+                    // Başlıklara göre veriyi al (Hatalı sütun eşleşmesini önler)
+                    const b = formatNumberTR(firstRow["bakir"] || "0");
+                    const u = formatNumberTR(firstRow["usd"] || "0");
+                    const e = formatNumberTR(firstRow["euro"] || "0");
 
                     const items = `
                         <div class="ticker-item"><span class="cur-name">BAKIR</span><span style="color:#fff">${b}</span><span style="color:#555; margin-left:2px">$</span></div>
@@ -106,12 +112,13 @@
                     document.getElementById('ticker-target').innerHTML = items + items + items;
                 }
             } catch (err) {
-                console.log("Hata:", err);
+                console.error("Veri çekilemedi:", err);
                 setTimeout(fetchMarketData, 5000);
             }
         }
 
         function renderSlider(data) {
+            if(!data.length) return;
             document.getElementById('slider-target').innerHTML = data.map(i => `
                 <div class="swiper-slide">
                     <a href="${i.link || '#'}" target="_blank">
@@ -123,6 +130,7 @@
         }
 
         function renderCards(data) {
+            if(!data.length) return;
             document.getElementById('cards-target').innerHTML = data.map(i => `
                 <a href="${i.link || '#'}" class="card" target="_blank">
                     <img src="${i.resim}" class="card-img" loading="lazy">
@@ -140,27 +148,28 @@
             
             const cachedSlider = localStorage.getItem("sliderData");
             const cachedCards = localStorage.getItem("cardsData");
-            if (cachedSlider && cachedCards) {
-                renderSlider(JSON.parse(cachedSlider));
-                renderCards(JSON.parse(cachedCards));
-            }
+            if (cachedSlider) renderSlider(JSON.parse(cachedSlider));
+            if (cachedCards) renderCards(JSON.parse(cachedCards));
+
             try {
                 const [rS, rC] = await Promise.all([
                     fetch(sUrl).then(r => r.text()),
-                    fetch(r => r.text())
+                    fetch(cUrl).then(r => r.text())
                 ]);
                 const sliderData = csvToJSON(rS);
                 const cardsData = csvToJSON(rC);
-                if (JSON.stringify(sliderData) !== cachedSlider) {
+                
+                if (sliderData.length && JSON.stringify(sliderData) !== cachedSlider) {
                     localStorage.setItem("sliderData", JSON.stringify(sliderData));
                     renderSlider(sliderData);
                 }
-                if (JSON.stringify(cardsData) !== cachedCards) {
+                if (cardsData.length && JSON.stringify(cardsData) !== cachedCards) {
                     localStorage.setItem("cardsData", JSON.stringify(cardsData));
                     renderCards(cardsData);
                 }
-            } catch (e) {}
+            } catch (e) { console.error("Slider/Kart hatası."); }
         }
+
         window.onload = init;
     </script>
 </body>
