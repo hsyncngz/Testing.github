@@ -3,107 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DURU - Canlı Veri Bandı</title>
+    <title>DURU - Veri Bandı</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        /* En alta sabitleme ayarları */
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: transparent; }
+        
         .fixed-bottom-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #333;
+            background-color: #2c2c2c; /* Daha koyu ve profesyonel bir gri */
             color: #fff;
-            padding: 10px 0;
+            padding: 12px 0;
             overflow: hidden;
-            z-index: 9999;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+            white-space: nowrap;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.5);
+            border-top: 1px solid #444;
         }
 
-        .marquee-content {
+        .marquee-container {
             display: inline-block;
-            white-space: nowrap;
             padding-left: 100%;
-            animation: marquee 20s linear infinite;
-            font-size: 18px;
-            font-weight: bold;
+            animation: marquee 25s linear infinite;
         }
 
         .data-item {
-            margin-right: 50px;
+            display: inline-block;
+            margin-right: 60px;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
         }
 
-        .label { color: #ffcc00; margin-right: 5px; }
-        .value { color: #ffffff; }
+        .label { color: #FFD700; margin-right: 8px; }
+        .value { color: #FFFFFF; font-family: monospace; }
 
         @keyframes marquee {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-100%, 0); }
-        }
-
-        /* Fare üzerine gelince durması için */
-        .fixed-bottom-bar:hover .marquee-content {
-            animation-play-state: paused;
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
         }
     </style>
 </head>
 <body>
 
     <div class="fixed-bottom-bar">
-        <div id="ticker" class="marquee-content">Veriler yükleniyor...</div>
+        <div id="ticker" class="marquee-container">Veriler güncelleniyor...</div>
     </div>
 
     <script>
         const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?output=csv';
 
-        // Sayıyı 13.768,25 formatına çeviren fonksiyon
-        function formatNumber(numStr) {
-            let num = parseFloat(numStr.replace(',', '.')); // CSV'den gelen olası virgülü noktaya çevir
-            if (isNaN(num)) return "---";
+        function formatTurkishNumber(val) {
+            if (!val) return "---";
+            // Gelen değerdeki noktaları temizle, virgülü noktaya çevir (hesaplama için)
+            let cleanVal = val.toString().replace(/\./g, '').replace(',', '.').trim();
+            let num = parseFloat(cleanVal);
             
+            if (isNaN(num)) return val; // Sayı değilse olduğu gibi bırak
+
             return new Intl.NumberFormat('tr-TR', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             }).format(num);
         }
 
-        async function fetchData() {
+        async function updateTicker() {
             try {
-                const response = await fetch(csvUrl);
-                const data = await response.text();
+                // Cache engellemek için url sonuna zaman damgası ekliyoruz
+                const response = await fetch(csvUrl + '&t=' + new Date().getTime());
+                const text = await response.text();
                 
-                // Satırları ayır (Başlık: 0, Veri: 1)
-                const rows = data.split('\n');
-                if (rows.length > 1) {
-                    const values = rows[1].split(','); // Virgülle ayrılmış değerler
-                    
-                    const bakir = formatNumber(values[0]);
-                    const usd = formatNumber(values[1]);
-                    const euro = formatNumber(values[2]);
+                // CSV Satırlarını ayır
+                const rows = text.split(/\r?\n/);
+                if (rows.length < 2) return;
 
-                    const tickerHtml = `
-                        <span class="data-item"><span class="label">BAKIR:</span><span class="value">${bakir}</span></span>
-                        <span class="data-item"><span class="label">USD:</span><span class="value">${usd}</span></span>
-                        <span class="data-item"><span class="label">EURO:</span><span class="value">${euro}</span></span>
-                        <span class="data-item"><span class="label">BAKIR:</span><span class="value">${bakir}</span></span>
-                    `;
-                    
-                    document.getElementById('ticker').innerHTML = tickerHtml + tickerHtml; // Süreklilik için tekrarla
-                }
+                // Başlıkların altındaki ilk veri satırını al
+                const values = rows[1].split(','); 
+
+                const bakir = formatTurkishNumber(values[0]);
+                const usd = formatTurkishNumber(values[1]);
+                const euro = formatTurkishNumber(values[2]);
+
+                const content = `
+                    <span class="data-item"><span class="label">BAKIR:</span><span class="value">${bakir}</span></span>
+                    <span class="data-item"><span class="label">USD:</span><span class="value">${usd}</span></span>
+                    <span class="data-item"><span class="label">EURO:</span><span class="value">${euro}</span></span>
+                `;
+
+                // Döngünün kesilmemesi için içeriği çoğaltıyoruz
+                document.getElementById('ticker').innerHTML = content + content + content;
+
             } catch (error) {
-                console.error('Veri çekme hatası:', error);
-                document.getElementById('ticker').innerText = "Veri güncellenemedi.";
+                console.error("DURU Veri Hatası:", error);
+                document.getElementById('ticker').innerHTML = "Veri bağlantısı kurulamadı.";
             }
         }
 
-        // Veriyi ilk açılışta çek ve her 1 dakikada bir güncelle
-        fetchData();
-        setInterval(fetchData, 60000);
+        // İlk çalışma
+        updateTicker();
+        // 5 dakikada bir güncelle (Google Sheets bazen hızlı güncellemeleri engeller)
+        setInterval(updateTicker, 300000);
     </script>
 </body>
 </html>
