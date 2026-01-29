@@ -2,151 +2,108 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Özbek Enerji App</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DURU - Canlı Veri Bandı</title>
     <style>
-        :root {
-            --bg-color: #0f1014;
-            --card-bg: #1a1c23;
-            --text-main: #ffffff;
-            --ticker-bg: #16171d;
-            --ozbek-red: #ff4d4d;
-            --enerji-blue: #00a2ff;
-            --dim-text: #888888;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
         }
-        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Inter', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
-        #main-content { padding-bottom: 50px; }
-        .swiper { width: 92%; border-radius: 12px; margin-top: 15px; aspect-ratio: 16/9; }
-        .swiper-slide a { display: block; width: 100%; height: 100%; }
-        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
-        .card { display: flex; background: var(--card-bg); border-radius: 12px; margin: 10px 15px; padding: 10px; text-decoration: none; color: inherit; align-items: center; transition: transform 0.2s; }
-        .card:active { transform: scale(0.98); }
-        .card-img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; margin-right: 12px; background: #252833; flex-shrink: 0; }
-        .ticker-wrapper { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--ticker-bg); height: 38px; display: flex; align-items: center; z-index: 1000; border-top: 1px solid #222; overflow: hidden; }
-        .ticker-content { display: flex; white-space: nowrap; animation: tickerSlide 25s linear infinite; }
-        .ticker-item { display: flex; align-items: center; padding: 0 35px; font-size: 13px; font-weight: 600; }
-        .cur-name { color: var(--dim-text); font-size: 11px; margin-right: 6px; font-weight: 400; }
-        .brand-item { font-weight: 700; font-size: 14px; }
-        @keyframes tickerSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* En alta sabitleme ayarları */
+        .fixed-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            overflow: hidden;
+            z-index: 9999;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+        }
+
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: marquee 20s linear infinite;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .data-item {
+            margin-right: 50px;
+        }
+
+        .label { color: #ffcc00; margin-right: 5px; }
+        .value { color: #ffffff; }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* Fare üzerine gelince durması için */
+        .fixed-bottom-bar:hover .marquee-content {
+            animation-play-state: paused;
+        }
     </style>
 </head>
 <body>
 
-    <div id="main-content">
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper" id="slider-target"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-        <div id="cards-target"></div>
+    <div class="fixed-bottom-bar">
+        <div id="ticker" class="marquee-content">Veriler yükleniyor...</div>
     </div>
 
-    <div class="ticker-wrapper">
-        <div class="ticker-content" id="ticker-target"></div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Sayı Formatlayıcı ve Temizleyici
-        function cleanAndFormat(val) {
-            if (!val || val.includes('#')) return "---"; // #NAME?, #VALUE! hatalarını yakalar
-            
-            let s = val.toString().replace(/"/g, "").trim();
-            
-            // Finansal formatı (13.768,00 -> 13768.00) JS'nin anlayacağı hale getir
-            let normalized = s.replace(/\./g, "").replace(",", ".");
-            
-            let n = parseFloat(normalized);
-            if (isNaN(n)) return s;
+        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?output=csv';
 
-            return new Intl.NumberFormat('tr-TR', { 
-                minimumFractionDigits: 2, 
-                maximumFractionDigits: 2 
-            }).format(n);
+        // Sayıyı 13.768,25 formatına çeviren fonksiyon
+        function formatNumber(numStr) {
+            let num = parseFloat(numStr.replace(',', '.')); // CSV'den gelen olası virgülü noktaya çevir
+            if (isNaN(num)) return "---";
+            
+            return new Intl.NumberFormat('tr-TR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(num);
         }
 
-        async function fetchMarketData() {
-            const mUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?output=csv";
-            
+        async function fetchData() {
             try {
-                const res = await fetch(mUrl + "&cache_bust=" + Date.now());
-                const csvText = await res.text();
-                const lines = csvText.split(/\r?\n/).filter(l => l.trim());
+                const response = await fetch(csvUrl);
+                const data = await response.text();
                 
-                if (lines.length >= 2) {
-                    const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
-                    const values = lines[1].split(',');
+                // Satırları ayır (Başlık: 0, Veri: 1)
+                const rows = data.split('\n');
+                if (rows.length > 1) {
+                    const values = rows[1].split(','); // Virgülle ayrılmış değerler
+                    
+                    const bakir = formatNumber(values[0]);
+                    const usd = formatNumber(values[1]);
+                    const euro = formatNumber(values[2]);
 
-                    // Başlıkların indekslerini bul
-                    const bIdx = headers.indexOf('bakir');
-                    const uIdx = headers.indexOf('usd');
-                    const eIdx = headers.indexOf('euro');
-
-                    const b = cleanAndFormat(values[bIdx]);
-                    const u = cleanAndFormat(values[uIdx]);
-                    const e = cleanAndFormat(values[eIdx]);
-
-                    const items = `
-                        <div class="ticker-item"><span class="cur-name">BAKIR</span><span style="color:#fff">${b}</span><span style="color:#555; margin-left:2px">$</span></div>
-                        <div class="ticker-item brand-item"><span style="color:var(--ozbek-red)">Özbek</span> <span style="color:var(--enerji-blue)">Enerji</span></div>
-                        <div class="ticker-item"><span class="cur-name">USD</span><span style="color:#fff">${u}</span><span style="color:#555; margin-left:2px">₺</span></div>
-                        <div class="ticker-item brand-item"><span style="color:var(--ozbek-red)">Özbek</span> <span style="color:var(--enerji-blue)">Enerji</span></div>
-                        <div class="ticker-item"><span class="cur-name">EURO</span><span style="color:#fff">${e}</span><span style="color:#555; margin-left:2px">₺</span></div>
-                        <div class="ticker-item brand-item"><span style="color:var(--ozbek-red)">Özbek</span> <span style="color:var(--enerji-blue)">Enerji</span></div>
+                    const tickerHtml = `
+                        <span class="data-item"><span class="label">BAKIR:</span><span class="value">${bakir}</span></span>
+                        <span class="data-item"><span class="label">USD:</span><span class="value">${usd}</span></span>
+                        <span class="data-item"><span class="label">EURO:</span><span class="value">${euro}</span></span>
+                        <span class="data-item"><span class="label">BAKIR:</span><span class="value">${bakir}</span></span>
                     `;
-                    document.getElementById('ticker-target').innerHTML = items + items + items;
+                    
+                    document.getElementById('ticker').innerHTML = tickerHtml + tickerHtml; // Süreklilik için tekrarla
                 }
-            } catch (err) {
-                console.error("Market hatası:", err);
-                setTimeout(fetchMarketData, 5000);
+            } catch (error) {
+                console.error('Veri çekme hatası:', error);
+                document.getElementById('ticker').innerText = "Veri güncellenemedi.";
             }
         }
 
-        // --- Diğer Render Fonksiyonları (Slider & Cards) ---
-        function csvToJSON(csv) {
-            const lines = csv.split(/\r?\n/).filter(l => l.trim());
-            if (lines.length < 2) return [];
-            const sep = lines[0].includes(';') ? ';' : ',';
-            const headers = lines[0].split(sep).map(h => h.trim().replace(/"/g, "").toLowerCase());
-            return lines.slice(1).map(line => {
-                const data = line.split(sep);
-                const obj = {};
-                headers.forEach((h, i) => { obj[h] = data[i] ? data[i].trim().replace(/"/g, "") : ""; });
-                return obj;
-            });
-        }
-
-        function renderSlider(data) {
-            document.getElementById('slider-target').innerHTML = data.map(i => `
-                <div class="swiper-slide"><a href="${i.link || '#'}" target="_blank"><img src="${i.resim}" loading="lazy"></a></div>
-            `).join('');
-            new Swiper(".mySwiper", { loop: true, autoplay: { delay: 3500 }, pagination: { el: ".swiper-pagination", clickable: true } });
-        }
-
-        function renderCards(data) {
-            document.getElementById('cards-target').innerHTML = data.map(i => `
-                <a href="${i.link || '#'}" class="card" target="_blank">
-                    <img src="${i.resim}" class="card-img" loading="lazy">
-                    <div class="card-info">
-                        <h4 style="margin:0; font-size:13px; font-weight:700;">${i.baslik}</h4>
-                        <p style="margin:4px 0 0; font-size:11px; color:var(--dim-text); line-height:1.4;">${i.ozet}</p>
-                    </div>
-                </a>`).join('');
-        }
-
-        async function init() {
-            fetchMarketData();
-            const sUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTwx01OUeHg0s-HvXa9duTL8gLVBv6rwH_uFWpjztnGINVUqkJbqjh75bohMWfUrLcHLdf0E30ahiqi/pub?output=csv";
-            const cUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQQeZrYsmqg7osozS-Pbj0W3kY9BkCq-BIjXhBYHhC0UDLIU-RK-FKWfYH7VSWieksv82vXd7lZVTT/pub?output=csv";
-            
-            try {
-                const [rS, rC] = await Promise.all([fetch(sUrl).then(r => r.text()), fetch(cUrl).then(r => r.text())]);
-                renderSlider(csvToJSON(rS));
-                renderCards(csvToJSON(rC));
-            } catch (e) { console.log("Yükleme hatası"); }
-        }
-        window.onload = init;
+        // Veriyi ilk açılışta çek ve her 1 dakikada bir güncelle
+        fetchData();
+        setInterval(fetchData, 60000);
     </script>
 </body>
 </html>
