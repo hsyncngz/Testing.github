@@ -48,42 +48,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Sayı formatlama fonksiyonu (Binlik nokta, Ondalık virgül)
-        function formatNumberTR(val) {
-            if (!val) return "0,00";
+        // Sayı Formatlayıcı ve Temizleyici
+        function cleanAndFormat(val) {
+            if (!val || val.includes('#')) return "---"; // #NAME?, #VALUE! hatalarını yakalar
+            
             let s = val.toString().replace(/"/g, "").trim();
             
-            // Eğer veride nokta binlik, virgül ondalık ise (13.768,00 gibi)
-            if (s.includes('.') && s.includes(',')) {
-                s = s.replace(/\./g, "").replace(",", ".");
-            } 
-            // Sadece virgül varsa (43,41 gibi)
-            else if (s.includes(',') && !s.includes('.')) {
-                s = s.replace(",", ".");
-            }
+            // Finansal formatı (13.768,00 -> 13768.00) JS'nin anlayacağı hale getir
+            let normalized = s.replace(/\./g, "").replace(",", ".");
             
-            let n = parseFloat(s);
-            if (isNaN(n)) return val;
+            let n = parseFloat(normalized);
+            if (isNaN(n)) return s;
 
             return new Intl.NumberFormat('tr-TR', { 
                 minimumFractionDigits: 2, 
                 maximumFractionDigits: 2 
             }).format(n);
-        }
-
-        // CSV'yi JSON'a çeviren ana fonksiyon
-        function csvToJSON(csv) {
-            const lines = csv.split(/\r?\n/).filter(l => l.trim());
-            if (lines.length < 2) return [];
-            const sep = lines[0].includes(';') ? ';' : ',';
-            const headers = lines[0].split(sep).map(h => h.trim().replace(/"/g, "").toLowerCase());
-            
-            return lines.slice(1).map(line => {
-                const data = line.split(sep);
-                const obj = {};
-                headers.forEach((h, i) => { obj[h] = data[i] ? data[i].trim().replace(/"/g, "") : ""; });
-                return obj;
-            });
         }
 
         async function fetchMarketData() {
@@ -92,14 +72,20 @@
             try {
                 const res = await fetch(mUrl + "&cache_bust=" + Date.now());
                 const csvText = await res.text();
-                const allData = csvToJSON(csvText);
+                const lines = csvText.split(/\r?\n/).filter(l => l.trim());
+                
+                if (lines.length >= 2) {
+                    const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+                    const values = lines[1].split(',');
 
-                if (allData.length > 0) {
-                    const firstRow = allData[0];
-                    // Başlıklara göre veriyi al (Hatalı sütun eşleşmesini önler)
-                    const b = formatNumberTR(firstRow["bakir"] || "0");
-                    const u = formatNumberTR(firstRow["usd"] || "0");
-                    const e = formatNumberTR(firstRow["euro"] || "0");
+                    // Başlıkların indekslerini bul
+                    const bIdx = headers.indexOf('bakir');
+                    const uIdx = headers.indexOf('usd');
+                    const eIdx = headers.indexOf('euro');
+
+                    const b = cleanAndFormat(values[bIdx]);
+                    const u = cleanAndFormat(values[uIdx]);
+                    const e = cleanAndFormat(values[eIdx]);
 
                     const items = `
                         <div class="ticker-item"><span class="cur-name">BAKIR</span><span style="color:#fff">${b}</span><span style="color:#555; margin-left:2px">$</span></div>
@@ -112,25 +98,33 @@
                     document.getElementById('ticker-target').innerHTML = items + items + items;
                 }
             } catch (err) {
-                console.error("Veri çekilemedi:", err);
+                console.error("Market hatası:", err);
                 setTimeout(fetchMarketData, 5000);
             }
         }
 
+        // --- Diğer Render Fonksiyonları (Slider & Cards) ---
+        function csvToJSON(csv) {
+            const lines = csv.split(/\r?\n/).filter(l => l.trim());
+            if (lines.length < 2) return [];
+            const sep = lines[0].includes(';') ? ';' : ',';
+            const headers = lines[0].split(sep).map(h => h.trim().replace(/"/g, "").toLowerCase());
+            return lines.slice(1).map(line => {
+                const data = line.split(sep);
+                const obj = {};
+                headers.forEach((h, i) => { obj[h] = data[i] ? data[i].trim().replace(/"/g, "") : ""; });
+                return obj;
+            });
+        }
+
         function renderSlider(data) {
-            if(!data.length) return;
             document.getElementById('slider-target').innerHTML = data.map(i => `
-                <div class="swiper-slide">
-                    <a href="${i.link || '#'}" target="_blank">
-                        <img src="${i.resim}" loading="lazy">
-                    </a>
-                </div>
+                <div class="swiper-slide"><a href="${i.link || '#'}" target="_blank"><img src="${i.resim}" loading="lazy"></a></div>
             `).join('');
             new Swiper(".mySwiper", { loop: true, autoplay: { delay: 3500 }, pagination: { el: ".swiper-pagination", clickable: true } });
         }
 
         function renderCards(data) {
-            if(!data.length) return;
             document.getElementById('cards-target').innerHTML = data.map(i => `
                 <a href="${i.link || '#'}" class="card" target="_blank">
                     <img src="${i.resim}" class="card-img" loading="lazy">
@@ -146,30 +140,12 @@
             const sUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTwx01OUeHg0s-HvXa9duTL8gLVBv6rwH_uFWpjztnGINVUqkJbqjh75bohMWfUrLcHLdf0E30ahiqi/pub?output=csv";
             const cUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQQeZrYsmqg7osozS-Pbj0W3kY9BkCq-BIjXhBYHhC0UDLIU-RK-FKWfYH7VSWieksv82vXd7lZVTT/pub?output=csv";
             
-            const cachedSlider = localStorage.getItem("sliderData");
-            const cachedCards = localStorage.getItem("cardsData");
-            if (cachedSlider) renderSlider(JSON.parse(cachedSlider));
-            if (cachedCards) renderCards(JSON.parse(cachedCards));
-
             try {
-                const [rS, rC] = await Promise.all([
-                    fetch(sUrl).then(r => r.text()),
-                    fetch(cUrl).then(r => r.text())
-                ]);
-                const sliderData = csvToJSON(rS);
-                const cardsData = csvToJSON(rC);
-                
-                if (sliderData.length && JSON.stringify(sliderData) !== cachedSlider) {
-                    localStorage.setItem("sliderData", JSON.stringify(sliderData));
-                    renderSlider(sliderData);
-                }
-                if (cardsData.length && JSON.stringify(cardsData) !== cachedCards) {
-                    localStorage.setItem("cardsData", JSON.stringify(cardsData));
-                    renderCards(cardsData);
-                }
-            } catch (e) { console.error("Slider/Kart hatası."); }
+                const [rS, rC] = await Promise.all([fetch(sUrl).then(r => r.text()), fetch(cUrl).then(r => r.text())]);
+                renderSlider(csvToJSON(rS));
+                renderCards(csvToJSON(rC));
+            } catch (e) { console.log("Yükleme hatası"); }
         }
-
         window.onload = init;
     </script>
 </body>
