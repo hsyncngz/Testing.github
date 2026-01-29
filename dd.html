@@ -6,33 +6,28 @@
     <title>DURU Veri Bandı</title>
     <style>
         body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
-        
         .fixed-bottom-bar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #222;
+            bottom: 0; left: 0; width: 100%;
+            background-color: #1a1a1a;
             color: #fff;
-            padding: 10px 0;
+            padding: 12px 0;
             white-space: nowrap;
-            border-top: 2px solid #444;
-            box-sizing: border-box;
+            border-top: 2px solid #333;
+            z-index: 9999;
         }
-
         .marquee {
             display: inline-block;
             padding-left: 100%;
-            animation: scroll 20s linear infinite;
-            font-family: 'Arial Black', sans-serif;
-            font-size: 16px;
+            animation: scroll-left 25s linear infinite;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 18px;
+            font-weight: bold;
         }
-
-        .item { margin-right: 60px; }
-        .label { color: #FFD700; font-weight: bold; } /* Altın sarısı başlık */
-        .val { color: #FFFFFF; }
-
-        @keyframes scroll {
+        .item { margin-right: 70px; }
+        .label { color: #FFD700; margin-right: 5px; }
+        .val { color: #ffffff; }
+        @keyframes scroll-left {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
@@ -45,54 +40,64 @@
     </div>
 
     <script>
-        // Yeni güncellediğiniz link
         const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?gid=0&single=true&output=csv';
 
-        function formatDuru(val) {
+        function cleanAndFormat(val) {
             if (!val) return "0,00";
-            // Sayı içindeki noktaları kaldır (binlik) ve virgülü noktaya çevir (işlem için)
-            let clean = val.toString().replace(/\./g, '').replace(',', '.').trim();
-            let num = parseFloat(clean);
-            if (isNaN(num)) return val;
+            // Sayı formatını temizle: Boşlukları sil, binlik noktaları kaldır, virgülü noktaya çevir
+            let raw = val.toString().trim().replace(/\s/g, '').replace(/\./g, '').replace(',', '.');
+            let num = parseFloat(raw);
+            
+            if (isNaN(num)) return "0,00";
 
-            // Türk formatına çevir: 13.768,25
+            // Türk formatına çevir (13.768,25)
             return new Intl.NumberFormat('tr-TR', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             }).format(num);
         }
 
-        async function getData() {
+        async function updateData() {
             try {
-                const response = await fetch(url + '&cacheburst=' + Math.random());
+                const response = await fetch(url + '&cache=' + Date.now());
                 const text = await response.text();
                 
+                // Satırlara böl
                 const rows = text.split(/\r?\n/);
                 if (rows.length < 2) return;
 
-                // Hem virgül hem noktalı virgül desteği (Türkiye ayarı için kritik)
-                let values = rows[1].includes(';') ? rows[1].split(';') : rows[1].split(',');
+                // AYIRICI KONTROLÜ: Noktalı virgül mü yoksa virgül mü?
+                let dataRow = rows[1];
+                let cells = [];
+                
+                if (dataRow.includes(';')) {
+                    cells = dataRow.split(';');
+                } else {
+                    cells = dataRow.split(',');
+                }
 
-                const bakir = formatDuru(values[0]);
-                const usd = formatDuru(values[1]);
-                const euro = formatDuru(values[2]);
+                // Verileri sırasıyla al (Bakır:0, USD:1, Euro:2)
+                const bakir = cleanAndFormat(cells[0]);
+                const usd = cleanAndFormat(cells[1]);
+                const euro = cleanAndFormat(cells[2]);
 
-                const content = `
-                    <span class="item"><span class="label">BAKIR:</span> <span class="val">${bakir}</span></span>
-                    <span class="item"><span class="label">USD:</span> <span class="val">${usd}</span></span>
-                    <span class="item"><span class="label">EURO:</span> <span class="val">${euro}</span></span>
+                const display = `
+                    <span class="item"><span class="label">BAKIR:</span><span class="val">${bakir}</span></span>
+                    <span class="item"><span class="label">USD:</span><span class="val">${usd}</span></span>
+                    <span class="item"><span class="label">EURO:</span><span class="val">${euro}</span></span>
                 `;
 
-                // Kesintisiz döngü için içeriği üçle
-                document.getElementById('ticker').innerHTML = content + content + content;
+                // Süreklilik için içeriği 3 kez yazdır
+                document.getElementById('ticker').innerHTML = display + display + display;
 
             } catch (err) {
-                document.getElementById('ticker').innerText = "Bağlantı Hatası!";
+                console.error(err);
+                document.getElementById('ticker').innerText = "Bağlantı bekleniyor...";
             }
         }
 
-        getData();
-        setInterval(getData, 30000); // 30 saniyede bir güncelle
+        updateData();
+        setInterval(updateData, 60000); // 1 dakikada bir yenile
     </script>
 </body>
 </html>
