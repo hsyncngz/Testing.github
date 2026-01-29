@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DURU Veri Bandı</title>
+    <title>DURU Canlı Veri</title>
     <style>
         body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
         .fixed-bottom-bar {
@@ -14,19 +14,17 @@
             padding: 12px 0;
             white-space: nowrap;
             border-top: 2px solid #333;
-            z-index: 9999;
         }
         .marquee {
             display: inline-block;
             padding-left: 100%;
             animation: scroll-left 25s linear infinite;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Arial', sans-serif;
             font-size: 18px;
             font-weight: bold;
         }
         .item { margin-right: 70px; }
         .label { color: #FFD700; margin-right: 5px; }
-        .val { color: #ffffff; }
         @keyframes scroll-left {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
@@ -36,21 +34,13 @@
 <body>
 
     <div class="fixed-bottom-bar">
-        <div id="ticker" class="marquee">Veriler yükleniyor...</div>
+        <div id="ticker" class="marquee">Veriler güncelleniyor...</div>
     </div>
 
     <script>
         const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?gid=0&single=true&output=csv';
 
-        function cleanAndFormat(val) {
-            if (!val) return "0,00";
-            // Sayı formatını temizle: Boşlukları sil, binlik noktaları kaldır, virgülü noktaya çevir
-            let raw = val.toString().trim().replace(/\s/g, '').replace(/\./g, '').replace(',', '.');
-            let num = parseFloat(raw);
-            
-            if (isNaN(num)) return "0,00";
-
-            // Türk formatına çevir (13.768,25)
+        function formatTurkish(num) {
             return new Intl.NumberFormat('tr-TR', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
@@ -59,45 +49,39 @@
 
         async function updateData() {
             try {
-                const response = await fetch(url + '&cache=' + Date.now());
+                const response = await fetch(url + '&t=' + Date.now());
                 const text = await response.text();
                 
-                // Satırlara böl
                 const rows = text.split(/\r?\n/);
                 if (rows.length < 2) return;
 
-                // AYIRICI KONTROLÜ: Noktalı virgül mü yoksa virgül mü?
+                // Satırı her türlü ayırıcıdan temizle (virgül veya noktalı virgül fark etmez)
+                // Bu kısım satırdaki sayısal blokları bulur
                 let dataRow = rows[1];
-                let cells = [];
-                
-                if (dataRow.includes(';')) {
-                    cells = dataRow.split(';');
-                } else {
-                    cells = dataRow.split(',');
-                }
+                let cells = dataRow.split(/[;,]/); // Hem virgül hem noktalı virgüle göre böl
 
-                // Verileri sırasıyla al (Bakır:0, USD:1, Euro:2)
-                const bakir = cleanAndFormat(cells[0]);
-                const usd = cleanAndFormat(cells[1]);
-                const euro = cleanAndFormat(cells[2]);
+                // Ham verileri temizle (boşlukları sil, sayıya çevir)
+                let values = cells.map(c => {
+                    let clean = c.trim().replace(/\./g, '').replace(',', '.');
+                    return parseFloat(clean) || 0;
+                });
 
+                // Sizin sıranız: Bakır (0), USD (1), Euro (2)
                 const display = `
-                    <span class="item"><span class="label">BAKIR:</span><span class="val">${bakir}</span></span>
-                    <span class="item"><span class="label">USD:</span><span class="val">${usd}</span></span>
-                    <span class="item"><span class="label">EURO:</span><span class="val">${euro}</span></span>
+                    <span class="item"><span class="label">BAKIR:</span>${formatTurkish(values[0])}</span>
+                    <span class="item"><span class="label">USD:</span>${formatTurkish(values[1])}</span>
+                    <span class="item"><span class="label">EURO:</span>${formatTurkish(values[2])}</span>
                 `;
 
-                // Süreklilik için içeriği 3 kez yazdır
                 document.getElementById('ticker').innerHTML = display + display + display;
 
             } catch (err) {
-                console.error(err);
-                document.getElementById('ticker').innerText = "Bağlantı bekleniyor...";
+                document.getElementById('ticker').innerText = "Yükleniyor...";
             }
         }
 
         updateData();
-        setInterval(updateData, 60000); // 1 dakikada bir yenile
+        setInterval(updateData, 60000);
     </script>
 </body>
 </html>
