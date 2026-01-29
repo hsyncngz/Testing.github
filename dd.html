@@ -3,85 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DURU Canlı Veri</title>
+    <title>DURU Canlı Veri Bandı</title>
     <style>
+        /* Sayfa ve Arka Plan Ayarları */
         body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
-        .fixed-bottom-bar {
+
+        /* En Alt Sabit Bar */
+        .duru-ticker-wrap {
             position: fixed;
-            bottom: 0; left: 0; width: 100%;
-            background-color: #1a1a1a;
-            color: #fff;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1a1a1a; /* Koyu Gri/Siyah Arka Plan */
+            color: #ffffff;
             padding: 12px 0;
             white-space: nowrap;
-            border-top: 2px solid #333;
+            border-top: 3px solid #FFD700; /* Üstte ince altın sarısı çizgi */
+            z-index: 99999;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
         }
-        .marquee {
+
+        /* Kayma Animasyonu */
+        .duru-ticker {
             display: inline-block;
             padding-left: 100%;
-            animation: scroll-left 25s linear infinite;
-            font-family: 'Arial', sans-serif;
-            font-size: 18px;
-            font-weight: bold;
+            animation: duru-scroll 25s linear infinite;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
         }
-        .item { margin-right: 70px; }
-        .label { color: #FFD700; margin-right: 5px; }
-        @keyframes scroll-left {
+
+        /* Veri Grupları */
+        .ticker-item {
+            display: inline-block;
+            margin-right: 80px;
+        }
+
+        .ticker-label {
+            color: #FFD700; /* Başlıklar Altın Sarısı */
+            margin-right: 10px;
+        }
+
+        .ticker-value {
+            color: #ffffff; /* Değerler Beyaz */
+            font-family: 'Courier New', monospace; /* Rakamlar daha net görünsün */
+        }
+
+        @keyframes duru-scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
+        }
+
+        /* Fare veya parmak üzerine gelince durması için */
+        .duru-ticker-wrap:hover .duru-ticker {
+            animation-play-state: paused;
         }
     </style>
 </head>
 <body>
 
-    <div class="fixed-bottom-bar">
-        <div id="ticker" class="marquee">Veriler güncelleniyor...</div>
+    <div class="duru-ticker-wrap">
+        <div id="duruContent" class="duru-ticker">Veriler yükleniyor...</div>
     </div>
 
     <script>
-        const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?gid=0&single=true&output=csv';
+        // Sizin verdiğiniz sayfa bazlı linkler
+        const dataSources = {
+            bakir: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?gid=0&single=true&output=csv',
+            usd: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?gid=557933778&single=true&output=csv',
+            euro: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?gid=678328637&single=true&output=csv'
+        };
 
-        function formatTurkish(num) {
+        // Sayıyı 13.768,25 formatına sokan fonksiyon
+        function formatTR(val) {
+            if (!val) return "0,00";
+            // Sayıdaki tüm yabancı karakterleri temizle (sadece rakam ve virgül/nokta kalsın)
+            let clean = val.toString().replace(/[^\d.,-]/g, '').trim();
+            
+            // Eğer veride nokta binlik ayırıcı olarak kullanılmışsa temizle, virgülü noktaya çevir
+            // Örn: 1.250,50 -> 1250.50
+            if (clean.includes('.') && clean.includes(',')) {
+                clean = clean.replace(/\./g, '').replace(',', '.');
+            } else if (clean.includes(',')) {
+                clean = clean.replace(',', '.');
+            }
+
+            let num = parseFloat(clean);
+            if (isNaN(num)) return "0,00";
+
             return new Intl.NumberFormat('tr-TR', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             }).format(num);
         }
 
-        async function updateData() {
+        async function getSingleValue(url) {
             try {
-                const response = await fetch(url + '&t=' + Date.now());
-                const text = await response.text();
-                
-                const rows = text.split(/\r?\n/);
-                if (rows.length < 2) return;
-
-                // Satırı her türlü ayırıcıdan temizle (virgül veya noktalı virgül fark etmez)
-                // Bu kısım satırdaki sayısal blokları bulur
-                let dataRow = rows[1];
-                let cells = dataRow.split(/[;,]/); // Hem virgül hem noktalı virgüle göre böl
-
-                // Ham verileri temizle (boşlukları sil, sayıya çevir)
-                let values = cells.map(c => {
-                    let clean = c.trim().replace(/\./g, '').replace(',', '.');
-                    return parseFloat(clean) || 0;
-                });
-
-                // Sizin sıranız: Bakır (0), USD (1), Euro (2)
-                const display = `
-                    <span class="item"><span class="label">BAKIR:</span>${formatTurkish(values[0])}</span>
-                    <span class="item"><span class="label">USD:</span>${formatTurkish(values[1])}</span>
-                    <span class="item"><span class="label">EURO:</span>${formatTurkish(values[2])}</span>
-                `;
-
-                document.getElementById('ticker').innerHTML = display + display + display;
-
-            } catch (err) {
-                document.getElementById('ticker').innerText = "Yükleniyor...";
+                const res = await fetch(url + '&cache=' + Date.now());
+                const text = await res.text();
+                // Satırlara böl ve ilk satırı (A1) al
+                const lines = text.split(/\r?\n/);
+                return lines[0].split(',')[0].split(';')[0]; // Hem virgül hem noktalı virgülde ilk hücreyi garantile
+            } catch (e) {
+                return "Hata";
             }
         }
 
-        updateData();
-        setInterval(updateData, 60000);
+        async function updateTicker() {
+            const [vBakir, vUsd, vEuro] = await Promise.all([
+                getSingleValue(dataSources.bakir),
+                getSingleValue(dataSources.usd),
+                getSingleValue(dataSources.euro)
+            ]);
+
+            const html = `
+                <span class="ticker-item"><span class="ticker-label">BAKIR:</span><span class="ticker-value">${formatTR(vBakir)}</span></span>
+                <span class="ticker-item"><span class="ticker-label">USD:</span><span class="ticker-value">${formatTR(vUsd)}</span></span>
+                <span class="ticker-item"><span class="ticker-label">EURO:</span><span class="ticker-value">${formatTR(vEuro)}</span></span>
+            `;
+
+            // Kesintisiz döngü hissi için içeriği 3 kez tekrarla
+            document.getElementById('duruContent').innerHTML = html + html + html;
+        }
+
+        // İlk yükleme
+        updateTicker();
+        // Her 60 saniyede bir (1 dakika) arka planda güncelle
+        setInterval(updateTicker, 60000);
     </script>
 </body>
 </html>
