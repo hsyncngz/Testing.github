@@ -25,7 +25,6 @@
         .card:active { transform: scale(0.98); }
         .card-img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; margin-right: 12px; background: #252833; flex-shrink: 0; }
         
-        /* Alt Bant Ayarları */
         .ticker-wrapper { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--ticker-bg); height: 38px; display: flex; align-items: center; z-index: 1000; border-top: 1px solid #222; overflow: hidden; }
         .ticker-content { display: flex; white-space: nowrap; animation: tickerSlide 25s linear infinite; }
         .ticker-item { display: flex; align-items: center; padding: 0 35px; font-size: 13px; font-weight: 600; }
@@ -45,65 +44,75 @@
     </div>
 
     <div class="ticker-wrapper">
-        <div class="ticker-content" id="ticker-target">Veriler yükleniyor...</div>
+        <div class="ticker-content" id="ticker-target">Veriler güncelleniyor...</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // DURU VERİ KAYNAKLARI
         const dataSources = {
             bakir: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?gid=0&single=true&output=csv',
             usd: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?gid=557933778&single=true&output=csv',
             euro: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2HG_EhDiTB7QAiDqWO5rOxB8RmRwTdVaiNYKCklahAEF3jb0TO4TUss-R5q-lp3byjEDBmKgkuKyP/pub?gid=678328637&single=true&output=csv'
         };
 
-        // Gelişmiş Sayı Formatlama (Binlik nokta, Ondalık virgül)
-        function formatSmart(val) {
-            if (!val || val.trim() === "") return "0,00";
-            let str = val.toString().trim().replace(/"/g, '').replace(/\s/g, '');
-            if (str.includes('.') && str.includes(',')) {
-                str = str.replace(/\./g, '').replace(',', '.');
-            } else if (str.includes(',')) {
-                str = str.replace(',', '.');
+        // KESİN ÇÖZÜM: Formatlama fonksiyonu
+        function formatDuru(val) {
+            if (!val) return "0,00";
+            
+            // Tırnakları ve boşlukları temizle
+            let clean = val.toString().replace(/"/g, '').trim();
+            
+            // Eğer "13.768,25" gibi geliyorsa; noktayı at, virgülü nokta yap
+            if (clean.includes('.') && clean.includes(',')) {
+                clean = clean.replace(/\./g, '').replace(',', '.');
+            } 
+            // Eğer sadece "13768,25" geliyorsa; virgülü nokta yap
+            else if (clean.includes(',')) {
+                clean = clean.replace(',', '.');
             }
-            let num = parseFloat(str);
+            // Eğer sadece "13.768" geliyorsa ve binlikse (genelde Google Sheets hatasıdır)
+            // Bu kısım riskli olduğu için düz sayıya çeviriyoruz.
+            
+            let num = parseFloat(clean);
             if (isNaN(num)) return "0,00";
-            return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num);
+
+            // TR formatına zorla: 13.768,25
+            return new Intl.NumberFormat('tr-TR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(num);
         }
 
         async function getVal(url) {
             try {
-                const res = await fetch(url + '&t=' + Date.now());
+                const res = await fetch(url + '&cache=' + Date.now());
                 const text = await res.text();
-                return text.split(/\r?\n/)[0].split(',')[0].split(';')[0]; 
+                // Satırı al ve her türlü ayırıcıdan kurtulup saf veriyi döndür
+                return text.split(/\r?\n/)[0].split(',')[0].split(';')[0];
             } catch (e) { return "0,00"; }
         }
 
         async function fetchMarketData() {
             try {
-                const [rBakir, rUsd, rEuro] = await Promise.all([
+                const [rB, rU, rE] = await Promise.all([
                     getVal(dataSources.bakir),
                     getVal(dataSources.usd),
                     getVal(dataSources.euro)
                 ]);
 
-                const bakir = formatSmart(rBakir);
-                const usd = formatSmart(rUsd);
-                const euro = formatSmart(rEuro);
-
                 const items = `
-                    <div class="ticker-item"><span class="cur-name">BAKIR</span><span style="color:#fff">${bakir}</span></div>
+                    <div class="ticker-item"><span class="cur-name">BAKIR</span><span style="color:#fff">${formatDuru(rB)}</span></div>
                     <div class="ticker-item brand-item"><span style="color:var(--ozbek-red)">Özbek</span> <span style="color:var(--enerji-blue)">Enerji</span></div>
-                    <div class="ticker-item"><span class="cur-name">USD</span><span style="color:#fff">${usd}</span><span style="color:#555; margin-left:2px">₺</span></div>
+                    <div class="ticker-item"><span class="cur-name">USD</span><span style="color:#fff">${formatDuru(rU)}</span><span style="color:#555; margin-left:2px">₺</span></div>
                     <div class="ticker-item brand-item"><span style="color:var(--ozbek-red)">Özbek</span> <span style="color:var(--enerji-blue)">Enerji</span></div>
-                    <div class="ticker-item"><span class="cur-name">EUR</span><span style="color:#fff">${euro}</span><span style="color:#555; margin-left:2px">₺</span></div>
+                    <div class="ticker-item"><span class="cur-name">EUR</span><span style="color:#fff">${formatDuru(rE)}</span><span style="color:#555; margin-left:2px">₺</span></div>
                     <div class="ticker-item brand-item"><span style="color:var(--ozbek-red)">Özbek</span> <span style="color:var(--enerji-blue)">Enerji</span></div>
                 `;
                 document.getElementById('ticker-target').innerHTML = items + items;
-            } catch (e) { console.error("Veri güncellenemedi."); }
+            } catch (e) { console.error("Veri hatası."); }
         }
 
-        // --- Mevcut Slider ve Kart Fonksiyonları (Ellemedim) ---
+        // Slider ve Kart fonksiyonları aynen bırakıldı...
         function csvToJSON(csv) {
             const lines = csv.split("\n");
             const headers = lines[0].split(",").map(h => h.trim().replace(/"/g, ""));
@@ -135,7 +144,7 @@
 
         async function init() {
             fetchMarketData();
-            setInterval(fetchMarketData, 60000); // Dakikada bir rakamları tazele
+            setInterval(fetchMarketData, 60000);
 
             const sUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTwx01OUeHg0s-HvXa9duTL8gLVBv6rwH_uFWpjztnGINVUqkJbqjh75bohMWfUrLcHLdf0E30ahiqi/pub?output=csv";
             const cUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQQeZrYsmqg7osozS-Pbj0W3kY9BkCq-BIjXhBYHhC0UDLIU-RK-FKWfYH7VSWieksv82vXd7lZVTT/pub?output=csv";
@@ -163,7 +172,7 @@
                     localStorage.setItem("cardsData", JSON.stringify(cardsData));
                     renderCards(cardsData);
                 }
-            } catch (e) { console.error("Tablo verisi hatası."); }
+            } catch (e) { console.error("Hata."); }
         }
 
         window.onload = init;
