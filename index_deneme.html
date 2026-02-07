@@ -2,57 +2,63 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gelişmiş Barkod Arama</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <title>Profesyonel Barkod Okuyucu</title>
   <script src="https://unpkg.com/html5-qrcode"></script>
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; background-color: #f9f9f9; }
+    body { font-family: 'Segoe UI', sans-serif; padding: 15px; max-width: 800px; margin: auto; background-color: #f4f7f6; }
     
-    /* Arama Grubu */
-    .search-container { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-    input[type="text"] { flex: 1; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; outline: none; }
+    /* Üst Alan Sabit */
+    .sticky-header { position: sticky; top: 0; background: #f4f7f6; z-index: 100; padding-bottom: 10px; }
     
-    /* Barkod İkonu/Butonu */
+    .search-container { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+    input[type="text"] { flex: 1; padding: 15px; font-size: 16px; border: 2px solid #ddd; border-radius: 12px; }
+    
     .barcode-btn { 
-      width: 48px; height: 48px; background: #fff; border: 1px solid #ccc; border-radius: 8px; 
-      cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s;
+      width: 55px; height: 55px; background: #333; border-radius: 12px; 
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
     }
-    .barcode-btn:hover { background: #e0e0e0; }
-    .barcode-btn svg { width: 30px; height: 30px; fill: #333; }
+    .barcode-btn svg { width: 30px; height: 30px; fill: white; }
 
-    /* Tarayıcı Alanı ve Odak Çizgisi */
-    #reader-wrapper { display: none; position: relative; width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-    #reader { width: 100%; }
+    /* Kamera ve Dijital Zoom Efekti */
+    #reader-wrapper { display: none; position: relative; width: 100%; border-radius: 15px; overflow: hidden; background: #000; margin-bottom: 15px; }
+    #reader { width: 100%; transform: scale(1.4); } /* Dijital Zoom: Görüntüyü %40 büyütür */
+    
+    .scan-region {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 260px; height: 160px; border: 2px solid #00ff00; border-radius: 10px; z-index: 11;
+      box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.5); /* Kenarları karartır */
+    }
+
     .scan-line {
-      position: absolute; top: 50%; left: 10%; width: 80%; height: 2px;
-      background: red; box-shadow: 0 0 8px red; z-index: 10;
-      animation: scanAnim 2s infinite ease-in-out;
+      position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+      background: #00ff00; box-shadow: 0 0 10px #00ff00;
+      animation: scanAnim 1.5s infinite linear;
     }
-    @keyframes scanAnim {
-      0%, 100% { transform: translateY(-60px); opacity: 0.4; }
-      50% { transform: translateY(60px); opacity: 1; }
-    }
+    @keyframes scanAnim { 0% { top: 0; } 100% { top: 100%; } }
 
-    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    th, td { padding: 12px; border: 1px solid #eee; text-align: left; }
-    th { background-color: #007bff; color: white; }
-    tr:nth-child(even) { background-color: #fcfcfc; }
+    table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; }
+    th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; font-size: 14px; }
+    th { background-color: #4A90E2; color: white; }
+    .header-row { background-color: #fff9c4 !important; font-weight: bold; } /* Güncelleme satırı rengi */
   </style>
 </head>
 <body>
 
-  <h2>Ürün Yönetimi</h2>
-  
-  <div class="search-container">
-    <input type="text" id="arama" placeholder="Ürün adı, kodu veya barkod...">
-    <div class="barcode-btn" onclick="kamerayiAc()" title="Barkod Okut">
-      <svg viewBox="0 0 24 24"><path d="M3 5v14h2V5H3zm4 0v14h1V5H7zm3 0v14h2V5h-2zm4 0v14h1V5h-1zm3 0v14h2V5h-2zm4 0v14h1V5h-1z"></path></svg>
+  <div class="sticky-header">
+    <div class="search-container">
+      <input type="text" id="arama" placeholder="Ürün veya Barkod Ara...">
+      <div class="barcode-btn" onclick="kamerayiAc()">
+        <svg viewBox="0 0 24 24"><path d="M3 5v14h2V5H3zm4 0v14h1V5H7zm3 0v14h2V5h-2zm4 0v14h1V5h-1zm3 0v14h2V5h-2zm4 0v14h1V5h-1z"></path></svg>
+      </div>
     </div>
   </div>
 
   <div id="reader-wrapper">
     <div id="reader"></div>
-    <div class="scan-line"></div>
+    <div class="scan-region">
+      <div class="scan-line"></div>
+    </div>
   </div>
 
   <table>
@@ -71,36 +77,49 @@
 
   <script>
     let urunVerisi = [];
+    let ilkSatir = null;
     const aramaInput = document.getElementById('arama');
     const liste = document.getElementById('liste');
-    const readerWrapper = document.getElementById('reader-wrapper');
     const beep = document.getElementById('beepSound');
+    const readerWrapper = document.getElementById('reader-wrapper');
 
+    // Veriyi çek
     fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
       .then(res => res.json())
-      .then(data => urunVerisi = data);
+      .then(data => {
+        urunVerisi = data;
+        if(data.length > 0) {
+          ilkSatir = data[0]; // Güncelleme tarihinin olduğu ilk satırı sakla
+          tabloyuGuncelle(""); // Başlangıçta sadece ilk satırı göster
+        }
+      });
 
-    function ditSesiCikar() {
-      beep.currentTime = 0;
-      beep.play().catch(() => {}); 
-    }
-
-    function urunBul(deger) {
-      const aranan = deger.toLowerCase().trim();
+    function tabloyuGuncelle(filtre) {
       liste.innerHTML = '';
-      if (aranan === "") return;
+      const aranan = filtre.toLowerCase().trim();
 
-      const sonuc = urunVerisi.filter(item => {
-        const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
-        const barkod = item["Barkod"] ? item["Barkod"].toString().toLowerCase() : "";
-        return metin.includes(aranan) || barkod === aranan;
-      });
-
-      sonuc.forEach(item => {
+      // 1. İlk satırı her zaman ekle (Güncelleme tarihi vb.)
+      if(ilkSatir) {
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${item["Ürün Kodu"]}</td><td>${item["Ürün Adı"]}</td><td>${item["Liste Fiyatı"]}</td><td>${item["Stok Miktarı"]}</td>`;
+        tr.className = 'header-row';
+        tr.innerHTML = `<td>${ilkSatir["Ürün Kodu"]}</td><td>${ilkSatir["Ürün Adı"]}</td><td>${ilkSatir["Liste Fiyatı"]}</td><td>${ilkSatir["Stok Miktarı"]}</td>`;
         liste.appendChild(tr);
-      });
+      }
+
+      // 2. Arama yapılmışsa sonuçları ekle
+      if (aranan !== "") {
+        const sonuclar = urunVerisi.slice(1).filter(item => {
+          const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
+          const barkod = item["Barkod"] ? item["Barkod"].toString().toLowerCase() : "";
+          return metin.includes(aranan) || barkod === aranan;
+        });
+
+        sonuclar.forEach(item => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${item["Ürün Kodu"]}</td><td>${item["Ürün Adı"]}</td><td>${item["Liste Fiyatı"]}</td><td>${item["Stok Miktarı"]}</td>`;
+          liste.appendChild(tr);
+        });
+      }
     }
 
     function kamerayiAc() {
@@ -108,25 +127,25 @@
       const html5QrCode = new Html5Qrcode("reader");
       
       const config = { 
-        fps: 20, 
-        qrbox: { width: 250, height: 150 },
-        // Yakınlaştırma (zoom) talebi - Tarayıcı destekliyse %30 civarı bir odak sağlar
-        videoConstraints: {
-          facingMode: "environment",
-          zoom: 1.3 
-        }
+        fps: 25, 
+        qrbox: { width: 250, height: 150 }, // Tarama alanı boyutu
+        aspectRatio: 1.0
       };
 
-      html5QrCode.start({ facingMode: "environment" }, config, (decodedText) => {
-        ditSesiCikar();
-        aramaInput.value = decodedText;
-        urunBul(decodedText);
-        html5QrCode.stop(); // Okuma başarılı olunca kamerayı kapat
-        readerWrapper.style.display = 'none';
-      }).catch(err => console.error("Kamera hatası:", err));
+      html5QrCode.start(
+        { facingMode: "environment" }, 
+        config, 
+        (decodedText) => {
+          beep.play();
+          aramaInput.value = decodedText;
+          tabloyuGuncelle(decodedText);
+          html5QrCode.stop();
+          readerWrapper.style.display = 'none';
+        }
+      ).catch(err => alert("Kamera izni gerekli!"));
     }
 
-    aramaInput.addEventListener('input', (e) => urunBul(e.target.value));
+    aramaInput.addEventListener('input', (e) => tabloyuGuncelle(e.target.value));
   </script>
 </body>
 </html>
