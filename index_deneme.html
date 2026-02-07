@@ -8,26 +8,25 @@
   <style>
     body { font-family: 'Segoe UI', sans-serif; padding: 15px; max-width: 800px; margin: auto; background-color: #f4f7f6; }
     
-    /* Üst Alan Sabit */
     .sticky-header { position: sticky; top: 0; background: #f4f7f6; z-index: 100; padding-bottom: 10px; }
     
     .search-container { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
-    input[type="text"] { flex: 1; padding: 15px; font-size: 16px; border: 2px solid #ddd; border-radius: 12px; }
+    input[type="text"] { flex: 1; padding: 15px; font-size: 16px; border: 2px solid #ddd; border-radius: 12px; outline: none; }
     
     .barcode-btn { 
       width: 55px; height: 55px; background: #333; border-radius: 12px; 
-      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.3s;
     }
+    .barcode-btn.active { background: #e74c3c; } /* Kamera açıkken kırmızı olur */
     .barcode-btn svg { width: 30px; height: 30px; fill: white; }
 
-    /* Kamera ve Dijital Zoom Efekti */
     #reader-wrapper { display: none; position: relative; width: 100%; border-radius: 15px; overflow: hidden; background: #000; margin-bottom: 15px; }
-    #reader { width: 100%; transform: scale(1.4); } /* Dijital Zoom: Görüntüyü %40 büyütür */
+    #reader { width: 100%; transform: scale(1.4); } 
     
     .scan-region {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 260px; height: 160px; border: 2px solid #00ff00; border-radius: 10px; z-index: 11;
-      box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.5); /* Kenarları karartır */
+      box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.5);
     }
 
     .scan-line {
@@ -37,10 +36,10 @@
     }
     @keyframes scanAnim { 0% { top: 0; } 100% { top: 100%; } }
 
-    table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; }
     th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; font-size: 14px; }
     th { background-color: #4A90E2; color: white; }
-    .header-row { background-color: #fff9c4 !important; font-weight: bold; } /* Güncelleme satırı rengi */
+    .header-row { background-color: #fff9c4 !important; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -48,7 +47,7 @@
   <div class="sticky-header">
     <div class="search-container">
       <input type="text" id="arama" placeholder="Ürün veya Barkod Ara...">
-      <div class="barcode-btn" onclick="kamerayiAc()">
+      <div id="barcode-toggle-btn" class="barcode-btn" onclick="toggleScanner()">
         <svg viewBox="0 0 24 24"><path d="M3 5v14h2V5H3zm4 0v14h1V5H7zm3 0v14h2V5h-2zm4 0v14h1V5h-1zm3 0v14h2V5h-2zm4 0v14h1V5h-1z"></path></svg>
       </div>
     </div>
@@ -56,18 +55,13 @@
 
   <div id="reader-wrapper">
     <div id="reader"></div>
-    <div class="scan-region">
-      <div class="scan-line"></div>
-    </div>
+    <div class="scan-region"><div class="scan-line"></div></div>
   </div>
 
   <table>
     <thead>
       <tr>
-        <th>Kod</th>
-        <th>Adı</th>
-        <th>Fiyat</th>
-        <th>Stok</th>
+        <th>Kod</th><th>Adı</th><th>Fiyat</th><th>Stok</th>
       </tr>
     </thead>
     <tbody id="liste"></tbody>
@@ -78,19 +72,22 @@
   <script>
     let urunVerisi = [];
     let ilkSatir = null;
+    let html5QrCode = null;
+    let isScannerOpen = false; // Tarayıcı durum takibi
+
     const aramaInput = document.getElementById('arama');
     const liste = document.getElementById('liste');
     const beep = document.getElementById('beepSound');
     const readerWrapper = document.getElementById('reader-wrapper');
+    const toggleBtn = document.getElementById('barcode-toggle-btn');
 
-    // Veriyi çek
     fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
       .then(res => res.json())
       .then(data => {
         urunVerisi = data;
         if(data.length > 0) {
-          ilkSatir = data[0]; // Güncelleme tarihinin olduğu ilk satırı sakla
-          tabloyuGuncelle(""); // Başlangıçta sadece ilk satırı göster
+          ilkSatir = data[0];
+          tabloyuGuncelle("");
         }
       });
 
@@ -98,7 +95,6 @@
       liste.innerHTML = '';
       const aranan = filtre.toLowerCase().trim();
 
-      // 1. İlk satırı her zaman ekle (Güncelleme tarihi vb.)
       if(ilkSatir) {
         const tr = document.createElement('tr');
         tr.className = 'header-row';
@@ -106,7 +102,6 @@
         liste.appendChild(tr);
       }
 
-      // 2. Arama yapılmışsa sonuçları ekle
       if (aranan !== "") {
         const sonuclar = urunVerisi.slice(1).filter(item => {
           const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
@@ -122,15 +117,22 @@
       }
     }
 
-    function kamerayiAc() {
+    // Ana kontrol fonksiyonu
+    async function toggleScanner() {
+      if (isScannerOpen) {
+        await durdurScanner();
+      } else {
+        baslatScanner();
+      }
+    }
+
+    function baslatScanner() {
+      isScannerOpen = true;
       readerWrapper.style.display = 'block';
-      const html5QrCode = new Html5Qrcode("reader");
+      toggleBtn.classList.add('active'); // Butonu kırmızı yap
       
-      const config = { 
-        fps: 25, 
-        qrbox: { width: 250, height: 150 }, // Tarama alanı boyutu
-        aspectRatio: 1.0
-      };
+      html5QrCode = new Html5Qrcode("reader");
+      const config = { fps: 25, qrbox: { width: 250, height: 150 }, aspectRatio: 1.0 };
 
       html5QrCode.start(
         { facingMode: "environment" }, 
@@ -139,10 +141,24 @@
           beep.play();
           aramaInput.value = decodedText;
           tabloyuGuncelle(decodedText);
-          html5QrCode.stop();
-          readerWrapper.style.display = 'none';
+          durdurScanner(); // Okuyunca otomatik kapat
         }
-      ).catch(err => alert("Kamera izni gerekli!"));
+      ).catch(err => {
+        console.error(err);
+        isScannerOpen = false;
+        readerWrapper.style.display = 'none';
+        toggleBtn.classList.remove('active');
+      });
+    }
+
+    async function durdurScanner() {
+      if (html5QrCode) {
+        await html5QrCode.stop();
+        html5QrCode = null;
+      }
+      isScannerOpen = false;
+      readerWrapper.style.display = 'none';
+      toggleBtn.classList.remove('active'); // Butonu eski haline getir
     }
 
     aramaInput.addEventListener('input', (e) => tabloyuGuncelle(e.target.value));
