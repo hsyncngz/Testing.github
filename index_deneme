@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barkodlu Ürün Arama</title>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+    #reader { width: 100%; margin-bottom: 20px; border-radius: 8px; overflow: hidden; }
+    input[type="text"] { width: 100%; padding: 12px; margin-bottom: 15px; font-size: 16px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+    th { background-color: #f4f4f4; }
+    tr:nth-child(even) { background-color: #fafafa; }
+    .status { color: #666; font-size: 0.9em; margin-bottom: 5px; }
+  </style>
+</head>
+<body>
+
+  <h2>Ürün Arama & Barkod Tarayıcı</h2>
+  
+  <div id="reader"></div>
+  
+  <p class="status" id="status">Kamera başlatılmadı.</p>
+  <input type="text" id="arama" placeholder="Ürün adı, kodu veya barkod okutun...">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Ürün Kodu</th>
+        <th>Ürün Adı</th>
+        <th>Liste Fiyatı</th>
+        <th>Stok</th>
+      </tr>
+    </thead>
+    <tbody id="liste"></tbody>
+  </table>
+
+  <audio id="beepSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
+
+  <script>
+    let urunVerisi = [];
+    const aramaInput = document.getElementById('arama');
+    const liste = document.getElementById('liste');
+    const beep = document.getElementById('beepSound');
+
+    // Veriyi çek
+    fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
+      .then(res => res.json())
+      .then(data => {
+        urunVerisi = data;
+        console.log("Veri yüklendi");
+      })
+      .catch(err => {
+        liste.innerHTML = '<tr><td colspan="4">Veri yüklenemedi.</td></tr>';
+      });
+
+    // Ses çalma fonksiyonu
+    function ditSesiCikar() {
+      beep.currentTime = 0;
+      beep.play();
+    }
+
+    // Arama ve Filtreleme Fonksiyonu
+    function urunBul(deger) {
+      const aranan = deger.toLowerCase().trim();
+      liste.innerHTML = '';
+
+      if (aranan === "") return;
+
+      const sonuc = urunVerisi.filter(item => {
+        const metin = (item["Ürün Adı"] + ' ' + item["Ürün Kodu"]).toLowerCase();
+        // JSON'da "Barkod" alanı olduğunu varsayıyoruz ancak ekranda göstermiyoruz
+        const barkod = item["Barkod"] ? item["Barkod"].toString().toLowerCase() : "";
+        
+        return metin.includes(aranan) || barkod === aranan;
+      });
+
+      if (sonuc.length > 0) {
+        sonuc.forEach(item => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${item["Ürün Kodu"]}</td>
+            <td>${item["Ürün Adı"]}</td>
+            <td>${item["Liste Fiyatı"]}</td>
+            <td>${item["Stok Miktarı"]}</td>
+          `;
+          liste.appendChild(tr);
+        });
+      }
+    }
+
+    // Barkod Okuyucu Ayarları
+    const html5QrCode = new Html5Qrcode("reader");
+    const config = { fps: 10, qrbox: { width: 250, height: 150 } };
+
+    html5QrCode.start({ facingMode: "environment" }, config, (decodedText) => {
+      // Barkod okunduğunda:
+      ditSesiCikar(); // Ses çıkar
+      aramaInput.value = decodedText; // Barkodu inputa yaz
+      urunBul(decodedText); // Ürünü filtrele
+      document.getElementById('status').innerText = "Son okunan: " + decodedText;
+    });
+
+    // Manuel arama desteği
+    aramaInput.addEventListener('input', (e) => urunBul(e.target.value));
+
+  </script>
+</body>
+</html>
