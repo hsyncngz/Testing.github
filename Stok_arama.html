@@ -3,179 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stok Sorgulama</title>
+  <title>Gelişmiş Barkodlu Ürün Arama</title>
+  <script src="https://unpkg.com/html5-qrcode"></script>
   <style>
-    /* Tam Siyah Arka Plan */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #000000; 
-      color: #e0e0e0; 
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; max-width: 1000px; margin: auto; background-color: #f9f9f9; }
+    .search-container { display: flex; gap: 10px; margin-bottom: 15px; }
+    input[type="text"] { flex: 1; padding: 12px; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; }
+    
+    /* Kamera Kutusu Ayarları */
+    #scanner-wrapper { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.3); width: 90%; max-width: 400px; }
+    #reader { width: 100%; }
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
+    
+    .btn-scan { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .btn-close { margin-top: 10px; width: 100%; background: #dc3545; color: white; border: none; padding: 8px; border-radius: 4px; }
 
-    h2 {
-      color: #00d4ff; 
-      text-align: center;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      border-bottom: 2px solid #1e2130;
-      padding-bottom: 10px;
-    }
-
-    /* Yazılan harfleri otomatik büyük harf yapan CSS */
-    input[type="text"] {
-      width: 100%;
-      padding: 15px;
-      margin-bottom: 25px;
-      font-size: 16px;
-      box-sizing: border-box;
-      background-color: #1a1d29;
-      border: 1px solid #333;
-      border-radius: 10px;
-      color: #fff;
-      outline: none;
-      text-transform: uppercase; 
-    }
-
-    input[type="text"]:focus {
-      border-color: #00d4ff;
-      background-color: #202436;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    th, td {
-      padding: 14px 18px;
-      border-bottom: 1px solid #232736;
-      text-align: left;
-    }
-
-    th {
-      background-color: #1a1d29;
-      color: #00d4ff;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    tr {
-      background-color: #141721;
-      transition: background-color 0.2s ease;
-    }
-
-    tr:hover {
-      background-color: #1e2231;
-    }
-
-    .stok-pozitif {
-      color: #39ff14; 
-      font-weight: bold;
-    }
-
-    .hata-mesaji {
-      color: #ff4d4d;
-      text-align: center;
-      padding: 20px;
-    }
+    table { width: 100%; border-collapse: collapse; background: white; }
+    th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+    th { background-color: #007bff; color: white; }
+    tr:hover { background-color: #f1f1f1; }
   </style>
 </head>
 <body>
 
-  <h2>Stok Sorgulama</h2>
+  <h2>Detaylı Ürün Arama</h2>
   
-  <input type="text" id="arama" placeholder="Ürün adı veya kodu ile hızlıca arayın...">
+  <div class="search-container">
+    <input type="text" id="arama" placeholder="Ürün adı, kodu veya barkod okutun...">
+    <button class="btn-scan" onclick="kameraAc()">📷 Barkod Tara</button>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="kameraKapat()"></div>
+  <div id="scanner-wrapper">
+    <div id="reader"></div>
+    <button class="btn-close" onclick="kameraKapat()">Kapat</button>
+  </div>
 
   <table>
     <thead>
       <tr>
         <th>Ürün Kodu</th>
         <th>Ürün Adı</th>
+        <th>Barkodlar</th>
         <th>Liste Fiyatı</th>
-        <th>Stok Miktarı</th>
+        <th>Stok</th>
       </tr>
     </thead>
     <tbody id="liste"></tbody>
   </table>
 
   <script>
-    // Türkçe karakterleri ve büyük harf uyumunu sağlayan fonksiyon
-    function normalizeEt(metin) {
-      return metin.toLocaleUpperCase('tr-TR')
-        .replace(/İ/g, 'I')
-        .replace(/Ğ/g, 'G')
-        .replace(/Ü/g, 'U')
-        .replace(/Ş/g, 'S')
-        .replace(/Ö/g, 'O')
-        .replace(/Ç/g, 'C');
-    }
+    let urunVerisi = [];
+    let html5QrCode;
 
+    // Veriyi çek
     fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
       .then(res => res.json())
       .then(data => {
-        const arama = document.getElementById('arama');
-        const liste = document.getElementById('liste');
-
-        function tabloyaEkle(item) {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${item["Ürün Kodu"]}</td>
-            <td>${item["Ürün Adı"]}</td>
-            <td>${item["Liste Fiyatı"]}</td>
-            <td class="stok-pozitif">${item["Stok Miktarı"]}</td>
-          `;
-          liste.appendChild(tr);
-        }
-
-        function ilkSatiriGoster() {
-          liste.innerHTML = '';
-          if (data.length > 0) {
-            tabloyaEkle(data[0]);
-          }
-        }
-
-        function detayliFiltrele() {
-          const aranan = normalizeEt(arama.value.trim());
-          const kelimeler = aranan.split(/\s+/).filter(k => k);
-          liste.innerHTML = '';
-
-          if (kelimeler.length === 0) {
-            ilkSatiriGoster();
-            return;
-          }
-
-          const filtrelenmis = data.filter((item, index) => {
-            if (index === 0) return false;
-            const urunMetni = normalizeEt(item["Ürün Adı"] + ' ' + item["Ürün Kodu"]);
-            
-            const stokStr = String(item["Stok Miktarı"]).replace(',', '.');
-            const stok = parseFloat(stokStr);
-            
-            return kelimeler.every(k => urunMetni.includes(k)) && stok > 0;
-          });
-
-          if (filtrelenmis.length === 0) {
-            liste.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; color:#888;">Sonuç bulunamadı.</td></tr>';
-            return;
-          }
-
-          filtrelenmis.forEach(item => tabloyaEkle(item));
-        }
-
-        arama.addEventListener('input', detayliFiltrele);
-        ilkSatiriGoster();
+        urunVerisi = data;
+        tabloyuGuncelle(urunVerisi.slice(0, 1)); // İlk açılışta ilk satırı göster
       })
-      .catch(err => {
-        document.getElementById('liste').innerHTML = '<tr><td colspan="4" class="hata-mesaji">Veri kaynağına erişilemedi.</td></tr>';
+      .catch(err => console.error('Veri yüklenemedi:', err));
+
+    function tabloyuGuncelle(listeData) {
+      const liste = document.getElementById('liste');
+      liste.innerHTML = '';
+      
+      listeData.forEach(item => {
+        const tr = document.createElement('tr');
+        // Barkod sütunlarını birleştirip gösterelim
+        const barkodlar = [item.barkod1, item.barkod2, item.barkod3].filter(b => b).join(', ');
+        
+        tr.innerHTML = `
+          <td>${item["Ürün Kodu"] || '-'}</td>
+          <td>${item["Ürün Adı"] || '-'}</td>
+          <td style="font-size: 0.85em; color: #666;">${barkodlar}</td>
+          <td>${item["Liste Fiyatı"] || '-'}</td>
+          <td>${item["Stok Miktarı"] || '-'}</td>
+        `;
+        liste.appendChild(tr);
       });
+    }
+
+    function filtrele() {
+      const terim = document.getElementById('arama').value.toLowerCase().trim();
+      if (!terim) {
+        tabloyuGuncelle(urunVerisi.slice(0, 1));
+        return;
+      }
+
+      const sonuclar = urunVerisi.filter(item => {
+        const metin = `${item["Ürün Adı"]} ${item["Ürün Kodu"]}`.toLowerCase();
+        // Barkodları kontrol et
+        const barkodEslesti = [item.barkod1, item.barkod2, item.barkod3].some(b => String(b).toLowerCase() === terim);
+        const metinEslesti = metin.includes(terim);
+        
+        // Stok kontrolü (opsiyonel: stok > 0 olanları getir)
+        const stok = parseFloat(String(item["Stok Miktarı"]).replace(',', '.')) || 0;
+        
+        return (metinEslesti || barkodEslesti) && (terim.length > 2 ? true : true);
+      });
+
+      tabloyuGuncelle(sonuclar);
+    }
+
+    // Kamera Fonksiyonları
+    function kameraAc() {
+      document.getElementById('scanner-wrapper').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+      
+      html5QrCode = new Html5Qrcode("reader");
+      html5QrCode.start(
+        { facingMode: "environment" }, 
+        { fps: 10, qrbox: { width: 250, height: 250 } },
+        (decodedText) => {
+          // Barkod okunduğunda:
+          document.getElementById('arama').value = decodedText;
+          kameraKapat();
+          filtrele();
+        }
+      ).catch(err => alert("Kamera başlatılamadı: " + err));
+    }
+
+    function kameraKapat() {
+      if (html5QrCode) {
+        html5QrCode.stop().then(() => {
+          document.getElementById('scanner-wrapper').style.display = 'none';
+          document.getElementById('overlay').style.display = 'none';
+        });
+      }
+    }
+
+    document.getElementById('arama').addEventListener('input', filtrele);
   </script>
 </body>
 </html>
