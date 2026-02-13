@@ -3,40 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gelişmiş Barkodlu Ürün Arama</title>
+  <title>Gelişmiş Barkod Arama</title>
   <script src="https://unpkg.com/html5-qrcode"></script>
   <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; max-width: 1000px; margin: auto; background-color: #f9f9f9; }
-    .search-container { display: flex; gap: 10px; margin-bottom: 15px; }
-    input[type="text"] { flex: 1; padding: 12px; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; }
+    body { font-family: sans-serif; padding: 20px; max-width: 900px; margin: auto; background: #f4f4f4; }
+    .search-area { display: flex; gap: 10px; margin-bottom: 20px; }
+    input[type="text"] { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; }
     
     /* Kamera Kutusu Ayarları */
-    #scanner-wrapper { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.3); width: 90%; max-width: 400px; }
-    #reader { width: 100%; }
-    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
+    #scanner-wrapper { 
+      display: none; position: fixed; top: 50%; left: 50%; 
+      transform: translate(-50%, -50%); z-index: 1000; 
+      background: white; padding: 10px; border-radius: 10px; 
+      box-shadow: 0 0 30px rgba(0,0,0,0.5); width: 320px; 
+    }
     
-    .btn-scan { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-    .btn-close { margin-top: 10px; width: 100%; background: #dc3545; color: white; border: none; padding: 8px; border-radius: 4px; }
+    /* ZORUNLU YAKINLAŞTIRMA (ZOOM) EFEKTİ */
+    #reader { 
+      width: 100%; 
+      overflow: hidden; /* Taşmaları gizle */
+      border-radius: 8px;
+    }
+    #reader video { 
+      transform: scale(1.5); /* %50 Zoom */
+      transform-origin: center;
+    }
 
-    table { width: 100%; border-collapse: collapse; background: white; }
-    th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; }
+    .btn-scan { background: #28a745; color: white; border: none; padding: 0 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+    .btn-close { width: 100%; background: #333; color: white; border: none; padding: 10px; margin-top: 10px; border-radius: 5px; }
+
+    table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    th, td { padding: 12px; border: 1px solid #eee; text-align: left; }
     th { background-color: #007bff; color: white; }
-    tr:hover { background-color: #f1f1f1; }
+    
+    /* Barkod sütunu burada gizleniyor */
+    .barkod-sutunu { display: none; }
   </style>
 </head>
 <body>
 
-  <h2>Detaylı Ürün Arama</h2>
+  <h2>Ürün Arama & Barkod Tarayıcı</h2>
   
-  <div class="search-container">
-    <input type="text" id="arama" placeholder="Ürün adı, kodu veya barkod okutun...">
-    <button class="btn-scan" onclick="kameraAc()">📷 Barkod Tara</button>
+  <div class="search-area">
+    <input type="text" id="arama" placeholder="Ürün adı, kodu veya barkod...">
+    <button class="btn-scan" onclick="kameraAc()">📷 TARA</button>
   </div>
 
   <div class="overlay" id="overlay" onclick="kameraKapat()"></div>
   <div id="scanner-wrapper">
     <div id="reader"></div>
-    <button class="btn-close" onclick="kameraKapat()">Kapat</button>
+    <button class="btn-close" onclick="kameraKapat()">İPTAL</button>
   </div>
 
   <table>
@@ -44,97 +61,89 @@
       <tr>
         <th>Ürün Kodu</th>
         <th>Ürün Adı</th>
-        <th>Barkodlar</th>
-        <th>Liste Fiyatı</th>
+        <th>Fiyat</th>
         <th>Stok</th>
+        <th class="barkod-sutunu">Barkodlar</th>
       </tr>
     </thead>
     <tbody id="liste"></tbody>
   </table>
 
   <script>
-    let urunVerisi = [];
-    let html5QrCode;
+    let tumVeri = [];
+    let qrOkuyucu;
 
-    // Veriyi çek
+    // Veriyi yükle
     fetch('https://raw.githubusercontent.com/hsyncngz/Testing.github/main/veri.json')
       .then(res => res.json())
       .then(data => {
-        urunVerisi = data;
-        tabloyuGuncelle(urunVerisi.slice(0, 1)); // İlk açılışta ilk satırı göster
-      })
-      .catch(err => console.error('Veri yüklenemedi:', err));
+        tumVeri = data;
+        tabloCiz(tumVeri.slice(0, 1));
+      });
 
-    function tabloyuGuncelle(listeData) {
+    function tabloCiz(veriler) {
       const liste = document.getElementById('liste');
       liste.innerHTML = '';
-      
-      listeData.forEach(item => {
+      veriler.forEach(item => {
         const tr = document.createElement('tr');
-        // Barkod sütunlarını birleştirip gösterelim
-        const barkodlar = [item.barkod1, item.barkod2, item.barkod3].filter(b => b).join(', ');
-        
         tr.innerHTML = `
-          <td>${item["Ürün Kodu"] || '-'}</td>
-          <td>${item["Ürün Adı"] || '-'}</td>
-          <td style="font-size: 0.85em; color: #666;">${barkodlar}</td>
-          <td>${item["Liste Fiyatı"] || '-'}</td>
-          <td>${item["Stok Miktarı"] || '-'}</td>
+          <td>${item["Ürün Kodu"] || ''}</td>
+          <td>${item["Ürün Adı"] || ''}</td>
+          <td>${item["Liste Fiyatı"] || ''}</td>
+          <td>${item["Stok Miktarı"] || ''}</td>
+          <td class="barkod-sutunu">${item.barkod1 || ''} ${item.barkod2 || ''} ${item.barkod3 || ''}</td>
         `;
         liste.appendChild(tr);
       });
     }
 
-    function filtrele() {
-      const terim = document.getElementById('arama').value.toLowerCase().trim();
-      if (!terim) {
-        tabloyuGuncelle(urunVerisi.slice(0, 1));
-        return;
-      }
+    function ara() {
+      const deger = document.getElementById('arama').value.toLowerCase().trim();
+      if (!deger) { tabloCiz(tumVeri.slice(0, 1)); return; }
 
-      const sonuclar = urunVerisi.filter(item => {
-        const metin = `${item["Ürün Adı"]} ${item["Ürün Kodu"]}`.toLowerCase();
-        // Barkodları kontrol et
-        const barkodEslesti = [item.barkod1, item.barkod2, item.barkod3].some(b => String(b).toLowerCase() === terim);
-        const metinEslesti = metin.includes(terim);
+      const sonuc = tumVeri.filter(item => {
+        const aramaMetni = `${item["Ürün Adı"]} ${item["Ürün Kodu"]}`.toLowerCase();
+        // Gizli barkod sütunlarını kontrol et
+        const barkodlar = [String(item.barkod1), String(item.barkod2), String(item.barkod3)];
+        const barkodEslesme = barkodlar.some(b => b.toLowerCase() === deger);
         
-        // Stok kontrolü (opsiyonel: stok > 0 olanları getir)
-        const stok = parseFloat(String(item["Stok Miktarı"]).replace(',', '.')) || 0;
-        
-        return (metinEslesti || barkodEslesti) && (terim.length > 2 ? true : true);
+        return aramaMetni.includes(deger) || barkodEslesme;
       });
-
-      tabloyuGuncelle(sonuclar);
+      tabloCiz(sonuc);
     }
 
-    // Kamera Fonksiyonları
     function kameraAc() {
       document.getElementById('scanner-wrapper').style.display = 'block';
       document.getElementById('overlay').style.display = 'block';
       
-      html5QrCode = new Html5Qrcode("reader");
-      html5QrCode.start(
+      qrOkuyucu = new Html5Qrcode("reader");
+      const config = { 
+        fps: 20, 
+        qrbox: { width: 200, height: 120 }, // İnce uzun barkod kutusu
+        aspectRatio: 1.0 
+      };
+
+      qrOkuyucu.start(
         { facingMode: "environment" }, 
-        { fps: 10, qrbox: { width: 250, height: 250 } },
-        (decodedText) => {
-          // Barkod okunduğunda:
-          document.getElementById('arama').value = decodedText;
+        config,
+        (text) => {
+          document.getElementById('arama').value = text;
           kameraKapat();
-          filtrele();
+          ara(); // Otomatik arama yap
         }
-      ).catch(err => alert("Kamera başlatılamadı: " + err));
+      ).catch(err => console.error(err));
     }
 
     function kameraKapat() {
-      if (html5QrCode) {
-        html5QrCode.stop().then(() => {
+      if (qrOkuyucu) {
+        qrOkuyucu.stop().then(() => {
           document.getElementById('scanner-wrapper').style.display = 'none';
           document.getElementById('overlay').style.display = 'none';
         });
       }
     }
 
-    document.getElementById('arama').addEventListener('input', filtrele);
+    document.getElementById('arama').addEventListener('input', ara);
   </script>
 </body>
 </html>
