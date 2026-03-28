@@ -1,9 +1,9 @@
 [
   {
     "Ürün Kodu": "TARİH",
-    "Ürün Adı": "25.03.2026",
+    "Ürün Adı": "28.03.2026",
     "Liste Fiyatı": "SAAT",
-    "Stok Miktarı": "17:52",
+    "Stok Miktarı": "16:45",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -84,7 +84,7 @@
     "Ürün Kodu": "003-KNRX-W18-Y",
     "Ürün Adı": "KONREX 18w (50cm) WALLWASHER YEŞİL",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "19",
+    "Stok Miktarı": "23",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -183,7 +183,7 @@
     "Ürün Kodu": "003-KNRX-W6-A",
     "Ürün Adı": "KONREX 6w (20cm) WALLWASHER AMBER",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "7",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -255,7 +255,7 @@
     "Ürün Kodu": "003-KNRX-W9-Y",
     "Ürün Adı": "KONREX 9w (30cm) WALLWASHER YEŞİL",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "-10",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -282,7 +282,7 @@
     "Ürün Kodu": "400-010000-096",
     "Ürün Adı": "GRANO BEYAZ TEKLİ ÇERÇEVE",
     "Liste Fiyatı": "16,70",
-    "Stok Miktarı": "17.592",
+    "Stok Miktarı": "17.489",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -309,7 +309,7 @@
     "Ürün Kodu": "400-010000-228",
     "Ürün Adı": "GRANO BEYAZ DÖRTLÜ ÇERÇEVE",
     "Liste Fiyatı": "194,60",
-    "Stok Miktarı": "2.041",
+    "Stok Miktarı": "2.081",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -336,7 +336,7 @@
     "Ürün Kodu": "400-010000-266",
     "Ürün Adı": "GRANO BEYAZ İKİLİ PRİZ ÇERÇEVE",
     "Liste Fiyatı": "54,20",
-    "Stok Miktarı": "1.159",
+    "Stok Miktarı": "1.123",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -381,7 +381,7 @@
     "Ürün Kodu": "400-110000-096",
     "Ürün Adı": "GRANO FÜME TEKLİ ÇERÇEVE",
     "Liste Fiyatı": "72,60",
-    "Stok Miktarı": "6.330",
+    "Stok Miktarı": "5.842",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -390,7 +390,7 @@
     "Ürün Kodu": "400-110000-226",
     "Ürün Adı": "GRANO FÜME İKİLİ ÇERÇEVE",
     "Liste Fiyatı": "167,70",
-    "Stok Miktarı": "3.997",
+    "Stok Miktarı": "3.749",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -435,7 +435,7 @@
     "Ürün Kodu": "400-110000-266",
     "Ürün Adı": "GRANO FÜME İKİLİ PRİZ ÇERÇEVE",
     "Liste Fiyatı": "102,90",
-    "Stok Miktarı": "522",
+    "Stok Miktarı": "515",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -486,10 +486,19 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "400-130000-096",
+    "Ürün Adı": "GRANO ANTRASİT TEKLİ ÇERÇEVE",
+    "Liste Fiyatı": "72,60",
+    "Stok Miktarı": "29",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "400-130000-226",
     "Ürün Adı": "GRANO ANTRASİT İKİLİ ÇERÇEVE",
     "Liste Fiyatı": "167,70",
-    "Stok Miktarı": "1.526",
+    "Stok Miktarı": "1.523",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -507,7 +516,7 @@
     "Ürün Kodu": "400-170000-096",
     "Ürün Adı": "GRANO METALİK SİYAH TEKLİ ÇERÇEVE",
     "Liste Fiyatı": "72,60",
-    "Stok Miktarı": "32.519",
+    "Stok Miktarı": "31.914",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -516,7 +525,7 @@
     "Ürün Kodu": "400-170000-226",
     "Ürün Adı": "GRANO METALİK SİYAH İKİLİ ÇERÇEVE",
     "Liste Fiyatı": "167,70",
-    "Stok Miktarı": "2.483",
+    "Stok Miktarı": "2.356",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -525,7 +534,7 @@
     "Ürün Kodu": "400-170000-227",
     "Ürün Adı": "GRANO METALİK SİYAH ÜÇLÜ ÇERÇEVE",
     "Liste Fiyatı": "245,40",
-    "Stok Miktarı": "2.145",
+    "Stok Miktarı": "2.139",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -561,7 +570,7 @@
     "Ürün Kodu": "400-170000-266",
     "Ürün Adı": "GRANO METALİK SİYAH İKİLİ PRİZ ÇERÇEVE",
     "Liste Fiyatı": "102,90",
-    "Stok Miktarı": "783",
+    "Stok Miktarı": "771",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -831,7 +840,7 @@
     "Ürün Kodu": "405-340000-096",
     "Ürün Adı": "QUANTUM İNOX TEKLİ ÇERÇEVE",
     "Liste Fiyatı": "121,20",
-    "Stok Miktarı": "2.891",
+    "Stok Miktarı": "2.890",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -867,7 +876,7 @@
     "Ürün Kodu": "405-340000-250",
     "Ürün Adı": "QUANTUM İNOX BEŞLİ ÇERÇEVE",
     "Liste Fiyatı": "629,70",
-    "Stok Miktarı": "183",
+    "Stok Miktarı": "182",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -885,7 +894,7 @@
     "Ürün Kodu": "405-360000-096",
     "Ürün Adı": "QUANTUM SİYAH TEKLİ ÇERÇEVE",
     "Liste Fiyatı": "121,20",
-    "Stok Miktarı": "4.438",
+    "Stok Miktarı": "4.434",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1137,7 +1146,7 @@
     "Ürün Kodu": "600-000201-202",
     "Ürün Adı": "GRANO BEYAZ KOMÜTATÖR",
     "Liste Fiyatı": "167,00",
-    "Stok Miktarı": "3.223",
+    "Stok Miktarı": "3.330",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1227,7 +1236,7 @@
     "Ürün Kodu": "600-000211-200",
     "Ürün Adı": "GRANO FÜME ANAHTAR",
     "Liste Fiyatı": "180,00",
-    "Stok Miktarı": "2.804",
+    "Stok Miktarı": "2.803",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1236,7 +1245,7 @@
     "Ürün Kodu": "600-000211-202",
     "Ürün Adı": "GRANO FÜME KOMÜTATÖR",
     "Liste Fiyatı": "232,30",
-    "Stok Miktarı": "4.463",
+    "Stok Miktarı": "4.458",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1290,7 +1299,7 @@
     "Ürün Kodu": "600-000211-254",
     "Ürün Adı": "GRANO FÜME ÜÇLÜ ANAHTAR",
     "Liste Fiyatı": "300,00",
-    "Stok Miktarı": "559",
+    "Stok Miktarı": "547",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1332,10 +1341,37 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "600-000213-200",
+    "Ürün Adı": "GRANO ANTRASİT ANAHTAR",
+    "Liste Fiyatı": "180,00",
+    "Stok Miktarı": "2",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
+    "Ürün Kodu": "600-000213-202",
+    "Ürün Adı": "GRANO ANTRASİT KOMÜTATÖR",
+    "Liste Fiyatı": "232,30",
+    "Stok Miktarı": "2",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
+    "Ürün Kodu": "600-000213-254",
+    "Ürün Adı": "GRANO ANTRASİT ÜÇLÜ ANAHTAR",
+    "Liste Fiyatı": "300,00",
+    "Stok Miktarı": "2",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "600-000217-200",
     "Ürün Adı": "GRANO METALİK SİYAH ANAHTAR",
     "Liste Fiyatı": "180,00",
-    "Stok Miktarı": "3.681",
+    "Stok Miktarı": "3.439",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1344,7 +1380,7 @@
     "Ürün Kodu": "600-000217-202",
     "Ürün Adı": "GRANO METALİK SİYAH KOMÜTATÖR",
     "Liste Fiyatı": "232,30",
-    "Stok Miktarı": "3.658",
+    "Stok Miktarı": "3.409",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1407,7 +1443,7 @@
     "Ürün Kodu": "600-000217-254",
     "Ürün Adı": "GRANO METALİK SİYAH ÜÇLÜ ANAHTAR",
     "Liste Fiyatı": "300,00",
-    "Stok Miktarı": "575",
+    "Stok Miktarı": "574",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1425,7 +1461,7 @@
     "Ürün Kodu": "600-000301-217",
     "Ürün Adı": "GRANO BEYAZ TOPRAKLI PRİZ",
     "Liste Fiyatı": "167,70",
-    "Stok Miktarı": "15.264",
+    "Stok Miktarı": "15.392",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1461,7 +1497,7 @@
     "Ürün Kodu": "600-000301-231",
     "Ürün Adı": "GRANO BEYAZ F KONNEKTÖRLÜ UYDU (EKO) (TEKLİ)",
     "Liste Fiyatı": "212,70",
-    "Stok Miktarı": "815",
+    "Stok Miktarı": "816",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1515,7 +1551,7 @@
     "Ürün Kodu": "600-000301-907",
     "Ürün Adı": "GRANO BEYAZ İKİLİ TOPRAKLI PRİZ MODÜL+KAPAK",
     "Liste Fiyatı": "274,20",
-    "Stok Miktarı": "1.060",
+    "Stok Miktarı": "1.024",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1569,7 +1605,7 @@
     "Ürün Kodu": "600-000311-217",
     "Ürün Adı": "GRANO FÜME TOPRAKLI PRİZ",
     "Liste Fiyatı": "217,00",
-    "Stok Miktarı": "12.102",
+    "Stok Miktarı": "12.084",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1605,7 +1641,7 @@
     "Ürün Kodu": "600-000311-231",
     "Ürün Adı": "GRANO FÜME F KONNEKTÖRLÜ UYDU (EKO) (TEKLİ)",
     "Liste Fiyatı": "267,20",
-    "Stok Miktarı": "745",
+    "Stok Miktarı": "750",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1641,7 +1677,7 @@
     "Ürün Kodu": "600-000311-249",
     "Ürün Adı": "GRANO FÜME KAPAKLI TOPRAKLI PRİZ",
     "Liste Fiyatı": "289,70",
-    "Stok Miktarı": "641",
+    "Stok Miktarı": "521",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1668,7 +1704,7 @@
     "Ürün Kodu": "600-000311-907",
     "Ürün Adı": "GRANO FÜME İKİLİ TOPRAKLI PRİZ MODÜL+KAPAK",
     "Liste Fiyatı": "343,00",
-    "Stok Miktarı": "585",
+    "Stok Miktarı": "578",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1701,6 +1737,15 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "600-000313-217",
+    "Ürün Adı": "GRANO ANTRASİT TOPRAKLI PRİZ",
+    "Liste Fiyatı": "217,00",
+    "Stok Miktarı": "14",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "600-000317-212",
     "Ürün Adı": "GRANO METALİK SİYAH DİMMER (800W)",
     "Liste Fiyatı": "2.185,00",
@@ -1713,7 +1758,7 @@
     "Ürün Kodu": "600-000317-217",
     "Ürün Adı": "GRANO METALİK SİYAH TOPRAKLI PRİZ",
     "Liste Fiyatı": "217,00",
-    "Stok Miktarı": "21.712",
+    "Stok Miktarı": "21.082",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1749,7 +1794,7 @@
     "Ürün Kodu": "600-000317-231",
     "Ürün Adı": "GRANO METALİK SİYAH F KONNEKTÖRLÜ UYDU (EKO) (TEKLİ)",
     "Liste Fiyatı": "267,20",
-    "Stok Miktarı": "2.121",
+    "Stok Miktarı": "2.120",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1758,7 +1803,7 @@
     "Ürün Kodu": "600-000317-233",
     "Ürün Adı": "GRANO METALİK SİYAH DATA PRİZİ JAKSIZ",
     "Liste Fiyatı": "225,75",
-    "Stok Miktarı": "809",
+    "Stok Miktarı": "803",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1813,15 +1858,6 @@
     "Ürün Adı": "MONOBLOK FİŞ TOPRAKLI",
     "Liste Fiyatı": "108,50",
     "Stok Miktarı": "400",
-    "barkod1": "",
-    "barkod2": "",
-    "barkod3": ""
-  },
-  {
-    "Ürün Kodu": "77 300 00",
-    "Ürün Adı": "AYKA 3 LÜ TOPRAKLI ANAHTARLI GRUP PRİZ",
-    "Liste Fiyatı": "265,00",
-    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1893,7 +1929,7 @@
     "Ürün Kodu": "ACK AT02-01230",
     "Ürün Adı": "ACK 36W LED ETANJ ARMATÜR 120CM (6500K)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "-27",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1911,7 +1947,7 @@
     "Ürün Kodu": "ACK AY02-00600",
     "Ürün Adı": "ACK 60w 5A ŞERİT LED TRAFOSU",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "28",
+    "Stok Miktarı": "26",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -1929,7 +1965,7 @@
     "Ürün Kodu": "ACK AY02-01500",
     "Ürün Adı": "ACK 150w 12,5A ŞERİT LED TRAFOSU",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "2",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2019,7 +2055,7 @@
     "Ürün Kodu": "ALK.305",
     "Ürün Adı": "ALKANLAR 3'LÜ GRUP PRİZ TOPRAKLI 5 MT AKIM KORUMALI ANAHTARLI SİYAH",
     "Liste Fiyatı": "715,38",
-    "Stok Miktarı": "19",
+    "Stok Miktarı": "18",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2046,7 +2082,7 @@
     "Ürün Kodu": "ALRRA 501-36SMD",
     "Ürün Adı": "FORMEL 36 W/120 CM ETANJ ARMATÜR 6500K",
     "Liste Fiyatı": "500,00",
-    "Stok Miktarı": "44",
+    "Stok Miktarı": "39",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2082,7 +2118,7 @@
     "Ürün Kodu": "AP.MD3103-W",
     "Ürün Adı": "AP 100W KRİSTAL YATAY BANT ARMATÜR (BEYAZ)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "351",
+    "Stok Miktarı": "327",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2091,7 +2127,7 @@
     "Ürün Kodu": "AP.MD3103-WW",
     "Ürün Adı": "AP 100W KRİSTAL YATAY BANT ARMATÜR (GÜNIŞIĞI)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "33",
+    "Stok Miktarı": "23",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2100,7 +2136,7 @@
     "Ürün Kodu": "ARS.348831",
     "Ürün Adı": "ARS ARONA 18w LED ETANJ APLİK",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "120",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2205,6 +2241,15 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "AUDIO 001460",
+    "Ürün Adı": "AUDİO BUS PLUS GSET-18 4,3 GÖR VİLLA SET BEYAZ",
+    "Liste Fiyatı": "18.870,00",
+    "Stok Miktarı": "0",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "AUDIO 002445",
     "Ürün Adı": "AUDİO BUS PLUS 24V 60 WATT POWER SUPPLY",
     "Liste Fiyatı": "3.190,00",
@@ -2261,8 +2306,8 @@
   {
     "Ürün Kodu": "AYKA 77 010 00",
     "Ürün Adı": "AYKA 10'LU TOPRAKLI GRUP PRİZ KLEMENSLİ",
-    "Liste Fiyatı": "560,00",
-    "Stok Miktarı": "154",
+    "Liste Fiyatı": "800,00",
+    "Stok Miktarı": "149",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2270,7 +2315,7 @@
   {
     "Ürün Kodu": "AYKA 77 100 00",
     "Ürün Adı": "AYKA TEKLİ DARBE KORUMALI PRİZ",
-    "Liste Fiyatı": "500,00",
+    "Liste Fiyatı": "700,00",
     "Stok Miktarı": "12",
     "barkod1": "",
     "barkod2": "",
@@ -2279,7 +2324,7 @@
   {
     "Ürün Kodu": "AYKA 77 111 00",
     "Ürün Adı": "AYKA TOPRAKSIZ DİŞİ FİŞ",
-    "Liste Fiyatı": "38,00",
+    "Liste Fiyatı": "52,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -2288,8 +2333,8 @@
   {
     "Ürün Kodu": "AYKA 77 130 00",
     "Ürün Adı": "AYKA SAFİR GOLYAT YONCA FİŞ PRİZ",
-    "Liste Fiyatı": "165,00",
-    "Stok Miktarı": "259",
+    "Liste Fiyatı": "250,00",
+    "Stok Miktarı": "254",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2297,7 +2342,7 @@
   {
     "Ürün Kodu": "AYKA 77 131 00",
     "Ürün Adı": "AYKA SAFİR 3 LÜ S/A TOPRAKLI PRİZ",
-    "Liste Fiyatı": "185,00",
+    "Liste Fiyatı": "280,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -2306,7 +2351,7 @@
   {
     "Ürün Kodu": "AYKA 77 134 00",
     "Ürün Adı": "AYKA 3 LÜ GOLYAT FİŞ PRİZ",
-    "Liste Fiyatı": "225,00",
+    "Liste Fiyatı": "325,00",
     "Stok Miktarı": "373",
     "barkod1": "",
     "barkod2": "",
@@ -2315,7 +2360,7 @@
   {
     "Ürün Kodu": "AYKA 77 200 00",
     "Ürün Adı": "AYKA 2'Lİ TOPRAKLI GRUP PRİZ KLEMENSLİ",
-    "Liste Fiyatı": "145,00",
+    "Liste Fiyatı": "205,00",
     "Stok Miktarı": "-20",
     "barkod1": "",
     "barkod2": "",
@@ -2324,8 +2369,8 @@
   {
     "Ürün Kodu": "AYKA 77 300 00",
     "Ürün Adı": "AYKA 3'LÜ TOPRAKLI GRUP PRİZ KLEMENSLİ",
-    "Liste Fiyatı": "175,00",
-    "Stok Miktarı": "184",
+    "Liste Fiyatı": "250,00",
+    "Stok Miktarı": "144",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2333,7 +2378,7 @@
   {
     "Ürün Kodu": "AYKA 77 400 00",
     "Ürün Adı": "AYKA 4'LÜ TOPRAKLI GRUP PRİZ KLEMENSLİ",
-    "Liste Fiyatı": "235,00",
+    "Liste Fiyatı": "335,00",
     "Stok Miktarı": "29",
     "barkod1": "",
     "barkod2": "",
@@ -2342,8 +2387,8 @@
   {
     "Ürün Kodu": "AYKA 77 600 00",
     "Ürün Adı": "AYKA 6'LI TOPRAKLI GRUP PRİZ KLEMENSLİ",
-    "Liste Fiyatı": "335,00",
-    "Stok Miktarı": "44",
+    "Liste Fiyatı": "480,00",
+    "Stok Miktarı": "40",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2406,7 +2451,7 @@
     "Ürün Kodu": "BANT 001",
     "Ürün Adı": "3M İZOLE BANT SİYAH",
     "Liste Fiyatı": "12,50",
-    "Stok Miktarı": "3.205",
+    "Stok Miktarı": "3.163",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2415,7 +2460,7 @@
     "Ürün Kodu": "BANT 002",
     "Ürün Adı": "GÜNSAN İZOLE BANT",
     "Liste Fiyatı": "10,00",
-    "Stok Miktarı": "393",
+    "Stok Miktarı": "380",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2460,7 +2505,7 @@
     "Ürün Kodu": "BK.CAT6 DIŞ",
     "Ürün Adı": "CAT-6 UTP BİLGİSAYAR KABLOSU DIŞ MEKAN",
     "Liste Fiyatı": "7,00",
-    "Stok Miktarı": "1.975",
+    "Stok Miktarı": "1.150",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2520,10 +2565,19 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "CATA CT-1150",
+    "Ürün Adı": "CATA 52w KRİSTAL PERVANE AMPÜL (BEYAZ)",
+    "Liste Fiyatı": "375,00",
+    "Stok Miktarı": "157",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "CATA CT-1151B",
     "Ürün Adı": "CATA 30W PERVANE AMPÜL (BEYAZ)",
     "Liste Fiyatı": "200,00",
-    "Stok Miktarı": "403",
+    "Stok Miktarı": "393",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2541,7 +2595,7 @@
     "Ürün Kodu": "CATA CT-1152",
     "Ürün Adı": "CATA 42w PERVANE AMPÜL (BEYAZ)",
     "Liste Fiyatı": "315,00",
-    "Stok Miktarı": "138",
+    "Stok Miktarı": "118",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2640,7 +2694,7 @@
     "Ürün Kodu": "CATA CT-2464",
     "Ürün Adı": "CATA 40cm BELLA SLİM CABİNET-SENSÖRLÜ (4000K-3200K-6400K)",
     "Liste Fiyatı": "400,00",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "1",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2667,7 +2721,7 @@
     "Ürün Kodu": "CATA CT-2467B",
     "Ürün Adı": "CATA 10w (60cm)  T5 LEDLİ BANT ARMATÜR 6400K",
     "Liste Fiyatı": "210,00",
-    "Stok Miktarı": "53",
+    "Stok Miktarı": "33",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2691,6 +2745,15 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "CATA CT-2468G",
+    "Ürün Adı": "CATA 15W (90CM)  T5 LEDLİ BANT ARMATÜR 3200K",
+    "Liste Fiyatı": "265,00",
+    "Stok Miktarı": "-12",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "CATA CT-2469B",
     "Ürün Adı": "CATA 20w (120cm)  T5 LEDLİ BANT ARMATÜR 6400K",
     "Liste Fiyatı": "325,00",
@@ -2703,7 +2766,7 @@
     "Ürün Kodu": "CATA CT-2474B",
     "Ürün Adı": "CATA 18W (60CM)  LEDLİ BANT ARMATÜR 6400K",
     "Liste Fiyatı": "200,00",
-    "Stok Miktarı": "124",
+    "Stok Miktarı": "241",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2748,7 +2811,7 @@
     "Ürün Kodu": "CATA CT-2478B",
     "Ürün Adı": "CATA 36w (120cm)  LEDLİ BANT ARMATÜR 6400K",
     "Liste Fiyatı": "230,00",
-    "Stok Miktarı": "56",
+    "Stok Miktarı": "946",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2874,7 +2937,7 @@
     "Ürün Kodu": "CATA CT-2574",
     "Ürün Adı": "CATA 60W 5A ŞERİT LED TRAFOSU (SLİM)",
     "Liste Fiyatı": "225,00",
-    "Stok Miktarı": "298",
+    "Stok Miktarı": "294",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2883,7 +2946,7 @@
     "Ürün Kodu": "CATA CT-2576",
     "Ürün Adı": "CATA 120w 10A ŞERİT LED TRAFOSU (SLİM)",
     "Liste Fiyatı": "340,00",
-    "Stok Miktarı": "484",
+    "Stok Miktarı": "483",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2928,7 +2991,7 @@
     "Ürün Kodu": "CATA CT-2674",
     "Ürün Adı": "CATA 60w 5A ŞERİT LED TRAFOSU (SÜPERSLİM)",
     "Liste Fiyatı": "170,00",
-    "Stok Miktarı": "1.107",
+    "Stok Miktarı": "1.099",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2937,7 +3000,7 @@
     "Ürün Kodu": "CATA CT-2675",
     "Ürün Adı": "CATA 150W 12,5A ŞERİT LED TRAFOSU (SÜPERSLİM)",
     "Liste Fiyatı": "230,00",
-    "Stok Miktarı": "369",
+    "Stok Miktarı": "367",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2946,7 +3009,7 @@
     "Ürün Kodu": "CATA CT-2677",
     "Ürün Adı": "CATA 250w 21A ŞERİT LED TRAFOSU (SÜPERSLİM)",
     "Liste Fiyatı": "330,00",
-    "Stok Miktarı": "567",
+    "Stok Miktarı": "551",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2955,7 +3018,7 @@
     "Ürün Kodu": "CATA CT-2678",
     "Ürün Adı": "CATA 360w 30A ŞERİT LED TRAFOSU (SÜPERSLİM)",
     "Liste Fiyatı": "395,00",
-    "Stok Miktarı": "257",
+    "Stok Miktarı": "246",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2964,7 +3027,7 @@
     "Ürün Kodu": "CATA CT-2679",
     "Ürün Adı": "CATA 200w 17A ŞERİT LED TRAFOSU (SÜPERSLİM)",
     "Liste Fiyatı": "275,00",
-    "Stok Miktarı": "-1",
+    "Stok Miktarı": "298",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -2997,10 +3060,19 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "CATA CT-4030",
+    "Ürün Adı": "CATA AKILLI VİLLA SET",
+    "Liste Fiyatı": "11.000,00",
+    "Stok Miktarı": "14",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "CATA CT-4040",
     "Ürün Adı": "CATA AKILLI KAMERALI KİLİT",
     "Liste Fiyatı": "17.000,00",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "2",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3009,7 +3081,7 @@
     "Ürün Kodu": "CATA CT-4050",
     "Ürün Adı": "CATA AKILLI IP KAMERA GECE GÖRÜŞLÜ (FHD1080P)",
     "Liste Fiyatı": "1.725,00",
-    "Stok Miktarı": "56",
+    "Stok Miktarı": "54",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3036,7 +3108,7 @@
     "Ürün Kodu": "CATA CT-4058",
     "Ürün Adı": "CATA 9W RGB LED AMPÜL KUMANDALI (E-27)",
     "Liste Fiyatı": "165,00",
-    "Stok Miktarı": "81",
+    "Stok Miktarı": "76",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3189,7 +3261,7 @@
     "Ürün Kodu": "CATA CT-4135",
     "Ürün Adı": "CATA 35W KRİSTAL TORCH LED AMPÜL (E27)  (BEYAZ)",
     "Liste Fiyatı": "155,00",
-    "Stok Miktarı": "119",
+    "Stok Miktarı": "118",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3225,7 +3297,7 @@
     "Ürün Kodu": "CATA CT-4177B",
     "Ürün Adı": "CATA 10W LED AMPÜL (E-27) (BEYAZ)",
     "Liste Fiyatı": "40,00",
-    "Stok Miktarı": "184",
+    "Stok Miktarı": "164",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3234,7 +3306,7 @@
     "Ürün Kodu": "CATA CT-4177G",
     "Ürün Adı": "CATA 10W LED AMPÜL (E-27) (GÜNIŞIĞI)",
     "Liste Fiyatı": "40,00",
-    "Stok Miktarı": "894",
+    "Stok Miktarı": "294",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3243,7 +3315,7 @@
     "Ürün Kodu": "CATA CT-4178G",
     "Ürün Adı": "CATA 16W LED AMPÜL (E27)  (GÜNIŞIĞI)",
     "Liste Fiyatı": "55,00",
-    "Stok Miktarı": "997",
+    "Stok Miktarı": "797",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3288,7 +3360,7 @@
     "Ürün Kodu": "CATA CT-4215A",
     "Ürün Adı": "CATA 7W LED AMPÜL (GU-10)  (AMBER)",
     "Liste Fiyatı": "52,00",
-    "Stok Miktarı": "494",
+    "Stok Miktarı": "394",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3297,7 +3369,7 @@
     "Ürün Kodu": "CATA CT-4215B",
     "Ürün Adı": "CATA 8W LED AMPÜL (GU-10)  6500K",
     "Liste Fiyatı": "49,00",
-    "Stok Miktarı": "34",
+    "Stok Miktarı": "69",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3306,7 +3378,7 @@
     "Ürün Kodu": "CATA CT-4215G",
     "Ürün Adı": "CATA 7W LED AMPÜL (GU-10)  GÜNIŞIĞI",
     "Liste Fiyatı": "49,00",
-    "Stok Miktarı": "272",
+    "Stok Miktarı": "268",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3333,7 +3405,7 @@
     "Ürün Kodu": "CATA CT-4217",
     "Ürün Adı": "CATA 8W (E-27) RUSTİK AMPÜL EDİSON (GÜNIŞIĞI)",
     "Liste Fiyatı": "120,00",
-    "Stok Miktarı": "163",
+    "Stok Miktarı": "113",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3423,7 +3495,7 @@
     "Ürün Kodu": "CATA CT-4232G",
     "Ürün Adı": "CATA 6W TOP LED AMPÜL E27 (GÜNIŞIĞI)",
     "Liste Fiyatı": "38,00",
-    "Stok Miktarı": "117",
+    "Stok Miktarı": "77",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3450,7 +3522,7 @@
     "Ürün Kodu": "CATA CT-4248G",
     "Ürün Adı": "CATA 7W LEDLİ KAPSÜL AMPÜL (G9) (220V) (GÜNIŞIĞI)",
     "Liste Fiyatı": "70,00",
-    "Stok Miktarı": "223",
+    "Stok Miktarı": "221",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3549,7 +3621,7 @@
     "Ürün Kodu": "CATA CT-4266B",
     "Ürün Adı": "CATA 12w LED AMPÜL (E27)  (BEYAZ)",
     "Liste Fiyatı": "50,00",
-    "Stok Miktarı": "445",
+    "Stok Miktarı": "442",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3594,7 +3666,7 @@
     "Ürün Kodu": "CATA CT-4281",
     "Ürün Adı": "CATA 4w (E14) RUSTİK AMPÜL KIVRIK (AMBER)",
     "Liste Fiyatı": "76,00",
-    "Stok Miktarı": "140",
+    "Stok Miktarı": "130",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3675,7 +3747,7 @@
     "Ürün Kodu": "CATA CT-4329",
     "Ürün Adı": "CATA 15W TORCH LED AMPÜL (E27)  (BEYAZ)",
     "Liste Fiyatı": "75,00",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "800",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3711,7 +3783,7 @@
     "Ürün Kodu": "CATA CT-4354",
     "Ürün Adı": "CATA 6w (E-27) RUSTİK AMPÜL (G-95) (GÜNIŞIĞI)",
     "Liste Fiyatı": "225,00",
-    "Stok Miktarı": "-46",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3783,7 +3855,7 @@
     "Ürün Kodu": "CATA CT-4455Y",
     "Ürün Adı": "CATA NEON LED HORTUM 12V YEŞİL",
     "Liste Fiyatı": "115,00",
-    "Stok Miktarı": "150",
+    "Stok Miktarı": "100",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3801,7 +3873,7 @@
     "Ürün Kodu": "CATA CT-4481",
     "Ürün Adı": "CATA 10 ÇİP İÇ MEKAN ŞERİT LED (GÜNIŞIĞI)",
     "Liste Fiyatı": "33,00",
-    "Stok Miktarı": "2.370",
+    "Stok Miktarı": "1.680",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3846,7 +3918,7 @@
     "Ürün Kodu": "CATA CT-4486",
     "Ürün Adı": "CATA 10 ÇİP İÇ MEKAN ŞERİT LED (4000K)",
     "Liste Fiyatı": "33,00",
-    "Stok Miktarı": "1.405",
+    "Stok Miktarı": "1.295",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3855,7 +3927,7 @@
     "Ürün Kodu": "CATA CT-4487",
     "Ürün Adı": "CATA 10 ÇİP DIŞ MEKAN ŞERİT LED (BEYAZ)",
     "Liste Fiyatı": "62,00",
-    "Stok Miktarı": "360",
+    "Stok Miktarı": "345",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3864,7 +3936,7 @@
     "Ürün Kodu": "CATA CT-4488",
     "Ürün Adı": "CATA 10 ÇİP DIŞ MEKAN ŞERİT LED (GÜNIŞIĞI)",
     "Liste Fiyatı": "62,00",
-    "Stok Miktarı": "375",
+    "Stok Miktarı": "360",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3882,7 +3954,7 @@
     "Ürün Kodu": "CATA CT-4495",
     "Ürün Adı": "CATA 220V 120 LEDLİ ŞERİT LED YAPIŞKANLI (BEYAZ)",
     "Liste Fiyatı": "86,00",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "-100",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3945,7 +4017,7 @@
     "Ürün Kodu": "CATA CT-4538A",
     "Ürün Adı": "CATA GOLD (240 ÇİP/mt)  İÇ MEKAN ŞERİT LED (AMBER)",
     "Liste Fiyatı": "61,00",
-    "Stok Miktarı": "355",
+    "Stok Miktarı": "260",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3954,7 +4026,7 @@
     "Ürün Kodu": "CATA CT-4538B",
     "Ürün Adı": "CATA GOLD (240 ÇİP/MT)  İÇ MEKAN ŞERİT LED (BEYAZ)",
     "Liste Fiyatı": "61,00",
-    "Stok Miktarı": "1.850",
+    "Stok Miktarı": "1.810",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3963,7 +4035,7 @@
     "Ürün Kodu": "CATA CT-4538G",
     "Ürün Adı": "CATA GOLD (240 ÇİP/MT)  İÇ MEKAN ŞERİT LED (GÜNIŞIĞI)",
     "Liste Fiyatı": "61,00",
-    "Stok Miktarı": "2.205",
+    "Stok Miktarı": "2.165",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -3972,7 +4044,7 @@
     "Ürün Kodu": "CATA CT-4538K",
     "Ürün Adı": "CATA GOLD (240 ÇİP/MT)  İÇ MEKAN ŞERİT LED (4000K)",
     "Liste Fiyatı": "61,00",
-    "Stok Miktarı": "680",
+    "Stok Miktarı": "630",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4017,7 +4089,7 @@
     "Ürün Kodu": "CATA CT-4545",
     "Ürün Adı": "CATA 3 ÇİP İÇ MEKAN ŞERİT LED (RGB)",
     "Liste Fiyatı": "66,00",
-    "Stok Miktarı": "1.065",
+    "Stok Miktarı": "955",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4098,7 +4170,7 @@
     "Ürün Kodu": "CATA CT-4557",
     "Ürün Adı": "CATA RGB ŞERİT LED SETİ (5MT RGB LED+TRAFO+RGB KUMANDA)",
     "Liste Fiyatı": "320,00",
-    "Stok Miktarı": "105",
+    "Stok Miktarı": "95",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4107,7 +4179,7 @@
     "Ürün Kodu": "CATA CT-4558",
     "Ürün Adı": "CATA RGB ŞERİT LED SET (60 CİP 5050)",
     "Liste Fiyatı": "550,00",
-    "Stok Miktarı": "42",
+    "Stok Miktarı": "32",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4215,7 +4287,7 @@
     "Ürün Kodu": "CATA CT-4592B",
     "Ürün Adı": "CATA 12v 2w MODÜL LED KRİSTAL (BEYAZ)",
     "Liste Fiyatı": "10,50",
-    "Stok Miktarı": "2.600",
+    "Stok Miktarı": "1.600",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4224,7 +4296,7 @@
     "Ürün Kodu": "CATA CT-4592G",
     "Ürün Adı": "CATA 12V 2W MODÜL LED KRİSTAL (GÜNIŞIĞI)",
     "Liste Fiyatı": "10,50",
-    "Stok Miktarı": "10.560",
+    "Stok Miktarı": "9.560",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4287,7 +4359,7 @@
     "Ürün Kodu": "CATA CT-4644",
     "Ürün Adı": "CATA 900W SOLAR SOKAK ARMATÜRÜ 6500k(KUMANDALI)",
     "Liste Fiyatı": "5.250,00",
-    "Stok Miktarı": "1",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4323,7 +4395,7 @@
     "Ürün Kodu": "CATA CT-4655",
     "Ürün Adı": "CATA 10w SLİM LED PROJEKTÖR (BEYAZ)",
     "Liste Fiyatı": "175,00",
-    "Stok Miktarı": "9",
+    "Stok Miktarı": "6",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4368,7 +4440,7 @@
     "Ürün Kodu": "CATA CT-4659G",
     "Ürün Adı": "CATA 100W SLİM LED PROJEKTÖR(GÜNIŞIĞI)",
     "Liste Fiyatı": "675,00",
-    "Stok Miktarı": "23",
+    "Stok Miktarı": "22",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4377,7 +4449,7 @@
     "Ürün Kodu": "CATA CT-4662",
     "Ürün Adı": "CATA 150W SLİM LED PROJEKTÖR (BEYAZ)",
     "Liste Fiyatı": "1.300,00",
-    "Stok Miktarı": "35",
+    "Stok Miktarı": "25",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4467,7 +4539,7 @@
     "Ürün Kodu": "CATA CT-4692",
     "Ürün Adı": "CATA 180W SOLAR SOKAK ARMATÜRÜ 6500K(KUMANDALI)",
     "Liste Fiyatı": "2.850,00",
-    "Stok Miktarı": "20",
+    "Stok Miktarı": "19",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4593,7 +4665,7 @@
     "Ürün Kodu": "CATA CT-4697A",
     "Ürün Adı": "CATA 36w (100cm) WALLWASHER AMBER",
     "Liste Fiyatı": "4.500,00",
-    "Stok Miktarı": "7",
+    "Stok Miktarı": "6",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4836,7 +4908,7 @@
     "Ürün Kodu": "CATA CT-5125B",
     "Ürün Adı": "CATA 6w S/A LED PANEL (SİYAH) BEYAZ",
     "Liste Fiyatı": "125,00",
-    "Stok Miktarı": "650",
+    "Stok Miktarı": "150",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4863,7 +4935,7 @@
     "Ürün Kodu": "CATA CT-5145B",
     "Ürün Adı": "CATA 6w S/A LED PANEL BEYAZ",
     "Liste Fiyatı": "115,00",
-    "Stok Miktarı": "82",
+    "Stok Miktarı": "83",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4881,7 +4953,7 @@
     "Ürün Kodu": "CATA CT-5146B",
     "Ürün Adı": "CATA 9w S/A LED PANEL BEYAZ",
     "Liste Fiyatı": "175,00",
-    "Stok Miktarı": "-11",
+    "Stok Miktarı": "-10",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4890,7 +4962,7 @@
     "Ürün Kodu": "CATA CT-5146G",
     "Ürün Adı": "CATA 9w S/A LED PANEL GÜNIŞIĞI",
     "Liste Fiyatı": "175,00",
-    "Stok Miktarı": "29",
+    "Stok Miktarı": "28",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4926,7 +4998,7 @@
     "Ürün Kodu": "CATA CT-5150",
     "Ürün Adı": "CATA 7w LED PANEL ARMATÜR (BEYAZ)  (MAVİ)",
     "Liste Fiyatı": "165,00",
-    "Stok Miktarı": "106",
+    "Stok Miktarı": "86",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4935,7 +5007,7 @@
     "Ürün Kodu": "CATA CT-5169B",
     "Ürün Adı": "CATA 18W S/A LED PANEL BEYAZ",
     "Liste Fiyatı": "250,00",
-    "Stok Miktarı": "56",
+    "Stok Miktarı": "23",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4944,7 +5016,7 @@
     "Ürün Kodu": "CATA CT-5169G",
     "Ürün Adı": "CATA 18w S/A LED PANEL GÜNIŞIĞI",
     "Liste Fiyatı": "250,00",
-    "Stok Miktarı": "808",
+    "Stok Miktarı": "807",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4962,7 +5034,7 @@
     "Ürün Kodu": "CATA CT-5170B",
     "Ürün Adı": "CATA 1W SENSÖRLÜ LEDLİ KORİDOR ARMATÜRÜ (BEYAZ)",
     "Liste Fiyatı": "185,00",
-    "Stok Miktarı": "280",
+    "Stok Miktarı": "282",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -4989,7 +5061,7 @@
     "Ürün Kodu": "CATA CT-5170G",
     "Ürün Adı": "CATA 1W SENSÖRLÜ LEDLİ KORİDOR ARMATÜRÜ (GÜNIŞIĞI)",
     "Liste Fiyatı": "185,00",
-    "Stok Miktarı": "547",
+    "Stok Miktarı": "537",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5007,7 +5079,7 @@
     "Ürün Kodu": "CATA CT-5170SG",
     "Ürün Adı": "CATA 1W SENSÖRLÜ LEDLİ KORİDOR ARMATÜRÜ SİYAH KASA (GÜNIŞIĞI)",
     "Liste Fiyatı": "185,00",
-    "Stok Miktarı": "322",
+    "Stok Miktarı": "310",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5097,7 +5169,7 @@
     "Ürün Kodu": "CATA CT-5204B",
     "Ürün Adı": "CATA 7w AKİK SMD LED ARMATÜR (BEYAZ)",
     "Liste Fiyatı": "110,00",
-    "Stok Miktarı": "30",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5124,7 +5196,7 @@
     "Ürün Kodu": "CATA CT-5212 B",
     "Ürün Adı": "CATA 7w KUĞU LEDLİ APLİK KROM (BEYAZ)",
     "Liste Fiyatı": "850,00",
-    "Stok Miktarı": "34",
+    "Stok Miktarı": "32",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5151,7 +5223,7 @@
     "Ürün Kodu": "CATA CT-5212GB",
     "Ürün Adı": "CATA 7w KUĞU LEDLİ APLİK GOLD (BEYAZ)",
     "Liste Fiyatı": "850,00",
-    "Stok Miktarı": "-1",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5160,7 +5232,7 @@
     "Ürün Kodu": "CATA CT-5212SB",
     "Ürün Adı": "CATA 7w KUĞU LEDLİ APLİK SİYAH (BEYAZ)",
     "Liste Fiyatı": "850,00",
-    "Stok Miktarı": "5",
+    "Stok Miktarı": "3",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5259,7 +5331,7 @@
     "Ürün Kodu": "CATA CT-5233B",
     "Ürün Adı": "CATA 18w S/Ü LED PANEL (YUVARLAK) BEYAZ",
     "Liste Fiyatı": "285,00",
-    "Stok Miktarı": "89",
+    "Stok Miktarı": "88",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5313,7 +5385,7 @@
     "Ürün Kodu": "CATA CT-5236B",
     "Ürün Adı": "CATA 18w S/Ü LED PANEL (KARE) (SİYAH) BEYAZ",
     "Liste Fiyatı": "360,00",
-    "Stok Miktarı": "-2",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5340,7 +5412,7 @@
     "Ürün Kodu": "CATA CT-5238B",
     "Ürün Adı": "CATA 30W S/Ü LED PANEL (YUVARLAK) (SİYAH) BEYAZ",
     "Liste Fiyatı": "500,00",
-    "Stok Miktarı": "95",
+    "Stok Miktarı": "93",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5376,7 +5448,7 @@
     "Ürün Kodu": "CATA CT-5252B",
     "Ürün Adı": "CATA 7W AKİK COB LED ARMATÜR (SATEN KASA) (BEYAZ)",
     "Liste Fiyatı": "125,00",
-    "Stok Miktarı": "-1",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5493,7 +5565,7 @@
     "Ürün Kodu": "CATA CT-5270B",
     "Ürün Adı": "CATA 1,5w  YILDIZ SPOT POwER LEDLİ (BEYAZ)",
     "Liste Fiyatı": "125,00",
-    "Stok Miktarı": "343",
+    "Stok Miktarı": "303",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5547,7 +5619,7 @@
     "Ürün Kodu": "CATA CT-5271B",
     "Ürün Adı": "CATA 25W S/Ü LED PANEL (YUVARLAK) BEYAZ",
     "Liste Fiyatı": "335,00",
-    "Stok Miktarı": "5",
+    "Stok Miktarı": "3",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5619,7 +5691,7 @@
     "Ürün Kodu": "CATA CT-5280",
     "Ürün Adı": "CATA 25w 30x30 LED PANEL BEYAZ",
     "Liste Fiyatı": "475,00",
-    "Stok Miktarı": "77",
+    "Stok Miktarı": "87",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5673,7 +5745,7 @@
     "Ürün Kodu": "CATA CT-5286B",
     "Ürün Adı": "CATA 25W 30X30 CLIP IN LED PANEL (BEYAZ)",
     "Liste Fiyatı": "315,00",
-    "Stok Miktarı": "-1",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5781,7 +5853,7 @@
     "Ürün Kodu": "CATA CT-5334G",
     "Ürün Adı": "CATA 30W BABİL RAY SPOT SİYAH (GÜNIŞIĞI)",
     "Liste Fiyatı": "275,00",
-    "Stok Miktarı": "377",
+    "Stok Miktarı": "374",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5853,7 +5925,7 @@
     "Ürün Kodu": "CATA CT-5420SB",
     "Ürün Adı": "CATA BERGAMA S/Ü ARMATÜR (GU-10)  (SİYAH+BAKIR)",
     "Liste Fiyatı": "300,00",
-    "Stok Miktarı": "201",
+    "Stok Miktarı": "498",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5934,7 +6006,7 @@
     "Ürün Kodu": "CATA CT-5646G",
     "Ürün Adı": "CATA 9W PLUS SLİM LED PANEL AYARLANABİLİR (GÜNIŞIĞI)",
     "Liste Fiyatı": "165,00",
-    "Stok Miktarı": "168",
+    "Stok Miktarı": "164",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5944,6 +6016,15 @@
     "Ürün Adı": "CATA 15w PLUS SLİM LED PANEL AYARLANABİLİR (BEYAZ)",
     "Liste Fiyatı": "245,00",
     "Stok Miktarı": "177",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
+    "Ürün Kodu": "CATA CT-5647G",
+    "Ürün Adı": "CATA 15w PLUS SLİM LED PANEL AYARLANABİLİR (GÜNIŞIĞI)",
+    "Liste Fiyatı": "245,00",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5985,10 +6066,19 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "CATA CT-5660B",
+    "Ürün Adı": "CATA 10w X-PLUS LED PANEL AYARLANABİLİR (BEYAZ)",
+    "Liste Fiyatı": "140,00",
+    "Stok Miktarı": "100",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "CATA CT-5660G",
     "Ürün Adı": "CATA 10W X-PLUS LED PANEL AYARLANABİLİR (GÜNIŞIĞI)",
     "Liste Fiyatı": "140,00",
-    "Stok Miktarı": "18",
+    "Stok Miktarı": "14",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -5997,7 +6087,7 @@
     "Ürün Kodu": "CATA CT-5661B",
     "Ürün Adı": "CATA 20W X-PLUS LED PANEL AYARLANABİLİR (BEYAZ)",
     "Liste Fiyatı": "175,00",
-    "Stok Miktarı": "100",
+    "Stok Miktarı": "90",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6033,7 +6123,7 @@
     "Ürün Kodu": "CATA CT-5663B",
     "Ürün Adı": "CATA 35w X-PLUS LED PANEL AYARLANABİLİR (BEYAZ)",
     "Liste Fiyatı": "380,00",
-    "Stok Miktarı": "2",
+    "Stok Miktarı": "-1",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6141,7 +6231,7 @@
     "Ürün Kodu": "CATA CT-6583",
     "Ürün Adı": "CATA HANIMELİ DEKORATİF CAM SPOT LEDLİ",
     "Liste Fiyatı": "260,00",
-    "Stok Miktarı": "-16",
+    "Stok Miktarı": "79",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6159,7 +6249,7 @@
     "Ürün Kodu": "CATA CT-6594",
     "Ürün Adı": "CATA SÜMBÜL DEKORATİF CAM SPOT LEDLİ",
     "Liste Fiyatı": "310,00",
-    "Stok Miktarı": "39",
+    "Stok Miktarı": "-3",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6222,7 +6312,7 @@
     "Ürün Kodu": "CATA CT-6646",
     "Ürün Adı": "CATA ZAMBAK DEKORATİF CAM SPOT",
     "Liste Fiyatı": "90,00",
-    "Stok Miktarı": "12",
+    "Stok Miktarı": "13",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6231,7 +6321,7 @@
     "Ürün Kodu": "CATA CT-6647",
     "Ürün Adı": "CATA YEŞİM DEKORATİF CAM SPOT",
     "Liste Fiyatı": "90,00",
-    "Stok Miktarı": "-17",
+    "Stok Miktarı": "16",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6330,7 +6420,7 @@
     "Ürün Kodu": "CATA CT-7044",
     "Ürün Adı": "CATA 10w GOZO LED APLİK (DIŞ MEKAN)",
     "Liste Fiyatı": "500,00",
-    "Stok Miktarı": "118",
+    "Stok Miktarı": "98",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6339,7 +6429,7 @@
     "Ürün Kodu": "CATA CT-7047",
     "Ürün Adı": "CATA 12W BORA LED APLİK DIŞ MEKAN",
     "Liste Fiyatı": "500,00",
-    "Stok Miktarı": "40",
+    "Stok Miktarı": "20",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6348,7 +6438,7 @@
     "Ürün Kodu": "CATA CT-7048",
     "Ürün Adı": "CATA 12W BORA LED APLİK DIŞ MEKAN",
     "Liste Fiyatı": "500,00",
-    "Stok Miktarı": "53",
+    "Stok Miktarı": "43",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6357,7 +6447,7 @@
     "Ürün Kodu": "CATA CT-7063",
     "Ürün Adı": "CATA MALTA DIŞ MEKAN LED APLİK",
     "Liste Fiyatı": "400,00",
-    "Stok Miktarı": "19",
+    "Stok Miktarı": "9",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6384,7 +6474,7 @@
     "Ürün Kodu": "CATA CT-7069",
     "Ürün Adı": "CATA SARMAŞIK DIŞ MEKAN ARMATÜR(5MT-5 DUY-EKLENEBİLİR-E27)",
     "Liste Fiyatı": "700,00",
-    "Stok Miktarı": "91",
+    "Stok Miktarı": "90",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6456,7 +6546,7 @@
     "Ürün Kodu": "CATA CT-7092",
     "Ürün Adı": "CATA 20W PALERMO SENSÖRLÜ DUVAR APLİK (4000K)",
     "Liste Fiyatı": "600,00",
-    "Stok Miktarı": "10",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6465,7 +6555,7 @@
     "Ürün Kodu": "CATA CT-7093",
     "Ürün Adı": "CATA 20W PALERMO SENSÖRLÜ DUVAR APLİK (4000K)",
     "Liste Fiyatı": "600,00",
-    "Stok Miktarı": "88",
+    "Stok Miktarı": "68",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6534,10 +6624,19 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "CATA CT-7314",
+    "Ürün Adı": "CATA TİBET SOLAR SET ÜSTÜ ( 75W )",
+    "Liste Fiyatı": "2.250,00",
+    "Stok Miktarı": "54",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "CATA CT-7315",
     "Ürün Adı": "CATA SOLAR SETÜSTÜ 30W(6500K)",
     "Liste Fiyatı": "875,00",
-    "Stok Miktarı": "764",
+    "Stok Miktarı": "674",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6582,7 +6681,7 @@
     "Ürün Kodu": "CATA CT-8011A",
     "Ürün Adı": "CATA 10W HAİTİ LED APLİK (DIŞ MEKAN)(AMBER)",
     "Liste Fiyatı": "290,00",
-    "Stok Miktarı": "50",
+    "Stok Miktarı": "40",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6591,7 +6690,7 @@
     "Ürün Kodu": "CATA CT-8011G",
     "Ürün Adı": "CATA 10W HAİTİ LED APLİK (DIŞ MEKAN)(GÜNIŞIĞI)",
     "Liste Fiyatı": "290,00",
-    "Stok Miktarı": "790",
+    "Stok Miktarı": "767",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6600,7 +6699,7 @@
     "Ürün Kodu": "CATA CT-8013A",
     "Ürün Adı": "CATA 15W KAPRİ LED APLİK (DIŞ MEKAN)(AMBER)",
     "Liste Fiyatı": "360,00",
-    "Stok Miktarı": "150",
+    "Stok Miktarı": "140",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6627,7 +6726,7 @@
     "Ürün Kodu": "CATA CT-8429",
     "Ürün Adı": "CATA LİZBON ANTİK ŞARJLI MASA LAMBASI",
     "Liste Fiyatı": "600,00",
-    "Stok Miktarı": "72",
+    "Stok Miktarı": "59",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6636,7 +6735,7 @@
     "Ürün Kodu": "CATA CT-8430",
     "Ürün Adı": "CATA LİZBON ŞARJLI MASA LAMBASI",
     "Liste Fiyatı": "600,00",
-    "Stok Miktarı": "54",
+    "Stok Miktarı": "48",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6645,7 +6744,7 @@
     "Ürün Kodu": "CATA CT-8432",
     "Ürün Adı": "CATA TOKYO ŞARJLI MASA LAMBASI (3200K-4000K-6400K)",
     "Liste Fiyatı": "750,00",
-    "Stok Miktarı": "61",
+    "Stok Miktarı": "57",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6690,7 +6789,7 @@
     "Ürün Kodu": "CATA CT-8440",
     "Ürün Adı": "CATA BERLİN ŞARJLI MASA LAMBASI",
     "Liste Fiyatı": "540,00",
-    "Stok Miktarı": "3",
+    "Stok Miktarı": "2",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6708,7 +6807,7 @@
     "Ürün Kodu": "CATA CT-9043",
     "Ürün Adı": "CATA 60x60 BACKLIGHT LED PANEL KASASI",
     "Liste Fiyatı": "400,00",
-    "Stok Miktarı": "4",
+    "Stok Miktarı": "204",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6753,7 +6852,7 @@
     "Ürün Kodu": "CATA CT-9082",
     "Ürün Adı": "CATA ANZER LED LİNEAR ARMATÜR(BEYAZ)",
     "Liste Fiyatı": "5.200,00",
-    "Stok Miktarı": "13",
+    "Stok Miktarı": "6",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6771,7 +6870,7 @@
     "Ürün Kodu": "CATA CT-9115",
     "Ürün Adı": "CATA 3 LÜ AYDINLATMA KUMANDASI (3X1000W)",
     "Liste Fiyatı": "285,00",
-    "Stok Miktarı": "439",
+    "Stok Miktarı": "434",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6780,7 +6879,7 @@
     "Ürün Kodu": "CATA CT-9116",
     "Ürün Adı": "CATA RGB KUMANDA MODÜL 24A (SÜPER SLİM)",
     "Liste Fiyatı": "285,00",
-    "Stok Miktarı": "360",
+    "Stok Miktarı": "354",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6798,7 +6897,7 @@
     "Ürün Kodu": "CATA CT-9123",
     "Ürün Adı": "CATA POYRAZ KAFA LAMBASI",
     "Liste Fiyatı": "465,00",
-    "Stok Miktarı": "191",
+    "Stok Miktarı": "188",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6825,7 +6924,7 @@
     "Ürün Kodu": "CATA CT-9147",
     "Ürün Adı": "CATA RGB KUMANDA MODÜL 18A",
     "Liste Fiyatı": "225,00",
-    "Stok Miktarı": "177",
+    "Stok Miktarı": "176",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6834,7 +6933,7 @@
     "Ürün Kodu": "CATA CT-9150",
     "Ürün Adı": "CATA RGB KUMANDA MODÜL 36A",
     "Liste Fiyatı": "250,00",
-    "Stok Miktarı": "191",
+    "Stok Miktarı": "186",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6852,7 +6951,7 @@
     "Ürün Kodu": "CATA CT-9152",
     "Ürün Adı": "CATA 10 KUMANDA 10X500W",
     "Liste Fiyatı": "900,00",
-    "Stok Miktarı": "216",
+    "Stok Miktarı": "215",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6870,7 +6969,7 @@
     "Ürün Kodu": "CATA CT-9166",
     "Ürün Adı": "CATA ExIT SAĞA OK",
     "Liste Fiyatı": "315,00",
-    "Stok Miktarı": "14",
+    "Stok Miktarı": "11",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6879,7 +6978,7 @@
     "Ürün Kodu": "CATA CT-9167",
     "Ürün Adı": "CATA EXIT AŞAĞI ÇIKIŞ",
     "Liste Fiyatı": "315,00",
-    "Stok Miktarı": "7",
+    "Stok Miktarı": "4",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6888,7 +6987,7 @@
     "Ürün Kodu": "CATA CT-9170",
     "Ürün Adı": "CATA EXIT SAĞ ÇIKIŞ",
     "Liste Fiyatı": "315,00",
-    "Stok Miktarı": "570",
+    "Stok Miktarı": "563",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6906,7 +7005,7 @@
     "Ürün Kodu": "CATA CT-9182",
     "Ürün Adı": "CATA DİJİTAL ZAMAN SAATİ ( 3500W )",
     "Liste Fiyatı": "535,00",
-    "Stok Miktarı": "116",
+    "Stok Miktarı": "114",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6915,7 +7014,7 @@
     "Ürün Kodu": "CATA CT-9183",
     "Ürün Adı": "CATA SESSİZ AYDINLATMA KONTAKTÖRÜ (25A)",
     "Liste Fiyatı": "340,00",
-    "Stok Miktarı": "310",
+    "Stok Miktarı": "305",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6924,7 +7023,7 @@
     "Ürün Kodu": "CATA CT-9184",
     "Ürün Adı": "CATA W OTOMAT TİPİ ZAMAN SAATİ ( 3500W )",
     "Liste Fiyatı": "580,00",
-    "Stok Miktarı": "291",
+    "Stok Miktarı": "288",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6942,7 +7041,7 @@
     "Ürün Kodu": "CATA CT-9186",
     "Ürün Adı": "CATA AKIM KORUMALI PRİZ ( 918 JOULE )  ( 4000W )",
     "Liste Fiyatı": "400,00",
-    "Stok Miktarı": "197",
+    "Stok Miktarı": "151",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6969,7 +7068,7 @@
     "Ürün Kodu": "CATA CT-9189",
     "Ürün Adı": "CATA FOTOSEL ( 1200W )",
     "Liste Fiyatı": "205,00",
-    "Stok Miktarı": "10",
+    "Stok Miktarı": "9",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6987,7 +7086,7 @@
     "Ürün Kodu": "CATA CT-9195",
     "Ürün Adı": "CATA MİNİ RADAR SENSÖR",
     "Liste Fiyatı": "420,00",
-    "Stok Miktarı": "364",
+    "Stok Miktarı": "360",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -6996,7 +7095,7 @@
     "Ürün Kodu": "CATA CT-9198",
     "Ürün Adı": "CATA AKILLI VOLTAJ VE AKIM KORUYUCU",
     "Liste Fiyatı": "750,00",
-    "Stok Miktarı": "87",
+    "Stok Miktarı": "57",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7023,7 +7122,7 @@
     "Ürün Kodu": "CATA CT-9242",
     "Ürün Adı": "CATA 360 DERECE S/A SENSÖR (1200W)",
     "Liste Fiyatı": "330,00",
-    "Stok Miktarı": "547",
+    "Stok Miktarı": "545",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7041,7 +7140,7 @@
     "Ürün Kodu": "CATA CT-9247B",
     "Ürün Adı": "CATA 20w 360 SENSÖRLÜ S/Ü LED ARMATÜR (BEYAZ)",
     "Liste Fiyatı": "700,00",
-    "Stok Miktarı": "251",
+    "Stok Miktarı": "245",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7050,7 +7149,7 @@
     "Ürün Kodu": "CATA CT-9247G",
     "Ürün Adı": "CATA 20w 360 SENSÖRLÜ S/Ü LED ARMATÜR (GÜNIŞIĞI)",
     "Liste Fiyatı": "700,00",
-    "Stok Miktarı": "45",
+    "Stok Miktarı": "44",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7059,7 +7158,7 @@
     "Ürün Kodu": "CATA CT-9263",
     "Ürün Adı": "CATA GU-10 DUY",
     "Liste Fiyatı": "10,50",
-    "Stok Miktarı": "3.281",
+    "Stok Miktarı": "3.278",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7248,7 +7347,7 @@
     "Ürün Kodu": "CATA CT-9932",
     "Ürün Adı": "CATA TUNA 30 LEDLİ ŞARJLI IŞILDAK",
     "Liste Fiyatı": "550,00",
-    "Stok Miktarı": "89",
+    "Stok Miktarı": "85",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7266,7 +7365,7 @@
     "Ürün Kodu": "CATA CT-9952",
     "Ürün Adı": "CATA SOMA EL FENERİ",
     "Liste Fiyatı": "540,00",
-    "Stok Miktarı": "31",
+    "Stok Miktarı": "30",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7311,7 +7410,7 @@
     "Ürün Kodu": "CEBI 304-04",
     "Ürün Adı": "ÇEBİ GEÇMELİ DERİN KASA (SİYAH)",
     "Liste Fiyatı": "5,90",
-    "Stok Miktarı": "10.076",
+    "Stok Miktarı": "10.061",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7320,7 +7419,7 @@
     "Ürün Kodu": "CEBI 304-12",
     "Ürün Adı": "ÇEBİ NORM BUAT KAPAKSIZ",
     "Liste Fiyatı": "8,00",
-    "Stok Miktarı": "2.344",
+    "Stok Miktarı": "2.334",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7338,7 +7437,7 @@
     "Ürün Kodu": "CEBI 306-01",
     "Ürün Adı": "ÇEBİ 1-2 Lİ OTOMATİK SİGORTA KUTUSU",
     "Liste Fiyatı": "31,00",
-    "Stok Miktarı": "1.252",
+    "Stok Miktarı": "1.170",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7401,7 +7500,7 @@
     "Ürün Kodu": "CEBI 306-09",
     "Ürün Adı": "ÇEBİ 16 LI S/A OTOMATİK SİGORTA KUTUSU",
     "Liste Fiyatı": "350,00",
-    "Stok Miktarı": "155",
+    "Stok Miktarı": "154",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7410,7 +7509,7 @@
     "Ürün Kodu": "CEBI 306-10",
     "Ürün Adı": "ÇEBİ 16 LI S/Ü OTOMATİK SİGORTA KUTUSU",
     "Liste Fiyatı": "400,00",
-    "Stok Miktarı": "124",
+    "Stok Miktarı": "123",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7419,7 +7518,7 @@
     "Ürün Kodu": "CEBI 306-11",
     "Ürün Adı": "ÇEBİ 24 LÜ S/A OTOMATİK SİGORTA KUTUSU",
     "Liste Fiyatı": "450,00",
-    "Stok Miktarı": "244",
+    "Stok Miktarı": "180",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7446,7 +7545,7 @@
     "Ürün Kodu": "CEBI 703-03",
     "Ürün Adı": "ÇEBİ 14mm SPİRAL BORU",
     "Liste Fiyatı": "8,50",
-    "Stok Miktarı": "1.464",
+    "Stok Miktarı": "1.364",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7464,7 +7563,7 @@
     "Ürün Kodu": "CEBI 703-05",
     "Ürün Adı": "ÇEBİ 18mm SPİRAL BORU",
     "Liste Fiyatı": "12,50",
-    "Stok Miktarı": "2.490",
+    "Stok Miktarı": "2.290",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7473,7 +7572,7 @@
     "Ürün Kodu": "CEBI 703-06",
     "Ürün Adı": "ÇEBİ 20mm SPİRAL BORU",
     "Liste Fiyatı": "13,50",
-    "Stok Miktarı": "300",
+    "Stok Miktarı": "200",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7500,7 +7599,7 @@
     "Ürün Kodu": "CEBI 802-03",
     "Ürün Adı": "14mm2 PVC İZOLELİ ÇELİK SPRAL BORU",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "380",
+    "Stok Miktarı": "330",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7581,7 +7680,7 @@
     "Ürün Kodu": "CET.AKB.6590",
     "Ürün Adı": "ÇETSAN KONTROL KALEMİ BÜYÜK",
     "Liste Fiyatı": "49,50",
-    "Stok Miktarı": "431",
+    "Stok Miktarı": "429",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7716,7 +7815,7 @@
     "Ürün Kodu": "CET.CB.02515",
     "Ürün Adı": "ÇETSAN 150X2.5MM KABLO BAĞI BEYAZ",
     "Liste Fiyatı": "0,29",
-    "Stok Miktarı": "21.800",
+    "Stok Miktarı": "19.300",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7743,7 +7842,7 @@
     "Ürün Kodu": "CET.CB.03620",
     "Ürün Adı": "ÇETSAN 200x3.6mm KABLO BAĞI BEYAZ",
     "Liste Fiyatı": "0,61",
-    "Stok Miktarı": "15.300",
+    "Stok Miktarı": "13.200",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7761,7 +7860,7 @@
     "Ürün Kodu": "CET.CB.03625",
     "Ürün Adı": "ÇETSAN 250X3.6MM KABLO BAĞI BEYAZ",
     "Liste Fiyatı": "0,77",
-    "Stok Miktarı": "33.500",
+    "Stok Miktarı": "31.500",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7770,7 +7869,7 @@
     "Ürün Kodu": "CET.CB.03625-1",
     "Ürün Adı": "ÇETSAN 250x3.6mm KABLO BAĞI SİYAH",
     "Liste Fiyatı": "0,77",
-    "Stok Miktarı": "8.300",
+    "Stok Miktarı": "8.000",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7779,7 +7878,7 @@
     "Ürün Kodu": "CET.CB.03630",
     "Ürün Adı": "ÇETSAN 300X3.6MM KABLO BAĞI BEYAZ",
     "Liste Fiyatı": "1,00",
-    "Stok Miktarı": "2.200",
+    "Stok Miktarı": "400",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7788,7 +7887,7 @@
     "Ürün Kodu": "CET.CB.03630-1",
     "Ürün Adı": "ÇETSAN 300x3.6mm KABLO BAĞI SİYAH",
     "Liste Fiyatı": "1,00",
-    "Stok Miktarı": "42.300",
+    "Stok Miktarı": "41.800",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7824,7 +7923,7 @@
     "Ürün Kodu": "CET.CB.04840",
     "Ürün Adı": "ÇETSAN 400X4.8MM KABLO BAĞI BEYAZ",
     "Liste Fiyatı": "1,77",
-    "Stok Miktarı": "7.500",
+    "Stok Miktarı": "6.000",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7833,7 +7932,7 @@
     "Ürün Kodu": "CET.CB.04840-1",
     "Ürün Adı": "ÇETSAN 400x4.8mm KABLO BAĞI SİYAH",
     "Liste Fiyatı": "1,77",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "-1.000",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7887,7 +7986,7 @@
     "Ürün Kodu": "CET.CR.2921",
     "Ürün Adı": "PG-13.5 KABLO RAKORU",
     "Liste Fiyatı": "13,60",
-    "Stok Miktarı": "257",
+    "Stok Miktarı": "251",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -7977,7 +8076,7 @@
     "Ürün Kodu": "CET.DB.02142",
     "Ürün Adı": "ÇETSAN DELÇAK DÜBEL",
     "Liste Fiyatı": "0,70",
-    "Stok Miktarı": "24.000",
+    "Stok Miktarı": "23.500",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -8013,7 +8112,7 @@
     "Ürün Kodu": "CET.FP.1803",
     "Ürün Adı": "ÇETSAN E27 İTALYAN DUY",
     "Liste Fiyatı": "25,00",
-    "Stok Miktarı": "55",
+    "Stok Miktarı": "30",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -8031,7 +8130,7 @@
     "Ürün Kodu": "CET.FP.1822",
     "Ürün Adı": "ÇETSAN DUY FİŞ PRİZ",
     "Liste Fiyatı": "44,50",
-    "Stok Miktarı": "34",
+    "Stok Miktarı": "32",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -8040,7 +8139,7 @@
     "Ürün Kodu": "CET.FP1825",
     "Ürün Adı": "ÇETSAN ANAHTARLI ERKEK FİŞ",
     "Liste Fiyatı": "96,00",
-    "Stok Miktarı": "90",
+    "Stok Miktarı": "40",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -8121,7 +8220,7 @@
     "Ürün Kodu": "CET.P.03215",
     "Ürün Adı": "ÇETSAN 20X30X15 POLİKARBONAT PANO",
     "Liste Fiyatı": "409,00",
-    "Stok Miktarı": "52",
+    "Stok Miktarı": "48",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -8175,7 +8274,7 @@
     "Ürün Kodu": "CET.PK.0640",
     "Ürün Adı": "ÇETSAN GEÇMELİ ALÇIPAN KASA (TURUNCU)",
     "Liste Fiyatı": "16,80",
-    "Stok Miktarı": "3.621",
+    "Stok Miktarı": "3.561",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -8220,7 +8319,7 @@
     "Ürün Kodu": "CET.S.1927",
     "Ürün Adı": "ÇETSAN 15MT PLASTİK SUSTA PVC",
     "Liste Fiyatı": "225,00",
-    "Stok Miktarı": "26",
+    "Stok Miktarı": "25",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -8319,7 +8418,7 @@
     "Ürün Kodu": "CET.YİS.201",
     "Ürün Adı": "ÇETSAN KARE YANGIN İHBAR BUTONU",
     "Liste Fiyatı": "130,00",
-    "Stok Miktarı": "24",
+    "Stok Miktarı": "14",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -8892,6 +8991,15 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "EAE 3008527",
+    "Ürün Adı": "040 UKS 050 YD YATAY DÖNÜŞ MODÜLÜ",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "0",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "EAE 3008542",
     "Ürün Adı": "TS 500 DUVAR TİPİ KANAL TAŞIYICI (2 MM) (PREG.)",
     "Liste Fiyatı": "0,00",
@@ -8912,6 +9020,15 @@
   {
     "Ürün Kodu": "EAE 3008550",
     "Ürün Adı": "TS 200 DUVAR TİPİ KANAL TAŞIYICI 2mm",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "0",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
+    "Ürün Kodu": "EAE 3008552",
+    "Ürün Adı": "TS 150 DUVAR TİPİ KANAL TAŞIYICISI 2mm",
     "Liste Fiyatı": "0,00",
     "Stok Miktarı": "0",
     "barkod1": "",
@@ -9399,7 +9516,7 @@
     "Ürün Kodu": "ELX.CAL-16C",
     "Ürün Adı": "ELMAX 16mm UZUN TİP BİMETAL (AL-CU) SKP KABLO PAPUCU",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "60",
+    "Stok Miktarı": "56",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10065,7 +10182,7 @@
     "Ürün Kodu": "ELX.SKPE-150-12",
     "Ürün Adı": "ELMAX 150mm SKP EKO KABLO PABUCU M12",
     "Liste Fiyatı": "240,00",
-    "Stok Miktarı": "53",
+    "Stok Miktarı": "3",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10074,7 +10191,7 @@
     "Ürün Kodu": "ELX.SKPE-16-06",
     "Ürün Adı": "ELMAX 16mm SKP EKO KABLO PABUCU M6",
     "Liste Fiyatı": "22,64",
-    "Stok Miktarı": "787",
+    "Stok Miktarı": "737",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10101,7 +10218,7 @@
     "Ürün Kodu": "ELX.SKPE-25-08",
     "Ürün Adı": "ELMAX 25mm SKP EKO KABLO PABUCU M8",
     "Liste Fiyatı": "33,40",
-    "Stok Miktarı": "277",
+    "Stok Miktarı": "53",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10110,7 +10227,7 @@
     "Ürün Kodu": "ELX.SKPE-35-08",
     "Ürün Adı": "ELMAX 35mm SKP EKO KABLO PABUCU M8",
     "Liste Fiyatı": "45,50",
-    "Stok Miktarı": "313",
+    "Stok Miktarı": "47",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10119,7 +10236,7 @@
     "Ürün Kodu": "ELX.SKPE-50-10",
     "Ürün Adı": "ELMAX 50mm SKP EKO KABLO PABUCU M10",
     "Liste Fiyatı": "58,90",
-    "Stok Miktarı": "283",
+    "Stok Miktarı": "69",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10138,6 +10255,15 @@
     "Ürün Adı": "ELMAX 95mm SKP EKO KABLO PABUCU M12",
     "Liste Fiyatı": "108,00",
     "Stok Miktarı": "68",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
+    "Ürün Kodu": "ELX.XCK-SEL-123",
+    "Ürün Adı": "ELMAX PLASTİK GÖVDELİ AÇISAL HAR. AYARLANABİLİR 50mm PLS. MAK. DÖNER KOL LİMİT SİVİÇ  (CLS191)",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10191,7 +10317,7 @@
     "Ürün Kodu": "EMK-3234",
     "Ürün Adı": "EMK 40W TORCH LED AMPÜL (E27)  (BEYAZ)",
     "Liste Fiyatı": "115,00",
-    "Stok Miktarı": "56",
+    "Stok Miktarı": "116",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10245,7 +10371,7 @@
     "Ürün Kodu": "ENT.M1929",
     "Ürün Adı": "ENTES DTR-25 ASTRONOMİK ZAMAN SAATİ 5 VAKİT SAATİ PROGRAMI ENTES",
     "Liste Fiyatı": "6.150,00",
-    "Stok Miktarı": "-1",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10407,7 +10533,7 @@
     "Ürün Kodu": "ERY.BT100",
     "Ürün Adı": "NİSA BT-100cm PLS.DEKORATİF ASPİRATÖR",
     "Liste Fiyatı": "365,00",
-    "Stok Miktarı": "167",
+    "Stok Miktarı": "162",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10542,7 +10668,7 @@
     "Ürün Kodu": "ERY.E1360",
     "Ürün Adı": "ÜÇ SESLİ KANARYALI KAPI ZİLİ",
     "Liste Fiyatı": "165,00",
-    "Stok Miktarı": "536",
+    "Stok Miktarı": "534",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10551,7 +10677,7 @@
     "Ürün Kodu": "ERY.E1361",
     "Ürün Adı": "ELEKTRONİK DİNG DONG KAPI ZİLİ",
     "Liste Fiyatı": "165,00",
-    "Stok Miktarı": "125",
+    "Stok Miktarı": "110",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10560,7 +10686,7 @@
     "Ürün Kodu": "ERY.E1366",
     "Ürün Adı": "15V RAYLI ZİL TRAFOSU",
     "Liste Fiyatı": "410,00",
-    "Stok Miktarı": "94",
+    "Stok Miktarı": "91",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10614,7 +10740,7 @@
     "Ürün Kodu": "ERY.EAMP059/1",
     "Ürün Adı": "NİSA 30W LED SİMİT AMPÜL KRİSTAL 3 RENK",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "-1",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10704,7 +10830,7 @@
     "Ürün Kodu": "ERY.EAMP105",
     "Ürün Adı": "ERAYLAR 45W PERVANE AMPÜL",
     "Liste Fiyatı": "300,00",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "1",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10722,7 +10848,7 @@
     "Ürün Kodu": "ERY.EB16",
     "Ürün Adı": "NİSA NB-16cm BACA ASPİRATÖR",
     "Liste Fiyatı": "3.190,00",
-    "Stok Miktarı": "14",
+    "Stok Miktarı": "13",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10740,7 +10866,7 @@
     "Ürün Kodu": "ERY.EB4",
     "Ürün Adı": "NİSA NB-35CM BACA ASPİRATÖR",
     "Liste Fiyatı": "4.475,00",
-    "Stok Miktarı": "7",
+    "Stok Miktarı": "5",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10902,7 +11028,7 @@
     "Ürün Kodu": "FETIH 117-03",
     "Ürün Adı": "FETİH YONCA 3 LÜ ANAHTARLI GOLYAT",
     "Liste Fiyatı": "340,00",
-    "Stok Miktarı": "228",
+    "Stok Miktarı": "225",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -10920,7 +11046,7 @@
     "Ürün Kodu": "FIY.FRK",
     "Ürün Adı": "FİYAT FARKI",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "-5",
+    "Stok Miktarı": "-3",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11091,7 +11217,7 @@
     "Ürün Kodu": "FUJIKA FCOB516 S/G",
     "Ürün Adı": "FUJIKA RIO 5W LED SPOT (SİYAH) (KARE) 4000K",
     "Liste Fiyatı": "60,00",
-    "Stok Miktarı": "-10",
+    "Stok Miktarı": "490",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11190,7 +11316,7 @@
     "Ürün Kodu": "FUJIKA FLPJ112/1",
     "Ürün Adı": "FUJİKA 50W GOLD LED PROJEKTÖR 6500K",
     "Liste Fiyatı": "350,00",
-    "Stok Miktarı": "65",
+    "Stok Miktarı": "63",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11370,7 +11496,7 @@
     "Ürün Kodu": "G.EGN 01 40 11 00 000 178",
     "Ürün Adı": "EGONA BEYAZ 2'Lİ PRİZ ÇERÇEVE",
     "Liste Fiyatı": "88,50",
-    "Stok Miktarı": "25",
+    "Stok Miktarı": "21",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11415,7 +11541,7 @@
     "Ürün Kodu": "G.EGN 01 40 11 00 155 150",
     "Ürün Adı": "EGONA BEYAZ İKİLİ TOPRAKLI PRİZ M/K",
     "Liste Fiyatı": "247,20",
-    "Stok Miktarı": "25",
+    "Stok Miktarı": "21",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11505,7 +11631,7 @@
     "Ürün Kodu": "G.FA 01 23 11 00 000 140",
     "Ürün Adı": "FANTASY BEYAZ TEKLİ ÇERÇEVE",
     "Liste Fiyatı": "14,70",
-    "Stok Miktarı": "141",
+    "Stok Miktarı": "131",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11577,7 +11703,7 @@
     "Ürün Kodu": "G.FA 01 23 11 00 100 101",
     "Ürün Adı": "FANTASY BEYAZ ANAHTAR",
     "Liste Fiyatı": "109,30",
-    "Stok Miktarı": "3.815",
+    "Stok Miktarı": "3.805",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11586,7 +11712,7 @@
     "Ürün Kodu": "G.FA 01 23 11 00 100 103",
     "Ürün Adı": "FANTASY BEYAZ KOMÜTATÖR",
     "Liste Fiyatı": "143,10",
-    "Stok Miktarı": "637",
+    "Stok Miktarı": "627",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11631,7 +11757,7 @@
     "Ürün Kodu": "G.FA 01 23 11 00 100 115",
     "Ürün Adı": "FANTASY BEYAZ TOPRAKLI PRİZ",
     "Liste Fiyatı": "140,80",
-    "Stok Miktarı": "1.506",
+    "Stok Miktarı": "1.496",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11775,7 +11901,7 @@
     "Ürün Kodu": "G.GDC3-1NC-1NO-65",
     "Ürün Adı": "GÜNSAN 65A 30KW 220V AC KONTAKTÖR",
     "Liste Fiyatı": "4.266,35",
-    "Stok Miktarı": "10",
+    "Stok Miktarı": "8",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11793,7 +11919,7 @@
     "Ürün Kodu": "G.GDC3-1NC-1NO-95",
     "Ürün Adı": "GÜNSAN 95A 45KW 220V AC KONTAKTÖR",
     "Liste Fiyatı": "5.715,85",
-    "Stok Miktarı": "12",
+    "Stok Miktarı": "10",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11838,7 +11964,7 @@
     "Ürün Kodu": "G.GDC3-1NO-32",
     "Ürün Adı": "GÜNSAN 32A 15kw 220v AC KONTAKTÖR",
     "Liste Fiyatı": "1.681,90",
-    "Stok Miktarı": "80",
+    "Stok Miktarı": "79",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -11937,7 +12063,7 @@
     "Ürün Kodu": "G.GDP32-4",
     "Ürün Adı": "GÜNSAN 2,5-4A MOTOR KORUMA ŞALTERİ",
     "Liste Fiyatı": "3.075,40",
-    "Stok Miktarı": "10",
+    "Stok Miktarı": "9",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12072,7 +12198,7 @@
     "Ürün Kodu": "G.GHA3-160-3-35-100/125",
     "Ürün Adı": "GÜNSAN 3x125A 35ka KOMPAKT ŞALTER (AYAR SAHALI)",
     "Liste Fiyatı": "8.174,00",
-    "Stok Miktarı": "-2",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12297,7 +12423,7 @@
     "Ürün Kodu": "G.GHY250F4P160AB1",
     "Ürün Adı": "GÜNSAN 4X160A 50KA YANGIN KORUMALI KOMPAKT ŞALTER",
     "Liste Fiyatı": "17.259,55",
-    "Stok Miktarı": "17",
+    "Stok Miktarı": "16",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12369,7 +12495,7 @@
     "Ürün Kodu": "G.KA3 2-32\\30",
     "Ürün Adı": "GÜNSAN 2X32A 30MA KAÇAK AKIM RÖLESİ",
     "Liste Fiyatı": "1.501,85",
-    "Stok Miktarı": "49",
+    "Stok Miktarı": "48",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12378,7 +12504,7 @@
     "Ürün Kodu": "G.KA3 2-32\\300",
     "Ürün Adı": "GÜNSAN 2x32A 300ma KAÇAK AKIM RÖLESİ",
     "Liste Fiyatı": "1.501,85",
-    "Stok Miktarı": "196",
+    "Stok Miktarı": "194",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12387,7 +12513,7 @@
     "Ürün Kodu": "G.KA3 2-40\\30",
     "Ürün Adı": "GÜNSAN 2X40A 30MA KAÇAK AKIM RÖLESİ",
     "Liste Fiyatı": "1.501,85",
-    "Stok Miktarı": "73",
+    "Stok Miktarı": "52",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12432,7 +12558,7 @@
     "Ürün Kodu": "G.KA3 4-25\\30",
     "Ürün Adı": "GÜNSAN 4x25A 30ma KAÇAK AKIM RÖLESİ",
     "Liste Fiyatı": "2.213,75",
-    "Stok Miktarı": "9",
+    "Stok Miktarı": "8",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12477,7 +12603,7 @@
     "Ürün Kodu": "G.KA3 4-40\\300",
     "Ürün Adı": "GÜNSAN 4X40A 300MA KAÇAK AKIM RÖLESİ",
     "Liste Fiyatı": "2.213,75",
-    "Stok Miktarı": "154",
+    "Stok Miktarı": "152",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12495,7 +12621,7 @@
     "Ürün Kodu": "G.KA3 4-63\\300",
     "Ürün Adı": "GÜNSAN 4x63A 300ma KAÇAK AKIM RÖLESİ",
     "Liste Fiyatı": "2.599,55",
-    "Stok Miktarı": "44",
+    "Stok Miktarı": "43",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12603,7 +12729,7 @@
     "Ürün Kodu": "G.OS3 B 360-25",
     "Ürün Adı": "GÜNSAN 3x25A B TİPİ 6ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "693,55",
-    "Stok Miktarı": "-47",
+    "Stok Miktarı": "1",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12612,7 +12738,7 @@
     "Ürün Kodu": "G.OS3 B 360-32",
     "Ürün Adı": "GÜNSAN 3x32A B TİPİ 6ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "704,15",
-    "Stok Miktarı": "-1",
+    "Stok Miktarı": "3",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12657,7 +12783,7 @@
     "Ürün Kodu": "G.OS3 C 1100-40",
     "Ürün Adı": "GÜNSAN 1x40A C TİPİ 10ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "423,50",
-    "Stok Miktarı": "95",
+    "Stok Miktarı": "94",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12684,7 +12810,7 @@
     "Ürün Kodu": "G.OS3 C 160-10",
     "Ürün Adı": "GÜNSAN 1X10A B TİPİ 6KA OTOMATİK SİGORTA",
     "Liste Fiyatı": "200,75",
-    "Stok Miktarı": "2.022",
+    "Stok Miktarı": "2.018",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12693,7 +12819,7 @@
     "Ürün Kodu": "G.OS3 C 160-16",
     "Ürün Adı": "GÜNSAN 1x16A B TİPİ 6ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "200,75",
-    "Stok Miktarı": "3.805",
+    "Stok Miktarı": "3.765",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12702,7 +12828,7 @@
     "Ürün Kodu": "G.OS3 C 160-20",
     "Ürün Adı": "GÜNSAN 1x20A B TİPİ 6ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "200,75",
-    "Stok Miktarı": "1.637",
+    "Stok Miktarı": "1.612",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12711,7 +12837,7 @@
     "Ürün Kodu": "G.OS3 C 160-25",
     "Ürün Adı": "GÜNSAN 1x25A B TİPİ 6ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "200,75",
-    "Stok Miktarı": "1.216",
+    "Stok Miktarı": "1.189",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12720,7 +12846,7 @@
     "Ürün Kodu": "G.OS3 C 160-32",
     "Ürün Adı": "GÜNSAN 1X32A B TİPİ 6KA OTOMATİK SİGORTA",
     "Liste Fiyatı": "263,15",
-    "Stok Miktarı": "1.128",
+    "Stok Miktarı": "1.122",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12729,7 +12855,7 @@
     "Ürün Kodu": "G.OS3 C 160-40",
     "Ürün Adı": "GÜNSAN 1X40A B TİPİ 6KA OTOMATİK SİGORTA",
     "Liste Fiyatı": "283,40",
-    "Stok Miktarı": "345",
+    "Stok Miktarı": "340",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12756,7 +12882,7 @@
     "Ürün Kodu": "G.OS3 C 3100-100",
     "Ürün Adı": "GÜNSAN 3X100A C TİPİ 10KA OTOMATİK SİGORTA",
     "Liste Fiyatı": "3.745,95",
-    "Stok Miktarı": "9",
+    "Stok Miktarı": "8",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12783,7 +12909,7 @@
     "Ürün Kodu": "G.OS3 C 3100-32",
     "Ürün Adı": "GÜNSAN 3x32A C TİPİ 10ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "1.241,50",
-    "Stok Miktarı": "384",
+    "Stok Miktarı": "382",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12810,7 +12936,7 @@
     "Ürün Kodu": "G.OS3 C 3100-80",
     "Ürün Adı": "GÜNSAN 3x80A C TİPİ 10ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "3.472,30",
-    "Stok Miktarı": "12",
+    "Stok Miktarı": "10",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12819,7 +12945,7 @@
     "Ürün Kodu": "G.OS3 C 360-10",
     "Ürün Adı": "GÜNSAN 3x10A C TİPİ 6ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "693,55",
-    "Stok Miktarı": "237",
+    "Stok Miktarı": "236",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12846,7 +12972,7 @@
     "Ürün Kodu": "G.OS3 C 360-25",
     "Ürün Adı": "GÜNSAN 3x25A C TİPİ 6ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "693,55",
-    "Stok Miktarı": "652",
+    "Stok Miktarı": "650",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12855,7 +12981,7 @@
     "Ürün Kodu": "G.OS3 C 360-32",
     "Ürün Adı": "GÜNSAN 3x32A C TİPİ 6ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "704,15",
-    "Stok Miktarı": "956",
+    "Stok Miktarı": "933",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12864,7 +12990,7 @@
     "Ürün Kodu": "G.OS3 C 360-40",
     "Ürün Adı": "GÜNSAN 3x40A C TİPİ 6ka OTOMATİK SİGORTA",
     "Liste Fiyatı": "718,30",
-    "Stok Miktarı": "500",
+    "Stok Miktarı": "483",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12873,7 +12999,7 @@
     "Ürün Kodu": "G.OS3 C 360-50",
     "Ürün Adı": "GÜNSAN 3X50A C TİPİ 6KA OTOMATİK SİGORTA",
     "Liste Fiyatı": "957,70",
-    "Stok Miktarı": "54",
+    "Stok Miktarı": "52",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -12882,7 +13008,7 @@
     "Ürün Kodu": "G.OS3 C 360-63",
     "Ürün Adı": "GÜNSAN 3X63A C TİPİ 6KA OTOMATİK SİGORTA",
     "Liste Fiyatı": "1.077,45",
-    "Stok Miktarı": "206",
+    "Stok Miktarı": "200",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -13368,7 +13494,7 @@
     "Ürün Kodu": "GLX.TRİ",
     "Ürün Adı": "GALAXY ENERJİ KORUMA VE KONTROL CİHAZI (63A) TRİFAZE",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "32",
+    "Stok Miktarı": "26",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -13395,7 +13521,7 @@
     "Ürün Kodu": "GWS.3430 SKP-S-10",
     "Ürün Adı": "GWEST 10mm M5 SKP STANDART TİP KABLO PAPUCU",
     "Liste Fiyatı": "20,00",
-    "Stok Miktarı": "1.596",
+    "Stok Miktarı": "1.576",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -13728,7 +13854,7 @@
     "Ürün Kodu": "HLS HS 2021-B",
     "Ürün Adı": "HELİOS (47-1000) 9W LED AMPÜL E27 6400K",
     "Liste Fiyatı": "40,00",
-    "Stok Miktarı": "6.000",
+    "Stok Miktarı": "5.400",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -13818,7 +13944,7 @@
     "Ürün Kodu": "HLS HS 2424-S",
     "Ürün Adı": "HELİOS ROZANS RAY (SİYAH)",
     "Liste Fiyatı": "60,00",
-    "Stok Miktarı": "9",
+    "Stok Miktarı": "6",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -13980,7 +14106,7 @@
     "Ürün Kodu": "HLS HS 4204",
     "Ürün Adı": "HELİOS AKILLI PRİZ (SMART FİŞ) ( 16,00 $ )",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "6",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -14529,7 +14655,7 @@
     "Ürün Kodu": "HS.1452-A",
     "Ürün Adı": "220V 120 LEDLİ ŞERİT LED (AMBER)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "275",
+    "Stok Miktarı": "175",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -14547,7 +14673,7 @@
     "Ürün Kodu": "HS.1452-G",
     "Ürün Adı": "220V 120 LEDLİ ŞERİT LED (GÜNIŞIĞI)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "-97",
+    "Stok Miktarı": "-197",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -14772,7 +14898,7 @@
     "Ürün Kodu": "HS.806/1",
     "Ürün Adı": "DÜNYA LED 100W KRİSTAL YATAY BANT ARMATÜR 6500K",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "10",
+    "Stok Miktarı": "11",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -14781,7 +14907,7 @@
     "Ürün Kodu": "HS.813/1",
     "Ürün Adı": "DÜNYA LED 36w NEMLİYER LEDLİ ETANJ ATMATÜR 6500K",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "131",
+    "Stok Miktarı": "127",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15114,7 +15240,7 @@
     "Ürün Kodu": "ISIL.90 000 000 000 1607",
     "Ürün Adı": "2 NO BETON ÇİVİLİ KROŞE",
     "Liste Fiyatı": "1,09",
-    "Stok Miktarı": "19.000",
+    "Stok Miktarı": "18.500",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15132,7 +15258,7 @@
     "Ürün Kodu": "ISIL.90 000 000 000 1609",
     "Ürün Adı": "4 NO BETON ÇİVİLİ KROŞE",
     "Liste Fiyatı": "1,50",
-    "Stok Miktarı": "22.200",
+    "Stok Miktarı": "21.100",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15186,7 +15312,7 @@
     "Ürün Kodu": "ISIL.90 000 000 000 2102",
     "Ürün Adı": "IŞILDAR 2 NO SIRA KLEMENS",
     "Liste Fiyatı": "73,00",
-    "Stok Miktarı": "959",
+    "Stok Miktarı": "958",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15213,7 +15339,7 @@
     "Ürün Kodu": "ISIL.90 000 000 000 2109",
     "Ürün Adı": "IŞILDAR 5 NO SIRA KLEMENS",
     "Liste Fiyatı": "125,00",
-    "Stok Miktarı": "645",
+    "Stok Miktarı": "644",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15276,7 +15402,7 @@
     "Ürün Kodu": "KBL NYA 1.5",
     "Ürün Adı": "1.5mm2 NYA KABLO",
     "Liste Fiyatı": "17,20",
-    "Stok Miktarı": "800",
+    "Stok Miktarı": "200",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15552,6 +15678,15 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "KBL NYY 3x16",
+    "Ürün Adı": "3x16mm2 NYY KABLO HES",
+    "Liste Fiyatı": "960,20",
+    "Stok Miktarı": "0",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "KBL NYY 3x16+10",
     "Ürün Adı": "3x16+10mm2 NYY KABLO",
     "Liste Fiyatı": "713,80",
@@ -15636,7 +15771,7 @@
     "Ürün Kodu": "KBL NYY 4x10",
     "Ürün Adı": "4x10mm2 NYY KABLO",
     "Liste Fiyatı": "495,50",
-    "Stok Miktarı": "70",
+    "Stok Miktarı": "20",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15645,7 +15780,7 @@
     "Ürün Kodu": "KBL NYY 4x16",
     "Ürün Adı": "4x16mm2 NYY KABLO HES",
     "Liste Fiyatı": "779,60",
-    "Stok Miktarı": "1",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15690,7 +15825,7 @@
     "Ürün Kodu": "KBL TTR 2x0.75",
     "Ürün Adı": "2x0.75mm2 TTR KABLO",
     "Liste Fiyatı": "25,90",
-    "Stok Miktarı": "109",
+    "Stok Miktarı": "44",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15708,7 +15843,7 @@
     "Ürün Kodu": "KBL TTR 2x1.5",
     "Ürün Adı": "2x1.5mm2 TTR KABLO",
     "Liste Fiyatı": "45,00",
-    "Stok Miktarı": "-189",
+    "Stok Miktarı": "-3.018",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15717,7 +15852,7 @@
     "Ürün Kodu": "KBL TTR 2x2.5",
     "Ürün Adı": "2x2.5mm2 TTR KABLO",
     "Liste Fiyatı": "70,30",
-    "Stok Miktarı": "1.351",
+    "Stok Miktarı": "1.451",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15762,7 +15897,7 @@
     "Ürün Kodu": "KBL TTR 3x1.5",
     "Ürün Adı": "3x1.5mm2 TTR KABLO",
     "Liste Fiyatı": "61,10",
-    "Stok Miktarı": "4.052",
+    "Stok Miktarı": "3.992",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15771,7 +15906,7 @@
     "Ürün Kodu": "KBL TTR 3x2.5",
     "Ürün Adı": "3x2.5mm2 TTR KABLO",
     "Liste Fiyatı": "96,30",
-    "Stok Miktarı": "2.336",
+    "Stok Miktarı": "2.015",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15798,7 +15933,7 @@
     "Ürün Kodu": "KBL TTR 4x1.5",
     "Ürün Adı": "4x1.5mm2 TTR KABLO",
     "Liste Fiyatı": "79,70",
-    "Stok Miktarı": "1.276",
+    "Stok Miktarı": "1.116",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15825,7 +15960,7 @@
     "Ürün Kodu": "KBL TTR 4x2.5",
     "Ürün Adı": "4x2.5mm2 TTR KABLO",
     "Liste Fiyatı": "126,50",
-    "Stok Miktarı": "1.904",
+    "Stok Miktarı": "1.899",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15879,7 +16014,7 @@
     "Ürün Kodu": "KBL TTR 5x2.5",
     "Ürün Adı": "5x2.5mm2 TTR KABLO",
     "Liste Fiyatı": "160,50",
-    "Stok Miktarı": "28",
+    "Stok Miktarı": "24",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15897,7 +16032,7 @@
     "Ürün Kodu": "KBL TTR 5x6",
     "Ürün Adı": "5x6mm2 TTR KABLO",
     "Liste Fiyatı": "356,90",
-    "Stok Miktarı": "49",
+    "Stok Miktarı": "43",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -15906,7 +16041,7 @@
     "Ürün Kodu": "KBL.052XZ1-F 2x1.5",
     "Ürün Adı": "HALOJEN FREE 2x1.5 mm2 KABLO (052XZ1-F)",
     "Liste Fiyatı": "52,20",
-    "Stok Miktarı": "-3",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16005,7 +16140,7 @@
     "Ürün Kodu": "KBL.CCA 5x1.5",
     "Ürün Adı": "5X1.5MM2 CCA TTR KABLO",
     "Liste Fiyatı": "22,75",
-    "Stok Miktarı": "2.129",
+    "Stok Miktarı": "1.609",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16113,7 +16248,7 @@
     "Ürün Kodu": "KBL.LP10122",
     "Ürün Adı": "2X0.75MM2 (CU) YASSI KORDON",
     "Liste Fiyatı": "9,75",
-    "Stok Miktarı": "4.224",
+    "Stok Miktarı": "3.974",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16158,7 +16293,7 @@
     "Ürün Kodu": "KBL.LP10130",
     "Ürün Adı": "CAT-6 UTP BİLGİSAYAR KABLOSU",
     "Liste Fiyatı": "5,00",
-    "Stok Miktarı": "2.324",
+    "Stok Miktarı": "784",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16311,7 +16446,7 @@
     "Ürün Kodu": "KBL.NAYY 1x185",
     "Ürün Adı": "ALVİNAL 1x185mm2 YAVV(NAYY) KABLO",
     "Liste Fiyatı": "265,60",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "630",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16383,7 +16518,7 @@
     "Ürün Kodu": "KBL.NAYY 3x35+16",
     "Ürün Adı": "ALVİNAL 3x35+16mm2 YAVV(NAYY) KABLO",
     "Liste Fiyatı": "215,30",
-    "Stok Miktarı": "-24",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16437,6 +16572,15 @@
     "Ürün Kodu": "KBL.NHXMH 2x1.5",
     "Ürün Adı": "HALOJEN FREE 2x1.5mm2 KABLO (NHXMH)",
     "Liste Fiyatı": "51,40",
+    "Stok Miktarı": "0",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
+    "Ürün Kodu": "KBL.NHXMH 2x2.5",
+    "Ürün Adı": "HALOJEN FREE 2x2.5mm2 KABLO (NHXMH)",
+    "Liste Fiyatı": "74,40",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -16536,7 +16680,7 @@
     "Ürün Kodu": "KBL.NYM 2x2.5",
     "Ürün Adı": "2x2.5mm2 NYM KABLO",
     "Liste Fiyatı": "67,50",
-    "Stok Miktarı": "234",
+    "Stok Miktarı": "124",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16563,7 +16707,7 @@
     "Ürün Kodu": "KBL.NYM 3x1.5",
     "Ürün Adı": "3x1.5mm2 NYM KABLO",
     "Liste Fiyatı": "60,20",
-    "Stok Miktarı": "181",
+    "Stok Miktarı": "56",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16581,7 +16725,7 @@
     "Ürün Kodu": "KBL.NYM 3x2.5",
     "Ürün Adı": "3x2.5mm2 NYM KABLO",
     "Liste Fiyatı": "94,60",
-    "Stok Miktarı": "193",
+    "Stok Miktarı": "258",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16635,7 +16779,7 @@
     "Ürün Kodu": "KBL.NYM 4x6",
     "Ürün Adı": "4x6mm2 NYM KABLO",
     "Liste Fiyatı": "284,10",
-    "Stok Miktarı": "20",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16680,7 +16824,7 @@
     "Ürün Kodu": "KBL.NYY 2x6",
     "Ürün Adı": "2x6mm2 NYY KABLO",
     "Liste Fiyatı": "159,00",
-    "Stok Miktarı": "228",
+    "Stok Miktarı": "198",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16707,7 +16851,7 @@
     "Ürün Kodu": "KBL.PTT 002",
     "Ürün Adı": "2x2x0.50mm2 TELEFON KABLOSU",
     "Liste Fiyatı": "1,50",
-    "Stok Miktarı": "-400",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16923,7 +17067,7 @@
     "Ürün Kodu": "KÖKEN",
     "Ürün Adı": "KÖKEN KABLO",
     "Liste Fiyatı": "3,00",
-    "Stok Miktarı": "500",
+    "Stok Miktarı": "100",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -16949,7 +17093,7 @@
   {
     "Ürün Kodu": "LEG.4 086 62",
     "Ürün Adı": "3x80A C TİPİ 10ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "19.800,00",
+    "Liste Fiyatı": "21.800,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -16958,7 +17102,7 @@
   {
     "Ürün Kodu": "LEG.4 086 63",
     "Ürün Adı": "3x100A C TİPİ 10ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "20.600,00",
+    "Liste Fiyatı": "22.700,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -16967,7 +17111,7 @@
   {
     "Ürün Kodu": "LEG.4 086 64",
     "Ürün Adı": "3X125A C TİPİ 10 KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "21.100,00",
+    "Liste Fiyatı": "23.300,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -16976,7 +17120,7 @@
   {
     "Ürün Kodu": "LEG.4 116 67",
     "Ürün Adı": "4x80A 300ma KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "7.920,00",
+    "Liste Fiyatı": "8.720,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -16985,7 +17129,7 @@
   {
     "Ürün Kodu": "LEG.4 116 78",
     "Ürün Adı": "4x100A 30ma KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "16.800,00",
+    "Liste Fiyatı": "18.500,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -16994,7 +17138,7 @@
   {
     "Ürün Kodu": "LEG.4 116 88",
     "Ürün Adı": "4x100A 300ma KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "16.600,00",
+    "Liste Fiyatı": "18.300,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -17003,7 +17147,7 @@
   {
     "Ürün Kodu": "LEG.4 124 08",
     "Ürün Adı": "CX DARBE AKIM 16A 1NA 230V",
-    "Liste Fiyatı": "2.110,00",
+    "Liste Fiyatı": "2.330,00",
     "Stok Miktarı": "1",
     "barkod1": "",
     "barkod2": "",
@@ -17012,8 +17156,8 @@
   {
     "Ürün Kodu": "LEG.4 127 90",
     "Ürün Adı": "16A 100s REZERVELİ ZAMAN SAATİ LEGRAND (037 40)",
-    "Liste Fiyatı": "4.630,00",
-    "Stok Miktarı": "3",
+    "Liste Fiyatı": "5.190,00",
+    "Stok Miktarı": "33",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17021,7 +17165,7 @@
   {
     "Ürün Kodu": "LEG.4 210 16",
     "Ürün Adı": "DPX 200-277V AÇTIRMA BOBİNİ LEGRAND",
-    "Liste Fiyatı": "4.000,00",
+    "Liste Fiyatı": "4.320,00",
     "Stok Miktarı": "1",
     "barkod1": "",
     "barkod2": "",
@@ -17030,7 +17174,7 @@
   {
     "Ürün Kodu": "LEG.4 331 82",
     "Ürün Adı": "2X25A 30MA KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "2.740,00",
+    "Liste Fiyatı": "3.290,00",
     "Stok Miktarı": "31",
     "barkod1": "",
     "barkod2": "",
@@ -17039,8 +17183,8 @@
   {
     "Ürün Kodu": "LEG.4 331 83",
     "Ürün Adı": "2X40A 30MA KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "2.800,00",
-    "Stok Miktarı": "6",
+    "Liste Fiyatı": "3.360,00",
+    "Stok Miktarı": "17",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17048,8 +17192,8 @@
   {
     "Ürün Kodu": "LEG.4 331 84",
     "Ürün Adı": "2X63A 30MA KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "4.030,00",
-    "Stok Miktarı": "0",
+    "Liste Fiyatı": "4.680,00",
+    "Stok Miktarı": "12",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17057,7 +17201,7 @@
   {
     "Ürün Kodu": "LEG.4 331 86",
     "Ürün Adı": "2X25A 300MA KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "2.480,00",
+    "Liste Fiyatı": "2.980,00",
     "Stok Miktarı": "53",
     "barkod1": "",
     "barkod2": "",
@@ -17066,7 +17210,7 @@
   {
     "Ürün Kodu": "LEG.4 331 87",
     "Ürün Adı": "2x40A 300ma KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "2.570,00",
+    "Liste Fiyatı": "3.090,00",
     "Stok Miktarı": "30",
     "barkod1": "",
     "barkod2": "",
@@ -17075,7 +17219,7 @@
   {
     "Ürün Kodu": "LEG.4 331 88",
     "Ürün Adı": "2X63A 300MA KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "3.430,00",
+    "Liste Fiyatı": "3.980,00",
     "Stok Miktarı": "15",
     "barkod1": "",
     "barkod2": "",
@@ -17084,8 +17228,8 @@
   {
     "Ürün Kodu": "LEG.4 331 90",
     "Ürün Adı": "4x25A 30ma KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "3.590,00",
-    "Stok Miktarı": "158",
+    "Liste Fiyatı": "4.310,00",
+    "Stok Miktarı": "157",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17093,8 +17237,8 @@
   {
     "Ürün Kodu": "LEG.4 331 91",
     "Ürün Adı": "4X40A 30MA KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "3.650,00",
-    "Stok Miktarı": "4",
+    "Liste Fiyatı": "4.380,00",
+    "Stok Miktarı": "49",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17102,8 +17246,8 @@
   {
     "Ürün Kodu": "LEG.4 331 92",
     "Ürün Adı": "4X63A 30MA KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "4.460,00",
-    "Stok Miktarı": "21",
+    "Liste Fiyatı": "5.180,00",
+    "Stok Miktarı": "18",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17111,7 +17255,7 @@
   {
     "Ürün Kodu": "LEG.4 331 94",
     "Ürün Adı": "4x25A 300ma KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "3.100,00",
+    "Liste Fiyatı": "3.720,00",
     "Stok Miktarı": "39",
     "barkod1": "",
     "barkod2": "",
@@ -17120,7 +17264,7 @@
   {
     "Ürün Kodu": "LEG.4 331 95",
     "Ürün Adı": "4x40A 300ma KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "3.260,00",
+    "Liste Fiyatı": "3.920,00",
     "Stok Miktarı": "19",
     "barkod1": "",
     "barkod2": "",
@@ -17129,8 +17273,8 @@
   {
     "Ürün Kodu": "LEG.4 331 96",
     "Ürün Adı": "4X63A 300MA KAÇAK AKIM RÖLESİ LEGRAND",
-    "Liste Fiyatı": "3.900,00",
-    "Stok Miktarı": "12",
+    "Liste Fiyatı": "4.530,00",
+    "Stok Miktarı": "11",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17138,7 +17282,7 @@
   {
     "Ürün Kodu": "LEG.4 332 02",
     "Ürün Adı": "1x6A B TİPİ 4.5ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "391,00",
+    "Liste Fiyatı": "415,00",
     "Stok Miktarı": "92",
     "barkod1": "",
     "barkod2": "",
@@ -17147,7 +17291,7 @@
   {
     "Ürün Kodu": "LEG.4 332 03",
     "Ürün Adı": "1X10A B TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "314,00",
+    "Liste Fiyatı": "340,00",
     "Stok Miktarı": "238",
     "barkod1": "",
     "barkod2": "",
@@ -17156,8 +17300,8 @@
   {
     "Ürün Kodu": "LEG.4 332 04",
     "Ürün Adı": "1X16A B TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "314,00",
-    "Stok Miktarı": "609",
+    "Liste Fiyatı": "340,00",
+    "Stok Miktarı": "607",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17165,8 +17309,8 @@
   {
     "Ürün Kodu": "LEG.4 332 05",
     "Ürün Adı": "1x20A B TİPİ 4.5ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "314,00",
-    "Stok Miktarı": "-5",
+    "Liste Fiyatı": "340,00",
+    "Stok Miktarı": "235",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17174,8 +17318,8 @@
   {
     "Ürün Kodu": "LEG.4 332 06",
     "Ürün Adı": "1X25A B TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "362,00",
-    "Stok Miktarı": "143",
+    "Liste Fiyatı": "391,00",
+    "Stok Miktarı": "263",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17183,8 +17327,8 @@
   {
     "Ürün Kodu": "LEG.4 332 07",
     "Ürün Adı": "1X32A B TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "393,00",
-    "Stok Miktarı": "0",
+    "Liste Fiyatı": "409,00",
+    "Stok Miktarı": "240",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17192,7 +17336,7 @@
   {
     "Ürün Kodu": "LEG.4 332 08",
     "Ürün Adı": "1x40A B TİPİ 4.5ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "447,00",
+    "Liste Fiyatı": "483,00",
     "Stok Miktarı": "292",
     "barkod1": "",
     "barkod2": "",
@@ -17201,7 +17345,7 @@
   {
     "Ürün Kodu": "LEG.4 332 09",
     "Ürün Adı": "1x50A B TİPİ 4.5ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "539,00",
+    "Liste Fiyatı": "572,00",
     "Stok Miktarı": "94",
     "barkod1": "",
     "barkod2": "",
@@ -17210,7 +17354,7 @@
   {
     "Ürün Kodu": "LEG.4 332 10",
     "Ürün Adı": "1X63A B TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "597,00",
+    "Liste Fiyatı": "621,00",
     "Stok Miktarı": "143",
     "barkod1": "",
     "barkod2": "",
@@ -17219,7 +17363,7 @@
   {
     "Ürün Kodu": "LEG.4 332 16",
     "Ürün Adı": "3x10A B TİPİ 4.5ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.290,00",
+    "Liste Fiyatı": "1.350,00",
     "Stok Miktarı": "2",
     "barkod1": "",
     "barkod2": "",
@@ -17228,7 +17372,7 @@
   {
     "Ürün Kodu": "LEG.4 332 18",
     "Ürün Adı": "3X20A B TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.290,00",
+    "Liste Fiyatı": "1.350,00",
     "Stok Miktarı": "17",
     "barkod1": "",
     "barkod2": "",
@@ -17237,7 +17381,7 @@
   {
     "Ürün Kodu": "LEG.4 332 19",
     "Ürün Adı": "3X25A B TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.400,00",
+    "Liste Fiyatı": "1.460,00",
     "Stok Miktarı": "115",
     "barkod1": "",
     "barkod2": "",
@@ -17246,7 +17390,7 @@
   {
     "Ürün Kodu": "LEG.4 332 20",
     "Ürün Adı": "3X32A B TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.430,00",
+    "Liste Fiyatı": "1.490,00",
     "Stok Miktarı": "42",
     "barkod1": "",
     "barkod2": "",
@@ -17255,7 +17399,7 @@
   {
     "Ürün Kodu": "LEG.4 332 21",
     "Ürün Adı": "3x40A B TİPİ 4.5ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.470,00",
+    "Liste Fiyatı": "1.590,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -17264,7 +17408,7 @@
   {
     "Ürün Kodu": "LEG.4 332 22",
     "Ürün Adı": "3x50A B TİPİ 4.5ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.900,00",
+    "Liste Fiyatı": "2.020,00",
     "Stok Miktarı": "4",
     "barkod1": "",
     "barkod2": "",
@@ -17273,7 +17417,7 @@
   {
     "Ürün Kodu": "LEG.4 332 23",
     "Ürün Adı": "3X63A B TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "2.080,00",
+    "Liste Fiyatı": "2.170,00",
     "Stok Miktarı": "43",
     "barkod1": "",
     "barkod2": "",
@@ -17282,7 +17426,7 @@
   {
     "Ürün Kodu": "LEG.4 333 29",
     "Ürün Adı": "1x16A C TİPİ 4.5ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "340,00",
+    "Liste Fiyatı": "361,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -17291,7 +17435,7 @@
   {
     "Ürün Kodu": "LEG.4 333 41",
     "Ürün Adı": "3x10A C TİPİ 4.5ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.420,00",
+    "Liste Fiyatı": "1.480,00",
     "Stok Miktarı": "78",
     "barkod1": "",
     "barkod2": "",
@@ -17300,7 +17444,7 @@
   {
     "Ürün Kodu": "LEG.4 333 42",
     "Ürün Adı": "3X16A C TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.420,00",
+    "Liste Fiyatı": "1.480,00",
     "Stok Miktarı": "27",
     "barkod1": "",
     "barkod2": "",
@@ -17309,7 +17453,7 @@
   {
     "Ürün Kodu": "LEG.4 333 43",
     "Ürün Adı": "3X20A C TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.420,00",
+    "Liste Fiyatı": "1.480,00",
     "Stok Miktarı": "89",
     "barkod1": "",
     "barkod2": "",
@@ -17318,8 +17462,8 @@
   {
     "Ürün Kodu": "LEG.4 333 44",
     "Ürün Adı": "3x25A C TİPİ 4.5ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.510,00",
-    "Stok Miktarı": "96",
+    "Liste Fiyatı": "1.580,00",
+    "Stok Miktarı": "95",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17327,7 +17471,7 @@
   {
     "Ürün Kodu": "LEG.4 333 45",
     "Ürün Adı": "3x32A C TİPİ 4.5ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.540,00",
+    "Liste Fiyatı": "1.610,00",
     "Stok Miktarı": "82",
     "barkod1": "",
     "barkod2": "",
@@ -17336,8 +17480,8 @@
   {
     "Ürün Kodu": "LEG.4 333 46",
     "Ürün Adı": "3X40A C TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "1.580,00",
-    "Stok Miktarı": "148",
+    "Liste Fiyatı": "1.680,00",
+    "Stok Miktarı": "145",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17345,8 +17489,8 @@
   {
     "Ürün Kodu": "LEG.4 333 47",
     "Ürün Adı": "3X50A C TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "2.010,00",
-    "Stok Miktarı": "4",
+    "Liste Fiyatı": "2.100,00",
+    "Stok Miktarı": "44",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17354,7 +17498,7 @@
   {
     "Ürün Kodu": "LEG.4 333 48",
     "Ürün Adı": "3X63A C TİPİ 4.5KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "2.190,00",
+    "Liste Fiyatı": "2.280,00",
     "Stok Miktarı": "14",
     "barkod1": "",
     "barkod2": "",
@@ -17363,7 +17507,7 @@
   {
     "Ürün Kodu": "LEG.4 337 08",
     "Ürün Adı": "4X40A C TİPİ 6KA OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "2.540,00",
+    "Liste Fiyatı": "2.800,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -17372,7 +17516,7 @@
   {
     "Ürün Kodu": "LEG.4 339 48",
     "Ürün Adı": "3x40A C TİPİ 10ka OTOMATİK SİGORTA LEGRAND",
-    "Liste Fiyatı": "2.750,00",
+    "Liste Fiyatı": "2.970,00",
     "Stok Miktarı": "11",
     "barkod1": "",
     "barkod2": "",
@@ -17634,7 +17778,7 @@
     "Ürün Kodu": "LK-42100",
     "Ürün Adı": "100W SLİM LED PROJEKTÖR(BEYAZ)",
     "Liste Fiyatı": "260,00",
-    "Stok Miktarı": "50",
+    "Stok Miktarı": "22",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17670,7 +17814,7 @@
     "Ürün Kodu": "LK-4250",
     "Ürün Adı": "50W SLİM LED PROJEKTÖR(BEYAZ)",
     "Liste Fiyatı": "180,00",
-    "Stok Miktarı": "79",
+    "Stok Miktarı": "56",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17706,7 +17850,7 @@
     "Ürün Kodu": "MIY 8010",
     "Ürün Adı": "MİY 360 HAREKET SENSÖRLÜ TAVAN ARMATÜRÜ 2XE27",
     "Liste Fiyatı": "170,00",
-    "Stok Miktarı": "18",
+    "Stok Miktarı": "12",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17715,7 +17859,7 @@
     "Ürün Kodu": "MIY 8020",
     "Ürün Adı": "MİY 360 HAREKET SENSÖRLÜ TAVAN ARMATÜRÜ 2XE27 (KİTLİ)",
     "Liste Fiyatı": "265,00",
-    "Stok Miktarı": "159",
+    "Stok Miktarı": "154",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17760,7 +17904,7 @@
     "Ürün Kodu": "MKL.10002",
     "Ürün Adı": "MAKEL TOPRAKLI ERKEK FİŞ",
     "Liste Fiyatı": "87,90",
-    "Stok Miktarı": "2.950",
+    "Stok Miktarı": "2.850",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17769,7 +17913,7 @@
     "Ürün Kodu": "MKL.10003",
     "Ürün Adı": "MAKEL TOPRAKLI DİŞİ FİŞ",
     "Liste Fiyatı": "110,40",
-    "Stok Miktarı": "231",
+    "Stok Miktarı": "81",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17778,7 +17922,7 @@
     "Ürün Kodu": "MKL.10014",
     "Ürün Adı": "MAKEL ARAPUAR ANAHTAR",
     "Liste Fiyatı": "64,10",
-    "Stok Miktarı": "489",
+    "Stok Miktarı": "484",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17787,7 +17931,7 @@
     "Ürün Kodu": "MKL.10027",
     "Ürün Adı": "MAKEL L TİPİ TOPRAKLI ERKEK FİŞ MONOBLOK",
     "Liste Fiyatı": "84,90",
-    "Stok Miktarı": "2.442",
+    "Stok Miktarı": "2.316",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17823,7 +17967,7 @@
     "Ürün Kodu": "MKL.10064",
     "Ürün Adı": "MAKEL ARAPUAR ANAHTAR (SİYAH)",
     "Liste Fiyatı": "64,10",
-    "Stok Miktarı": "318",
+    "Stok Miktarı": "313",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17967,7 +18111,7 @@
     "Ürün Kodu": "MKL.18308",
     "Ürün Adı": "MAKEL BEYAZ NEMLİYER TOPRAKLI PRİZ",
     "Liste Fiyatı": "174,90",
-    "Stok Miktarı": "140",
+    "Stok Miktarı": "179",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -17994,7 +18138,7 @@
     "Ürün Kodu": "MKL.18351",
     "Ürün Adı": "MAKEL BEYAZ İKİLİ NEMLİYER KOMÜTATÖR+ KAP.TOP.PRİZ",
     "Liste Fiyatı": "357,60",
-    "Stok Miktarı": "60",
+    "Stok Miktarı": "58",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -19272,7 +19416,7 @@
     "Ürün Kodu": "MKL.34003009",
     "Ürün Adı": "MAKEL 4X50A 30MA KAÇAK AKIM RÖLESİ (6KA)",
     "Liste Fiyatı": "2.192,60",
-    "Stok Miktarı": "82",
+    "Stok Miktarı": "81",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -19398,7 +19542,7 @@
     "Ürün Kodu": "MKL.42001701",
     "Ürün Adı": "DEFNE BEYAZ TEKLİ ÇERÇEVE",
     "Liste Fiyatı": "21,80",
-    "Stok Miktarı": "2.486",
+    "Stok Miktarı": "2.595",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -19416,7 +19560,7 @@
     "Ürün Kodu": "MKL.42001703",
     "Ürün Adı": "DEFNE BEYAZ ÜÇLÜ YATAY ÇERÇEVE",
     "Liste Fiyatı": "98,70",
-    "Stok Miktarı": "789",
+    "Stok Miktarı": "807",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -19596,7 +19740,7 @@
     "Ürün Kodu": "MKL.43001003",
     "Ürün Adı": "DEFNE BEYAZ KOMÜTATÖR MODÜL TUŞ",
     "Liste Fiyatı": "138,40",
-    "Stok Miktarı": "1.320",
+    "Stok Miktarı": "1.326",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -19650,7 +19794,7 @@
     "Ürün Kodu": "MKL.43001028",
     "Ürün Adı": "DEFNE BEYAZ TOPRAKLI PRİZ MODÜL KAPAK",
     "Liste Fiyatı": "131,30",
-    "Stok Miktarı": "1.203",
+    "Stok Miktarı": "1.214",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -19659,7 +19803,7 @@
     "Ürün Kodu": "MKL.43001029",
     "Ürün Adı": "DEFNE BEYAZ KAPAKLI TOPRAKLI PRİZ MODÜL KAPAK",
     "Liste Fiyatı": "164,00",
-    "Stok Miktarı": "598",
+    "Stok Miktarı": "478",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -19785,7 +19929,7 @@
     "Ürün Kodu": "MKL.43010003",
     "Ürün Adı": "DEFNE KREM KOMÜTATÖR MODÜL TUŞ",
     "Liste Fiyatı": "138,40",
-    "Stok Miktarı": "530",
+    "Stok Miktarı": "572",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -19821,7 +19965,7 @@
     "Ürün Kodu": "MKL.43010011",
     "Ürün Adı": "DEFNE KREM DİMMER 600w MODÜL KAPAK",
     "Liste Fiyatı": "795,90",
-    "Stok Miktarı": "34",
+    "Stok Miktarı": "22",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -19857,7 +20001,7 @@
     "Ürün Kodu": "MKL.43010028",
     "Ürün Adı": "DEFNE KREM TOPRAKLI PRİZ MODÜL KAPAK",
     "Liste Fiyatı": "131,30",
-    "Stok Miktarı": "600",
+    "Stok Miktarı": "619",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -20001,7 +20145,7 @@
     "Ürün Kodu": "MKL.45103",
     "Ürün Adı": "MAKEL S/Ü BEYAZ KOMÜTATÖR",
     "Liste Fiyatı": "136,30",
-    "Stok Miktarı": "855",
+    "Stok Miktarı": "854",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -20028,7 +20172,7 @@
     "Ürün Kodu": "MKL.45108",
     "Ürün Adı": "MAKEL S/Ü BEYAZ TOPRAKLI PRİZ",
     "Liste Fiyatı": "134,30",
-    "Stok Miktarı": "480",
+    "Stok Miktarı": "478",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -20118,7 +20262,7 @@
     "Ürün Kodu": "MKL.53000246",
     "Ürün Adı": "7M KASA - S/A (KIRMIZI)",
     "Liste Fiyatı": "92,00",
-    "Stok Miktarı": "19",
+    "Stok Miktarı": "55",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -20496,7 +20640,7 @@
     "Ürün Kodu": "MKL.56050701",
     "Ürün Adı": "KAREA FÜME TEKLİ ÇERÇEVE",
     "Liste Fiyatı": "43,80",
-    "Stok Miktarı": "2.100",
+    "Stok Miktarı": "4.215",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -20505,7 +20649,7 @@
     "Ürün Kodu": "MKL.56050702",
     "Ürün Adı": "KAREA FÜME İKİLİ YATAY ÇERÇEVE",
     "Liste Fiyatı": "115,40",
-    "Stok Miktarı": "1.557",
+    "Stok Miktarı": "1.554",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -20514,7 +20658,7 @@
     "Ürün Kodu": "MKL.56050703",
     "Ürün Adı": "KAREA FÜME ÜÇLÜ YATAY ÇERÇEVE",
     "Liste Fiyatı": "162,40",
-    "Stok Miktarı": "593",
+    "Stok Miktarı": "576",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -20577,7 +20721,7 @@
     "Ürün Kodu": "MKL.56050710",
     "Ürün Adı": "KAREA FÜME İKİLİ YÜKSEK PRİZ ÇERÇEVE",
     "Liste Fiyatı": "73,60",
-    "Stok Miktarı": "206",
+    "Stok Miktarı": "147",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -20775,7 +20919,7 @@
     "Ürün Kodu": "MKL.57001003",
     "Ürün Adı": "KAREA BEYAZ KOMÜTATÖR MODÜL TUŞ",
     "Liste Fiyatı": "138,40",
-    "Stok Miktarı": "1.128",
+    "Stok Miktarı": "1.125",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -20838,7 +20982,7 @@
     "Ürün Kodu": "MKL.57001028",
     "Ürün Adı": "KAREA BEYAZ TOPRAKLI PRİZ MODÜL KAPAK",
     "Liste Fiyatı": "131,30",
-    "Stok Miktarı": "7.714",
+    "Stok Miktarı": "7.713",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -20847,7 +20991,7 @@
     "Ürün Kodu": "MKL.57001029",
     "Ürün Adı": "KAREA BEYAZ KAPAKLI TOPRAKLI PRİZ MODÜL KAPAK",
     "Liste Fiyatı": "164,00",
-    "Stok Miktarı": "570",
+    "Stok Miktarı": "510",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -20857,6 +21001,15 @@
     "Ürün Adı": "KAREA BEYAZ İKİLİ DATA PRİZ BOŞ MODÜL",
     "Liste Fiyatı": "134,10",
     "Stok Miktarı": "136",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
+    "Ürün Kodu": "MKL.57001041",
+    "Ürün Adı": "KAREA BEYAZ JALUZİ ANAHTARI MODÜL TUŞ",
+    "Liste Fiyatı": "219,30",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -21099,7 +21252,7 @@
     "Ürün Kodu": "MKL.57050001",
     "Ürün Adı": "KAREA FÜME ANAHTAR MODÜL TUŞ",
     "Liste Fiyatı": "142,70",
-    "Stok Miktarı": "529",
+    "Stok Miktarı": "508",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -21108,7 +21261,7 @@
     "Ürün Kodu": "MKL.57050003",
     "Ürün Adı": "KAREA FÜME KOMÜTATÖR MODÜL TUŞ",
     "Liste Fiyatı": "202,40",
-    "Stok Miktarı": "417",
+    "Stok Miktarı": "414",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -21117,7 +21270,7 @@
     "Ürün Kodu": "MKL.57050004",
     "Ürün Adı": "KAREA FÜME LİGHT MODÜL TUŞ",
     "Liste Fiyatı": "161,30",
-    "Stok Miktarı": "471",
+    "Stok Miktarı": "462",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -21144,7 +21297,7 @@
     "Ürün Kodu": "MKL.57050014",
     "Ürün Adı": "KAREA FÜME NÜMERİS TELEFON PRİZİ MODÜL KAPAK",
     "Liste Fiyatı": "168,90",
-    "Stok Miktarı": "1.190",
+    "Stok Miktarı": "1.178",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -21189,7 +21342,7 @@
     "Ürün Kodu": "MKL.57050028",
     "Ürün Adı": "KAREA FÜME TOPRAKLI PRİZ MODÜL KAPAK",
     "Liste Fiyatı": "194,40",
-    "Stok Miktarı": "2.048",
+    "Stok Miktarı": "2.046",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -21198,7 +21351,7 @@
     "Ürün Kodu": "MKL.57050029",
     "Ürün Adı": "KAREA FÜME KAPAKLI TOPRAKLI PRİZ MODÜL KAPAK",
     "Liste Fiyatı": "236,80",
-    "Stok Miktarı": "1.415",
+    "Stok Miktarı": "1.385",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -21207,7 +21360,7 @@
     "Ürün Kodu": "MKL.57050038",
     "Ürün Adı": "KAREA FÜME İKİLİ DATA PRİZ BOŞ MODÜL KAPAK",
     "Liste Fiyatı": "206,70",
-    "Stok Miktarı": "3.054",
+    "Stok Miktarı": "3.019",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -21234,7 +21387,7 @@
     "Ürün Kodu": "MKL.57050082",
     "Ürün Adı": "KAREA FÜME İKİLİ TOPRAKLI PRİZ MODÜL",
     "Liste Fiyatı": "195,80",
-    "Stok Miktarı": "183",
+    "Stok Miktarı": "124",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -21675,7 +21828,7 @@
     "Ürün Kodu": "MKL.63012",
     "Ürün Adı": "MAKEL 12 Lİ S/A OTOMATİK SİGORTA KUTUSU",
     "Liste Fiyatı": "748,70",
-    "Stok Miktarı": "31",
+    "Stok Miktarı": "26",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -21702,7 +21855,7 @@
     "Ürün Kodu": "MKL.63036",
     "Ürün Adı": "MAKEL 36 LI S/A OTOMATİK SİGORTA KUTUSU",
     "Liste Fiyatı": "1.979,20",
-    "Stok Miktarı": "29",
+    "Stok Miktarı": "28",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -21891,7 +22044,7 @@
     "Ürün Kodu": "MKL.68000027",
     "Ürün Adı": "MAKEL 9A AC MİNİ KONTAKTÖR (1NK)",
     "Liste Fiyatı": "1.209,70",
-    "Stok Miktarı": "17",
+    "Stok Miktarı": "12",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -22305,7 +22458,7 @@
     "Ürün Kodu": "MKL.N3210043",
     "Ürün Adı": "MAKEL YENİ NESİL GRUP PRİZ ÜÇLÜ 3M Ç.K.",
     "Liste Fiyatı": "743,10",
-    "Stok Miktarı": "102",
+    "Stok Miktarı": "78",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -22314,7 +22467,7 @@
     "Ürün Kodu": "MKL.N3210063",
     "Ürün Adı": "MAKEL YENİ NESİL GRUP PRİZ ÜÇLÜ 5M Ç.K.",
     "Liste Fiyatı": "964,20",
-    "Stok Miktarı": "112",
+    "Stok Miktarı": "88",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -22350,7 +22503,7 @@
     "Ürün Kodu": "MKL.N3310063",
     "Ürün Adı": "MAKEL YENİ NESİL GRUP PRİZ ÜÇLÜ 5M ANAHTARLI Ç.K.",
     "Liste Fiyatı": "1.294,20",
-    "Stok Miktarı": "26",
+    "Stok Miktarı": "24",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -22881,7 +23034,7 @@
     "Ürün Kodu": "MUT.001 157 012012 20 00",
     "Ürün Adı": "MUTLUSAN 12x12mm KABLO KANALI YAPIŞKAN BANTLI",
     "Liste Fiyatı": "26,70",
-    "Stok Miktarı": "3.638",
+    "Stok Miktarı": "3.630",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -22890,7 +23043,7 @@
     "Ürün Kodu": "MUT.001 157 016016 20 00",
     "Ürün Adı": "MUTLUSAN 16x16mm KABLO KANALI YAPIŞKAN BANTLI",
     "Liste Fiyatı": "29,13",
-    "Stok Miktarı": "12.674",
+    "Stok Miktarı": "12.644",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -22899,7 +23052,7 @@
     "Ürün Kodu": "MUT.001 157 025016 20 00",
     "Ürün Adı": "MUTLUSAN 25x16mm KABLO KANALI YAPIŞKAN BANTLI",
     "Liste Fiyatı": "44,50",
-    "Stok Miktarı": "6.330",
+    "Stok Miktarı": "6.310",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -22908,7 +23061,7 @@
     "Ürün Kodu": "MUT.001 157 025025 20 00",
     "Ürün Adı": "MUTLUSAN 25x25mm KABLO KANALI YAPIŞKAN BANTLI",
     "Liste Fiyatı": "65,28",
-    "Stok Miktarı": "4.902",
+    "Stok Miktarı": "4.882",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -22926,7 +23079,7 @@
     "Ürün Kodu": "MUT.001 157 040040 20 00",
     "Ürün Adı": "MUTLUSAN 40x40mm KABLO KANALI YAPIŞKAN BANTLI",
     "Liste Fiyatı": "110,39",
-    "Stok Miktarı": "1.205",
+    "Stok Miktarı": "1.209",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -22980,7 +23133,7 @@
     "Ürün Kodu": "NE-AD 1003-1",
     "Ürün Adı": "NE-AD ÜÇLÜ GOLYAT PRİZ",
     "Liste Fiyatı": "275,00",
-    "Stok Miktarı": "80",
+    "Stok Miktarı": "160",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -22998,7 +23151,7 @@
     "Ürün Kodu": "NE-AD 1005-MP",
     "Ürün Adı": "NEAD 3X25 KAPAKLI MAKİNE PRİZİ",
     "Liste Fiyatı": "215,00",
-    "Stok Miktarı": "487",
+    "Stok Miktarı": "486",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23016,7 +23169,7 @@
     "Ürün Kodu": "NE-AD 1010-UPS",
     "Ürün Adı": "NEAD UPS TOPRAKLI ERKEK FİŞ",
     "Liste Fiyatı": "82,00",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "120",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23034,7 +23187,7 @@
     "Ürün Kodu": "NE-AD 2001",
     "Ürün Adı": "NEAD 1X16 KAPAKLI TOPRAKLI PANO PRİZ",
     "Liste Fiyatı": "95,00",
-    "Stok Miktarı": "1.597",
+    "Stok Miktarı": "2.986",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23079,7 +23232,7 @@
     "Ürün Kodu": "NE-AD 2056",
     "Ürün Adı": "NEAD CAT6E (RJ45) DATA SOKETİ",
     "Liste Fiyatı": "62,00",
-    "Stok Miktarı": "3.996",
+    "Stok Miktarı": "3.991",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23124,16 +23277,16 @@
     "Ürün Kodu": "NE-AD 3014-K",
     "Ürün Adı": "NEAD ÜÇLÜ KLEMENSLİ TOPRAKLI GRUP PRİZ",
     "Liste Fiyatı": "180,00",
-    "Stok Miktarı": "134",
+    "Stok Miktarı": "271",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
   },
   {
     "Ürün Kodu": "NE-AD 3014-KA",
-    "Ürün Adı": "NEAD ÜÇLÜ KLEMENSLİ TOPRAKLI ANAHTARLI GRUP PRİZ",
+    "Ürün Adı": "NEAD ÜÇLÜ KLEMENSLİ TOPRAKLI GRUP PRİZ ANAHTARLI",
     "Liste Fiyatı": "327,00",
-    "Stok Miktarı": "90",
+    "Stok Miktarı": "88",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23187,7 +23340,7 @@
     "Ürün Kodu": "NE-AD 4001",
     "Ürün Adı": "NEAD 1X16A KAUÇUK TOPRAKLI ERKEK FİŞ",
     "Liste Fiyatı": "90,00",
-    "Stok Miktarı": "2.019",
+    "Stok Miktarı": "2.614",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23205,7 +23358,7 @@
     "Ürün Kodu": "NE-AD 4005",
     "Ürün Adı": "NEAD 3X25A TRİFAZE ERKEK FİŞ",
     "Liste Fiyatı": "236,00",
-    "Stok Miktarı": "387",
+    "Stok Miktarı": "867",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23214,7 +23367,7 @@
     "Ürün Kodu": "NE-AD 4006",
     "Ürün Adı": "NEAD TRİFAZE SEYYAR PRİZ",
     "Liste Fiyatı": "241,00",
-    "Stok Miktarı": "357",
+    "Stok Miktarı": "356",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23277,7 +23430,7 @@
     "Ürün Kodu": "NE-AD 4103",
     "Ürün Adı": "NEAD 1X16A KAUÇUK ÜÇLÜ GRUP PRİZ",
     "Liste Fiyatı": "296,00",
-    "Stok Miktarı": "1.251",
+    "Stok Miktarı": "1.351",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23295,7 +23448,7 @@
     "Ürün Kodu": "NE-AD 5004",
     "Ürün Adı": "NEAD İKİLİ BOŞ KOMBİNASYON 242X322 MM",
     "Liste Fiyatı": "755,00",
-    "Stok Miktarı": "51",
+    "Stok Miktarı": "50",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23304,7 +23457,7 @@
     "Ürün Kodu": "NE-AD 5010",
     "Ürün Adı": "NEAD TEKLİ BOŞ KOMBİNASYON 156X238mm",
     "Liste Fiyatı": "464,00",
-    "Stok Miktarı": "10",
+    "Stok Miktarı": "8",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23313,7 +23466,7 @@
     "Ürün Kodu": "NE-AD 5012",
     "Ürün Adı": "NEAD (1 AD.3X25 ÖN/2 AD.1X16 YAN) KOMBİNASYON PANO",
     "Liste Fiyatı": "872,00",
-    "Stok Miktarı": "27",
+    "Stok Miktarı": "22",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23331,7 +23484,7 @@
     "Ürün Kodu": "NE-AD 5022",
     "Ürün Adı": "NEAD (2 AD.5X32 ÖN/2 AD.1X16 YAN) KOMBİNASYON PANO",
     "Liste Fiyatı": "2.687,00",
-    "Stok Miktarı": "135",
+    "Stok Miktarı": "133",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23340,7 +23493,7 @@
     "Ürün Kodu": "NE-AD 5161",
     "Ürün Adı": "NEAD 5X16 DÜZ ERKEK FİŞ",
     "Liste Fiyatı": "484,00",
-    "Stok Miktarı": "165",
+    "Stok Miktarı": "163",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23358,7 +23511,7 @@
     "Ürün Kodu": "NE-AD 5163",
     "Ürün Adı": "NEAD 5X16 KAPAKLI MAKİNE PRİZİ",
     "Liste Fiyatı": "545,00",
-    "Stok Miktarı": "283",
+    "Stok Miktarı": "281",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23376,7 +23529,7 @@
     "Ürün Kodu": "NE-AD 5321",
     "Ürün Adı": "NEAD 5X32A DÜZ ERKEK FİŞ",
     "Liste Fiyatı": "649,00",
-    "Stok Miktarı": "138",
+    "Stok Miktarı": "442",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23394,7 +23547,7 @@
     "Ürün Kodu": "NE-AD 5323",
     "Ürün Adı": "NEAD 5X32A KAPAKLI MAKİNA PRİZİ",
     "Liste Fiyatı": "655,00",
-    "Stok Miktarı": "98",
+    "Stok Miktarı": "82",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23403,7 +23556,7 @@
     "Ürün Kodu": "NE-AD 5324",
     "Ürün Adı": "NEAD 5X32 DUVAR PRİZİ",
     "Liste Fiyatı": "788,00",
-    "Stok Miktarı": "29",
+    "Stok Miktarı": "19",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23493,7 +23646,7 @@
     "Ürün Kodu": "NOAS YL10-1500",
     "Ürün Adı": "NOAS 15w S/A LED PANEL BEYAZ",
     "Liste Fiyatı": "235,00",
-    "Stok Miktarı": "178",
+    "Stok Miktarı": "163",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23556,7 +23709,7 @@
     "Ürün Kodu": "NOAS YL18-5400",
     "Ürün Adı": "NOAS 4OW 60X60 LED PANEL S/A (BEYAZ)",
     "Liste Fiyatı": "560,00",
-    "Stok Miktarı": "299",
+    "Stok Miktarı": "271",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23637,7 +23790,7 @@
     "Ürün Kodu": "NOAS YL26-0360",
     "Ürün Adı": "NOAS 24V 15A 360W ŞERİT LED TRAFOSU (ULTRASLİM)",
     "Liste Fiyatı": "625,00",
-    "Stok Miktarı": "27",
+    "Stok Miktarı": "26",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23763,7 +23916,7 @@
     "Ürün Kodu": "NOAS YL70-1300",
     "Ürün Adı": "NOAS 300W SLİM LED PROJEKTÖR (BEYAZ)",
     "Liste Fiyatı": "1.600,00",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "-1",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23817,7 +23970,7 @@
     "Ürün Kodu": "NOAS YL91-0501",
     "Ürün Adı": "NOAS 5w SOFT LED AMPÜL (GU-10)  6500K",
     "Liste Fiyatı": "48,00",
-    "Stok Miktarı": "129",
+    "Stok Miktarı": "60",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23898,7 +24051,7 @@
     "Ürün Kodu": "NOAS YL95-1211",
     "Ürün Adı": "NOAS 12W LED AMPÜL (E27)  (BEYAZ)",
     "Liste Fiyatı": "50,00",
-    "Stok Miktarı": "49",
+    "Stok Miktarı": "21",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23908,6 +24061,15 @@
     "Ürün Adı": "NOAS 12W LED AMPÜL (E27)  (GÜNIŞIĞI)",
     "Liste Fiyatı": "50,00",
     "Stok Miktarı": "1.297",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
+    "Ürün Kodu": "NOAS YL95-6021",
+    "Ürün Adı": "NOAS 60W TORCH LED AMPÜL (E27)  (BEYAZ)",
+    "Liste Fiyatı": "280,00",
+    "Stok Miktarı": "130",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -23961,7 +24123,7 @@
     "Ürün Kodu": "NTS 2001-S",
     "Ürün Adı": "NTS 4,3 İNÇ GÖRÜNTÜLÜ DİJİTAL DİAFON SİYAH",
     "Liste Fiyatı": "2.500,00",
-    "Stok Miktarı": "-4",
+    "Stok Miktarı": "54",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -24303,7 +24465,7 @@
     "Ürün Kodu": "NTS 8003",
     "Ürün Adı": "NTS TUŞ TAKIMLI DİJİTAL ZİL PANELİ",
     "Liste Fiyatı": "8.000,00",
-    "Stok Miktarı": "18",
+    "Stok Miktarı": "16",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -24321,7 +24483,7 @@
     "Ürün Kodu": "NTS 9063",
     "Ürün Adı": "NTS DİJİTAL SİSTEM BESLEMESİ",
     "Liste Fiyatı": "1.800,00",
-    "Stok Miktarı": "48",
+    "Stok Miktarı": "46",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -24411,7 +24573,7 @@
     "Ürün Kodu": "OAG 45 - 1P-10",
     "Ürün Adı": "OAG 1x10A OTOMATİK SİGORTA",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "244",
+    "Stok Miktarı": "239",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -24528,7 +24690,7 @@
     "Ürün Kodu": "OG 0600",
     "Ürün Adı": "İZOLE HALI 2mm 10kV",
     "Liste Fiyatı": "270,00",
-    "Stok Miktarı": "58",
+    "Stok Miktarı": "56",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -24545,7 +24707,7 @@
   {
     "Ürün Kodu": "ONK.1010651",
     "Ürün Adı": "MRK 16mm2 RAY KLEMENS",
-    "Liste Fiyatı": "122,50",
+    "Liste Fiyatı": "122,60",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -24572,7 +24734,7 @@
   {
     "Ürün Kodu": "ONK.1015",
     "Ürün Adı": "MRK 2.5mm2 RAY KLEMENS MAVİ",
-    "Liste Fiyatı": "35,60",
+    "Liste Fiyatı": "35,65",
     "Stok Miktarı": "10",
     "barkod1": "",
     "barkod2": "",
@@ -24662,7 +24824,7 @@
   {
     "Ürün Kodu": "ONK.1293",
     "Ürün Adı": "MTK 4mm TOPRAKLAMA KLEMENSİ",
-    "Liste Fiyatı": "100,00",
+    "Liste Fiyatı": "158,45",
     "Stok Miktarı": "213",
     "barkod1": "",
     "barkod2": "",
@@ -24680,7 +24842,7 @@
   {
     "Ürün Kodu": "ONK.2140",
     "Ürün Adı": "SK16/5 YAY BASKILI BAKIR BARA KLEMENSİ",
-    "Liste Fiyatı": "58,50",
+    "Liste Fiyatı": "59,00",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -24689,8 +24851,8 @@
   {
     "Ürün Kodu": "ONK.2142",
     "Ürün Adı": "SK35/5 YAY BASKILI BAKIR BARA KLEMENSİ",
-    "Liste Fiyatı": "104,25",
-    "Stok Miktarı": "285",
+    "Liste Fiyatı": "105,10",
+    "Stok Miktarı": "269",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -24698,7 +24860,7 @@
   {
     "Ürün Kodu": "ONK.4172",
     "Ürün Adı": "RAY TAŞIYICI SAC KROM",
-    "Liste Fiyatı": "13,30",
+    "Liste Fiyatı": "13,65",
     "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
@@ -25095,7 +25257,7 @@
     "Ürün Kodu": "OREL 1202",
     "Ürün Adı": "OREL MİMOZA DİŞİ FİŞ",
     "Liste Fiyatı": "25,00",
-    "Stok Miktarı": "380",
+    "Stok Miktarı": "330",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25104,7 +25266,7 @@
     "Ürün Kodu": "OREL 1203",
     "Ürün Adı": "OREL MİMOZA ERKEK FİŞ",
     "Liste Fiyatı": "25,00",
-    "Stok Miktarı": "347",
+    "Stok Miktarı": "197",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25140,7 +25302,7 @@
     "Ürün Kodu": "OREL 2000-B",
     "Ürün Adı": "TAVAN GLOP ARMATÜR E27 BEYAZ",
     "Liste Fiyatı": "85,00",
-    "Stok Miktarı": "41",
+    "Stok Miktarı": "33",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25248,7 +25410,7 @@
     "Ürün Kodu": "ÖZ.AB03",
     "Ürün Adı": "85X85X35 S/Ü BUAT (HALOJEN FREE) ÖZKARAKUŞ",
     "Liste Fiyatı": "18,00",
-    "Stok Miktarı": "1.243",
+    "Stok Miktarı": "1.241",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25257,7 +25419,7 @@
     "Ürün Kodu": "ÖZ.AB07",
     "Ürün Adı": "180X120X70 S.Ü KARE BUAT",
     "Liste Fiyatı": "70,00",
-    "Stok Miktarı": "136",
+    "Stok Miktarı": "134",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25266,7 +25428,7 @@
     "Ürün Kodu": "ÖZ.KB008",
     "Ürün Adı": "110X110X75 S.Ü KARE BUAT",
     "Liste Fiyatı": "46,00",
-    "Stok Miktarı": "154",
+    "Stok Miktarı": "113",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25275,7 +25437,7 @@
     "Ürün Kodu": "ÖZ.KB07",
     "Ürün Adı": "10X10 KARE BUAT ÖZKARAKUŞ",
     "Liste Fiyatı": "19,50",
-    "Stok Miktarı": "148",
+    "Stok Miktarı": "88",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25293,7 +25455,7 @@
     "Ürün Kodu": "ÖZ.KB09",
     "Ürün Adı": "15X15 KARE BUAT ÖZKARAKUŞ",
     "Liste Fiyatı": "26,00",
-    "Stok Miktarı": "120",
+    "Stok Miktarı": "100",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25356,7 +25518,7 @@
     "Ürün Kodu": "ÖZ.LP18",
     "Ürün Adı": "18W LED PANEL S/Ü KASASI",
     "Liste Fiyatı": "50,00",
-    "Stok Miktarı": "30",
+    "Stok Miktarı": "10",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25473,7 +25635,7 @@
     "Ürün Kodu": "OZB.1105",
     "Ürün Adı": "BAKIR TOPRAKLAMA ÇUBUĞU (Q16) 1m",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "-1",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25518,7 +25680,7 @@
     "Ürün Kodu": "OZB.1135",
     "Ürün Adı": "CEB-106 20 LİK BAKIR TOPRAKLAMA ELEKTROD BAŞLIĞI",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "-1",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25527,7 +25689,7 @@
     "Ürün Kodu": "OZB.1141",
     "Ürün Adı": "A40-B25 AL-CU ALÜMİNYUM KLEMENS",
     "Liste Fiyatı": "42,00",
-    "Stok Miktarı": "173",
+    "Stok Miktarı": "167",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25689,7 +25851,7 @@
     "Ürün Kodu": "OZB.1331",
     "Ürün Adı": "S-3 SOKAK LAMBASI BORUSU (KONSUL)",
     "Liste Fiyatı": "165,00",
-    "Stok Miktarı": "82",
+    "Stok Miktarı": "81",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25707,7 +25869,7 @@
     "Ürün Kodu": "OZB.1343",
     "Ürün Adı": "3 NO TANDIR KROŞE",
     "Liste Fiyatı": "11,50",
-    "Stok Miktarı": "348",
+    "Stok Miktarı": "268",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25716,7 +25878,7 @@
     "Ürün Kodu": "OZB.1352",
     "Ürün Adı": "İZOLELİ ÇELİK HALAT 5MM",
     "Liste Fiyatı": "17,50",
-    "Stok Miktarı": "690",
+    "Stok Miktarı": "649",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25725,7 +25887,7 @@
     "Ürün Kodu": "OZB.1362",
     "Ürün Adı": "HALAT GERDİRME 8mm",
     "Liste Fiyatı": "60,00",
-    "Stok Miktarı": "97",
+    "Stok Miktarı": "96",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25734,7 +25896,7 @@
     "Ürün Kodu": "OZB.1371",
     "Ürün Adı": "HALAT SIKTIRMA 6mm",
     "Liste Fiyatı": "16,00",
-    "Stok Miktarı": "169",
+    "Stok Miktarı": "167",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25761,7 +25923,7 @@
     "Ürün Kodu": "PANO",
     "Ürün Adı": "ÖZEL PANO",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "-1",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -25932,7 +26094,7 @@
     "Ürün Kodu": "PHL.PLC.05",
     "Ürün Adı": "PHL.20557",
     "Liste Fiyatı": "50,00",
-    "Stok Miktarı": "5",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -26409,7 +26571,7 @@
     "Ürün Kodu": "RCB.901058",
     "Ürün Adı": "REÇBER DT-8 DİAFON KABLOSU",
     "Liste Fiyatı": "28,38",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "-100",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -26850,7 +27012,7 @@
     "Ürün Kodu": "SIMGE 8010",
     "Ürün Adı": "SİMGE 360° SENSÖRLÜ TAVAN ARMATÜRÜ LEDLİ İSKA",
     "Liste Fiyatı": "230,00",
-    "Stok Miktarı": "98",
+    "Stok Miktarı": "97",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -27030,7 +27192,7 @@
     "Ürün Kodu": "T.PKB 01",
     "Ürün Adı": "TAMER 2X1.5-3X50+25 PABUÇSUZ KABLO BAŞLIĞI",
     "Liste Fiyatı": "215,00",
-    "Stok Miktarı": "217",
+    "Stok Miktarı": "117",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -27075,7 +27237,7 @@
     "Ürün Kodu": "T.S1 31610",
     "Ürün Adı": "TAMER 3x16+10 ISI BÜZÜŞMELİ EK MUFU",
     "Liste Fiyatı": "375,00",
-    "Stok Miktarı": "5",
+    "Stok Miktarı": "4",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -27342,10 +27504,28 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "TNS.FKV-03F",
+    "Ürün Adı": "TENSE FAZ SIRALI MOTOR KORUMA RÖLESİ",
+    "Liste Fiyatı": "1.350,00",
+    "Stok Miktarı": "0",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
+    "Ürün Kodu": "TNS.FKV-11",
+    "Ürün Adı": "TENSE (FKV-11) FAZ (MOTOR) KORUMA RÖLESİ (OTOMAT TİP)",
+    "Liste Fiyatı": "900,00",
+    "Stok Miktarı": "0",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "TNS.FKV-14P",
     "Ürün Adı": "TENSE (FKV-14P) FAZ KORUMA RÖLESİ FAZ SIRALAMALI (%30 ASİMETRİ)",
     "Liste Fiyatı": "1.300,00",
-    "Stok Miktarı": "0",
+    "Stok Miktarı": "-10",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -27354,7 +27534,7 @@
     "Ürün Kodu": "TNS.FLT-3",
     "Ürün Adı": "TENSE (FLT-3) 3 METRE KABLOLU FLATÖR ( 21,50 $ )",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "1",
+    "Stok Miktarı": "0",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -27471,7 +27651,7 @@
     "Ürün Kodu": "TORK.MAK-025-S",
     "Ürün Adı": "TORK 25mm MAKARON SİYAH",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "27",
+    "Stok Miktarı": "26",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28110,7 +28290,7 @@
     "Ürün Kodu": "WLL-2106-B",
     "Ürün Adı": "WALLED 12w LED PANEL S/A SİYAH KASA 6500k",
     "Liste Fiyatı": "290,00",
-    "Stok Miktarı": "48",
+    "Stok Miktarı": "46",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28191,7 +28371,7 @@
     "Ürün Kodu": "YCL AL 2050",
     "Ürün Adı": "YCL 50W SMD LED PROJEKTÖR (AMBER)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "12",
+    "Stok Miktarı": "13",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28200,7 +28380,7 @@
     "Ürün Kodu": "YCL AL 2050G",
     "Ürün Adı": "YCL 50W SMD LED PROJEKTÖR (GÜNIŞIĞI)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "7",
+    "Stok Miktarı": "5",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28217,6 +28397,15 @@
   {
     "Ürün Kodu": "YCL AL 2200",
     "Ürün Adı": "YCL 200W SMD LED PROJEKTÖR (GÜNIŞIĞI)",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "0",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
+    "Ürün Kodu": "YCL ASM 2206",
+    "Ürün Adı": "YCL 18w S/Ü LED PANEL (KARE) (SİYAH) BEYAZ",
     "Liste Fiyatı": "0,00",
     "Stok Miktarı": "0",
     "barkod1": "",
@@ -28413,6 +28602,15 @@
     "barkod3": ""
   },
   {
+    "Ürün Kodu": "ZMR-121/B.30",
+    "Ürün Adı": "ZMR 7w LED AMPÜL (GU-10) GÜNIŞIĞI",
+    "Liste Fiyatı": "0,00",
+    "Stok Miktarı": "1.000",
+    "barkod1": "",
+    "barkod2": "",
+    "barkod3": ""
+  },
+  {
     "Ürün Kodu": "ZMR-121/B.40",
     "Ürün Adı": "ZMR 7w LED AMPÜL (GU-10) 4000K",
     "Liste Fiyatı": "0,00",
@@ -28443,7 +28641,7 @@
     "Ürün Kodu": "ZMR-202/B.65",
     "Ürün Adı": "ZMR 6w S/A LED PANEL BEYAZ",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "155",
+    "Stok Miktarı": "154",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28470,7 +28668,7 @@
     "Ürün Kodu": "ZMR-203/B.65",
     "Ürün Adı": "ZMR 9w S/A LED PANEL BEYAZ",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "12",
+    "Stok Miktarı": "11",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28548,15 +28746,6 @@
     "barkod3": ""
   },
   {
-    "Ürün Kodu": "ZMR-206/S.65",
-    "Ürün Adı": "ZMR 18w S/A LED PANEL (SİYAH) BEYAZ",
-    "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "0",
-    "barkod1": "",
-    "barkod2": "",
-    "barkod3": ""
-  },
-  {
     "Ürün Kodu": "ZMR-227/B.65",
     "Ürün Adı": "ZMR 36w X-PLUS LED PANEL AYARLANABİLİR (BEYAZ)",
     "Liste Fiyatı": "0,00",
@@ -28569,7 +28758,7 @@
     "Ürün Kodu": "ZMR-234/B.65",
     "Ürün Adı": "ZMR 100W KRİSTAL YATAY BANT ARMATÜR (BEYAZ)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "306",
+    "Stok Miktarı": "302",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28587,7 +28776,7 @@
     "Ürün Kodu": "ZMR-250/B.65",
     "Ürün Adı": "ZMR 24W 30X30 CLIP IN LED PANEL (BEYAZ)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "39",
+    "Stok Miktarı": "33",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28605,7 +28794,7 @@
     "Ürün Kodu": "ZMR-256/B.65",
     "Ürün Adı": "ZMR 4OW 60X60 LED PANEL S/A (BEYAZ)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "482",
+    "Stok Miktarı": "430",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28632,7 +28821,7 @@
     "Ürün Kodu": "ZMR-313/S.65",
     "Ürün Adı": "ZMR 150W ULTRA SLİM LED PROJEKTÖR (BEYAZ)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "7",
+    "Stok Miktarı": "1",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28641,7 +28830,7 @@
     "Ürün Kodu": "ZMR-314/S.65",
     "Ürün Adı": "ZMR 200W ULTRA SLİM LED PROJEKTÖR (BEYAZ)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "46",
+    "Stok Miktarı": "39",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28704,7 +28893,7 @@
     "Ürün Kodu": "ZMR-714/B.00",
     "Ürün Adı": "ZMR 460W 30A ŞERİT LED TRAFOSU (SÜPERSLİM)",
     "Liste Fiyatı": "0,00",
-    "Stok Miktarı": "65",
+    "Stok Miktarı": "64",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
@@ -28947,7 +29136,7 @@
     "Ürün Kodu": "ZRP.6851",
     "Ürün Adı": "ZERPA OPTİK ALTIGEN DUVAR APLİK",
     "Liste Fiyatı": "300,00",
-    "Stok Miktarı": "7",
+    "Stok Miktarı": "4",
     "barkod1": "",
     "barkod2": "",
     "barkod3": ""
