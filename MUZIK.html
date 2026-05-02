@@ -1,93 +1,178 @@
-```html
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Duru Müzik</title>
+<title>Duru Player</title>
 
 <style>
 body { background:#000; color:#fff; font-family:Arial; margin:0; }
-#list { padding:15px; }
-.song { padding:12px; border-bottom:1px solid #222; cursor:pointer; display:flex; gap:10px; align-items:center;}
-.song img { width:50px; height:50px; border-radius:8px; object-fit:cover;}
+
+header { padding:10px; background:#111; display:flex; gap:10px; }
+
+select, input {
+    background:#111; color:#fff; border:none; padding:8px;
+}
+
+#list { padding:10px; }
+
+.song {
+    display:flex; align-items:center;
+    padding:10px; border-bottom:1px solid #222;
+    cursor:pointer;
+}
+
+.song img { width:50px; height:50px; border-radius:8px; margin-right:10px; }
+
 .song:hover { background:#111; }
-#player { position:fixed; bottom:0; width:100%; background:#111; padding:10px;}
+
+.actions { margin-left:auto; display:flex; gap:10px; }
+
+button {
+    background:#1db954; border:none; padding:5px 8px;
+    color:#fff; cursor:pointer;
+}
+
+#player {
+    position:fixed; bottom:0; width:100%;
+    background:#111; padding:10px;
+}
+
+/* 🎵 ANİMASYON */
+.equalizer {
+    display:flex; gap:3px; height:20px;
+}
+
+.bar {
+    width:3px;
+    background:#1db954;
+    animation: bounce 1s infinite;
+}
+
+.bar:nth-child(2){ animation-delay:0.2s;}
+.bar:nth-child(3){ animation-delay:0.4s;}
+.bar:nth-child(4){ animation-delay:0.6s;}
+
+@keyframes bounce {
+    0%{ height:5px;}
+    50%{ height:20px;}
+    100%{ height:5px;}
+}
 </style>
+
 </head>
 
 <body>
 
-<h2 style="padding:10px">🎧 Müzik Player </h2>
+<header>
+<input id="search" placeholder="Ara...">
 
-<input id="search" placeholder="Ara..." style="width:90%;margin:10px;padding:10px;background:#111;border:none;color:#fff">
+<select id="albumFilter"></select> <select id="catFilter"></select>
+
+<button onclick="createPlaylist()">+ Playlist</button>
+
+</header>
 
 <div id="list"></div>
 
 <div id="player">
-    <div id="now">Şarkı seç</div>
-    <audio id="audio" controls style="width:100%"></audio>
+    <div style="display:flex;align-items:center;gap:10px">
+        <div class="equalizer" id="eq" style="display:none">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div id="now">Şarkı seç</div>
+    </div>
+
+```
+<audio id="audio" controls style="width:100%"></audio>
+```
+
 </div>
 
 <script>
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTdRVAosbcPqFmuzurnWP7n_aEyUCafM9txkdVW5GnOh1pBpTAQXUNmjrbw-7s2ky-KwEhmpxQ974Sh/pub?gid=0&single=true&output=csv";
+const URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTdRVAosbcPqFmuzurnWP7n_aEyUCafM9txkdVW5GnOh1pBpTAQXUNmjrbw-7s2ky-KwEhmpxQ974Sh/pub?gid=0&single=true&output=csv";
 
-let songs = [];
-let queue = [];
-let currentIndex = -1;
+let songs=[], queue=[], currentIndex=-1;
+let playlists = JSON.parse(localStorage.getItem("pl")) || {};
 
-const list = document.getElementById("list");
 const audio = document.getElementById("audio");
+const list = document.getElementById("list");
 const now = document.getElementById("now");
+const eq = document.getElementById("eq");
 
-// CSV parse (daha sağlam)
-function parseCSV(text){
-    const lines = text.split("\n");
-    const headers = lines[0].split(",");
-
-    return lines.slice(1).map(line=>{
-        const cols = line.split(",");
-        let obj = {};
-        headers.forEach((h,i)=> obj[h.trim()] = cols[i]);
-        return obj;
+// CSV
+function parseCSV(t){
+    let l=t.split("\n");
+    let h=l[0].split(",");
+    return l.slice(1).map(r=>{
+        let c=r.split(",");
+        let o={};
+        h.forEach((x,i)=>o[x.trim()]=c[i]);
+        return o;
     });
 }
 
-// load
+// LOAD
 async function load(){
-    const res = await fetch(SHEET_URL);
-    const txt = await res.text();
+    let r=await fetch(URL);
+    let t=await r.text();
 
-    songs = parseCSV(txt).map((s,i)=>({
-        title: s.SARKI,
-        url: s.URL,
-        album: s.ALBUM,
-        cat: s.KATEGORI,
-        img: s.RESIM || "https://via.placeholder.com/150/000000/ff0000?text=DURU"
+    songs=parseCSV(t).map(s=>({
+        title:s.SARKI,
+        url:s.URL,
+        album:s.ALBUM,
+        cat:s.KATEGORI,
+        img:s.RESIM||"https://via.placeholder.com/150"
     })).filter(s=>s.title && s.url);
 
-    queue = songs;
+    queue=songs;
+    fillFilters();
     render(queue);
 }
 
-// render
+// FILTERS
+function fillFilters(){
+    let alb=[...new Set(songs.map(s=>s.album))];
+    let cat=[...new Set(songs.map(s=>s.cat))];
+
+    albumFilter.innerHTML="<option value=''>Albüm</option>";
+    catFilter.innerHTML="<option value=''>Kategori</option>";
+
+    alb.forEach(a=>{
+        albumFilter.innerHTML+=`<option>${a}</option>`;
+    });
+
+    cat.forEach(c=>{
+        catFilter.innerHTML+=`<option>${c}</option>`;
+    });
+}
+
+// RENDER
 function render(arr){
-    list.innerHTML = "";
+    list.innerHTML="";
     arr.forEach((s,i)=>{
-        let d = document.createElement("div");
+        let d=document.createElement("div");
         d.className="song";
 
-        d.innerHTML = `
+        d.innerHTML=`
             <img src="${s.img}">
             <div>
                 <div>${s.title}</div>
                 <div style="font-size:12px;color:#aaa">${s.album}</div>
             </div>
+            <div class="actions">
+                <button onclick="event.stopPropagation();addQueue(${i})">+Sıraya</button>
+                <button onclick="event.stopPropagation();addPlaylist(${i})">❤️</button>
+            </div>
         `;
 
         d.onclick=()=>{
-            queue = arr;
-            currentIndex = i;
+            queue=arr;
+            currentIndex=i;
             play();
         };
 
@@ -95,50 +180,75 @@ function render(arr){
     });
 }
 
-// play
+// PLAY
 function play(){
-    let s = queue[currentIndex];
-    audio.src = s.url;
+    let s=queue[currentIndex];
+    audio.src=s.url;
     audio.play();
-    now.innerText = s.title + " - " + s.album;
+    now.innerText=s.title + " - " + s.album;
+    eq.style.display="flex";
     preload();
 }
 
-// preload (önceki + sonraki)
+// PRELOAD
 function preload(){
     [currentIndex-1,currentIndex+1].forEach(i=>{
         if(queue[i]){
-            let a = new Audio();
-            a.src = queue[i].url;
-            a.preload="auto";
+            let a=new Audio();
+            a.src=queue[i].url;
         }
     });
 }
 
-// next auto
-audio.onended = ()=>{
+// AUTO NEXT
+audio.onended=()=>{
     if(currentIndex < queue.length-1){
         currentIndex++;
         play();
     }
 };
 
-// search
-document.getElementById("search").oninput = (e)=>{
-    let q = e.target.value.toLowerCase();
+// QUEUE EKLE
+function addQueue(i){
+    queue.push(songs[i]);
+    alert("Sıraya eklendi");
+}
 
-    let f = songs.filter(s =>
-        s.title.toLowerCase().includes(q) ||
-        s.album.toLowerCase().includes(q) ||
-        s.cat.toLowerCase().includes(q)
+// PLAYLIST
+function createPlaylist(){
+    let name=prompt("Playlist adı");
+    if(name) playlists[name]=[];
+    localStorage.setItem("pl",JSON.stringify(playlists));
+}
+
+function addPlaylist(i){
+    let name=prompt("Hangi playlist?");
+    if(!playlists[name]) playlists[name]=[];
+    playlists[name].push(songs[i]);
+    localStorage.setItem("pl",JSON.stringify(playlists));
+}
+
+// SEARCH + FILTER
+document.getElementById("search").oninput=filter;
+albumFilter.onchange=filter;
+catFilter.onchange=filter;
+
+function filter(){
+    let q=search.value.toLowerCase();
+    let a=albumFilter.value;
+    let c=catFilter.value;
+
+    let f=songs.filter(s=>
+        (!a||s.album==a) &&
+        (!c||s.cat==c) &&
+        (s.title.toLowerCase().includes(q))
     );
 
     render(f);
-};
+}
 
 load();
 </script>
 
 </body>
 </html>
-```
