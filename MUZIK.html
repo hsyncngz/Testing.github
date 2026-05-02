@@ -1,0 +1,207 @@
+```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Online Müzik Player</title>
+
+<style>
+body {
+    background: #121212;
+    color: #fff;
+    font-family: Arial;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#controls {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+button {
+    background: #1db954;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+select {
+    padding: 8px;
+    border-radius: 5px;
+    background: #333;
+    color: white;
+}
+
+#list {
+    max-width: 700px;
+    margin: auto;
+}
+
+.song {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+}
+
+.song:hover {
+    background: #222;
+}
+
+.active {
+    background: #1db954;
+}
+</style>
+
+</head>
+<body>
+
+<h1>🎧 Müzik Player</h1>
+
+<div id="controls">
+    <button onclick="toggleShuffle()">🔀 Shuffle</button>
+
+    <select id="categoryFilter" onchange="filterSongs()">
+        <option value="all">Tüm Kategoriler</option>
+    </select>
+
+    <select id="albumFilter" onchange="filterSongs()">
+        <option value="all">Tüm Albümler</option>
+    </select>
+</div>
+
+<div id="list"></div>
+
+<audio id="player" controls style="width:100%; margin-top:20px;"></audio>
+
+<script>
+
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTdRVAosbcPqFmuzurnWP7n_aEyUCafM9txkdVW5GnOh1pBpTAQXUNmjrbw-7s2ky-KwEhmpxQ974Sh/pub?gid=0&single=true&output=csv";
+
+let songs = [];
+let filteredSongs = [];
+let currentIndex = 0;
+let shuffle = false;
+
+const listDiv = document.getElementById("list");
+const player = document.getElementById("player");
+const categoryFilter = document.getElementById("categoryFilter");
+const albumFilter = document.getElementById("albumFilter");
+
+// CSV PARSE
+function parseCSV(text) {
+    const rows = text.split("\n").map(r => r.split(","));
+    const headers = rows[0];
+
+    return rows.slice(1).map(row => {
+        let obj = {};
+        headers.forEach((h, i) => obj[h.trim()] = row[i]);
+        return obj;
+    });
+}
+
+// GOOGLE SHEET VERİYİ ÇEK
+async function loadSongs() {
+    const res = await fetch(SHEET_URL);
+    const csv = await res.text();
+
+    songs = parseCSV(csv).filter(s => s.SARKI && s.URL);
+
+    filteredSongs = [...songs];
+
+    fillFilters();
+    renderList();
+}
+
+// KATEGORİ + ALBÜM DOLDUR
+function fillFilters() {
+    const categories = [...new Set(songs.map(s => s.KATEGORI))];
+    const albums = [...new Set(songs.map(s => s.ALBUM))];
+
+    categories.forEach(cat => {
+        let opt = document.createElement("option");
+        opt.value = cat;
+        opt.textContent = cat;
+        categoryFilter.appendChild(opt);
+    });
+
+    albums.forEach(alb => {
+        let opt = document.createElement("option");
+        opt.value = alb;
+        opt.textContent = alb;
+        albumFilter.appendChild(opt);
+    });
+}
+
+// LİSTE
+function renderList() {
+    listDiv.innerHTML = "";
+
+    filteredSongs.forEach((song, index) => {
+        let div = document.createElement("div");
+        div.className = "song";
+        div.textContent = `${song.SARKI} - ${song.ALBUM}`;
+        div.onclick = () => playSong(index);
+        listDiv.appendChild(div);
+    });
+}
+
+// ÇAL
+function playSong(index) {
+    currentIndex = index;
+    player.src = filteredSongs[index].URL;
+    player.play();
+    highlight();
+}
+
+// AKTİF
+function highlight() {
+    document.querySelectorAll(".song").forEach((el, i) => {
+        el.classList.toggle("active", i === currentIndex);
+    });
+}
+
+// OTOMATİK GEÇİŞ
+player.addEventListener("ended", () => {
+    if (shuffle) {
+        currentIndex = Math.floor(Math.random() * filteredSongs.length);
+    } else {
+        currentIndex = (currentIndex + 1) % filteredSongs.length;
+    }
+    playSong(currentIndex);
+});
+
+// SHUFFLE
+function toggleShuffle() {
+    shuffle = !shuffle;
+    alert("Shuffle: " + (shuffle ? "Açık" : "Kapalı"));
+}
+
+// FİLTRE
+function filterSongs() {
+    const cat = categoryFilter.value;
+    const alb = albumFilter.value;
+
+    filteredSongs = songs.filter(s => {
+        return (cat === "all" || s.KATEGORI === cat) &&
+               (alb === "all" || s.ALBUM === alb);
+    });
+
+    renderList();
+}
+
+// BAŞLAT
+loadSongs();
+
+</script>
+
+</body>
+</html>
+```
