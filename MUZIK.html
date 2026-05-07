@@ -1,253 +1,635 @@
 <!DOCTYPE html>
-
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Duru Player</title>
+<title>Duru Music</title>
 
 <style>
-body { background:#000; color:#fff; font-family:Arial; margin:0; }
-
-header { padding:10px; background:#111; display:flex; gap:10px; }
-
-select, input {
-    background:#111; color:#fff; border:none; padding:8px;
+:root{
+    --bg:#000;
+    --card:#111;
+    --border:#222;
+    --green:#1db954;
+    --text:#fff;
+    --sub:#999;
 }
 
-#list { padding:10px; }
+*{
+    box-sizing:border-box;
+}
 
-.song {
-    display:flex; align-items:center;
-    padding:10px; border-bottom:1px solid #222;
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+
+/* HEADER */
+
+.top{
+    padding:20px 15px 10px;
+    background:#000;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    text-align:center;
+    color:var(--green);
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.search-wrap{
+    display:flex;
+    justify-content:center;
+    margin-bottom:15px;
+}
+
+#search{
+    width:100%;
+    max-width:700px;
+    padding:18px 22px;
+    border:none;
+    border-radius:18px;
+    background:#111;
+    color:#fff;
+    font-size:18px;
+}
+
+.filters{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.filters select{
+    background:#111;
+    color:#fff;
+    border:none;
+    padding:12px 16px;
+    border-radius:12px;
+    font-size:15px;
+}
+
+/* LIST */
+
+#list{
+    height:calc(100vh - 220px);
+    overflow:auto;
+    padding:10px 10px 140px;
+}
+
+.song{
+    display:flex;
+    align-items:center;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:10px;
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.song:hover{
+    background:#171717;
+}
+
+.song.active{
+    border-color:var(--green);
+    background:#08130c;
+}
+
+.song img{
+    width:65px;
+    height:65px;
+    border-radius:12px;
+    object-fit:cover;
+    margin-right:12px;
+}
+
+.meta{
+    flex:1;
+    overflow:hidden;
+}
+
+.title{
+    font-size:16px;
+    font-weight:bold;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.album{
+    font-size:13px;
+    color:var(--sub);
+    margin-top:4px;
+}
+
+/* EQUALIZER */
+
+.eq{
+    display:none;
+    gap:3px;
+    align-items:flex-end;
+    width:18px;
+    height:18px;
+    margin-right:12px;
+}
+
+.eq span{
+    width:3px;
+    background:var(--green);
+    border-radius:5px;
+    animation:bounce 1s infinite ease-in-out;
+}
+
+.eq span:nth-child(2){animation-delay:.2s;}
+.eq span:nth-child(3){animation-delay:.4s;}
+.eq span:nth-child(4){animation-delay:.6s;}
+
+@keyframes bounce{
+    0%{height:4px;}
+    50%{height:18px;}
+    100%{height:4px;}
+}
+
+/* PLAYER */
+
+.player{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#0d0d0d;
+    border-top:1px solid #222;
+    padding:12px;
+}
+
+.now{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+}
+
+.now img{
+    width:55px;
+    height:55px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.now-title{
+    font-size:15px;
+    font-weight:bold;
+}
+
+.now-album{
+    font-size:12px;
+    color:#999;
+    margin-top:4px;
+}
+
+/* PROGRESS */
+
+.progress-wrap{
+    margin-bottom:15px;
+}
+
+.progress{
+    width:100%;
+    height:10px;
+    background:#222;
+    border-radius:20px;
+    overflow:hidden;
     cursor:pointer;
 }
 
-.song img { width:50px; height:50px; border-radius:8px; margin-right:10px; }
-
-.song:hover { background:#111; }
-
-.actions { margin-left:auto; display:flex; gap:10px; }
-
-button {
-    background:#1db954; border:none; padding:5px 8px;
-    color:#fff; cursor:pointer;
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:var(--green);
 }
 
-#player {
-    position:fixed; bottom:0; width:100%;
-    background:#111; padding:10px;
+.time{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:#888;
+    margin-top:6px;
 }
 
-/* 🎵 ANİMASYON */
-.equalizer {
-    display:flex; gap:3px; height:20px;
+/* CONTROLS */
+
+.controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:35px;
 }
 
-.bar {
-    width:3px;
-    background:#1db954;
-    animation: bounce 1s infinite;
+.controls button{
+    background:none;
+    border:none;
+    color:#fff;
+    cursor:pointer;
 }
 
-.bar:nth-child(2){ animation-delay:0.2s;}
-.bar:nth-child(3){ animation-delay:0.4s;}
-.bar:nth-child(4){ animation-delay:0.6s;}
+.controls .main{
+    font-size:60px;
+    color:var(--green);
+}
 
-@keyframes bounce {
-    0%{ height:5px;}
-    50%{ height:20px;}
-    100%{ height:5px;}
+.controls .side{
+    font-size:34px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+    #search{
+        font-size:16px;
+        padding:16px;
+    }
+
+    .controls{
+        gap:28px;
+    }
 }
 </style>
-
 </head>
 
 <body>
 
-<header>
-<input id="search" placeholder="Ara...">
+<div class="top">
+    <div class="logo">DURU MUSIC</div>
 
-<select id="albumFilter"></select> <select id="catFilter"></select>
+    <div class="search-wrap">
+        <input id="search" placeholder="Şarkı, albüm veya kategori ara...">
+    </div>
 
-<button onclick="createPlaylist()">+ Playlist</button>
+    <div class="filters">
+        <select id="albumFilter">
+            <option value="">Tüm Albümler</option>
+        </select>
 
-</header>
+        <select id="catFilter">
+            <option value="">Tüm Kategoriler</option>
+        </select>
+    </div>
+</div>
 
 <div id="list"></div>
 
-<div id="player">
-    <div style="display:flex;align-items:center;gap:10px">
-        <div class="equalizer" id="eq" style="display:none">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+<div class="player">
+
+    <div class="now">
+        <img id="cover" src="https://via.placeholder.com/300x300/111111/1db954?text=DURU">
+
+        <div style="flex:1">
+            <div class="now-title" id="nowTitle">Şarkı seçin</div>
+            <div class="now-album" id="nowAlbum">Albüm</div>
         </div>
-        <div id="now">Şarkı seç</div>
     </div>
 
-```
-<audio id="audio" controls style="width:100%"></audio>
-```
+    <div class="progress-wrap">
+        <div class="progress" id="progress">
+            <div class="progress-fill" id="fill"></div>
+        </div>
+
+        <div class="time">
+            <span id="current">0:00</span>
+            <span id="total">0:00</span>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="side" onclick="prevSong()">⏮</button>
+
+        <button class="main" id="playBtn" onclick="togglePlay()">▶</button>
+
+        <button class="side" onclick="nextSong()">⏭</button>
+    </div>
 
 </div>
 
+<audio id="audio" preload="auto"></audio>
+
 <script>
-const URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTdRVAosbcPqFmuzurnWP7n_aEyUCafM9txkdVW5GnOh1pBpTAQXUNmjrbw-7s2ky-KwEhmpxQ974Sh/pub?gid=0&single=true&output=csv";
 
-let songs=[], queue=[], currentIndex=-1;
-let playlists = JSON.parse(localStorage.getItem("pl")) || {};
+const SHEET_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vTdRVAosbcPqFmuzurnWP7n_aEyUCafM9txkdVW5GnOh1pBpTAQXUNmjrbw-7s2ky-KwEhmpxQ974Sh/pub?gid=0&single=true&output=csv";
 
-const audio = document.getElementById("audio");
+let songs = [];
+let filtered = [];
+let currentIndex = -1;
+
 const list = document.getElementById("list");
-const now = document.getElementById("now");
-const eq = document.getElementById("eq");
+const audio = document.getElementById("audio");
 
-// CSV
-function parseCSV(t){
-    let l=t.split("\n");
-    let h=l[0].split(",");
-    return l.slice(1).map(r=>{
-        let c=r.split(",");
-        let o={};
-        h.forEach((x,i)=>o[x.trim()]=c[i]);
-        return o;
+const nowTitle = document.getElementById("nowTitle");
+const nowAlbum = document.getElementById("nowAlbum");
+const cover = document.getElementById("cover");
+
+const playBtn = document.getElementById("playBtn");
+
+const fill = document.getElementById("fill");
+const current = document.getElementById("current");
+const total = document.getElementById("total");
+
+/* CSV */
+
+function parseCSV(text){
+
+    const lines = text.trim().split("\n");
+    const headers = lines[0].split(",");
+
+    return lines.slice(1).map(line=>{
+
+        const cols = line.split(",");
+
+        let obj = {};
+
+        headers.forEach((h,i)=>{
+            obj[h.trim()] = cols[i];
+        });
+
+        return obj;
     });
 }
 
-// LOAD
-async function load(){
-    let r=await fetch(URL);
-    let t=await r.text();
+/* LOAD */
 
-    songs=parseCSV(t).map(s=>({
+async function loadSongs(){
+
+    const res = await fetch(SHEET_URL);
+    const txt = await res.text();
+
+    songs = parseCSV(txt).map((s,i)=>({
+
         title:s.SARKI,
         url:s.URL,
         album:s.ALBUM,
         cat:s.KATEGORI,
-        img:s.RESIM||"https://via.placeholder.com/150"
+        img:s.RESIM ||
+        "https://via.placeholder.com/300x300/111111/1db954?text=DURU"
+
     })).filter(s=>s.title && s.url);
 
-    queue=songs;
+    filtered = songs;
+
     fillFilters();
-    render(queue);
+
+    render(filtered);
 }
 
-// FILTERS
+/* FILTERS */
+
 function fillFilters(){
-    let alb=[...new Set(songs.map(s=>s.album))];
-    let cat=[...new Set(songs.map(s=>s.cat))];
 
-    albumFilter.innerHTML="<option value=''>Albüm</option>";
-    catFilter.innerHTML="<option value=''>Kategori</option>";
+    const albums = [...new Set(songs.map(s=>s.album))];
+    const cats = [...new Set(songs.map(s=>s.cat))];
 
-    alb.forEach(a=>{
-        albumFilter.innerHTML+=`<option>${a}</option>`;
+    albums.forEach(a=>{
+        albumFilter.innerHTML += `<option>${a}</option>`;
     });
 
-    cat.forEach(c=>{
-        catFilter.innerHTML+=`<option>${c}</option>`;
+    cats.forEach(c=>{
+        catFilter.innerHTML += `<option>${c}</option>`;
     });
 }
 
-// RENDER
-function render(arr){
-    list.innerHTML="";
-    arr.forEach((s,i)=>{
-        let d=document.createElement("div");
-        d.className="song";
+/* RENDER */
 
-        d.innerHTML=`
-            <img src="${s.img}">
-            <div>
-                <div>${s.title}</div>
-                <div style="font-size:12px;color:#aaa">${s.album}</div>
+function render(arr){
+
+    list.innerHTML = "";
+
+    arr.forEach((s,i)=>{
+
+        const active = i === currentIndex;
+
+        const div = document.createElement("div");
+
+        div.className = "song " + (active ? "active" : "");
+
+        div.innerHTML = `
+
+            <div class="eq" style="display:${active && !audio.paused ? 'flex':'none'}">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <div class="actions">
-                <button onclick="event.stopPropagation();addQueue(${i})">+Sıraya</button>
-                <button onclick="event.stopPropagation();addPlaylist(${i})">❤️</button>
+
+            <img src="${s.img}">
+
+            <div class="meta">
+                <div class="title">${s.title}</div>
+                <div class="album">${s.album} • ${s.cat}</div>
             </div>
         `;
 
-        d.onclick=()=>{
-            queue=arr;
-            currentIndex=i;
-            play();
+        div.onclick = ()=>{
+
+            currentIndex = i;
+
+            playSong();
         };
 
-        list.appendChild(d);
+        list.appendChild(div);
     });
 }
 
-// PLAY
-function play(){
-    let s=queue[currentIndex];
-    audio.src=s.url;
+/* PLAY */
+
+function playSong(){
+
+    const s = filtered[currentIndex];
+
+    audio.src = s.url;
+
     audio.play();
-    now.innerText=s.title + " - " + s.album;
-    eq.style.display="flex";
-    preload();
+
+    nowTitle.innerText = s.title;
+    nowAlbum.innerText = s.album;
+    cover.src = s.img;
+
+    playBtn.innerText = "⏸";
+
+    render(filtered);
+
+    preloadAround();
+
+    if ('mediaSession' in navigator) {
+
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: s.title,
+            artist: s.album,
+            artwork: [
+                { src: s.img, sizes: '512x512', type: 'image/png' }
+            ]
+        });
+
+        navigator.mediaSession.setActionHandler('previoustrack', prevSong);
+        navigator.mediaSession.setActionHandler('nexttrack', nextSong);
+        navigator.mediaSession.setActionHandler('play', ()=>audio.play());
+        navigator.mediaSession.setActionHandler('pause', ()=>audio.pause());
+    }
 }
 
-// PRELOAD
-function preload(){
+/* PRELOAD */
+
+function preloadAround(){
+
     [currentIndex-1,currentIndex+1].forEach(i=>{
-        if(queue[i]){
-            let a=new Audio();
-            a.src=queue[i].url;
+
+        if(filtered[i]){
+
+            const a = new Audio();
+
+            a.src = filtered[i].url;
+
+            a.preload = "auto";
         }
     });
 }
 
-// AUTO NEXT
-audio.onended=()=>{
-    if(currentIndex < queue.length-1){
-        currentIndex++;
-        play();
+/* PLAY PAUSE */
+
+function togglePlay(){
+
+    if(!audio.src) return;
+
+    if(audio.paused){
+
+        audio.play();
+
+        playBtn.innerText = "⏸";
+
+    }else{
+
+        audio.pause();
+
+        playBtn.innerText = "▶";
     }
+
+    render(filtered);
+}
+
+/* NEXT */
+
+function nextSong(){
+
+    if(currentIndex < filtered.length - 1){
+
+        currentIndex++;
+
+        playSong();
+    }
+}
+
+/* PREV */
+
+function prevSong(){
+
+    if(currentIndex > 0){
+
+        currentIndex--;
+
+        playSong();
+    }
+}
+
+/* AUTO NEXT */
+
+audio.onended = ()=>{
+
+    nextSong();
 };
 
-// QUEUE EKLE
-function addQueue(i){
-    queue.push(songs[i]);
-    alert("Sıraya eklendi");
+/* PROGRESS */
+
+audio.ontimeupdate = ()=>{
+
+    const p = (audio.currentTime / audio.duration) * 100;
+
+    fill.style.width = p + "%";
+
+    current.innerText = format(audio.currentTime);
+
+    total.innerText = format(audio.duration);
+};
+
+function format(s){
+
+    if(isNaN(s)) return "0:00";
+
+    const m = Math.floor(s / 60);
+
+    const sec = Math.floor(s % 60);
+
+    return `${m}:${sec < 10 ? '0':''}${sec}`;
 }
 
-// PLAYLIST
-function createPlaylist(){
-    let name=prompt("Playlist adı");
-    if(name) playlists[name]=[];
-    localStorage.setItem("pl",JSON.stringify(playlists));
+/* SEEK */
+
+document.getElementById("progress").onclick = (e)=>{
+
+    const w = e.currentTarget.clientWidth;
+
+    const x = e.offsetX;
+
+    audio.currentTime = (x / w) * audio.duration;
+};
+
+/* SEARCH */
+
+search.oninput = filterSongs;
+albumFilter.onchange = filterSongs;
+catFilter.onchange = filterSongs;
+
+function filterSongs(){
+
+    const q = search.value.toLowerCase();
+
+    const a = albumFilter.value;
+
+    const c = catFilter.value;
+
+    filtered = songs.filter(s=>{
+
+        return (
+
+            (!a || s.album === a) &&
+            (!c || s.cat === c) &&
+
+            (
+                s.title.toLowerCase().includes(q) ||
+                s.album.toLowerCase().includes(q) ||
+                s.cat.toLowerCase().includes(q)
+            )
+        );
+    });
+
+    currentIndex = -1;
+
+    render(filtered);
 }
 
-function addPlaylist(i){
-    let name=prompt("Hangi playlist?");
-    if(!playlists[name]) playlists[name]=[];
-    playlists[name].push(songs[i]);
-    localStorage.setItem("pl",JSON.stringify(playlists));
-}
+/* START */
 
-// SEARCH + FILTER
-document.getElementById("search").oninput=filter;
-albumFilter.onchange=filter;
-catFilter.onchange=filter;
+loadSongs();
 
-function filter(){
-    let q=search.value.toLowerCase();
-    let a=albumFilter.value;
-    let c=catFilter.value;
-
-    let f=songs.filter(s=>
-        (!a||s.album==a) &&
-        (!c||s.cat==c) &&
-        (s.title.toLowerCase().includes(q))
-    );
-
-    render(f);
-}
-
-load();
 </script>
 
 </body>
