@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Şeffaf Cam Kitaplık</title>
+  <title>Özbek Enerji - Fiyat Listeleri Kitaplığı</title>
   <style>
     :root {
-      --glass-bg: rgba(255, 255, 255, 0.15);
-      --glass-border: rgba(255, 255, 255, 0.25);
-      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      --glass-bg: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.22);
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      --accent-color: #38bdf8;
       --text-color: #ffffff;
     }
 
@@ -21,46 +22,67 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       min-height: 100vh;
-      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+      background: radial-gradient(circle at top left, #1e1b4b, #0f172a, #030712);
       background-attachment: fixed;
       color: var(--text-color);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
     }
 
-    h1 {
+    /* Üst Başlık & iOS Cam Bar */
+    .header-bar {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border);
+      padding: 1rem 2.5rem;
+      border-radius: 30px;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      box-shadow: var(--glass-shadow);
+    }
+
+    .header-bar h1 {
+      font-size: 1.6rem;
       font-weight: 600;
       letter-spacing: -0.5px;
-      margin-bottom: 2rem;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, #ffffff 0%, #93c5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    /* Grid Yapısı: Yan yana 3 kitap */
+    .header-bar p {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 4px;
+    }
+
+    /* Kitaplık Izgarası (Masaüstünde Yan Yana 3 Kitap) */
     .bookshelf {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 1.8rem;
       width: 100%;
-      max-width: 850px;
-      padding: 1.5rem;
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
+      max-width: 960px;
+      padding: 2rem;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: var(--glass-shadow);
     }
 
     /* Kitap Kartı (iOS Glassmorphism) */
     .book-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
-      border-radius: 18px;
-      padding: 1rem;
+      border-radius: 20px;
+      padding: 1.2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -69,106 +91,187 @@
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       cursor: grab;
       user-select: none;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Parlama Efekti */
+    .book-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transition: 0.5s;
+    }
+
+    .book-card:hover::before {
+      left: 100%;
     }
 
     .book-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      background: rgba(255, 255, 255, 0.22);
+      transform: translateY(-8px) scale(1.02);
+      background: rgba(255, 255, 255, 0.2);
       border-color: rgba(255, 255, 255, 0.4);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
     }
 
     .book-card:active {
       cursor: grabbing;
+      transform: scale(0.98);
     }
 
     .book-card.dragging {
-      opacity: 0.4;
-      transform: scale(0.95);
+      opacity: 0.3;
+      border: 2px dashed var(--accent-color);
     }
 
-    /* Kitap Kapak Görseli */
+    /* Şeffaf Kapak Kutusu (Görsel Olmadığında Şık Duruş) */
     .book-cover {
       width: 100%;
-      aspect-ratio: 1 / 1.41; /* Standart A4 / Kitap oranı */
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      margin-bottom: 0.8rem;
-      pointer-events: none; /* Sürüklemeyi etkilememesi için */
+      aspect-ratio: 1 / 1.35;
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.05), 0 8px 16px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
     }
 
-    /* Kitap Başlığı */
+    .book-card:hover .book-cover {
+      transform: scale(1.03);
+    }
+
+    /* İkon Stil */
+    .book-icon {
+      width: 48px;
+      height: 48px;
+      fill: none;
+      stroke: var(--accent-color);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.4));
+      margin-bottom: 8px;
+    }
+
+    .book-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      background: rgba(0, 0, 0, 0.2);
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+
+    /* Kitap / Dosya İsmi (isim.html) */
     .book-title {
       font-size: 0.95rem;
-      font-weight: 500;
+      font-weight: 600;
       text-align: center;
       word-break: break-word;
+      color: #f1f5f9;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
       line-height: 1.3;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
     }
 
-    @media (max-width: 600px) {
+    /* Mobil Uyum */
+    @media (max-width: 768px) {
       .bookshelf {
-        grid-template-columns: repeat(2, 1fr); /* Küçük ekranlarda 2'li düzen */
-        gap: 1rem;
-        padding: 1rem;
+        grid-template-columns: repeat(2, 1fr); /* Tablet / Büyük ekran telefonlar */
+        gap: 1.2rem;
+        padding: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .bookshelf {
+        grid-template-columns: repeat(2, 1fr); /* Mobil ekranda da rahat 2'li yapı */
+        gap: 0.9rem;
+        padding: 0.9rem;
+      }
+      .book-title {
+        font-size: 0.85rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <h1>Kitaplık</h1>
+  <div class="header-bar">
+    <h1>Fiyat Listeleri Kitaplığı</h1>
+    <p>Kartları sürükleyerek kendi diziliminizi oluşturabilirsiniz</p>
+  </div>
 
   <div class="bookshelf" id="bookshelf">
-    <!-- Kitaplar JavaScript ile dynamic yüklenecek -->
+    <!-- Kitaplar JavaScript ile dinamik basılacak -->
   </div>
 
   <script>
-    // 1. Örnek Base URL ve Kitap Verileri
-    // Sen klasöründeki isimleri bu listeye yazacaksın.
-    const BASE_URL = "https://ornek-siteniz.com/klasor/";
+    // Baz URL
+    const BASE_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/";
 
-    const initialBooks = [
-      { id: "1", name: "nutuk", title: "Nutuk", cover: "nutuk/page_1.jpg" },
-      { id: "2", name: "simyaci", title: "Simyacı", cover: "simyaci/page_1.jpg" },
-      { id: "3", name: "sefiller", title: "Sefiller", cover: "sefiller/page_1.jpg" },
-      { id: "4", name: "1984", title: "1984", cover: "1984/page_1.jpg" },
-      { id: "5", name: "otostopcu", title: "Otostopçunun Galaksi Rehberi", cover: "otostopcu/page_1.jpg" }
+    // Görseldeki tüm liste isimleri
+    const rawNames = [
+      "ABB", "ACK", "ADAL", "ARS", "ARVIA", "AUDIO", "AYKA", "BEMIS", "CATA", 
+      "CHINT", "ÇEBI", "ÇET-SAN", "DÜNYA LED", "ELMAX", "EMAS", "ENTES", 
+      "ERKLED", "ERNA", "FANSAN HİVA", "FAR", "FETİH", "FORLIFE", "GOYA LİGHTİNG", 
+      "GWEST", "HASÇELİK", "HELİOS", "HES KABLO", "HIGHTEK", "HOROZ", "İNOLED", 
+      "IŞILDAR", "K2 KENDAL", "KONREX İNOVASYON LİST.", "LEGRAND", "MAKEL", 
+      "METOP OCAK", "MULTİTEK", "MUTLUSAN", "NEAD", "NETAPLAST", "NOAS", 
+      "NTS", "OAG", "OREL", "OVİVO WOG", "OVIVO", "ÖZKARAKUŞ", "ÖZKARDEŞLER", 
+      "ÖZNUR", "PELSAN", "REÇBER", "TEKNOLOJİ", "TENSE", "TK LIGHTING", 
+      "UGEST", "VİKO", "WALL LED", "YCL", "ZERPA", "ZMR"
     ];
+
+    // Benzersiz ID'ler ile obje dizisi oluştur
+    const defaultBooks = rawNames.map((name, index) => ({
+      id: "item-" + index,
+      name: name
+    }));
 
     const bookshelf = document.getElementById('bookshelf');
 
-    // LocalStorage'dan sıralamayı oku veya varsayılanı kullan
+    // LocalStorage'dan sırayı al veya varsayılanı kullan
     function getSavedOrder() {
-      const saved = localStorage.getItem('bookshelf_order');
+      const saved = localStorage.getItem('ozbek_bookshelf_order');
       if (saved) {
-        const orderIds = JSON.parse(saved);
-        // Kaydedilen ID sıralamasına göre objeleri diz
-        const ordered = [];
-        orderIds.forEach(id => {
-          const found = initialBooks.find(b => b.id === id);
-          if (found) ordered.push(found);
-        });
-        // Yeni eklenen ama kayıtta olmayan kitaplar varsa sona ekle
-        initialBooks.forEach(b => {
-          if (!ordered.find(o => o.id === b.id)) ordered.push(b);
-        });
-        return ordered;
+        try {
+          const orderIds = JSON.parse(saved);
+          const ordered = [];
+          orderIds.forEach(id => {
+            const found = defaultBooks.find(b => b.id === id);
+            if (found) ordered.push(found);
+          });
+          // Yeni eklenenler varsa sona ekle
+          defaultBooks.forEach(b => {
+            if (!ordered.find(o => o.id === b.id)) ordered.push(b);
+          });
+          return ordered;
+        } catch(e) {
+          return defaultBooks;
+        }
       }
-      return initialBooks;
+      return defaultBooks;
     }
 
-    // Sıralamayı LocalStorage'a kaydet
+    // Sıralamayı kaydet
     function saveOrder() {
       const currentCards = document.querySelectorAll('.book-card');
       const orderIds = Array.from(currentCards).map(card => card.dataset.id);
-      localStorage.setItem('bookshelf_order', JSON.stringify(orderIds));
+      localStorage.setItem('ozbek_bookshelf_order', JSON.stringify(orderIds));
     }
 
-    // Kitapları Ekrana Bas
+    // Ekrana Çizdirme
     function renderBooks() {
       bookshelf.innerHTML = '';
       const booksToRender = getSavedOrder();
@@ -176,24 +279,32 @@
       booksToRender.forEach(book => {
         const card = document.createElement('a');
         card.className = 'book-card';
-        card.href = `${BASE_URL}${book.name}.html`;
-        card.target = '_blank'; // Yeni sekmede açılması için
+        // Tıklanınca ilgili html sayfasını açar
+        card.href = `${BASE_URL}${encodeURIComponent(book.name)}.html`;
+        card.target = '_blank';
         card.draggable = true;
         card.dataset.id = book.id;
 
         card.innerHTML = `
-          <img class="book-cover" src="${book.cover}" alt="${book.title}" onerror="this.src='https://via.placeholder.com/150x210/ffffff/000000?text=Kapak+Yok'">
+          <div class="book-cover">
+            <svg class="book-icon" viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span class="book-badge">HTML</span>
+          </div>
           <div class="book-title">${book.name}.html</div>
         `;
 
-        // Drag & Drop Eventleri
         addDragEvents(card);
-
         bookshelf.appendChild(card);
       });
     }
 
-    // Drag & Drop Mantığı
+    // Drag & Drop Fonksiyonları
     let draggedItem = null;
 
     function addDragEvents(item) {
@@ -203,9 +314,11 @@
       });
 
       item.addEventListener('dragend', () => {
-        draggedItem.classList.remove('dragging');
-        draggedItem = null;
-        saveOrder(); // Sürükleme bitince yeni düzeni kaydet
+        if(draggedItem) {
+          draggedItem.classList.remove('dragging');
+          draggedItem = null;
+          saveOrder(); // Yerleşimi hatırla ve kaydet
+        }
       });
 
       item.addEventListener('dragover', (e) => {
@@ -219,17 +332,14 @@
       });
     }
 
-    // Fare pozisyonuna göre en yakın kartı bulma
     function getDragAfterElement(container, x, y) {
       const draggableElements = [...container.querySelectorAll('.book-card:not(.dragging)')];
 
       return draggableElements.reduce((closest, child) => {
         const box = child.getBoundingClientRect();
-        // Kartın merkezine göre mesafe hesabı
         const offsetX = x - box.left - box.width / 2;
         const offsetY = y - box.top - box.height / 2;
         
-        // Basit yakınlık algoritması
         if (offsetX < 0 && offsetY < 0) {
           return { offset: offsetX + offsetY, element: child };
         } else {
@@ -238,7 +348,7 @@
       }, { offset: Number.NEGATIVE_INFINITY }).element;
     }
 
-    // İlk yükleme
+    // Başlat
     renderBooks();
   </script>
 </body>
