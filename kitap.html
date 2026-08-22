@@ -2,8 +2,8 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Özbek Enerji - Fiyat Listeleri Kitaplığı</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Fiyat Listeleri Kitaplığı</title>
   <style>
     :root {
       --glass-bg: rgba(255, 255, 255, 0.12);
@@ -17,6 +17,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -28,199 +29,139 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2.5rem 1rem;
+      padding: 1.5rem 0.8rem;
     }
 
-    /* Üst Başlık & iOS Cam Bar */
-    .header-bar {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid var(--glass-border);
-      padding: 1rem 2.5rem;
-      border-radius: 30px;
-      margin-bottom: 2.5rem;
-      text-align: center;
-      box-shadow: var(--glass-shadow);
-    }
-
-    .header-bar h1 {
-      font-size: 1.6rem;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #ffffff 0%, #93c5fd 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .header-bar p {
-      font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.6);
-      margin-top: 4px;
-    }
-
-    /* Kitaplık Izgarası (Masaüstünde Yan Yana 3 Kitap) */
+    /* Kitaplık Izgarası - Yan Yana 3 Kitap */
     .bookshelf {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.8rem;
+      gap: 1rem;
       width: 100%;
       max-width: 960px;
-      padding: 2rem;
-      border-radius: 32px;
+      padding: 1rem;
+      border-radius: 28px;
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: var(--glass-shadow);
+      touch-action: manipulation;
     }
 
-    /* Kitap Kartı (iOS Glassmorphism) */
+    /* Kitap Kartı */
     .book-card {
       background: var(--glass-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 1.2rem;
+      border-radius: 18px;
+      padding: 0.8rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-decoration: none;
       color: var(--text-color);
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      cursor: grab;
-      user-select: none;
+      transition: transform 0.2s ease, background 0.2s ease;
       position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Kapak Görseli */
+    .book-cover-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1.41;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Parlama Efekti */
-    .book-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-      transition: 0.5s;
-    }
-
-    .book-card:hover::before {
-      left: 100%;
-    }
-
-    .book-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.4);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
-    }
-
-    .book-card:active {
-      cursor: grabbing;
-      transform: scale(0.98);
-    }
-
-    .book-card.dragging {
-      opacity: 0.3;
-      border: 2px dashed var(--accent-color);
-    }
-
-    /* Şeffaf Kapak Kutusu (Görsel Olmadığında Şık Duruş) */
-    .book-cover {
-      width: 100%;
-      aspect-ratio: 1 / 1.35;
-      border-radius: 14px;
+      margin-bottom: 0.6rem;
       background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02));
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1rem;
-      box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.05), 0 8px 16px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
-    .book-card:hover .book-cover {
-      transform: scale(1.03);
+    .book-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    /* İkon Stil */
-    .book-icon {
-      width: 48px;
-      height: 48px;
-      fill: none;
+    /* Görsel Yoksa Yedek İkon */
+    .fallback-icon {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .fallback-icon svg {
+      width: 36px;
+      height: 36px;
       stroke: var(--accent-color);
+      fill: none;
       stroke-width: 1.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.4));
-      margin-bottom: 8px;
     }
 
-    .book-badge {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.5);
-      background: rgba(0, 0, 0, 0.2);
-      padding: 3px 8px;
-      border-radius: 12px;
-    }
-
-    /* Kitap / Dosya İsmi (isim.html) */
     .book-title {
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       font-weight: 600;
       text-align: center;
       word-break: break-word;
       color: #f1f5f9;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-      line-height: 1.3;
+      line-height: 1.2;
     }
 
-    /* Mobil Uyum */
-    @media (max-width: 768px) {
-      .bookshelf {
-        grid-template-columns: repeat(2, 1fr); /* Tablet / Büyük ekran telefonlar */
-        gap: 1.2rem;
-        padding: 1.2rem;
-      }
+    /* iOS Jiggle / Shake Animasyonu (Basılı Tutunca) */
+    @keyframes jiggle {
+      0% { transform: rotate(-1.2deg) scale(0.98); }
+      50% { transform: rotate(1.2deg) scale(0.98); }
+      100% { transform: rotate(-1.2deg) scale(0.98); }
+    }
+
+    body.edit-mode .book-card {
+      animation: jiggle 0.24s infinite ease-in-out;
+      border-color: rgba(56, 189, 248, 0.5);
+      cursor: move;
+    }
+
+    body.edit-mode .book-card:nth-child(even) {
+      animation-duration: 0.28s;
+      animation-direction: reverse;
+    }
+
+    .book-card.dragging {
+      opacity: 0.3;
+      transform: scale(0.9);
     }
 
     @media (max-width: 480px) {
       .bookshelf {
-        grid-template-columns: repeat(2, 1fr); /* Mobil ekranda da rahat 2'li yapı */
-        gap: 0.9rem;
-        padding: 0.9rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        padding: 0.5rem;
+      }
+      .book-card {
+        padding: 0.5rem;
+        border-radius: 14px;
       }
       .book-title {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="header-bar">
-    <h1>Fiyat Listeleri Kitaplığı</h1>
-    <p>Kartları sürükleyerek kendi diziliminizi oluşturabilirsiniz</p>
-  </div>
-
-  <div class="bookshelf" id="bookshelf">
-    <!-- Kitaplar JavaScript ile dinamik basılacak -->
-  </div>
+  <div class="bookshelf" id="bookshelf"></div>
 
   <script>
-    // Baz URL
-    const BASE_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/";
+    const BASE_FOLDER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/";
 
-    // Görseldeki tüm liste isimleri
     const rawNames = [
       "ABB", "ACK", "ADAL", "ARS", "ARVIA", "AUDIO", "AYKA", "BEMIS", "CATA", 
       "CHINT", "ÇEBI", "ÇET-SAN", "DÜNYA LED", "ELMAX", "EMAS", "ENTES", 
@@ -233,17 +174,13 @@
       "UGEST", "VİKO", "WALL LED", "YCL", "ZERPA", "ZMR"
     ];
 
-    // Benzersiz ID'ler ile obje dizisi oluştur
-    const defaultBooks = rawNames.map((name, index) => ({
-      id: "item-" + index,
-      name: name
-    }));
-
+    const defaultBooks = rawNames.map((name, index) => ({ id: "book-" + index, name: name }));
     const bookshelf = document.getElementById('bookshelf');
+    let isEditMode = false;
+    let pressTimer = null;
 
-    // LocalStorage'dan sırayı al veya varsayılanı kullan
     function getSavedOrder() {
-      const saved = localStorage.getItem('ozbek_bookshelf_order');
+      const saved = localStorage.getItem('ozbek_bookshelf_order_v2');
       if (saved) {
         try {
           const orderIds = JSON.parse(saved);
@@ -252,26 +189,21 @@
             const found = defaultBooks.find(b => b.id === id);
             if (found) ordered.push(found);
           });
-          // Yeni eklenenler varsa sona ekle
           defaultBooks.forEach(b => {
             if (!ordered.find(o => o.id === b.id)) ordered.push(b);
           });
           return ordered;
-        } catch(e) {
-          return defaultBooks;
-        }
+        } catch(e) { return defaultBooks; }
       }
       return defaultBooks;
     }
 
-    // Sıralamayı kaydet
     function saveOrder() {
       const currentCards = document.querySelectorAll('.book-card');
       const orderIds = Array.from(currentCards).map(card => card.dataset.id);
-      localStorage.setItem('ozbek_bookshelf_order', JSON.stringify(orderIds));
+      localStorage.setItem('ozbek_bookshelf_order_v2', JSON.stringify(orderIds));
     }
 
-    // Ekrana Çizdirme
     function renderBooks() {
       bookshelf.innerHTML = '';
       const booksToRender = getSavedOrder();
@@ -279,76 +211,112 @@
       booksToRender.forEach(book => {
         const card = document.createElement('a');
         card.className = 'book-card';
-        // Tıklanınca ilgili html sayfasını açar
-        card.href = `${BASE_URL}${encodeURIComponent(book.name)}.html`;
-        card.target = '_blank';
-        card.draggable = true;
+        card.href = `${BASE_FOLDER_URL}${encodeURIComponent(book.name)}.html`;
         card.dataset.id = book.id;
 
+        // Sayfa 1 Kapak Görseli Yolu
+        const coverImgUrl = `${BASE_FOLDER_URL}${encodeURIComponent(book.name)}/page_1.jpg`;
+
         card.innerHTML = `
-          <div class="book-cover">
-            <svg class="book-icon" viewBox="0 0 24 24">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-              <polyline points="10 9 9 9 8 9"></polyline>
-            </svg>
-            <span class="book-badge">HTML</span>
+          <div class="book-cover-wrap">
+            <img class="book-cover-img" src="${coverImgUrl}" alt="${book.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="fallback-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            </div>
           </div>
-          <div class="book-title">${book.name}.html</div>
+          <div class="book-title">${book.name}</div>
         `;
 
-        addDragEvents(card);
+        attachEvents(card);
         bookshelf.appendChild(card);
       });
     }
 
-    // Drag & Drop Fonksiyonları
-    let draggedItem = null;
-
-    function addDragEvents(item) {
-      item.addEventListener('dragstart', (e) => {
-        draggedItem = item;
-        setTimeout(() => item.classList.add('dragging'), 0);
-      });
-
-      item.addEventListener('dragend', () => {
-        if(draggedItem) {
-          draggedItem.classList.remove('dragging');
-          draggedItem = null;
-          saveOrder(); // Yerleşimi hatırla ve kaydet
+    function attachEvents(card) {
+      card.addEventListener('click', (e) => {
+        if (isEditMode) {
+          e.preventDefault();
         }
       });
 
-      item.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        const afterElement = getDragAfterElement(bookshelf, e.clientX, e.clientY);
-        if (afterElement == null) {
-          bookshelf.appendChild(draggedItem);
-        } else {
-          bookshelf.insertBefore(draggedItem, afterElement);
-        }
-      });
+      const startPress = () => {
+        pressTimer = setTimeout(() => {
+          enableEditMode();
+        }, 500);
+      };
+
+      const cancelPress = () => {
+        clearTimeout(pressTimer);
+      };
+
+      card.addEventListener('touchstart', startPress, { passive: true });
+      card.addEventListener('touchend', cancelPress);
+      card.addEventListener('touchmove', cancelPress);
+      card.addEventListener('mousedown', startPress);
+      card.addEventListener('mouseup', cancelPress);
+      card.addEventListener('mouseleave', cancelPress);
+
+      card.draggable = true;
+      card.addEventListener('dragstart', handleDragStart);
+      card.addEventListener('dragend', handleDragEnd);
     }
 
-    function getDragAfterElement(container, x, y) {
-      const draggableElements = [...container.querySelectorAll('.book-card:not(.dragging)')];
+    let draggedCard = null;
 
-      return draggableElements.reduce((closest, child) => {
+    function handleDragStart(e) {
+      if (!isEditMode) {
+        e.preventDefault();
+        return;
+      }
+      draggedCard = this;
+      this.classList.add('dragging');
+    }
+
+    function handleDragEnd() {
+      if (draggedCard) {
+        draggedCard.classList.remove('dragging');
+        draggedCard = null;
+        saveOrder();
+      }
+    }
+
+    bookshelf.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      if (!isEditMode || !draggedCard) return;
+      const afterElement = getDragAfterElement(bookshelf, e.clientX, e.clientY);
+      if (afterElement == null) {
+        bookshelf.appendChild(draggedCard);
+      } else {
+        bookshelf.insertBefore(draggedCard, afterElement);
+      }
+    });
+
+    function getDragAfterElement(container, x, y) {
+      const elements = [...container.querySelectorAll('.book-card:not(.dragging)')];
+      return elements.reduce((closest, child) => {
         const box = child.getBoundingClientRect();
-        const offsetX = x - box.left - box.width / 2;
-        const offsetY = y - box.top - box.height / 2;
-        
-        if (offsetX < 0 && offsetY < 0) {
-          return { offset: offsetX + offsetY, element: child };
+        const offset = x - box.left - box.width / 2 + (y - box.top - box.height / 2);
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
         } else {
           return closest;
         }
       }, { offset: Number.NEGATIVE_INFINITY }).element;
     }
 
-    // Başlat
+    function enableEditMode() {
+      isEditMode = true;
+      document.body.classList.add('edit-mode');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (isEditMode && !e.target.closest('.book-card')) {
+        isEditMode = false;
+        document.body.classList.remove('edit-mode');
+        saveOrder();
+      }
+    });
+
     renderBooks();
   </script>
 </body>
