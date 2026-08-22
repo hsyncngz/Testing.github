@@ -2,322 +2,93 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Fiyat Listeleri Kitaplığı</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Katalog Listesi</title>
   <style>
-    :root {
-      --glass-bg: rgba(255, 255, 255, 0.12);
-      --glass-border: rgba(255, 255, 255, 0.22);
-      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-      --accent-color: #38bdf8;
-      --text-color: #ffffff;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      min-height: 100vh;
-      background: radial-gradient(circle at top left, #1e1b4b, #0f172a, #030712);
-      background-attachment: fixed;
-      color: var(--text-color);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1.5rem 0.8rem;
-    }
-
-    /* Kitaplık Izgarası - Yan Yana 3 Kitap */
-    .bookshelf {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      width: 100%;
-      max-width: 960px;
-      padding: 1rem;
-      border-radius: 28px;
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: var(--glass-shadow);
-      touch-action: manipulation;
-    }
-
-    /* Kitap Kartı */
-    .book-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      border-radius: 18px;
-      padding: 0.8rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: var(--text-color);
-      transition: transform 0.2s ease, background 0.2s ease;
-      position: relative;
-      user-select: none;
-      -webkit-user-select: none;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Kapak Görseli */
-    .book-cover-wrap {
-      width: 100%;
-      aspect-ratio: 1 / 1.41;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 0.6rem;
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02));
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-
-    .book-cover-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Görsel Yoksa Yedek İkon */
-    .fallback-icon {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .fallback-icon svg {
-      width: 36px;
-      height: 36px;
-      stroke: var(--accent-color);
-      fill: none;
-      stroke-width: 1.5;
-    }
-
-    .book-title {
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-align: center;
-      word-break: break-word;
-      color: #f1f5f9;
-      line-height: 1.2;
-    }
-
-    /* iOS Jiggle / Shake Animasyonu (Basılı Tutunca) */
-    @keyframes jiggle {
-      0% { transform: rotate(-1.2deg) scale(0.98); }
-      50% { transform: rotate(1.2deg) scale(0.98); }
-      100% { transform: rotate(-1.2deg) scale(0.98); }
-    }
-
-    body.edit-mode .book-card {
-      animation: jiggle 0.24s infinite ease-in-out;
-      border-color: rgba(56, 189, 248, 0.5);
-      cursor: move;
-    }
-
-    body.edit-mode .book-card:nth-child(even) {
-      animation-duration: 0.28s;
-      animation-direction: reverse;
-    }
-
-    .book-card.dragging {
-      opacity: 0.3;
-      transform: scale(0.9);
-    }
-
-    @media (max-width: 480px) {
-      .bookshelf {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
-        padding: 0.5rem;
-      }
-      .book-card {
-        padding: 0.5rem;
-        border-radius: 14px;
-      }
-      .book-title {
-        font-size: 0.75rem;
-      }
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #fff; padding: 15px; }
+    
+    .header { position: sticky; top: 0; background: #0f172a; padding-bottom: 10px; z-index: 10; }
+    .search-input { width: 100%; padding: 12px 16px; background: #1e293b; border: 1px solid #334155; border-radius: 10px; color: #fff; font-size: 15px; outline: none; }
+    
+    .list-container { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .list-item { background: #1e293b; border: 1px solid #334155; padding: 14px 16px; border-radius: 10px; text-decoration: none; color: #f8fafc; font-size: 15px; font-weight: 500; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+    .list-item:active { background: #334155; }
+    .arrow { color: #64748b; font-size: 18px; }
+    
+    .empty-msg { text-align: center; color: #64748b; margin-top: 40px; font-size: 14px; }
   </style>
 </head>
 <body>
 
-  <div class="bookshelf" id="bookshelf"></div>
+<div class="header">
+  <input type="text" id="searchBox" class="search-input" placeholder="Katalog veya firma ara...">
+</div>
 
-  <script>
-    const BASE_FOLDER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/";
+<div class="list-container" id="catalogList"></div>
 
-    const rawNames = [
-      "ABB", "ACK", "ADAL", "ARS", "ARVIA", "AUDIO", "AYKA", "BEMIS", "CATA", 
-      "CHINT", "ÇEBI", "ÇET-SAN", "DÜNYA LED", "ELMAX", "EMAS", "ENTES", 
-      "ERKLED", "ERNA", "FANSAN HİVA", "FAR", "FETİH", "FORLIFE", "GOYA LİGHTİNG", 
-      "GWEST", "HASÇELİK", "HELİOS", "HES KABLO", "HIGHTEK", "HOROZ", "İNOLED", 
-      "IŞILDAR", "K2 KENDAL", "KONREX İNOVASYON LİST.", "LEGRAND", "MAKEL", 
-      "METOP OCAK", "MULTİTEK", "MUTLUSAN", "NEAD", "NETAPLAST", "NOAS", 
-      "NTS", "OAG", "OREL", "OVİVO WOG", "OVIVO", "ÖZKARAKUŞ", "ÖZKARDEŞLER", 
-      "ÖZNUR", "PELSAN", "REÇBER", "TEKNOLOJİ", "TENSE", "TK LIGHTING", 
-      "UGEST", "VİKO", "WALL LED", "YCL", "ZERPA", "ZMR"
-    ];
+<script>
+  // Klasördeki mevcut HTML dosyalarının listesi
+  // (Silinen dosyayı buradan kaldırmanız, yeni ekleneni buraya yazmanız yeterlidir)
+  let htmlFiles = [
+    "AUDIO 2026-2-Fiyat-Listesi-web.html",
+    "AYKA 2026.html",
+    "BEMIS 2026.html",
+    "CHINT 2026.html",
+    "ÇEBI 2025_ocred.html",
+    "ÇET-SAN 2026 Fiyat Listesi.html",
+    "CATA 2026.html",
+    "GÜNSAN 2026.html"
+  ];
 
-    const defaultBooks = rawNames.map((name, index) => ({ id: "book-" + index, name: name }));
-    const bookshelf = document.getElementById('bookshelf');
-    let isEditMode = false;
-    let pressTimer = null;
+  const catalogList = document.getElementById('catalogList');
+  const searchBox = document.getElementById('searchBox');
 
-    function getSavedOrder() {
-      const saved = localStorage.getItem('ozbek_bookshelf_order_v2');
-      if (saved) {
-        try {
-          const orderIds = JSON.parse(saved);
-          const ordered = [];
-          orderIds.forEach(id => {
-            const found = defaultBooks.find(b => b.id === id);
-            if (found) ordered.push(found);
-          });
-          defaultBooks.forEach(b => {
-            if (!ordered.find(o => o.id === b.id)) ordered.push(b);
-          });
-          return ordered;
-        } catch(e) { return defaultBooks; }
-      }
-      return defaultBooks;
-    }
+  // Türkçe Karakter Destekli Alfabetik Sıralama (A-Z)
+  function sortFilesAlphabetically(files) {
+    return files.sort((a, b) => a.localeCompare(b, 'tr', { sensitivity: 'base' }));
+  }
 
-    function saveOrder() {
-      const currentCards = document.querySelectorAll('.book-card');
-      const orderIds = Array.from(currentCards).map(card => card.dataset.id);
-      localStorage.setItem('ozbek_bookshelf_order_v2', JSON.stringify(orderIds));
-    }
+  // Dosya adını temizleme (Uzantıyı ve gereksiz karakterleri kaldırır)
+  function cleanFileName(fileName) {
+    return fileName.replace(/\.[^/.]+$/, "").trim();
+  }
 
-    function renderBooks() {
-      bookshelf.innerHTML = '';
-      const booksToRender = getSavedOrder();
+  // Listeyi Ekrana Basma Fonksiyonu
+  function renderList(filter = '') {
+    catalogList.innerHTML = '';
+    
+    // 1. Önce Türkçe alfabeye göre sırala
+    const sortedFiles = sortFilesAlphabetically(htmlFiles);
 
-      booksToRender.forEach(book => {
-        const card = document.createElement('a');
-        card.className = 'book-card';
-        card.href = `${BASE_FOLDER_URL}${encodeURIComponent(book.name)}.html`;
-        card.dataset.id = book.id;
-
-        // Sayfa 1 Kapak Görseli Yolu
-        const coverImgUrl = `${BASE_FOLDER_URL}${encodeURIComponent(book.name)}/page_1.jpg`;
-
-        card.innerHTML = `
-          <div class="book-cover-wrap">
-            <img class="book-cover-img" src="${coverImgUrl}" alt="${book.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="fallback-icon">
-              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-            </div>
-          </div>
-          <div class="book-title">${book.name}</div>
-        `;
-
-        attachEvents(card);
-        bookshelf.appendChild(card);
-      });
-    }
-
-    function attachEvents(card) {
-      card.addEventListener('click', (e) => {
-        if (isEditMode) {
-          e.preventDefault();
-        }
-      });
-
-      const startPress = () => {
-        pressTimer = setTimeout(() => {
-          enableEditMode();
-        }, 500);
-      };
-
-      const cancelPress = () => {
-        clearTimeout(pressTimer);
-      };
-
-      card.addEventListener('touchstart', startPress, { passive: true });
-      card.addEventListener('touchend', cancelPress);
-      card.addEventListener('touchmove', cancelPress);
-      card.addEventListener('mousedown', startPress);
-      card.addEventListener('mouseup', cancelPress);
-      card.addEventListener('mouseleave', cancelPress);
-
-      card.draggable = true;
-      card.addEventListener('dragstart', handleDragStart);
-      card.addEventListener('dragend', handleDragEnd);
-    }
-
-    let draggedCard = null;
-
-    function handleDragStart(e) {
-      if (!isEditMode) {
-        e.preventDefault();
-        return;
-      }
-      draggedCard = this;
-      this.classList.add('dragging');
-    }
-
-    function handleDragEnd() {
-      if (draggedCard) {
-        draggedCard.classList.remove('dragging');
-        draggedCard = null;
-        saveOrder();
-      }
-    }
-
-    bookshelf.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      if (!isEditMode || !draggedCard) return;
-      const afterElement = getDragAfterElement(bookshelf, e.clientX, e.clientY);
-      if (afterElement == null) {
-        bookshelf.appendChild(draggedCard);
-      } else {
-        bookshelf.insertBefore(draggedCard, afterElement);
+    let count = 0;
+    sortedFiles.forEach(file => {
+      const displayName = cleanFileName(file);
+      
+      // Arama filtresi kontrolü
+      if (!filter || displayName.toLowerCase().includes(filter.toLowerCase())) {
+        const a = document.createElement('a');
+        a.className = 'list-item';
+        a.href = file; // Tıklayınca doğrudan ilgili HTML sayfasına gider
+        a.innerHTML = `<span>${displayName}</span><span class="arrow">›</span>`;
+        catalogList.appendChild(a);
+        count++;
       }
     });
 
-    function getDragAfterElement(container, x, y) {
-      const elements = [...container.querySelectorAll('.book-card:not(.dragging)')];
-      return elements.reduce((closest, child) => {
-        const box = child.getBoundingClientRect();
-        const offset = x - box.left - box.width / 2 + (y - box.top - box.height / 2);
-        if (offset < 0 && offset > closest.offset) {
-          return { offset: offset, element: child };
-        } else {
-          return closest;
-        }
-      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    if (count === 0) {
+      catalogList.innerHTML = '<div class="empty-msg">Katalog bulunamadı.</div>';
     }
+  }
 
-    function enableEditMode() {
-      isEditMode = true;
-      document.body.classList.add('edit-mode');
-    }
+  // Arama Kutusu Dinleyicisi
+  searchBox.addEventListener('input', (e) => {
+    renderList(e.target.value);
+  });
 
-    document.addEventListener('click', (e) => {
-      if (isEditMode && !e.target.closest('.book-card')) {
-        isEditMode = false;
-        document.body.classList.remove('edit-mode');
-        saveOrder();
-      }
-    });
+  // İlk Açılışta Listele
+  renderList();
+</script>
 
-    renderBooks();
-  </script>
 </body>
 </html>
