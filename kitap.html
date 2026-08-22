@@ -3,91 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Katalog Listesi</title>
+  <title>Katalog Kitaplığı</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #fff; padding: 15px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #ffffff; padding: 20px; }
     
-    .header { position: sticky; top: 0; background: #0f172a; padding-bottom: 10px; z-index: 10; }
-    .search-input { width: 100%; padding: 12px 16px; background: #1e293b; border: 1px solid #334155; border-radius: 10px; color: #fff; font-size: 15px; outline: none; }
+    .card { background: #1e293b; padding: 20px; border-radius: 16px; max-width: 650px; margin: 0 auto; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+    h2 { margin-bottom: 15px; font-weight: 600; font-size: 1.2rem; color: #f8fafc; }
     
-    .list-container { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-    .list-item { background: #1e293b; border: 1px solid #334155; padding: 14px 16px; border-radius: 10px; text-decoration: none; color: #f8fafc; font-size: 15px; font-weight: 500; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
-    .list-item:active { background: #334155; }
-    .arrow { color: #64748b; font-size: 18px; }
+    .search-input { width: 100%; padding: 12px 16px; background: #0f172a; border: 1px solid #334155; border-radius: 10px; color: #fff; font-size: 15px; outline: none; margin-bottom: 15px; }
+    .search-input:focus { border-color: #38bdf8; }
     
-    .empty-msg { text-align: center; color: #64748b; margin-top: 40px; font-size: 14px; }
+    .file-list { display: flex; flex-direction: column; gap: 10px; }
+    .file-item { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #f8fafc; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; }
+    .file-item:active { background: #1e293b; border-color: #38bdf8; }
+    
+    .arrow-icon { color: #38bdf8; font-size: 1.1rem; }
+    .status-msg { text-align: center; color: #94a3b8; padding: 20px 0; font-size: 0.9rem; }
   </style>
 </head>
 <body>
 
-<div class="header">
-  <input type="text" id="searchBox" class="search-input" placeholder="Katalog veya firma ara...">
+<div class="card">
+  <h2>Katalog Kitaplığı</h2>
+  <input type="text" id="searchBox" class="search-input" placeholder="Katalog ara...">
+  
+  <div class="file-list" id="fileList">
+    <div class="status-msg" id="statusMsg">Sunucudaki listeler taranıyor...</div>
+  </div>
 </div>
 
-<div class="list-container" id="catalogList"></div>
-
 <script>
-  // Klasördeki mevcut HTML dosyalarının listesi
-  // (Silinen dosyayı buradan kaldırmanız, yeni ekleneni buraya yazmanız yeterlidir)
-  let htmlFiles = [
-    "AUDIO 2026-2-Fiyat-Listesi-web.html",
-    "AYKA 2026.html",
-    "BEMIS 2026.html",
-    "CHINT 2026.html",
-    "ÇEBI 2025_ocred.html",
-    "ÇET-SAN 2026 Fiyat Listesi.html",
-    "CATA 2026.html",
-    "GÜNSAN 2026.html"
-  ];
-
-  const catalogList = document.getElementById('catalogList');
+  const TARGET_URL = 'https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/';
+  const fileListContainer = document.getElementById('fileList');
   const searchBox = document.getElementById('searchBox');
+  const statusMsg = document.getElementById('statusMsg');
 
-  // Türkçe Karakter Destekli Alfabetik Sıralama (A-Z)
-  function sortFilesAlphabetically(files) {
-    return files.sort((a, b) => a.localeCompare(b, 'tr', { sensitivity: 'base' }));
-  }
+  let fetchedFiles = [];
 
-  // Dosya adını temizleme (Uzantıyı ve gereksiz karakterleri kaldırır)
-  function cleanFileName(fileName) {
-    return fileName.replace(/\.[^/.]+$/, "").trim();
-  }
-
-  // Listeyi Ekrana Basma Fonksiyonu
-  function renderList(filter = '') {
-    catalogList.innerHTML = '';
-    
-    // 1. Önce Türkçe alfabeye göre sırala
-    const sortedFiles = sortFilesAlphabetically(htmlFiles);
-
-    let count = 0;
-    sortedFiles.forEach(file => {
-      const displayName = cleanFileName(file);
+  // Sunucudaki dizini tara ve .html dosyalarını çek
+  async function loadDirectoryFiles() {
+    try {
+      const response = await fetch(TARGET_URL);
+      if (!response.ok) throw new Error("Dizin okunamadı");
       
-      // Arama filtresi kontrolü
-      if (!filter || displayName.toLowerCase().includes(filter.toLowerCase())) {
-        const a = document.createElement('a');
-        a.className = 'list-item';
-        a.href = file; // Tıklayınca doğrudan ilgili HTML sayfasına gider
-        a.innerHTML = `<span>${displayName}</span><span class="arrow">›</span>`;
-        catalogList.appendChild(a);
-        count++;
-      }
-    });
+      const htmlText = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlText, 'text/html');
+      const links = Array.from(doc.querySelectorAll('a'));
 
-    if (count === 0) {
-      catalogList.innerHTML = '<div class="empty-msg">Katalog bulunamadı.</div>';
+      // Sadece .html ile biten dosyaları filtrele
+      fetchedFiles = links
+        .map(link => link.getAttribute('href'))
+        .filter(href => href && href.endsWith('.html') && !href.startsWith('http'))
+        .map(href => decodeURIComponent(href.split('/').pop()));
+
+      // Türkçe karakter destekli A-Z sıralama
+      fetchedFiles.sort((a, b) => a.localeCompare(b, 'tr', { sensitivity: 'base' }));
+
+      renderList();
+    } catch (err) {
+      statusMsg.innerText = "Dizin taranırken hata oluştu veya CORS engeline takıldı.";
+      statusMsg.style.color = "#ef4444";
     }
   }
 
-  // Arama Kutusu Dinleyicisi
+  // Dosya adından .html uzantısını temizleme
+  function cleanName(fileName) {
+    return fileName.replace(/\.[^/.]+$/, "").trim();
+  }
+
+  // Ekranı güncelleme
+  function renderList(filter = '') {
+    fileListContainer.innerHTML = '';
+
+    const filtered = fetchedFiles.filter(file => 
+      cleanName(file).toLowerCase().includes(filter.toLowerCase())
+    );
+
+    if (filtered.length === 0) {
+      fileListContainer.innerHTML = '<div class="status-msg">Katalog bulunamadı.</div>';
+      return;
+    }
+
+    filtered.forEach(fileName => {
+      const a = document.createElement('a');
+      a.className = 'file-item';
+      a.href = TARGET_URL + fileName;
+      a.target = '_blank';
+      a.innerHTML = `<span>${cleanName(fileName)}</span><span class="arrow-icon">›</span>`;
+      fileListContainer.appendChild(a);
+    });
+  }
+
   searchBox.addEventListener('input', (e) => {
     renderList(e.target.value);
   });
 
-  // İlk Açılışta Listele
-  renderList();
+  // Sayfa açıldığında otomatik taramayı başlat
+  loadDirectoryFiles();
 </script>
 
 </body>
