@@ -178,21 +178,16 @@
     let pressTimer = null;
     let coverFiles = [];
 
-    // Metin Temizleme ve Türkçe Karakter Normalizasyonu
     function cleanText(str) {
       if (!str) return "";
       return str.toLowerCase()
-        .replace(/ı/g, 'i')
-        .replace(/ğ/g, 'g')
-        .replace(/ü/g, 'u')
-        .replace(/ş/g, 's')
-        .replace(/ö/g, 'o')
-        .replace(/ç/g, 'c')
+        .replace(/ı/g, 'i').replace(/ğ/g, 'g').replace(/ü/g, 'u')
+        .replace(/ş/g, 's').replace(/ö/g, 'o').replace(/ç/g, 'c')
         .replace(/[^a-z0-9]/g, ' ')
         .trim();
     }
 
-    // Kapak Fotoğraflarını Tarama
+    // Kapak klasörünü dinamik tara
     async function fetchCoverImages() {
       try {
         const response = await fetch(COVER_FOLDER_URL);
@@ -207,63 +202,11 @@
           .filter(href => href && /\.(jpg|jpeg|png|webp)$/i.test(href))
           .map(href => decodeURIComponent(href.split('/').pop()));
       } catch (e) {
-        console.log("Kapak klasörü taranamadı.");
+        coverFiles = [];
       }
     }
 
-    // Kelime İçerme Odaklı Esnek Eşleştirme
-    function getBestCoverUrl(bookName) {
-      const targetClean = cleanText(bookName);
-      const targetWords = targetClean.split(/\s+/).filter(w => w.length > 0);
-
-      if (coverFiles.length > 0) {
-        let bestMatch = null;
-        let highestScore = -1;
-
-        coverFiles.forEach(file => {
-          const fileNoExt = file.substring(0, file.lastIndexOf('.'));
-          const fileClean = cleanText(fileNoExt);
-          const fileWords = fileClean.split(/\s+/).filter(w => w.length > 0);
-
-          let score = 0;
-
-          // 1. Tam İsim Birebir Eşleşiyorsa (örn: CATA === CATA)
-          if (targetClean === fileClean) {
-            score += 1000;
-          }
-
-          // 2. Kitap adındaki tüm kelimeler kapak adında geçiyorsa (örn: CATA -> CATA 202026)
-          targetWords.forEach(word => {
-            if (fileWords.includes(word)) {
-              score += 200; // Tam kelime eşleşmesi
-            } else if (fileClean.includes(word)) {
-              score += 100; // Alt metin eşleşmesi
-            }
-          });
-
-          // 3. Dosya adındaki kelimeler kitap adında geçiyorsa
-          fileWords.forEach(word => {
-            if (targetWords.includes(word)) {
-              score += 50;
-            }
-          });
-
-          if (score > highestScore && score > 0) {
-            highestScore = score;
-            bestMatch = file;
-          }
-        });
-
-        if (bestMatch) {
-          return COVER_FOLDER_URL + encodeURIComponent(bestMatch);
-        }
-      }
-
-      // Bulunamazsa varsayılan olarak .jpg dene
-      return `${COVER_FOLDER_URL}${encodeURIComponent(bookName)}.jpg`;
-    }
-
-    // Sunucudan Listeleri Çekme
+    // Sunucudan HTML Listesini Çek
     async function fetchServerList() {
       try {
         const response = await fetch(BASE_FOLDER_URL);
@@ -286,7 +229,7 @@
     }
 
     function mergeAndOrder(serverNames) {
-      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v5');
+      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v6');
       let savedNames = saved ? JSON.parse(saved) : [];
 
       savedNames = savedNames.filter(name => serverNames.includes(name));
@@ -304,14 +247,70 @@
         if (!inserted) savedNames.push(newName);
       });
 
-      localStorage.setItem('ozbek_bookshelf_order_names_v5', JSON.stringify(savedNames));
+      localStorage.setItem('ozbek_bookshelf_order_names_v6', JSON.stringify(savedNames));
       return savedNames;
     }
 
     function saveOrder() {
       const currentCards = document.querySelectorAll('.book-card');
       const names = Array.from(currentCards).map(card => card.dataset.name);
-      localStorage.setItem('ozbek_bookshelf_order_names_v5', JSON.stringify(names));
+      localStorage.setItem('ozbek_bookshelf_order_names_v6', JSON.stringify(names));
+    }
+
+    // Çoklu Aşamalı Görsel Düzeltme / Yükleme Mekanizması
+    function handleImageFallback(imgElement, bookName) {
+      const extensions = ['.jpg', '.png', '.jpeg', '.webp', '.JPG', '.PNG'];
+      
+      // Marka isminden alternatif arama terimleri üret
+      const cleanBook = cleanText(bookName);
+      const firstWord = bookName.split(' ')[0]; // Örn: "DÜNYA LED" -> "DÜNYA" veya "CATA"
+      
+      let candidateUrls = [];
+
+      // 1. Dizin taranabildiyse kelime eşleşmesine bak
+      if (coverFiles.length > 0) {
+        coverFiles.forEach(file => {
+          const cleanFile = cleanText(file);
+          if (cleanFile.includes(cleanBook) || cleanBook.includes(cleanFile) || cleanFile.includes(cleanText(firstWord))) {
+            candidateUrls.push(COVER_FOLDER_URL + encodeURIComponent(file));
+          }
+        });
+      }
+
+      // 2. Direkt Dosya Adı İhtimallerini Oluştur
+      extensions.forEach(ext => {
+        candidateUrls.push(`${COVER_FOLDER_URL}${encodeURIComponent(bookName)}${ext}`);
+        candidateUrls.push(`${COVER_FOLDER_URL}${encodeURIComponent(firstWord)}${ext}`);
+      });
+
+      // Tekrarlanan URL'leri Temizle
+      candidateUrls = Array.from(new Set(candidateUrls));
+
+      let currentIndex = 0;
+
+      // Hata aldıkça sıradaki alternatif resmi dene
+      imgElement.onerror = function() {
+        if (currentIndex < candidateUrls.length) {
+          const nextUrl = candidateUrls[currentIndex];
+          currentIndex++;
+          this.src = nextUrl;
+        } else {
+          // Hiçbiri çalışmazsa ikona geç
+          this.style.display = 'none';
+          if (this.nextElementSibling) {
+            this.nextElementSibling.style.display = 'flex';
+          }
+        }
+      };
+
+      // İlk görsel denemesini tetikle
+      if (candidateUrls.length > 0) {
+        const firstUrl = candidateUrls[0];
+        currentIndex = 1;
+        imgElement.src = firstUrl;
+      } else {
+        imgElement.onerror();
+      }
     }
 
     async function initBookshelf() {
@@ -330,17 +329,18 @@
         card.href = `${BASE_FOLDER_URL}${encodeURIComponent(name)}.html`;
         card.dataset.name = name;
 
-        const coverImgUrl = getBestCoverUrl(name);
-
         card.innerHTML = `
           <div class="book-cover-wrap">
-            <img class="book-cover-img" src="${coverImgUrl}" alt="${name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <img class="book-cover-img" alt="${name}">
             <div class="fallback-icon">
               <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
             </div>
           </div>
           <div class="book-title">${name}</div>
         `;
+
+        const imgElement = card.querySelector('.book-cover-img');
+        handleImageFallback(imgElement, name);
 
         attachEvents(card);
         bookshelf.appendChild(card);
