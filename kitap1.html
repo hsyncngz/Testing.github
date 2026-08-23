@@ -88,11 +88,11 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      display: none; /* Başlangıçta gizli, sadece başarılı yüklenen resmi göster */
     }
 
     .fallback-icon {
-      display: none;
+      display: flex;
       flex-direction: column;
       align-items: center;
     }
@@ -187,7 +187,7 @@
         .trim();
     }
 
-    // Kapak klasörünü dinamik tara
+    // Kapak fotoğrafları klasörünü tara
     async function fetchCoverImages() {
       try {
         const response = await fetch(COVER_FOLDER_URL);
@@ -206,7 +206,7 @@
       }
     }
 
-    // Sunucudan HTML Listesini Çek
+    // Sunucudaki HTML listesini tara
     async function fetchServerList() {
       try {
         const response = await fetch(BASE_FOLDER_URL);
@@ -229,7 +229,7 @@
     }
 
     function mergeAndOrder(serverNames) {
-      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v6');
+      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v7');
       let savedNames = saved ? JSON.parse(saved) : [];
 
       savedNames = savedNames.filter(name => serverNames.includes(name));
@@ -247,70 +247,74 @@
         if (!inserted) savedNames.push(newName);
       });
 
-      localStorage.setItem('ozbek_bookshelf_order_names_v6', JSON.stringify(savedNames));
+      localStorage.setItem('ozbek_bookshelf_order_names_v7', JSON.stringify(savedNames));
       return savedNames;
     }
 
     function saveOrder() {
       const currentCards = document.querySelectorAll('.book-card');
       const names = Array.from(currentCards).map(card => card.dataset.name);
-      localStorage.setItem('ozbek_bookshelf_order_names_v6', JSON.stringify(names));
+      localStorage.setItem('ozbek_bookshelf_order_names_v7', JSON.stringify(names));
     }
 
-    // Çoklu Aşamalı Görsel Düzeltme / Yükleme Mekanizması
-    function handleImageFallback(imgElement, bookName) {
-      const extensions = ['.jpg', '.png', '.jpeg', '.webp', '.JPG', '.PNG'];
-      
-      // Marka isminden alternatif arama terimleri üret
+    // Görsel Yükleme Mantığı (Soru İşareti / Kırık Görsel Çıkmasını Engeller)
+    function loadCoverImage(cardElement, bookName) {
+      const imgElement = cardElement.querySelector('.book-cover-img');
+      const iconElement = cardElement.querySelector('.fallback-icon');
+
       const cleanBook = cleanText(bookName);
-      const firstWord = bookName.split(' ')[0]; // Örn: "DÜNYA LED" -> "DÜNYA" veya "CATA"
-      
+      const firstWord = cleanText(bookName.split(' ')[0]);
+
       let candidateUrls = [];
 
-      // 1. Dizin taranabildiyse kelime eşleşmesine bak
+      // 1. Kapak klasöründen kelime eşleşmesi bul
       if (coverFiles.length > 0) {
         coverFiles.forEach(file => {
           const cleanFile = cleanText(file);
-          if (cleanFile.includes(cleanBook) || cleanBook.includes(cleanFile) || cleanFile.includes(cleanText(firstWord))) {
+          if (cleanFile.includes(cleanBook) || cleanBook.includes(cleanFile) || cleanFile.includes(firstWord)) {
             candidateUrls.push(COVER_FOLDER_URL + encodeURIComponent(file));
           }
         });
       }
 
-      // 2. Direkt Dosya Adı İhtimallerini Oluştur
-      extensions.forEach(ext => {
-        candidateUrls.push(`${COVER_FOLDER_URL}${encodeURIComponent(bookName)}${ext}`);
-        candidateUrls.push(`${COVER_FOLDER_URL}${encodeURIComponent(firstWord)}${ext}`);
-      });
+      // 2. Kapak klasöründe doğrudan isim dene (.jpg / .png)
+      candidateUrls.push(`${COVER_FOLDER_URL}${encodeURIComponent(bookName)}.jpg`);
+      candidateUrls.push(`${COVER_FOLDER_URL}${encodeURIComponent(bookName)}.png`);
 
-      // Tekrarlanan URL'leri Temizle
+      // 3. BULUNAMAZSA: ESKİ ÇALIŞAN METODA DÖN (page_1.jpg)
+      candidateUrls.push(`${BASE_FOLDER_URL}${encodeURIComponent(bookName)}/page_1.jpg`);
+
       candidateUrls = Array.from(new Set(candidateUrls));
 
-      let currentIndex = 0;
+      let index = 0;
 
-      // Hata aldıkça sıradaki alternatif resmi dene
-      imgElement.onerror = function() {
-        if (currentIndex < candidateUrls.length) {
-          const nextUrl = candidateUrls[currentIndex];
-          currentIndex++;
-          this.src = nextUrl;
-        } else {
-          // Hiçbiri çalışmazsa ikona geç
-          this.style.display = 'none';
-          if (this.nextElementSibling) {
-            this.nextElementSibling.style.display = 'flex';
-          }
+      function tryNext() {
+        if (index >= candidateUrls.length) {
+          // Hiçbir görsel çalışmadıysa ikonda kal
+          imgElement.style.display = 'none';
+          iconElement.style.display = 'flex';
+          return;
         }
-      };
 
-      // İlk görsel denemesini tetikle
-      if (candidateUrls.length > 0) {
-        const firstUrl = candidateUrls[0];
-        currentIndex = 1;
-        imgElement.src = firstUrl;
-      } else {
-        imgElement.onerror();
+        const testUrl = candidateUrls[index++];
+        const tempImg = new Image();
+
+        tempImg.onload = function() {
+          // Başarılı yüklenirse resmi göster
+          imgElement.src = testUrl;
+          imgElement.style.display = 'block';
+          iconElement.style.display = 'none';
+        };
+
+        tempImg.onerror = function() {
+          // Başarısız olursa sıradakini dene
+          tryNext();
+        };
+
+        tempImg.src = testUrl;
       }
+
+      tryNext();
     }
 
     async function initBookshelf() {
@@ -339,9 +343,7 @@
           <div class="book-title">${name}</div>
         `;
 
-        const imgElement = card.querySelector('.book-cover-img');
-        handleImageFallback(imgElement, name);
-
+        loadCoverImage(card, name);
         attachEvents(card);
         bookshelf.appendChild(card);
       });
