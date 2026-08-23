@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Fiyat Listeleri Kitaplığı</title>
+  <style>
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.22);
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      --accent-color: #38bdf8;
+      --text-color: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      background: radial-gradient(circle at top left, #1e1b4b, #0f172a, #030712);
+      background-attachment: fixed;
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 0.8rem;
+    }
+
+    /* Kitaplık Izgarası - Yan Yana 3 Kitap */
+    .bookshelf {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      width: 100%;
+      max-width: 960px;
+      padding: 1rem;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--glass-shadow);
+      touch-action: manipulation;
+    }
+
+    /* Kitap Kartı */
+    .book-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-color);
+      transition: transform 0.2s ease, background 0.2s ease;
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .book-cover-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1.41;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 0.6rem;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .book-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .fallback-icon {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .fallback-icon svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--accent-color);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .book-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+      word-break: break-word;
+      color: #f1f5f9;
+      line-height: 1.2;
+    }
+
+    /* Shake / Jiggle Animasyonu */
+    @keyframes jiggle {
+      0% { transform: rotate(-1.2deg) scale(0.98); }
+      50% { transform: rotate(1.2deg) scale(0.98); }
+      100% { transform: rotate(-1.2deg) scale(0.98); }
+    }
+
+    body.edit-mode .book-card {
+      animation: jiggle 0.24s infinite ease-in-out;
+      border-color: rgba(56, 189, 248, 0.5);
+      cursor: move;
+    }
+
+    body.edit-mode .book-card:nth-child(even) {
+      animation-duration: 0.28s;
+      animation-direction: reverse;
+    }
+
+    .book-card.dragging {
+      opacity: 0.3;
+      transform: scale(0.9);
+    }
+
+    @media (max-width: 480px) {
+      .bookshelf {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        padding: 0.5rem;
+      }
+      .book-card {
+        padding: 0.5rem;
+        border-radius: 14px;
+      }
+      .book-title {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bookshelf" id="bookshelf"></div>
+
+  <script>
+    const BASE_FOLDER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/";
+    const COVER_FOLDER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/";
+
+    const fallbackNames = [
+      "ABB", "ACK", "ADAL", "ARS", "ARVIA", "AUDIO", "AYKA", "BEMIS", "CATA", 
+      "CHINT", "ÇEBI", "ÇET-SAN", "DÜNYA LED", "ELMAX", "EMAS", "ENTES", 
+      "ERKLED", "ERNA", "FANSAN HİVA", "FAR", "FETİH", "FORLIFE", "GOYA LİGHTİNG", 
+      "GWEST", "HASÇELİK", "HELİOS", "HES KABLO", "HIGHTEK", "HOROZ", "İNOLED", 
+      "IŞILDAR", "K2 KENDAL", "KONREX İNOVASYON LİST.", "LEGRAND", "MAKEL", 
+      "METOP OCAK", "MULTİTEK", "MUTLUSAN", "NEAD", "NETAPLAST", "NOAS", 
+      "NTS", "OAG", "OREL", "OVİVO WOG", "OVIVO", "ÖZKARAKUŞ", "ÖZKARDEŞLER", 
+      "ÖZNUR", "PELSAN", "REÇBER", "TEKNOLOJİ", "TENSE", "TK LIGHTING", 
+      "UGEST", "VİKO", "WALL LED", "YCL", "ZERPA", "ZMR"
+    ];
+
+    const bookshelf = document.getElementById('bookshelf');
+    let isEditMode = false;
+    let pressTimer = null;
+    let coverImagesMap = {};
+
+    // Kapak fotoğrafları klasöründeki dosyaları tarama
+    async function fetchCoverImages() {
+      try {
+        const response = await fetch(COVER_FOLDER_URL);
+        if (!response.ok) return;
+        const htmlText = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+        const links = Array.from(doc.querySelectorAll('a'));
+
+        links.forEach(a => {
+          const href = a.getAttribute('href');
+          if (href && /\.(jpg|jpeg|png|webp)$/i.test(href)) {
+            const fileName = decodeURIComponent(href.split('/').pop());
+            // Uzantısız ismi anahtar yaparak haritala
+            const cleanName = fileName.substring(0, fileName.lastIndexOf('.')).toLowerCase().trim();
+            coverImagesMap[cleanName] = fileName;
+          }
+        });
+      } catch (e) {
+        console.log("Kapak fotoğrafları klasörü taranamadı, doğrudan eşleşme deneniyor.");
+      }
+    }
+
+    // Isme en yakın kapak fotoğrafı URL'ini belirleme
+    function getBestCoverUrl(bookName) {
+      const normalizedBook = bookName.toLowerCase().trim();
+      
+      // 1. Dinamik taranan haritada isim benzerliği ara
+      if (coverImagesMap[normalizedBook]) {
+        return COVER_FOLDER_URL + encodeURIComponent(coverImagesMap[normalizedBook]);
+      }
+
+      // Harita içinde kısmi eşleşme ara (Örn: "ABB Listesi.jpg" -> "ABB")
+      for (let key in coverImagesMap) {
+        if (key.includes(normalizedBook) || normalizedBook.includes(key)) {
+          return COVER_FOLDER_URL + encodeURIComponent(coverImagesMap[key]);
+        }
+      }
+
+      // 2. Varsayılan olarak doğrudan isimle .jpg / .png ihtimalini dene
+      return `${COVER_FOLDER_URL}${encodeURIComponent(bookName)}.jpg`;
+    }
+
+    // HTML Listeleri Klasörünü Tarama
+    async function fetchServerList() {
+      try {
+        const response = await fetch(BASE_FOLDER_URL);
+        if (!response.ok) throw new Error("Dizin erişimi yok");
+        const htmlText = await response.text();
+        
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+        const links = Array.from(doc.querySelectorAll('a'));
+        
+        const detectedNames = links
+          .map(a => a.getAttribute('href'))
+          .filter(href => href && href.endsWith('.html') && !href.startsWith('http'))
+          .map(href => decodeURIComponent(href.replace('.html', '').replace('./', '')));
+
+        return detectedNames.length > 0 ? Array.from(new Set(detectedNames)) : fallbackNames;
+      } catch (err) {
+        return fallbackNames;
+      }
+    }
+
+    function mergeAndOrder(serverNames) {
+      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v3');
+      let savedNames = saved ? JSON.parse(saved) : [];
+
+      savedNames = savedNames.filter(name => serverNames.includes(name));
+      const newNames = serverNames.filter(name => !savedNames.includes(name));
+
+      newNames.forEach(newName => {
+        let inserted = false;
+        for (let i = 0; i < savedNames.length; i++) {
+          if (newName.localeCompare(savedNames[i], 'tr') < 0) {
+            savedNames.splice(i, 0, newName);
+            inserted = true;
+            break;
+          }
+        }
+        if (!inserted) savedNames.push(newName);
+      });
+
+      localStorage.setItem('ozbek_bookshelf_order_names_v3', JSON.stringify(savedNames));
+      return savedNames;
+    }
+
+    function saveOrder() {
+      const currentCards = document.querySelectorAll('.book-card');
+      const names = Array.from(currentCards).map(card => card.dataset.name);
+      localStorage.setItem('ozbek_bookshelf_order_names_v3', JSON.stringify(names));
+    }
+
+    async function initBookshelf() {
+      await fetchCoverImages(); // Önce kapak görsellerini tara
+      const serverNames = await fetchServerList();
+      const finalNames = mergeAndOrder(serverNames);
+      renderBooks(finalNames);
+    }
+
+    function renderBooks(names) {
+      bookshelf.innerHTML = '';
+
+      names.forEach(name => {
+        const card = document.createElement('a');
+        card.className = 'book-card';
+        card.href = `${BASE_FOLDER_URL}${encodeURIComponent(name)}.html`;
+        card.dataset.name = name;
+
+        const coverImgUrl = getBestCoverUrl(name);
+
+        card.innerHTML = `
+          <div class="book-cover-wrap">
+            <img class="book-cover-img" src="${coverImgUrl}" alt="${name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="fallback-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            </div>
+          </div>
+          <div class="book-title">${name}</div>
+        `;
+
+        attachEvents(card);
+        bookshelf.appendChild(card);
+      });
+    }
+
+    function attachEvents(card) {
+      card.addEventListener('click', (e) => {
+        if (isEditMode) e.preventDefault();
+      });
+
+      const startPress = () => {
+        pressTimer = setTimeout(() => enableEditMode(), 500);
+      };
+
+      const cancelPress = () => clearTimeout(pressTimer);
+
+      card.addEventListener('touchstart', startPress, { passive: true });
+      card.addEventListener('touchend', cancelPress);
+      card.addEventListener('touchmove', cancelPress);
+      card.addEventListener('mousedown', startPress);
+      card.addEventListener('mouseup', cancelPress);
+      card.addEventListener('mouseleave', cancelPress);
+
+      card.draggable = true;
+      card.addEventListener('dragstart', handleDragStart);
+      card.addEventListener('dragend', handleDragEnd);
+    }
+
+    let draggedCard = null;
+
+    function handleDragStart(e) {
+      if (!isEditMode) {
+        e.preventDefault();
+        return;
+      }
+      draggedCard = this;
+      this.classList.add('dragging');
+    }
+
+    function handleDragEnd() {
+      if (draggedCard) {
+        draggedCard.classList.remove('dragging');
+        draggedCard = null;
+        saveOrder();
+      }
+    }
+
+    bookshelf.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      if (!isEditMode || !draggedCard) return;
+      const afterElement = getDragAfterElement(bookshelf, e.clientX, e.clientY);
+      if (afterElement == null) {
+        bookshelf.appendChild(draggedCard);
+      } else {
+        bookshelf.insertBefore(draggedCard, afterElement);
+      }
+    });
+
+    function getDragAfterElement(container, x, y) {
+      const elements = [...container.querySelectorAll('.book-card:not(.dragging)')];
+      return elements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = x - box.left - box.width / 2 + (y - box.top - box.height / 2);
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    function enableEditMode() {
+      isEditMode = true;
+      document.body.classList.add('edit-mode');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (isEditMode && !e.target.closest('.book-card')) {
+        isEditMode = false;
+        document.body.classList.remove('edit-mode');
+        saveOrder();
+      }
+    });
+
+    initBookshelf();
+  </script>
+</body>
+</html>
