@@ -178,7 +178,7 @@
     let pressTimer = null;
     let coverFiles = [];
 
-    // Metin Temizleme ve Normalizasyon (Türkçe ve Özel Karakter Temizliği)
+    // Metin Temizleme ve Türkçe Karakter Normalizasyonu
     function cleanText(str) {
       if (!str) return "";
       return str.toLowerCase()
@@ -207,59 +207,63 @@
           .filter(href => href && /\.(jpg|jpeg|png|webp)$/i.test(href))
           .map(href => decodeURIComponent(href.split('/').pop()));
       } catch (e) {
-        console.log("Kapak klasörü okunamadı, direkt eşleşmeye geçiliyor.");
+        console.log("Kapak klasörü taranamadı.");
       }
     }
 
-    // Esnek Esleştirme Algoritması (Fuzzy Matching)
+    // Kelime İçerme Odaklı Esnek Eşleştirme
     function getBestCoverUrl(bookName) {
       const targetClean = cleanText(bookName);
-      const targetWords = targetClean.split(/\s+/).filter(w => w.length > 1);
+      const targetWords = targetClean.split(/\s+/).filter(w => w.length > 0);
 
       if (coverFiles.length > 0) {
         let bestMatch = null;
-        let highestScore = 0;
+        let highestScore = -1;
 
         coverFiles.forEach(file => {
-          const fileClean = cleanText(file.substring(0, file.lastIndexOf('.')));
-          const fileWords = fileClean.split(/\s+/);
+          const fileNoExt = file.substring(0, file.lastIndexOf('.'));
+          const fileClean = cleanText(fileNoExt);
+          const fileWords = fileClean.split(/\s+/).filter(w => w.length > 0);
 
           let score = 0;
 
-          // Birebir aynı ise en yüksek puan
+          // 1. Tam İsim Birebir Eşleşiyorsa (örn: CATA === CATA)
           if (targetClean === fileClean) {
-            score += 100;
-          }
-          // Biri diğerinin içinde geçiyorsa
-          else if (fileClean.includes(targetClean) || targetClean.includes(fileClean)) {
-            score += 50;
+            score += 1000;
           }
 
-          // Kelime bazlı eşleşme kontrolü
+          // 2. Kitap adındaki tüm kelimeler kapak adında geçiyorsa (örn: CATA -> CATA 202026)
           targetWords.forEach(word => {
             if (fileWords.includes(word)) {
-              score += 20;
+              score += 200; // Tam kelime eşleşmesi
             } else if (fileClean.includes(word)) {
-              score += 10;
+              score += 100; // Alt metin eşleşmesi
             }
           });
 
-          if (score > highestScore) {
+          // 3. Dosya adındaki kelimeler kitap adında geçiyorsa
+          fileWords.forEach(word => {
+            if (targetWords.includes(word)) {
+              score += 50;
+            }
+          });
+
+          if (score > highestScore && score > 0) {
             highestScore = score;
             bestMatch = file;
           }
         });
 
-        if (bestMatch && highestScore > 0) {
+        if (bestMatch) {
           return COVER_FOLDER_URL + encodeURIComponent(bestMatch);
         }
       }
 
-      // Bulunamazsa varsayılan direkt .jpg varsayımı
+      // Bulunamazsa varsayılan olarak .jpg dene
       return `${COVER_FOLDER_URL}${encodeURIComponent(bookName)}.jpg`;
     }
 
-    // Sunucudan Liste Çekme
+    // Sunucudan Listeleri Çekme
     async function fetchServerList() {
       try {
         const response = await fetch(BASE_FOLDER_URL);
@@ -282,7 +286,7 @@
     }
 
     function mergeAndOrder(serverNames) {
-      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v4');
+      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v5');
       let savedNames = saved ? JSON.parse(saved) : [];
 
       savedNames = savedNames.filter(name => serverNames.includes(name));
@@ -300,14 +304,14 @@
         if (!inserted) savedNames.push(newName);
       });
 
-      localStorage.setItem('ozbek_bookshelf_order_names_v4', JSON.stringify(savedNames));
+      localStorage.setItem('ozbek_bookshelf_order_names_v5', JSON.stringify(savedNames));
       return savedNames;
     }
 
     function saveOrder() {
       const currentCards = document.querySelectorAll('.book-card');
       const names = Array.from(currentCards).map(card => card.dataset.name);
-      localStorage.setItem('ozbek_bookshelf_order_names_v4', JSON.stringify(names));
+      localStorage.setItem('ozbek_bookshelf_order_names_v5', JSON.stringify(names));
     }
 
     async function initBookshelf() {
