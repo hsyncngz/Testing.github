@@ -88,11 +88,11 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: none; /* Başlangıçta gizli, sadece başarılı yüklenen resmi göster */
+      display: block;
     }
 
     .fallback-icon {
-      display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
     }
@@ -159,7 +159,6 @@
 
   <script>
     const BASE_FOLDER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/";
-    const COVER_FOLDER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/kapak-fotograflari/";
 
     const fallbackNames = [
       "ABB", "ACK", "ADAL", "ARS", "ARVIA", "AUDIO", "AYKA", "BEMIS", "CATA", 
@@ -176,37 +175,8 @@
     const bookshelf = document.getElementById('bookshelf');
     let isEditMode = false;
     let pressTimer = null;
-    let coverFiles = [];
 
-    function cleanText(str) {
-      if (!str) return "";
-      return str.toLowerCase()
-        .replace(/ı/g, 'i').replace(/ğ/g, 'g').replace(/ü/g, 'u')
-        .replace(/ş/g, 's').replace(/ö/g, 'o').replace(/ç/g, 'c')
-        .replace(/[^a-z0-9]/g, ' ')
-        .trim();
-    }
-
-    // Kapak fotoğrafları klasörünü tara
-    async function fetchCoverImages() {
-      try {
-        const response = await fetch(COVER_FOLDER_URL);
-        if (!response.ok) return;
-        const htmlText = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlText, 'text/html');
-        const links = Array.from(doc.querySelectorAll('a'));
-
-        coverFiles = links
-          .map(a => a.getAttribute('href'))
-          .filter(href => href && /\.(jpg|jpeg|png|webp)$/i.test(href))
-          .map(href => decodeURIComponent(href.split('/').pop()));
-      } catch (e) {
-        coverFiles = [];
-      }
-    }
-
-    // Sunucudaki HTML listesini tara
+    // Sunucudaki HTML listelerini tara
     async function fetchServerList() {
       try {
         const response = await fetch(BASE_FOLDER_URL);
@@ -229,7 +199,7 @@
     }
 
     function mergeAndOrder(serverNames) {
-      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v7');
+      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v8');
       let savedNames = saved ? JSON.parse(saved) : [];
 
       savedNames = savedNames.filter(name => serverNames.includes(name));
@@ -247,78 +217,17 @@
         if (!inserted) savedNames.push(newName);
       });
 
-      localStorage.setItem('ozbek_bookshelf_order_names_v7', JSON.stringify(savedNames));
+      localStorage.setItem('ozbek_bookshelf_order_names_v8', JSON.stringify(savedNames));
       return savedNames;
     }
 
     function saveOrder() {
       const currentCards = document.querySelectorAll('.book-card');
       const names = Array.from(currentCards).map(card => card.dataset.name);
-      localStorage.setItem('ozbek_bookshelf_order_names_v7', JSON.stringify(names));
-    }
-
-    // Görsel Yükleme Mantığı (Soru İşareti / Kırık Görsel Çıkmasını Engeller)
-    function loadCoverImage(cardElement, bookName) {
-      const imgElement = cardElement.querySelector('.book-cover-img');
-      const iconElement = cardElement.querySelector('.fallback-icon');
-
-      const cleanBook = cleanText(bookName);
-      const firstWord = cleanText(bookName.split(' ')[0]);
-
-      let candidateUrls = [];
-
-      // 1. Kapak klasöründen kelime eşleşmesi bul
-      if (coverFiles.length > 0) {
-        coverFiles.forEach(file => {
-          const cleanFile = cleanText(file);
-          if (cleanFile.includes(cleanBook) || cleanBook.includes(cleanFile) || cleanFile.includes(firstWord)) {
-            candidateUrls.push(COVER_FOLDER_URL + encodeURIComponent(file));
-          }
-        });
-      }
-
-      // 2. Kapak klasöründe doğrudan isim dene (.jpg / .png)
-      candidateUrls.push(`${COVER_FOLDER_URL}${encodeURIComponent(bookName)}.jpg`);
-      candidateUrls.push(`${COVER_FOLDER_URL}${encodeURIComponent(bookName)}.png`);
-
-      // 3. BULUNAMAZSA: ESKİ ÇALIŞAN METODA DÖN (page_1.jpg)
-      candidateUrls.push(`${BASE_FOLDER_URL}${encodeURIComponent(bookName)}/page_1.jpg`);
-
-      candidateUrls = Array.from(new Set(candidateUrls));
-
-      let index = 0;
-
-      function tryNext() {
-        if (index >= candidateUrls.length) {
-          // Hiçbir görsel çalışmadıysa ikonda kal
-          imgElement.style.display = 'none';
-          iconElement.style.display = 'flex';
-          return;
-        }
-
-        const testUrl = candidateUrls[index++];
-        const tempImg = new Image();
-
-        tempImg.onload = function() {
-          // Başarılı yüklenirse resmi göster
-          imgElement.src = testUrl;
-          imgElement.style.display = 'block';
-          iconElement.style.display = 'none';
-        };
-
-        tempImg.onerror = function() {
-          // Başarısız olursa sıradakini dene
-          tryNext();
-        };
-
-        tempImg.src = testUrl;
-      }
-
-      tryNext();
+      localStorage.setItem('ozbek_bookshelf_order_names_v8', JSON.stringify(names));
     }
 
     async function initBookshelf() {
-      await fetchCoverImages();
       const serverNames = await fetchServerList();
       const finalNames = mergeAndOrder(serverNames);
       renderBooks(finalNames);
@@ -333,9 +242,12 @@
         card.href = `${BASE_FOLDER_URL}${encodeURIComponent(name)}.html`;
         card.dataset.name = name;
 
+        // Doğrudan ilk sayfa resmi hedeflenir
+        const coverImgUrl = `${BASE_FOLDER_URL}${encodeURIComponent(name)}/page_1.jpg`;
+
         card.innerHTML = `
           <div class="book-cover-wrap">
-            <img class="book-cover-img" alt="${name}">
+            <img class="book-cover-img" src="${coverImgUrl}" alt="${name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="fallback-icon">
               <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
             </div>
@@ -343,7 +255,6 @@
           <div class="book-title">${name}</div>
         `;
 
-        loadCoverImage(card, name);
         attachEvents(card);
         bookshelf.appendChild(card);
       });
