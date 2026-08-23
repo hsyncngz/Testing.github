@@ -176,9 +176,23 @@
     const bookshelf = document.getElementById('bookshelf');
     let isEditMode = false;
     let pressTimer = null;
-    let coverImagesMap = {};
+    let coverFiles = [];
 
-    // Kapak fotoğrafları klasöründeki dosyaları tarama
+    // Metin Temizleme ve Normalizasyon (Türkçe ve Özel Karakter Temizliği)
+    function cleanText(str) {
+      if (!str) return "";
+      return str.toLowerCase()
+        .replace(/ı/g, 'i')
+        .replace(/ğ/g, 'g')
+        .replace(/ü/g, 'u')
+        .replace(/ş/g, 's')
+        .replace(/ö/g, 'o')
+        .replace(/ç/g, 'c')
+        .replace(/[^a-z0-9]/g, ' ')
+        .trim();
+    }
+
+    // Kapak Fotoğraflarını Tarama
     async function fetchCoverImages() {
       try {
         const response = await fetch(COVER_FOLDER_URL);
@@ -188,41 +202,64 @@
         const doc = parser.parseFromString(htmlText, 'text/html');
         const links = Array.from(doc.querySelectorAll('a'));
 
-        links.forEach(a => {
-          const href = a.getAttribute('href');
-          if (href && /\.(jpg|jpeg|png|webp)$/i.test(href)) {
-            const fileName = decodeURIComponent(href.split('/').pop());
-            // Uzantısız ismi anahtar yaparak haritala
-            const cleanName = fileName.substring(0, fileName.lastIndexOf('.')).toLowerCase().trim();
-            coverImagesMap[cleanName] = fileName;
-          }
-        });
+        coverFiles = links
+          .map(a => a.getAttribute('href'))
+          .filter(href => href && /\.(jpg|jpeg|png|webp)$/i.test(href))
+          .map(href => decodeURIComponent(href.split('/').pop()));
       } catch (e) {
-        console.log("Kapak fotoğrafları klasörü taranamadı, doğrudan eşleşme deneniyor.");
+        console.log("Kapak klasörü okunamadı, direkt eşleşmeye geçiliyor.");
       }
     }
 
-    // Isme en yakın kapak fotoğrafı URL'ini belirleme
+    // Esnek Esleştirme Algoritması (Fuzzy Matching)
     function getBestCoverUrl(bookName) {
-      const normalizedBook = bookName.toLowerCase().trim();
-      
-      // 1. Dinamik taranan haritada isim benzerliği ara
-      if (coverImagesMap[normalizedBook]) {
-        return COVER_FOLDER_URL + encodeURIComponent(coverImagesMap[normalizedBook]);
-      }
+      const targetClean = cleanText(bookName);
+      const targetWords = targetClean.split(/\s+/).filter(w => w.length > 1);
 
-      // Harita içinde kısmi eşleşme ara (Örn: "ABB Listesi.jpg" -> "ABB")
-      for (let key in coverImagesMap) {
-        if (key.includes(normalizedBook) || normalizedBook.includes(key)) {
-          return COVER_FOLDER_URL + encodeURIComponent(coverImagesMap[key]);
+      if (coverFiles.length > 0) {
+        let bestMatch = null;
+        let highestScore = 0;
+
+        coverFiles.forEach(file => {
+          const fileClean = cleanText(file.substring(0, file.lastIndexOf('.')));
+          const fileWords = fileClean.split(/\s+/);
+
+          let score = 0;
+
+          // Birebir aynı ise en yüksek puan
+          if (targetClean === fileClean) {
+            score += 100;
+          }
+          // Biri diğerinin içinde geçiyorsa
+          else if (fileClean.includes(targetClean) || targetClean.includes(fileClean)) {
+            score += 50;
+          }
+
+          // Kelime bazlı eşleşme kontrolü
+          targetWords.forEach(word => {
+            if (fileWords.includes(word)) {
+              score += 20;
+            } else if (fileClean.includes(word)) {
+              score += 10;
+            }
+          });
+
+          if (score > highestScore) {
+            highestScore = score;
+            bestMatch = file;
+          }
+        });
+
+        if (bestMatch && highestScore > 0) {
+          return COVER_FOLDER_URL + encodeURIComponent(bestMatch);
         }
       }
 
-      // 2. Varsayılan olarak doğrudan isimle .jpg / .png ihtimalini dene
+      // Bulunamazsa varsayılan direkt .jpg varsayımı
       return `${COVER_FOLDER_URL}${encodeURIComponent(bookName)}.jpg`;
     }
 
-    // HTML Listeleri Klasörünü Tarama
+    // Sunucudan Liste Çekme
     async function fetchServerList() {
       try {
         const response = await fetch(BASE_FOLDER_URL);
@@ -245,7 +282,7 @@
     }
 
     function mergeAndOrder(serverNames) {
-      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v3');
+      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v4');
       let savedNames = saved ? JSON.parse(saved) : [];
 
       savedNames = savedNames.filter(name => serverNames.includes(name));
@@ -263,18 +300,18 @@
         if (!inserted) savedNames.push(newName);
       });
 
-      localStorage.setItem('ozbek_bookshelf_order_names_v3', JSON.stringify(savedNames));
+      localStorage.setItem('ozbek_bookshelf_order_names_v4', JSON.stringify(savedNames));
       return savedNames;
     }
 
     function saveOrder() {
       const currentCards = document.querySelectorAll('.book-card');
       const names = Array.from(currentCards).map(card => card.dataset.name);
-      localStorage.setItem('ozbek_bookshelf_order_names_v3', JSON.stringify(names));
+      localStorage.setItem('ozbek_bookshelf_order_names_v4', JSON.stringify(names));
     }
 
     async function initBookshelf() {
-      await fetchCoverImages(); // Önce kapak görsellerini tara
+      await fetchCoverImages();
       const serverNames = await fetchServerList();
       const finalNames = mergeAndOrder(serverNames);
       renderBooks(finalNames);
