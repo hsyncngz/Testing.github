@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Fiyat Listeleri Kitaplığı</title>
+  <style>
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.22);
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      --accent-color: #38bdf8;
+      --text-color: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      background: radial-gradient(circle at top left, #1e1b4b, #0f172a, #030712);
+      background-attachment: fixed;
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 0.8rem;
+    }
+
+    /* Kitaplık Izgarası - Yan Yana 3 Kitap */
+    .bookshelf {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      width: 100%;
+      max-width: 960px;
+      padding: 1rem;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--glass-shadow);
+    }
+
+    /* Kitap Kartı */
+    .book-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-color);
+      transition: transform 0.2s ease, background 0.2s ease;
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .book-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .book-cover-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1.41;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 0.6rem;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .book-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .fallback-icon {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .fallback-icon svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--accent-color);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .book-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+      word-break: break-word;
+      color: #f1f5f9;
+      line-height: 1.2;
+    }
+
+    @media (max-width: 480px) {
+      .bookshelf {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        padding: 0.5rem;
+      }
+      .book-card {
+        padding: 0.5rem;
+        border-radius: 14px;
+      }
+      .book-title {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bookshelf" id="bookshelf"></div>
+
+  <script>
+    const PDF_BASE_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/";
+    const COVER_BASE_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/";
+
+    // Dizin taraması başarısız olursa kullanılacak yedek marka listesi
+    const fallbackNames = [
+      "ABB", "ACK", "ADAL", "ARS", "ARVIA", "AUDIO", "AYKA", "BEMIS", "CATA", 
+      "CHINT", "ÇEBI", "ÇET-SAN", "DÜNYA LED", "ELMAX", "EMAS", "ENTES", 
+      "ERKLED", "ERNA", "FANSAN HİVA", "FAR", "FETİH", "FORLIFE", "GOYA LİGHTİNG", 
+      "GWEST", "HASÇELİK", "HELİOS", "HES KABLO", "HIGHTEK", "HOROZ", "İNOLED", 
+      "IŞILDAR", "K2 KENDAL", "KONREX İNOVASYON LİST.", "LEGRAND", "MAKEL", 
+      "METOP OCAK", "MULTİTEK", "MUTLUSAN", "NEAD", "NETAPLAST", "NOAS", 
+      "NTS", "OAG", "OREL", "OVİVO WOG", "OVIVO", "ÖZKARAKUŞ", "ÖZKARDEŞLER", 
+      "ÖZNUR", "PELSAN", "REÇBER", "TEKNOLOJİ", "TENSE", "TK LIGHTING", 
+      "UGEST", "VİKO", "WALL LED", "YCL", "ZERPA", "ZMR"
+    ];
+
+    const bookshelf = document.getElementById('bookshelf');
+
+    // Sunucudan PDF listesini çekip alfabetik sıralayan fonksiyon
+    async function fetchList() {
+      try {
+        const response = await fetch(PDF_BASE_URL);
+        if (!response.ok) throw new Error("Sunucu erişim hatası");
+        const htmlText = await response.text();
+        
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText, 'text/html');
+        const links = Array.from(doc.querySelectorAll('a'));
+        
+        // Dizin listesinden PDF veya HTML dosyalarını süz
+        let names = links
+          .map(a => a.getAttribute('href'))
+          .filter(href => href && (href.endsWith('.pdf') || href.endsWith('.html')) && !href.startsWith('http'))
+          .map(href => decodeURIComponent(href.replace(/\.(pdf|html)$/i, '').replace('./', '')));
+
+        names = Array.from(new Set(names));
+        
+        return names.length > 0 ? names : fallbackNames;
+      } catch (err) {
+        return fallbackNames;
+      }
+    }
+
+    // İlk ekrana gelecek kapak görsellerini önbelleğe alan önyükleme mekanizması
+    function preloadCovers(names) {
+      const initialBatch = names.slice(0, 9); // İlk 9 görseli önyükle
+      initialBatch.forEach(name => {
+        const img = new Image();
+        img.src = `${COVER_BASE_URL}${encodeURIComponent(name)}.jpg`;
+      });
+    }
+
+    function renderBooks(names) {
+      // Türkçe karakterlere duyarlı tam alfabetik sıralama
+      names.sort((a, b) => a.localeCompare(b, 'tr', { sensitivity: 'base' }));
+
+      // Önyükleme (Preload) başlat
+      preloadCovers(names);
+
+      bookshelf.innerHTML = '';
+
+      names.forEach(name => {
+        const card = document.createElement('a');
+        card.className = 'book-card';
+        card.href = `${PDF_BASE_URL}${encodeURIComponent(name)}.pdf`;
+        card.target = "_blank"; // PDF'i yeni sekmede açmak için
+
+        const coverImgUrl = `${COVER_BASE_URL}${encodeURIComponent(name)}.jpg`;
+
+        card.innerHTML = `
+          <div class="book-cover-wrap">
+            <img class="book-cover-img" src="${coverImgUrl}" alt="${name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="fallback-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            </div>
+          </div>
+          <div class="book-title">${name}</div>
+        `;
+
+        bookshelf.appendChild(card);
+      });
+    }
+
+    async function initBookshelf() {
+      const names = await fetchList();
+      renderBooks(names);
+    }
+
+    initBookshelf();
+  </script>
+</body>
+</html>
