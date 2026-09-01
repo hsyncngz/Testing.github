@@ -159,7 +159,9 @@
 
   <script>
     const BASE_FOLDER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/";
+    const COVER_FOLDER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/";
 
+    // Varsayılan Liste (Sunucudan dinamik liste alınamazsa yedek olarak çalışır)
     const fallbackNames = [
       "ABB", "ACK", "ADAL", "ARS", "ARVIA", "AUDIO", "AYKA", "BEMIS", "CATA", 
       "CHINT", "ÇEBI", "ÇET-SAN", "DÜNYA LED", "ELMAX", "EMAS", "ENTES", 
@@ -176,7 +178,7 @@
     let isEditMode = false;
     let pressTimer = null;
 
-    // Sunucudaki HTML listelerini tara
+    // Sunucudaki Klasör İçeriğini Taramaya Çalışan Fonksiyon
     async function fetchServerList() {
       try {
         const response = await fetch(BASE_FOLDER_URL);
@@ -198,13 +200,18 @@
       }
     }
 
+    // Akıllı Liste Senkronizasyonu (Silinenleri kaldır, yenileri alfabetik sıraya yerleştir)
     function mergeAndOrder(serverNames) {
-      const saved = localStorage.getItem('ozbek_bookshelf_order_names_v8');
+      const saved = localStorage.getItem('ozbek_bookshelf_order_names');
       let savedNames = saved ? JSON.parse(saved) : [];
 
+      // 1. Silinen dosyaları kullanıcı listesinden kaldır
       savedNames = savedNames.filter(name => serverNames.includes(name));
+
+      // 2. Yeni eklenen dosyaları tespit et
       const newNames = serverNames.filter(name => !savedNames.includes(name));
 
+      // 3. Yeni eklenenleri alfabetik sırasına göre yerleştir
       newNames.forEach(newName => {
         let inserted = false;
         for (let i = 0; i < savedNames.length; i++) {
@@ -217,14 +224,14 @@
         if (!inserted) savedNames.push(newName);
       });
 
-      localStorage.setItem('ozbek_bookshelf_order_names_v8', JSON.stringify(savedNames));
+      localStorage.setItem('ozbek_bookshelf_order_names', JSON.stringify(savedNames));
       return savedNames;
     }
 
     function saveOrder() {
       const currentCards = document.querySelectorAll('.book-card');
       const names = Array.from(currentCards).map(card => card.dataset.name);
-      localStorage.setItem('ozbek_bookshelf_order_names_v8', JSON.stringify(names));
+      localStorage.setItem('ozbek_bookshelf_order_names', JSON.stringify(names));
     }
 
     async function initBookshelf() {
@@ -242,8 +249,8 @@
         card.href = `${BASE_FOLDER_URL}${encodeURIComponent(name)}.html`;
         card.dataset.name = name;
 
-        // Doğrudan ilk sayfa resmi hedeflenir
-        const coverImgUrl = `${BASE_FOLDER_URL}${encodeURIComponent(name)}/page_1.jpg`;
+        // Kapak resmi kapaklar klasöründen çekiliyor: MARKA.jpg
+        const coverImgUrl = `${COVER_FOLDER_URL}${encodeURIComponent(name)}.jpg`;
 
         card.innerHTML = `
           <div class="book-cover-wrap">
