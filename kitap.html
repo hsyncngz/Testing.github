@@ -159,8 +159,9 @@
 
   <script>
     const BASE_FOLDER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/";
+    const COVER_FOLDER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/";
 
-    // Varsayılan Liste (Sunucudan dinamik liste alınamazsa yedek olarak çalışır)
+    // Sunucu dizin taraması engellenirse devreye girecek tam yedek liste
     const fallbackNames = [
       "ABB", "ACK", "ADAL", "ARS", "ARVIA", "AUDIO", "AYKA", "BEMIS", "CATA", 
       "CHINT", "ÇEBI", "ÇET-SAN", "DÜNYA LED", "ELMAX", "EMAS", "ENTES", 
@@ -177,51 +178,63 @@
     let isEditMode = false;
     let pressTimer = null;
 
-    // Sunucudaki Klasör İçeriğini Taramaya Çalışan Fonksiyon
+    // Sunucudan dizin tatarak güncel dosya listesini çeken ana fonksiyon
     async function fetchServerList() {
       try {
-        const response = await fetch(BASE_FOLDER_URL);
-        if (!response.ok) throw new Error("Dizin erişimi yok");
-        const htmlText = await response.text();
+        const response = await fetch(BASE_FOLDER_URL, { cache: 'no-cache' });
+        if (!response.ok) throw new Error("Dizin erişim engeli veya 403/404 hatası");
         
+        const htmlText = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlText, 'text/html');
         const links = Array.from(doc.querySelectorAll('a'));
         
         const detectedNames = links
           .map(a => a.getAttribute('href'))
-          .filter(href => href && href.endsWith('.html') && !href.startsWith('http'))
-          .map(href => decodeURIComponent(href.replace('.html', '').replace('./', '')));
+          .filter(href => href && (href.endsWith('.html') || href.endsWith('.pdf')) && !href.startsWith('http'))
+          .map(href => {
+            let clean = href.replace('./', '').replace('.html', '').replace('.pdf', '');
+            return decodeURIComponent(clean);
+          });
 
-        return detectedNames.length > 0 ? Array.from(new Set(detectedNames)) : fallbackNames;
+        if (detectedNames.length > 0) {
+          // Türkçe karakter uyumlu alfabetik sıralama
+          return Array.from(new Set(detectedNames)).sort((a, b) => a.localeCompare(b, 'tr'));
+        }
+        return fallbackNames;
       } catch (err) {
+        console.warn("Otomatik tarama yapılamadı, varsayılan liste kullanılıyor:", err.message);
         return fallbackNames;
       }
     }
 
-    // Akıllı Liste Senkronizasyonu (Silinenleri kaldır, yenileri alfabetik sıraya yerleştir)
+    // Sıralamayı localStorage ve yeni eklenen/silinen dosyalarla senkronize eder
     function mergeAndOrder(serverNames) {
       const saved = localStorage.getItem('ozbek_bookshelf_order_names');
       let savedNames = saved ? JSON.parse(saved) : [];
 
-      // 1. Silinen dosyaları kullanıcı listesinden kaldır
-      savedNames = savedNames.filter(name => serverNames.includes(name));
+      if (savedNames.length === 0) {
+        savedNames = [...serverNames].sort((a, b) => a.localeCompare(b, 'tr'));
+      } else {
+        // 1. Silinen dosyaları kaldır
+        savedNames = savedNames.filter(name => serverNames.includes(name));
 
-      // 2. Yeni eklenen dosyaları tespit et
-      const newNames = serverNames.filter(name => !savedNames.includes(name));
+        // 2. Yeni eklenen dosyaları tespit et ve alfabetik konumlarına ekle
+        const newNames = serverNames.filter(name => !savedNames.includes(name));
+        newNames.sort((a, b) => a.localeCompare(b, 'tr'));
 
-      // 3. Yeni eklenenleri alfabetik sırasına göre yerleştir
-      newNames.forEach(newName => {
-        let inserted = false;
-        for (let i = 0; i < savedNames.length; i++) {
-          if (newName.localeCompare(savedNames[i], 'tr') < 0) {
-            savedNames.splice(i, 0, newName);
-            inserted = true;
-            break;
+        newNames.forEach(newName => {
+          let inserted = false;
+          for (let i = 0; i < savedNames.length; i++) {
+            if (newName.localeCompare(savedNames[i], 'tr') < 0) {
+              savedNames.splice(i, 0, newName);
+              inserted = true;
+              break;
+            }
           }
-        }
-        if (!inserted) savedNames.push(newName);
-      });
+          if (!inserted) savedNames.push(newName);
+        });
+      }
 
       localStorage.setItem('ozbek_bookshelf_order_names', JSON.stringify(savedNames));
       return savedNames;
@@ -248,7 +261,8 @@
         card.href = `${BASE_FOLDER_URL}${encodeURIComponent(name)}.html`;
         card.dataset.name = name;
 
-        const coverImgUrl = `${BASE_FOLDER_URL}${encodeURIComponent(name)}/page_1.jpg`;
+        // Kapak resmi belirtilen 'kapaklar/' klasöründen yüklenir
+        const coverImgUrl = `${COVER_FOLDER_URL}${encodeURIComponent(name)}.jpg`;
 
         card.innerHTML = `
           <div class="book-cover-wrap">
@@ -344,6 +358,7 @@
       }
     });
 
+    // Başlat
     initBookshelf();
   </script>
 </body>
