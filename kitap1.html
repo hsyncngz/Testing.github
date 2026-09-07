@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dijital Kitaplık - Fiyat Listeleri</title>
+  
+  <!-- Hızlı Bağlantı Kurulumu (DNS & Connection Pre-connect) -->
+  <link rel="dns-prefetch" href="https://www.ozbekenerji.com.tr">
+  <link rel="preconnect" href="https://www.ozbekenerji.com.tr" crossorigin>
+
   <style>
     :root {
       --bg-color: #1e222d;
@@ -20,42 +25,28 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      padding: 20px 10px;
+      padding: 15px 10px;
       min-height: 100vh;
+      text-rendering: optimizeSpeed;
     }
 
-    /* Tam 3 Sütun Düzeni ve Mobil Esneklik */
+    /* Tam 3 Sütun Grid (Masaüstü ve Mobil) */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
+      gap: 12px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    /* Mobil Cihazlar İçin Uyum */
     @media (max-width: 768px) {
-      body {
-        padding: 10px 5px;
-      }
-      .grid-container {
-        gap: 10px; /* Mobilde aralıkları biraz daraltarak ekranı verimli kullanır */
-      }
-      .book-card {
-        padding: 8px !important;
-      }
-      .book-title {
-        font-size: 0.75rem !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .grid-container {
-        gap: 8px;
-      }
+      body { padding: 10px 5px; }
+      .grid-container { gap: 8px; }
+      .book-card { padding: 8px !important; }
+      .book-title { font-size: 0.75rem !important; }
     }
 
     .book-card {
@@ -67,12 +58,13 @@
       align-items: center;
       text-decoration: none;
       color: var(--text-color);
-      transition: transform 0.2s, background-color 0.2s;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      will-change: transform;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
     }
 
     .book-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       background-color: var(--card-hover);
     }
 
@@ -92,12 +84,13 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .book-title {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 700;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
       text-align: center;
       text-transform: uppercase;
       word-break: break-word;
@@ -106,51 +99,437 @@
 </head>
 <body>
 
-  <div class="grid-container" id="book-grid">
-    <!-- Kitap Kartları Otomatik Üretilir -->
+  <div class="grid-container">
+    <!-- Statik Oluşturulmuş Kartlar (Sıfır JS Yükü) -->
+    
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/ABB.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/ABB.jpg?v=20260907" alt="ABB" decoding="async" fetchpriority="high">
+      </div>
+      <div class="book-title">ABB</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/ACK.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/ACK.jpg?v=20260907" alt="ACK" decoding="async" fetchpriority="high">
+      </div>
+      <div class="book-title">ACK</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/ADAL.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/ADAL.jpg?v=20260907" alt="ADAL" decoding="async" fetchpriority="high">
+      </div>
+      <div class="book-title">ADAL</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/ARS.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/ARS.jpg?v=20260907" alt="ARS" decoding="async" fetchpriority="high">
+      </div>
+      <div class="book-title">ARS</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/ARVIA.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/ARVIA.jpg?v=20260907" alt="ARVIA" decoding="async" fetchpriority="high">
+      </div>
+      <div class="book-title">ARVIA</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/AUDIO.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/AUDIO.jpg?v=20260907" alt="AUDIO" decoding="async" fetchpriority="high">
+      </div>
+      <div class="book-title">AUDIO</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/AYKA.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/AYKA.jpg?v=20260907" alt="AYKA" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">AYKA</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/BEMIS.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/BEMIS.jpg?v=20260907" alt="BEMIS" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">BEMIS</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/CATA.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/CATA.jpg?v=20260907" alt="CATA" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">CATA</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/CHINT.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/CHINT.jpg?v=20260907" alt="CHINT" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">CHINT</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/%C3%87EB%C4%B0.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/%C3%87EB%C4%B0.jpg?v=20260907" alt="ÇEBİ" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">ÇEBİ</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/%C3%87ET-SAN.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/%C3%87ET-SAN.jpg?v=20260907" alt="ÇET-SAN" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">ÇET-SAN</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/D%C3%9CNYA%20LED.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/D%C3%9CNYA%20LED.jpg?v=20260907" alt="DÜNYA LED" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">DÜNYA LED</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/ELMAX.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/ELMAX.jpg?v=20260907" alt="ELMAX" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">ELMAX</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/EMAS.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/EMAS.jpg?v=20260907" alt="EMAS" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">EMAS</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/ENTES.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/ENTES.jpg?v=20260907" alt="ENTES" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">ENTES</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/ERKLED.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/ERKLED.jpg?v=20260907" alt="ERKLED" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">ERKLED</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/ERNA.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/ERNA.jpg?v=20260907" alt="ERNA" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">ERNA</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/FANSAN.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/FANSAN.jpg?v=20260907" alt="FANSAN" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">FANSAN</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/FAR.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/FAR.jpg?v=20260907" alt="FAR" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">FAR</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/FET%C4%B0H.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/FET%C4%B0H.jpg?v=20260907" alt="FETİH" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">FETİH</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/FORLIFE.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/FORLIFE.jpg?v=20260907" alt="FORLIFE" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">FORLIFE</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/GOYA.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/GOYA.jpg?v=20260907" alt="GOYA" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">GOYA</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/GWEST.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/GWEST.jpg?v=20260907" alt="GWEST" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">GWEST</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/HAS%C3%87EL%C4%B0K.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/HAS%C3%87EL%C4%B0K.jpg?v=20260907" alt="HASÇELİK" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">HASÇELİK</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/HEL%C4%B0OS.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/HEL%C4%B0OS.jpg?v=20260907" alt="HELİOS" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">HELİOS</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/HES.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/HES.jpg?v=20260907" alt="HES" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">HES</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/HIGHTEK.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/HIGHTEK.jpg?v=20260907" alt="HIGHTEK" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">HIGHTEK</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/HOROZ.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/HOROZ.jpg?v=20260907" alt="HOROZ" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">HOROZ</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/%C4%B0NOLED.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/%C4%B0NOLED.jpg?v=20260907" alt="İNOLED" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">İNOLED</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/I%C5%9EILDAR.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/I%C5%9EILDAR.jpg?v=20260907" alt="IŞILDAR" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">IŞILDAR</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/K2.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/K2.jpg?v=20260907" alt="K2" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">K2</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/KONREX.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/KONREX.jpg?v=20260907" alt="KONREX" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">KONREX</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/LEGRAND.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/LEGRAND.jpg?v=20260907" alt="LEGRAND" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">LEGRAND</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/MAKEL.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/MAKEL.jpg?v=20260907" alt="MAKEL" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">MAKEL</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/METOP.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/METOP.jpg?v=20260907" alt="METOP" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">METOP</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/MULT%C4%B0TEK.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/MULT%C4%B0TEK.jpg?v=20260907" alt="MULTİTEK" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">MULTİTEK</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/MUTLUSAN.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/MUTLUSAN.jpg?v=20260907" alt="MUTLUSAN" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">MUTLUSAN</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/NEAD.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/NEAD.jpg?v=20260907" alt="NEAD" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">NEAD</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/NETAPLAST.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/NETAPLAST.jpg?v=20260907" alt="NETAPLAST" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">NETAPLAST</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/NOAS.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/NOAS.jpg?v=20260907" alt="NOAS" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">NOAS</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/NTS.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/NTS.jpg?v=20260907" alt="NTS" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">NTS</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/OAG.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/OAG.jpg?v=20260907" alt="OAG" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">OAG</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/OREL.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/OREL.jpg?v=20260907" alt="OREL" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">OREL</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/OV%C4%B0VO%20WOG.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/OV%C4%B0VO%20WOG.jpg?v=20260907" alt="OVİVO WOG" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">OVİVO WOG</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/OV%C4%B0VO.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/OV%C4%B0VO.jpg?v=20260907" alt="OVİVO" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">OVİVO</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/%C3%96ZKARAKU%C5%9E.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/%C3%96ZKARAKU%C5%9E.jpg?v=20260907" alt="ÖZKARAKUŞ" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">ÖZKARAKUŞ</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/%C3%96ZKARDE%C5%9ELER.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/%C3%96ZKARDE%C5%9ELER.jpg?v=20260907" alt="ÖZKARDEŞLER" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">ÖZKARDEŞLER</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/%C3%96ZNUR.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/%C3%96ZNUR.jpg?v=20260907" alt="ÖZNUR" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">ÖZNUR</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/PELSAN.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/PELSAN.jpg?v=20260907" alt="PELSAN" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">PELSAN</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/RE%C3%87BER.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/RE%C3%87BER.jpg?v=20260907" alt="REÇBER" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">REÇBER</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/S%C4%B0GMA.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/S%C4%B0GMA.jpg?v=20260907" alt="SİGMA" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">SİGMA</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/TEKNOLOJ%C4%B0.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/TEKNOLOJ%C4%B0.jpg?v=20260907" alt="TEKNOLOJİ" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">TEKNOLOJİ</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/TENSE.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/TENSE.jpg?v=20260907" alt="TENSE" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">TENSE</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/TK.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/TK.jpg?v=20260907" alt="TK" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">TK</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/UGEST.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/UGEST.jpg?v=20260907" alt="UGEST" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">UGEST</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/V%C4%B0KO.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/V%C4%B0KO.jpg?v=20260907" alt="VİKO" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">VİKO</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/WALL%20LED.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/WALL%20LED.jpg?v=20260907" alt="WALL LED" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">WALL LED</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/YCL.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/YCL.jpg?v=20260907" alt="YCL" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">YCL</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/ZERPA.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/ZERPA.jpg?v=20260907" alt="ZERPA" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">ZERPA</div>
+    </a>
+
+    <a class="book-card" href="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/ZMR.html">
+      <div class="cover-wrapper">
+        <img class="cover-image" src="https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/ZMR.jpg?v=20260907" alt="ZMR" decoding="async" loading="lazy">
+      </div>
+      <div class="book-title">ZMR</div>
+    </a>
+
   </div>
 
-  <script>
-    const BASE_PDF_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/";
-    const BASE_COVER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/";
-
-    // Kitap İsimleri Listesi
-    const books = [
-      "ABB", "ACK", "ADAL", "ARS", "ARVIA", "AUDIO", "AYKA", "BEMIS", 
-      "CATA", "CHINT", "ÇEBİ", "ÇET-SAN", "DÜNYA LED", "ELMAX", "EMAS", 
-      "ENTES", "ERKLED", "ERNA", "FANSAN", "FAR", "FETİH", "FORLIFE", 
-      "GOYA", "GWEST", "HASÇELİK", "HELİOS", "HES", "HIGHTEK", "HOROZ", 
-      "İNOLED", "IŞILDAR", "K2", "KONREX", "LEGRAND", "MAKEL", "METOP", 
-      "MULTİTEK", "MUTLUSAN", "NEAD", "NETAPLAST", "NOAS", "NTS", "OAG", 
-      "OREL", "OVİVO WOG", "OVİVO", "ÖZKARAKUŞ", "ÖZKARDEŞLER", "ÖZNUR", 
-      "PELSAN", "REÇBER", "SİGMA", "TEKNOLOJİ", "TENSE", "TK", "UGEST", 
-      "VİKO", "WALL LED", "YCL", "ZERPA", "ZMR"
-    ];
-
-    function renderLibrary() {
-      const grid = document.getElementById('book-grid');
-      const now = new Date().getTime(); // Ön bellek / kapak güncelleme kontrolü
-
-      books.forEach(book => {
-        const bookUrl = `${BASE_PDF_URL}${encodeURIComponent(book)}.html`;
-        const coverUrl = `${BASE_COVER_URL}${encodeURIComponent(book)}.jpg?v=${now}`;
-
-        const card = document.createElement('a');
-        card.className = 'book-card';
-        card.href = bookUrl;
-
-        card.innerHTML = `
-          <div class="cover-wrapper">
-            <img class="cover-image" src="${coverUrl}" alt="${book}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400/181b23/ffffff?text=${encodeURIComponent(book)}'">
-          </div>
-          <div class="book-title">${book}</div>
-        `;
-
-        grid.appendChild(card);
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', renderLibrary);
-  </script>
 </body>
 </html>
