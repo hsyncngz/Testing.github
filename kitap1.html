@@ -23,34 +23,45 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      padding: 20px;
+      padding: 20px 10px;
       min-height: 100vh;
     }
 
+    /* Tam 3 Sütun Düzeni ve Mobil Esneklik */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 15px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    @media (max-width: 900px) {
+    /* Mobil Cihazlar İçin Uyum */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px 5px;
+      }
       .grid-container {
-        grid-template-columns: repeat(2, 1fr);
+        gap: 10px; /* Mobilde aralıkları biraz daraltarak ekranı verimli kullanır */
+      }
+      .book-card {
+        padding: 8px !important;
+      }
+      .book-title {
+        font-size: 0.75rem !important;
       }
     }
 
-    @media (max-width: 550px) {
+    @media (max-width: 480px) {
       .grid-container {
-        grid-template-columns: 1fr;
+        gap: 8px;
       }
     }
 
     .book-card {
       background-color: var(--card-bg);
       border-radius: var(--border-radius);
-      padding: 15px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -61,7 +72,7 @@
     }
 
     .book-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
       background-color: var(--card-hover);
     }
 
@@ -74,7 +85,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .cover-image {
@@ -84,18 +95,19 @@
     }
 
     .book-title {
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 700;
       letter-spacing: 0.5px;
       text-align: center;
       text-transform: uppercase;
+      word-break: break-word;
     }
   </style>
 </head>
 <body>
 
   <div class="grid-container" id="book-grid">
-    <!-- Kitap Kartları JavaScript Tarafından Otomatik Üretilir -->
+    <!-- Kitap Kartları Otomatik Üretilir -->
   </div>
 
   <script>
@@ -117,7 +129,7 @@
 
     function renderLibrary() {
       const grid = document.getElementById('book-grid');
-      const now = new Date().getTime(); // Açılışta kapak güncelleme kontrolü (cache-busting)
+      const now = new Date().getTime(); // Ön bellek / kapak güncelleme kontrolü
 
       books.forEach(book => {
         const bookUrl = `${BASE_PDF_URL}${encodeURIComponent(book)}.html`;
@@ -125,7 +137,7 @@
 
         const card = document.createElement('a');
         card.className = 'book-card';
-        card.href = bookUrl; // Aynı pencerede açılması için target kaldırıldı
+        card.href = bookUrl;
 
         card.innerHTML = `
           <div class="cover-wrapper">
