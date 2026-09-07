@@ -2,375 +2,155 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>Eşzamanlı Çoklu PDF Dönüştürücü (HTML & Kapak JPG)</title>
-  <!-- CDN Çökme/Erişim Riskine Karşı Yedekli ve Stabil Yükleme -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dijital Kitaplık - Fiyat Listeleri</title>
   <style>
-    * { box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 20px; background: #0f172a; color: white; margin: 0; }
-    .card { background: #1e293b; padding: 25px; border-radius: 16px; max-width: 700px; margin: 20px auto; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid #334155; }
-    h2 { margin-top: 0; font-weight: 600; font-size: 1.3rem; }
-    p.desc { font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px; }
-    input[type="file"] { width: 100%; margin: 15px 0; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #94a3b8; }
-    
-    .main-btn { width: 100%; margin-top: 10px; padding: 14px; cursor: pointer; border: none; background: #2563eb; color: white; border-radius: 10px; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
-    .main-btn:hover { background: #1d4ed8; }
-    .main-btn:disabled { background: #475569; opacity: 0.6; cursor: not-allowed; }
-    
-    .file-list { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
-    .file-item { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
-    .file-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; font-weight: 500; }
-    .file-name { color: #f8fafc; font-weight: 600; word-break: break-all; }
-    
-    .progress-wrapper { width: 100%; background: #1e293b; border-radius: 6px; height: 10px; overflow: hidden; position: relative; }
-    .progress-bar { width: 0%; height: 100%; background: #10b981; transition: width 0.15s linear; }
-    
-    .status-text { font-size: 0.8rem; color: #38bdf8; }
-    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-    .save-item-btn { background: #10b981; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; }
-    .save-item-btn:hover { background: #059669; }
-    .save-jpg-btn { background: #f59e0b; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; }
-    .save-jpg-btn:hover { background: #d97706; }
-    .save-all-btn { background: #6366f1; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; }
-    .save-all-btn:hover { background: #4f46e5; }
+    :root {
+      --bg-color: #1e222d;
+      --card-bg: #2a2e3d;
+      --card-hover: #34394a;
+      --text-color: #ffffff;
+      --border-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding: 20px 10px;
+      min-height: 100vh;
+    }
+
+    /* Tam 3 Sütun Düzeni ve Mobil Esneklik */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Mobil Cihazlar İçin Uyum */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px 5px;
+      }
+      .grid-container {
+        gap: 10px; /* Mobilde aralıkları biraz daraltarak ekranı verimli kullanır */
+      }
+      .book-card {
+        padding: 8px !important;
+      }
+      .book-title {
+        font-size: 0.75rem !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .grid-container {
+        gap: 8px;
+      }
+    }
+
+    .book-card {
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-color);
+      transition: transform 0.2s, background-color 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .book-card:hover {
+      transform: translateY(-4px);
+      background-color: var(--card-hover);
+    }
+
+    .cover-wrapper {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-radius: 8px;
+      background-color: #181b23;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .cover-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .book-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-align: center;
+      text-transform: uppercase;
+      word-break: break-word;
+    }
   </style>
 </head>
 <body>
 
-<div class="card">
-  <h2>Çoklu PDF → Mobil HTML & Kapak JPG Dönüştürücü</h2>
-  <p class="desc">PDF dosyalarınızı dönüştürün. İsterseniz HTML kataloğunu ve ilk sayfa kapak görselini (JPG) tek tıkla aynı klasöre kaydedebilirsiniz.</p>
-  
-  <input type="file" id="pdfInput" accept="application/pdf" multiple>
-  <button id="convertBtn" class="main-btn" type="button">Hepsini Aynı Anda Dönüştür</button>
-  
-  <div class="file-list" id="fileList"></div>
-</div>
-
-<script>
-  // Kütüphane yükleme kontrolü ve worker ayarlaması
-  if (typeof pdfjsLib !== 'undefined') {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-  }
-
-  const pdfInput = document.getElementById('pdfInput');
-  const convertBtn = document.getElementById('convertBtn');
-  const fileList = document.getElementById('fileList');
-
-  function getBaseName(originalName) {
-    let nameWithoutExt = originalName.replace(/\.[^/.]+$/, "");
-    let cleanName = nameWithoutExt.replace(/\s+\d{4}.*/g, "").trim();
-    return cleanName || nameWithoutExt;
-  }
-
-  function renderFileList() {
-    fileList.innerHTML = '';
-    const files = Array.from(pdfInput.files);
-
-    if (files.length > 0) {
-      convertBtn.innerText = `${files.length} Dosyayı Dönüştür`;
-      files.forEach((file, index) => {
-        const item = document.createElement('div');
-        item.className = 'file-item';
-        item.id = `file-item-${index}`;
-        item.innerHTML = `
-          <div class="file-header">
-            <span class="file-name">${file.name}</span>
-            <div id="action-area-${index}">
-              <span class="status-text" id="status-${index}">Hazır</span>
-            </div>
-          </div>
-          <div class="progress-wrapper">
-            <div class="progress-bar" id="progress-${index}"></div>
-          </div>
-        `;
-        fileList.appendChild(item);
-      });
-    } else {
-      convertBtn.innerText = 'Hepsini Aynı Anda Dönüştür';
-    }
-  }
-
-  pdfInput.addEventListener('change', renderFileList);
-
-  convertBtn.addEventListener('click', async () => {
-    // 1. PDF.js kütüphanesi düzgün yüklendi mi kontrolü
-    if (typeof pdfjsLib === 'undefined') {
-      alert("Hata: PDF işleme kütüphanesi (pdf.js) yüklenemedi. Lütfen internet bağlantınızı kontrol edip sayfayı yenileyin.");
-      return;
-    }
-
-    // 2. Dosya seçimi kontrolü
-    const files = Array.from(pdfInput.files);
-    if (files.length === 0) {
-      alert("Lütfen önce en az bir PDF dosyası seçin!");
-      return;
-    }
-
-    convertBtn.disabled = true;
-    convertBtn.innerText = "İşlem Başlatıldı...";
-
-    // Sıralı ve hatasız işleme (Asenkron Döngü)
-    for (let i = 0; i < files.length; i++) {
-      try {
-        await processPdfFile(files[i], i);
-      } catch (err) {
-        console.error(`Dosya işleme hatası (${files[i].name}):`, err);
-        const statusEl = document.getElementById(`status-${i}`);
-        if (statusEl) statusEl.innerText = "Hata oluştu!";
-      }
-    }
-
-    convertBtn.disabled = false;
-    convertBtn.innerText = "Yeniden Dönüştür";
-  });
-
-  function processPdfFile(file, index) {
-    return new Promise((resolve, reject) => {
-      const statusEl = document.getElementById(`status-${index}`);
-      const progressEl = document.getElementById(`progress-${index}`);
-      const actionArea = document.getElementById(`action-area-${index}`);
-
-      statusEl.innerText = "Okunuyor...";
-
-      const fileReader = new FileReader();
-
-      fileReader.onerror = function() {
-        statusEl.innerText = "Dosya Okuma Hatası!";
-        reject(new Error("File reader error"));
-      };
-
-      fileReader.onload = async function() {
-        try {
-          const typedarray = new Uint8Array(this.result);
-          const pdf = await pdfjsLib.getDocument({ data: typedarray }).promise;
-          let pageData = [];
-          let firstPageJpgData = null;
-
-          for (let p = 1; p <= pdf.numPages; p++) {
-            statusEl.innerText = `Sayfa ${p} / ${pdf.numPages}`;
-            
-            const page = await pdf.getPage(p);
-            const textContent = await page.getTextContent();
-            const text = textContent.items.map(item => item.str).join(' ');
-
-            const viewport = page.getViewport({ scale: 1.5 });
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            await page.render({ canvasContext: context, viewport: viewport }).promise;
-            const imgData = canvas.toDataURL('image/webp', 0.8);
-
-            if (p === 1) {
-              firstPageJpgData = canvas.toDataURL('image/jpeg', 0.85);
-            }
-
-            pageData.push({ page: p, text: text, image: imgData });
-
-            const percent = Math.round((p / pdf.numPages) * 100);
-            progressEl.style.width = `${percent}%`;
-          }
-
-          const baseName = getBaseName(file.name);
-          const htmlFileName = baseName + ".html";
-          const jpgFileName = baseName + ".jpg";
-          const generatedHtml = generateStandaloneHtml(pageData);
-
-          statusEl.innerText = "Tamamlandı!";
-          actionArea.innerHTML = `
-            <div class="btn-group">
-              <button class="save-all-btn" id="save-all-${index}">📁 İkisini de Kaydet</button>
-              <button class="save-item-btn" id="save-html-${index}">HTML</button>
-              <button class="save-jpg-btn" id="save-jpg-${index}">JPG Kapak</button>
-            </div>
-          `;
-
-          // İndirme butonları olayları
-          document.getElementById(`save-all-${index}`).addEventListener('click', async () => {
-            if ('showSaveFilePicker' in window) {
-              try {
-                const handleHtml = await window.showSaveFilePicker({
-                  suggestedName: htmlFileName,
-                  types: [{ description: 'HTML Dosyası', accept: {'text/html': ['.html']} }]
-                });
-                const writableHtml = await handleHtml.createWritable();
-                await writableHtml.write(generatedHtml);
-                await writableHtml.close();
-
-                const handleJpg = await window.showSaveFilePicker({
-                  suggestedName: jpgFileName,
-                  types: [{ description: 'JPG Resmi', accept: {'image/jpeg': ['.jpg']} }]
-                });
-                const blobJpg = dataURLtoBlob(firstPageJpgData);
-                const writableJpg = await handleJpg.createWritable();
-                await writableJpg.write(blobJpg);
-                await writableJpg.close();
-              } catch (err) {
-                if (err.name !== 'AbortError') console.error(err);
-              }
-            } else {
-              downloadBlob(new Blob([generatedHtml], { type: 'text/html' }), htmlFileName);
-              setTimeout(() => {
-                downloadBlob(dataURLtoBlob(firstPageJpgData), jpgFileName);
-              }, 500);
-            }
-          });
-
-          document.getElementById(`save-html-${index}`).addEventListener('click', () => {
-            saveSingleFile(generatedHtml, htmlFileName, 'text/html', '.html', 'HTML Dosyası');
-          });
-
-          document.getElementById(`save-jpg-${index}`).addEventListener('click', () => {
-            const blob = dataURLtoBlob(firstPageJpgData);
-            saveSingleFile(blob, jpgFileName, 'image/jpeg', '.jpg', 'JPG Resmi');
-          });
-
-          resolve();
-        } catch (err) {
-          console.error("PDF Dönüştürme Hatası:", err);
-          statusEl.innerText = "Dönüştürme Hatası!";
-          progressEl.style.background = "#ef4444";
-          reject(err);
-        }
-      };
-
-      fileReader.readAsArrayBuffer(file);
-    });
-  }
-
-  function dataURLtoBlob(dataurl) {
-    let arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while(n--){
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new Blob([u8arr], {type:mime});
-  }
-
-  function downloadBlob(blob, fileName) {
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = fileName;
-    a.click();
-  }
-
-  async function saveSingleFile(content, fileName, mimeType, ext, desc) {
-    const blob = content instanceof Blob ? content : new Blob([content], { type: mimeType });
-    if ('showSaveFilePicker' in window) {
-      try {
-        const handle = await window.showSaveFilePicker({
-          suggestedName: fileName,
-          types: [{ description: desc, accept: { [mimeType]: [ext] } }]
-        });
-        const writable = await handle.createWritable();
-        await writable.write(blob);
-        await writable.close();
-      } catch (err) {
-        if (err.name !== 'AbortError') console.error(err);
-      }
-    } else {
-      downloadBlob(blob, fileName);
-    }
-  }
-
-  function generateStandaloneHtml(data) {
-    return `<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>Katalog</title>
-  <style>
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-      background: #000000; color: #ffffff; margin: 0; padding: 0; padding-bottom: 100px;
-      touch-action: pan-x pan-y pinch-zoom; -webkit-user-select: none;
-    }
-    .catalog-container { width: 100%; display: flex; flex-direction: column; }
-    .page-wrapper { position: relative; width: 100%; min-height: 250px; background: #111; border-bottom: 1px solid #222; }
-    .page-wrapper img { width: 100%; height: auto; display: block; }
-    .page-badge { position: absolute; top: 12px; right: 12px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.15); pointer-events: none; }
-    .bottom-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 480px; background: rgba(30, 30, 30, 0.75); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 30px; padding: 6px 10px; display: flex; align-items: center; gap: 6px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); z-index: 9999; touch-action: none; }
-    .icon-btn { width: 38px; height: 38px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.12); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
-    .icon-btn svg { width: 18px; height: 18px; fill: none; stroke: #ffffff; stroke-width: 2; }
-    .search-container { flex: 1; display: flex; align-items: center; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 0 12px; height: 38px; }
-    .search-input { flex: 1; background: transparent; border: none; outline: none; color: #fff; font-size: 14px; }
-    .clear-btn { width: 20px; height: 20px; border-radius: 50%; background: rgba(255, 255, 255, 0.25); border: none; color: #fff; display: none; align-items: center; justify-content: center; cursor: pointer; }
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px); z-index: 10000; padding: 20px; overflow-y: auto; }
-    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .modal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; }
-    .thumb-card { background: #111; border-radius: 8px; overflow: hidden; border: 1px solid #333; text-align: center; font-size: 12px; padding-bottom: 5px; cursor: pointer; }
-    .thumb-card img { width: 100%; height: 120px; object-fit: cover; }
-    .close-btn { background: #e11d48; border: none; color: white; padding: 8px 16px; border-radius: 20px; }
-  </style>
-</head>
-<body>
-  <div class="catalog-container" id="catalog"></div>
-  <div class="bottom-bar" id="bottomBar">
-    <div class="icon-btn" id="homeBtn" title="Başa Dön"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
-    <div class="icon-btn" id="listBtn" title="Sayfalar"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg></div>
-    <div class="search-container"><input type="text" class="search-input" id="searchBox" placeholder="Ürün kodu ara..."><button class="clear-btn" id="clearBtn">✕</button></div>
+  <div class="grid-container" id="book-grid">
+    <!-- Kitap Kartları Otomatik Üretilir -->
   </div>
-  <div class="modal" id="listModal">
-    <div class="modal-header"><h3 style="margin:0;">Tüm Sayfalar</h3><button class="close-btn" id="closeModal">Kapat</button></div>
-    <div class="modal-grid" id="modalGrid"></div>
-  </div>
+
   <script>
-    const rawPages = ${JSON.stringify(data)};
-    const catalog = document.getElementById('catalog');
-    const searchBox = document.getElementById('searchBox');
-    const clearBtn = document.getElementById('clearBtn');
-    const homeBtn = document.getElementById('homeBtn');
-    const listBtn = document.getElementById('listBtn');
-    const listModal = document.getElementById('listModal');
-    const closeModal = document.getElementById('closeModal');
-    const modalGrid = document.getElementById('modalGrid');
+    const BASE_PDF_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/";
+    const BASE_COVER_URL = "https://www.ozbekenerji.com.tr/uploads/fiyat-listeleri/pdf/Listeler/kapaklar/";
 
-    function renderCatalog(filter = '') {
-      catalog.innerHTML = '';
-      rawPages.forEach(p => {
-        const isMatch = !filter || p.text.toLowerCase().includes(filter.toLowerCase());
-        if (isMatch) {
-          const div = document.createElement('div');
-          div.className = 'page-wrapper';
-          div.id = 'page-' + p.page;
-          div.innerHTML = \\`<img loading="lazy" src="\\${p.image}" alt="Sayfa \\${p.page}"><div class="page-badge">Sayfa \\${p.page}</div>\\`;
-          catalog.appendChild(div);
-        }
+    // Kitap İsimleri Listesi
+    const books = [
+      "ABB", "ACK", "ADAL", "ARS", "ARVIA", "AUDIO", "AYKA", "BEMIS", 
+      "CATA", "CHINT", "ÇEBİ", "ÇET-SAN", "DÜNYA LED", "ELMAX", "EMAS", 
+      "ENTES", "ERKLED", "ERNA", "FANSAN", "FAR", "FETİH", "FORLIFE", 
+      "GOYA", "GWEST", "HASÇELİK", "HELİOS", "HES", "HIGHTEK", "HOROZ", 
+      "İNOLED", "IŞILDAR", "K2", "KONREX", "LEGRAND", "MAKEL", "METOP", 
+      "MULTİTEK", "MUTLUSAN", "NEAD", "NETAPLAST", "NOAS", "NTS", "OAG", 
+      "OREL", "OVİVO WOG", "OVİVO", "ÖZKARAKUŞ", "ÖZKARDEŞLER", "ÖZNUR", 
+      "PELSAN", "REÇBER", "SİGMA", "TEKNOLOJİ", "TENSE", "TK", "UGEST", 
+      "VİKO", "WALL LED", "YCL", "ZERPA", "ZMR"
+    ];
+
+    function renderLibrary() {
+      const grid = document.getElementById('book-grid');
+      const now = new Date().getTime(); // Ön bellek / kapak güncelleme kontrolü
+
+      books.forEach(book => {
+        const bookUrl = `${BASE_PDF_URL}${encodeURIComponent(book)}.html`;
+        const coverUrl = `${BASE_COVER_URL}${encodeURIComponent(book)}.jpg?v=${now}`;
+
+        const card = document.createElement('a');
+        card.className = 'book-card';
+        card.href = bookUrl;
+
+        card.innerHTML = `
+          <div class="cover-wrapper">
+            <img class="cover-image" src="${coverUrl}" alt="${book}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400/181b23/ffffff?text=${encodeURIComponent(book)}'">
+          </div>
+          <div class="book-title">${book}</div>
+        `;
+
+        grid.appendChild(card);
       });
     }
 
-    searchBox.addEventListener('input', (e) => {
-      const val = e.target.value;
-      clearBtn.style.display = val.length > 0 ? 'flex' : 'none';
-      renderCatalog(val);
-    });
-
-    clearBtn.addEventListener('click', () => { searchBox.value = ''; clearBtn.style.display = 'none'; renderCatalog(''); });
-    homeBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    listBtn.addEventListener('click', () => {
-      modalGrid.innerHTML = '';
-      rawPages.forEach(p => {
-        const div = document.createElement('div');
-        div.className = 'thumb-card';
-        div.innerHTML = \\`<img src="\\${p.image}"><span>Sayfa \\${p.page}</span>\\`;
-        div.onclick = () => { listModal.style.display = 'none'; const target = document.getElementById('page-' + p.page); if (target) target.scrollIntoView({ behavior: 'smooth' }); };
-        modalGrid.appendChild(div);
-      });
-      listModal.style.display = 'block';
-    });
-    closeModal.addEventListener('click', () => listModal.style.display = 'none');
-    renderCatalog('');
-  <\/script>
-</body>
-</html>`;
-  }
-</script>
-
+    document.addEventListener('DOMContentLoaded', renderLibrary);
+  </script>
 </body>
 </html>
